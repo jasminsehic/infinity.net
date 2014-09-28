@@ -12,12 +12,14 @@ namespace Infinity
 
             Configuration = new TfsClientConfiguration(configuration);
 
+            Project = new ProjectClient(Configuration);
             TeamRoom = new TeamRoomClient(Configuration);
             UserProfile = new UserProfileClient(Configuration);
         }
 
         internal TfsClientConfiguration Configuration { get; private set; }
 
+        public ProjectClient Project { get; private set; }
         public TeamRoomClient TeamRoom { get; private set; }
         public UserProfileClient UserProfile { get; private set; }
     }

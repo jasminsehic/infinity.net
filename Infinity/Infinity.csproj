@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="Clients\TfsClientBase.cs" />
     <Compile Include="Clients\UserProfileClient.cs" />
@@ -49,6 +50,8 @@
     <Compile Include="Exceptions\TfsConflictException.cs" />
     <Compile Include="Exceptions\TfsRestException.cs" />
     <Compile Include="Exceptions\TfsUnauthorizedException.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectState.cs" />
     <Compile Include="Models\TeamRoom.cs" />
     <Compile Include="Models\TeamRoomMessage.cs" />
     <Compile Include="Models\UserProfile.cs" />
