@@ -1,0 +1,8 @@
+*.suo
+
+[Dd]ebug/
+[Rr]elease/
+
+*.nupkg
+**/packages/*
+!**/packages/build/
