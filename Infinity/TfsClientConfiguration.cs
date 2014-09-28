@@ -1,4 +1,6 @@
-﻿namespace Infinity
+﻿using System;
+
+namespace Infinity
 {
     public class TfsClientConfiguration
     {
@@ -8,13 +10,13 @@
 
         internal TfsClientConfiguration(TfsClientConfiguration original)
         {
-            Uri = original.Uri;
+            Url = original.Url;
             Username = original.Username;
             Password = original.Password;
             UserAgent = original.UserAgent;
         }
 
-        public string Uri
+        public Uri Url
         {
             get;
             set;

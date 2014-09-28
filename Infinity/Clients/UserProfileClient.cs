@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using RestSharp;
 
@@ -13,16 +14,18 @@ namespace Infinity.Clients
         {
         }
 
-        public UserIdentity GetIdentity()
+        public async Task<UserIdentity> GetIdentity()
         {
-            return Execute<UserIdentityContainer>(new RestRequest("/_api/_common/GetUserProfile")).Identity;
+            UserIdentityContainer container = await Execute<UserIdentityContainer>(new RestRequest("/_api/_common/GetUserProfile"));
+            return container.Identity;
         }
 
-        public UserIdentity GetIdentity(string tfUserId)
+        public async Task<UserIdentity> GetIdentity(string tfUserId)
         {
             var request = new RestRequest("/_api/_common/GetUserProfile/{TfUserId}");
             request.AddUrlSegment("TfUserId", tfUserId);
-            return Execute<UserIdentityContainer>(request).Identity;
+            UserIdentityContainer container = await Execute<UserIdentityContainer>(request);
+            return container.Identity;
         }
 
         public class UserIdentityContainer

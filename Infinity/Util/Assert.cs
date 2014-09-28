@@ -2,9 +2,9 @@
 
 namespace Infinity.Util
 {
-    public static class Assert
+    internal static class Assert
     {
-        public static void IsTrue(bool value, string name)
+        internal static void IsTrue(bool value, string name)
         {
             if (!value)
             {
@@ -13,7 +13,7 @@ namespace Infinity.Util
             }
         }
 
-        public static void NotNull(object o, string name)
+        internal static void NotNull(object o, string name)
         {
             if (o == null)
             {
@@ -22,7 +22,7 @@ namespace Infinity.Util
             }
         }
 
-        public static void NotNullOrEmpty(string o, string name)
+        internal static void NotNullOrEmpty(string o, string name)
         {
             Assert.NotNull(o, name);
 

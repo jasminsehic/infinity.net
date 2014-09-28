@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 using RestSharp;
 using RestSharp.Deserializers;
@@ -28,22 +29,22 @@ namespace Infinity.Clients
             private set;
         }
 
-        public T Execute<T>(IRestRequest request) where T : new()
+        public async Task<T> Execute<T>(IRestRequest request) where T : new()
         {
-            IRestResponse<T> response = CreateClient().Execute<T>(request);
+            IRestResponse<T> response = await CreateClient().ExecuteTaskAsync<T>(request);
             HandleResponse(response);
             return response.Data;
         }
 
-        public void Execute(IRestRequest request)
+        public async Task Execute(IRestRequest request)
         {
-            IRestResponse response = CreateClient().Execute(request);
+            IRestResponse response = await CreateClient().ExecuteTaskAsync(request);
             HandleResponse(response);
         }
 
         private RestClient CreateClient()
         {
-            RestClient client = new RestClient(Configuration.Uri);
+            RestClient client = new RestClient(Configuration.Url.ToString());
 
             if (Configuration.UserAgent != null)
             {

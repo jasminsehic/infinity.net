@@ -8,7 +8,7 @@ namespace Infinity
         public TfsClient(TfsClientConfiguration configuration)
         {
             Assert.NotNull(configuration, "configuration");
-            Assert.NotNull(configuration.Uri, "configuration.Uri");
+            Assert.NotNull(configuration.Url, "configuration.Url");
 
             Configuration = new TfsClientConfiguration(configuration);
 
