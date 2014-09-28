@@ -24,13 +24,13 @@ namespace Infinity.Clients
         public async Task Join(TeamRoom room)
         {
             var userProfileClient = new UserProfileClient(Configuration);
-            var identity = await userProfileClient.GetIdentity();
+            var profile = await userProfileClient.GetUserProfile();
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.PUT);
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
             request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("Identity", identity.TeamFoundationId);
+            request.AddUrlSegment("UserId", profile.Id.ToString());
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(new { userId = identity.TeamFoundationId });
+            request.AddBody(new { userId = profile.Id.ToString() });
             await Execute(request);
         }
 
@@ -60,11 +60,11 @@ namespace Infinity.Clients
         public async Task Leave(TeamRoom room)
         {
             var userProfileClient = new UserProfileClient(Configuration);
-            var identity = await userProfileClient.GetIdentity();
+            var profile = await userProfileClient.GetUserProfile();
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.DELETE);
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
             request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("Identity", identity.TeamFoundationId);
+            request.AddUrlSegment("UserId", profile.Id.ToString());
             request.RequestFormat = DataFormat.Json;
             await Execute(request);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using RestSharp;
@@ -9,28 +10,28 @@ namespace Infinity.Clients
 {
     public class UserProfileClient : TfsClientBase
     {
-        public UserProfileClient(TfsClientConfiguration configuration)
+        internal UserProfileClient(TfsClientConfiguration configuration)
             : base(configuration)
         {
         }
 
-        public async Task<UserIdentity> GetIdentity()
+        public async Task<UserProfile> GetUserProfile()
         {
-            UserIdentityContainer container = await Execute<UserIdentityContainer>(new RestRequest("/_api/_common/GetUserProfile"));
-            return container.Identity;
+            UserProfileContainer container = await Execute<UserProfileContainer>(new RestRequest("/_apis/profile/profiles/me"));
+            return container.Profile;
         }
 
-        public async Task<UserIdentity> GetIdentity(string tfUserId)
+        public async Task<UserProfile> GetUserProfile(Guid userId)
         {
-            var request = new RestRequest("/_api/_common/GetUserProfile/{TfUserId}");
-            request.AddUrlSegment("TfUserId", tfUserId);
-            UserIdentityContainer container = await Execute<UserIdentityContainer>(request);
-            return container.Identity;
+            var request = new RestRequest("/_apis/profile/profiles/{UserId}");
+            request.AddUrlSegment("UserId", userId.ToString());
+            UserProfileContainer container = await Execute<UserProfileContainer>(request);
+            return container.Profile;
         }
 
-        public class UserIdentityContainer
+        private class UserProfileContainer
         {
-            public UserIdentity Identity { get; set; }
+            public UserProfile Profile { get; set; }
         }
     }
 }

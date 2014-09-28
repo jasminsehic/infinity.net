@@ -51,7 +51,7 @@
     <Compile Include="Exceptions\TfsUnauthorizedException.cs" />
     <Compile Include="Models\TeamRoom.cs" />
     <Compile Include="Models\TeamRoomMessage.cs" />
-    <Compile Include="Models\UserIdentity.cs" />
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="TfsClient.cs" />
     <Compile Include="TfsClientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
