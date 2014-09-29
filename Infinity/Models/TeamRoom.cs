@@ -4,14 +4,14 @@ namespace Infinity.Models
 {
     public class TeamRoom
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime LastActivity { get; set; }
-        public bool IsClosed { get; set; }
-        public Guid CreatorUserTfId { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool HasAdminPermissions { get; set; }
-        public bool HasReadWritePermissions { get; set; }
+        public int Id { get; internal set; }
+        public string Name { get; internal set; }
+        public string Description { get; internal set; }
+        public DateTime LastActivity { get; internal set; }
+        public bool IsClosed { get; internal set; }
+        public TeamRoomAuthor CreatedBy { get; internal set; }
+        public DateTime CreatedDate { get; internal set; }
+        public bool HasAdminPermissions { get; internal set; }
+        public bool HasReadWritePermissions { get; internal set; }
     }
 }

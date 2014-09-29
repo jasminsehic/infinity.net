@@ -56,7 +56,9 @@
     <Compile Include="Models\Reference.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\TeamRoom.cs" />
+    <Compile Include="Models\TeamRoomAuthor.cs" />
     <Compile Include="Models\TeamRoomMessage.cs" />
+    <Compile Include="Models\TeamRoomMessageType.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="TfsClient.cs" />
     <Compile Include="TfsClientConfiguration.cs" />

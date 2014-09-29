@@ -10,27 +10,24 @@ namespace Infinity.Clients
 {
     public class TeamRoomClient : TfsClientBase
     {
-        public TeamRoomClient(TfsClientConfiguration configuration)
+        internal TeamRoomClient(TfsClientConfiguration configuration)
             : base(configuration)
         {
         }
 
-        public async Task<IEnumerable<TeamRoom>> Rooms()
+        public async Task<IEnumerable<TeamRoom>> GetRooms()
         {
             TeamRoomList list = await Execute<TeamRoomList>(new RestRequest("/_apis/chat/rooms"));
             return list.Value;
         }
 
-        public async Task Join(TeamRoom room)
+        public async Task Join(TeamRoom room, UserProfile profile)
         {
-            var userProfileClient = new UserProfileClient(Configuration);
-            var profile = await userProfileClient.GetUserProfile();
-
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.PUT);
             request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("UserId", profile.Id.ToString());
+            request.AddUrlSegment("Identity", profile.Id.ToString());
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(new { userId = profile.Id.ToString() });
+            request.AddBody(new { userId = profile.Id });
             await Execute(request);
         }
 
@@ -43,7 +40,7 @@ namespace Infinity.Clients
             await Execute(request);
         }
 
-        public async Task<IEnumerable<TeamRoomMessage>> Messages(TeamRoom room, string filter = null)
+        public async Task<IEnumerable<TeamRoomMessage>> GetMessages(TeamRoom room, string filter = null)
         {
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.GET);
             request.AddUrlSegment("RoomId", room.Id.ToString());
@@ -53,18 +50,15 @@ namespace Infinity.Clients
                 request.AddParameter("$filter", filter);
             }
 
-            TeamMessageList messages = await Execute<TeamMessageList>(request);
-            return (messages != null) ? messages.Value : null;
+            TeamRoomMessageList messages = await Execute<TeamRoomMessageList>(request);
+            return (messages != null) ? messages.Value : new List<TeamRoomMessage>();
         }
 
-        public async Task Leave(TeamRoom room)
+        public async Task Leave(TeamRoom room, UserProfile profile)
         {
-            var userProfileClient = new UserProfileClient(Configuration);
-            var profile = await userProfileClient.GetUserProfile();
-
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.DELETE);
             request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("UserId", profile.Id.ToString());
+            request.AddUrlSegment("Identity", profile.Id.ToString());
             request.RequestFormat = DataFormat.Json;
             await Execute(request);
         }
@@ -75,7 +69,7 @@ namespace Infinity.Clients
             public List<TeamRoom> Value { get; set; }
         }
 
-        private class TeamMessageList
+        private class TeamRoomMessageList
         {
             public int Count { get; set; }
             public List<TeamRoomMessage> Value { get; set; }

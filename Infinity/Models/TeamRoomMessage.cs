@@ -2,18 +2,13 @@
 
 namespace Infinity.Models
 {
-    public enum TeamRoomMessageType
-    {
-        System, Normal
-    }
-
     public class TeamRoomMessage
     {
-        public int Id { get; set; }
-        public string Content { get; set; }
-        public TeamRoomMessageType MessageType { get; set; }
-        public DateTime PostedTime { get; set; }
-        public int PostedRoomId { get; set; }
-        public Guid PostedByUserTfid { get; set; }
+        public int Id { get; internal set; }
+        public string Content { get; internal set; }
+        public TeamRoomMessageType MessageType { get; internal set; }
+        public DateTime PostedTime { get; internal set; }
+        public int PostedRoomId { get; internal set; }
+        public TeamRoomAuthor PostedBy { get; internal set; }
     }
 }

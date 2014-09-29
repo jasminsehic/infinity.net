@@ -16,7 +16,7 @@ namespace Infinity.Clients
     {
         private readonly JsonDeserializer deserializer = new JsonDeserializer();
 
-        internal TfsClientBase(TfsClientConfiguration configuration)
+        protected TfsClientBase(TfsClientConfiguration configuration)
         {
             Assert.NotNull(configuration, "configuration");
 
