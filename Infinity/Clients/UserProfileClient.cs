@@ -8,16 +8,18 @@ using Infinity.Models;
 
 namespace Infinity.Clients
 {
-    public class UserProfileClient : TfsClientBase
+    public class UserProfileClient
     {
-        internal UserProfileClient(TfsClientConfiguration configuration)
-            : base(configuration)
+        internal UserProfileClient(TfsClientExecutor executor)
         {
+            Executor = executor;
         }
+
+        private TfsClientExecutor Executor { get; set; }
 
         public async Task<UserProfile> GetUserProfile()
         {
-            UserProfileContainer container = await Execute<UserProfileContainer>(new RestRequest("/_apis/profile/profiles/me"));
+            UserProfileContainer container = await Executor.Execute<UserProfileContainer>(new RestRequest("/_apis/profile/profiles/me"));
             return container.Profile;
         }
 
@@ -25,7 +27,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/profile/profiles/{UserId}");
             request.AddUrlSegment("UserId", userId.ToString());
-            UserProfileContainer container = await Execute<UserProfileContainer>(request);
+            UserProfileContainer container = await Executor.Execute<UserProfileContainer>(request);
             return container.Profile;
         }
 

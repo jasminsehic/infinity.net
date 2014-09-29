@@ -45,7 +45,7 @@
     <Compile Include="Clients\GitClient.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
-    <Compile Include="Clients\TfsClientBase.cs" />
+    <Compile Include="Clients\TfsClientExecutor.cs" />
     <Compile Include="Clients\UserProfileClient.cs" />
     <Compile Include="Exceptions\TfsClientException.cs" />
     <Compile Include="Exceptions\TfsConflictException.cs" />

@@ -5,48 +5,60 @@ using System.Threading.Tasks;
 using RestSharp;
 
 using Infinity.Models;
+using Infinity.Util;
 
 namespace Infinity.Clients
 {
-    public class GitClient : TfsClientBase
+    public class GitClient
     {
-        internal GitClient(TfsClientConfiguration config)
-            : base(config)
+        internal GitClient(TfsClientExecutor restClient)
         {
+            Executor = restClient;
         }
+
+        private TfsClientExecutor Executor { get; set; }
 
         public async Task<IEnumerable<Repository>> GetRepositories()
         {
-            RepositoryList list = await Execute<RepositoryList>(new RestRequest("/_apis/git/repositories"));
+            RepositoryList list = await Executor.Execute<RepositoryList>(new RestRequest("/_apis/git/repositories"));
             return list.Value;
         }
 
         public async Task<Repository> GetRepository(Guid id)
         {
+            Assert.NotNull(id, "id");
+
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}");
             request.AddUrlSegment("RepositoryId", id.ToString());
 
-            return await Execute<Repository>(request);
+            return await Executor.Execute<Repository>(request);
         }
 
         public async Task<Repository> GetRepository(string name)
         {
+            Assert.NotNull(name, "name");
+
             var request = new RestRequest("/_apis/git/repositories/{Name}");
             request.AddUrlSegment("Name", name);
 
-            return await Execute<Repository>(request);
+            return await Executor.Execute<Repository>(request);
         }
 
         public async Task<Repository> CreateRepository(Project project, string name)
         {
+            Assert.NotNull(project, "project");
+            Assert.NotNull(name, "name");
+
             var request = new RestRequest("/_apis/git/repositories", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, project = new { id = project.Id } });
-            return await Execute<Repository>(request);
+            return await Executor.Execute<Repository>(request);
         }
 
         public async Task<IEnumerable<Reference>> GetReferences(Repository repository, string filter = null)
         {
+            Assert.NotNull(repository, "repository");
+
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs", Method.GET);
             request.AddUrlSegment("RepositoryId", repository.Id.ToString());
 
@@ -55,7 +67,7 @@ namespace Infinity.Clients
                 request.AddParameter("$filter", filter);
             }
 
-            ReferenceList references = await Execute<ReferenceList>(request);
+            ReferenceList references = await Executor.Execute<ReferenceList>(request);
             return (references != null) ? references.Value : new List<Reference>();
         }
 

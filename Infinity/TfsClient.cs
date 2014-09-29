@@ -10,15 +10,23 @@ namespace Infinity
             Assert.NotNull(configuration, "configuration");
             Assert.NotNull(configuration.Url, "configuration.Url");
 
-            Configuration = new TfsClientConfiguration(configuration);
+            Executor = new TfsClientExecutor(configuration);
 
-            Project = new ProjectClient(Configuration);
-            Git = new GitClient(Configuration);
-            TeamRoom = new TeamRoomClient(Configuration);
-            UserProfile = new UserProfileClient(Configuration);
+            Project = new ProjectClient(Executor);
+            Git = new GitClient(Executor);
+            TeamRoom = new TeamRoomClient(Executor);
+            UserProfile = new UserProfileClient(Executor);
         }
 
-        internal TfsClientConfiguration Configuration { get; private set; }
+        private TfsClientExecutor Executor { get; set; }
+
+        public TfsClientConfiguration Configuration
+        {
+            get
+            {
+                return Executor.Configuration;
+            }
+        }
 
         public ProjectClient Project { get; private set; }
         public GitClient Git { get; private set; }

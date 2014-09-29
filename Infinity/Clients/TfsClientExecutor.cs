@@ -12,11 +12,11 @@ using Infinity.Util;
 
 namespace Infinity.Clients
 {
-    public abstract class TfsClientBase
+    internal class TfsClientExecutor
     {
         private readonly JsonDeserializer deserializer = new JsonDeserializer();
 
-        protected TfsClientBase(TfsClientConfiguration configuration)
+        internal TfsClientExecutor(TfsClientConfiguration configuration)
         {
             Assert.NotNull(configuration, "configuration");
 
