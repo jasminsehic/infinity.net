@@ -3,8 +3,15 @@ using Infinity.Util;
 
 namespace Infinity
 {
+    /// <summary>
+    /// The TFS client API.
+    /// </summary>
     public class TfsClient
     {
+        /// <summary>
+        /// Create a new TFS client API.
+        /// </summary>
+        /// <param name="configuration">The configuration for the TFS server.</param>
         public TfsClient(TfsClientConfiguration configuration)
         {
             Assert.NotNull(configuration, "configuration");
@@ -20,6 +27,9 @@ namespace Infinity
 
         private TfsClientExecutor Executor { get; set; }
 
+        /// <summary>
+        /// The configuration used for this client.
+        /// </summary>
         public TfsClientConfiguration Configuration
         {
             get
@@ -28,9 +38,24 @@ namespace Infinity
             }
         }
 
+        /// <summary>
+        /// Information about Team Projects.
+        /// </summary>
         public ProjectClient Project { get; private set; }
+
+        /// <summary>
+        /// Information about Git repositories, commits, references, etc.
+        /// </summary>
         public GitClient Git { get; private set; }
+
+        /// <summary>
+        /// Information about Team Rooms.
+        /// </summary>
         public TeamRoomClient TeamRoom { get; private set; }
+
+        /// <summary>
+        /// Information about users.
+        /// </summary>
         public UserProfileClient UserProfile { get; private set; }
     }
 }

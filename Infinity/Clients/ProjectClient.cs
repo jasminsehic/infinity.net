@@ -9,6 +9,10 @@ using Infinity.Util;
 
 namespace Infinity.Clients
 {
+    /// <summary>
+    /// Client to access information about Team Projects inside a
+    /// TFS Project Collection.
+    /// </summary>
     public class ProjectClient
     {
         internal ProjectClient(TfsClientExecutor executor)
@@ -18,6 +22,13 @@ namespace Infinity.Clients
 
         private TfsClientExecutor Executor { get; set; }
 
+        /// <summary>
+        /// Get a list of all Team Projects within the current Project Collection.
+        /// </summary>
+        /// <param name="projectState">The state of the Team Project(s) to query</param>
+        /// <param name="count">The maximum number of Team Projects to return</param>
+        /// <param name="skip">The number of Team Projects to skip</param>
+        /// <returns>The list of Team Projects that match the criteria</returns>
         public async Task<IEnumerable<Project>> GetProjects(
             ProjectState projectState = ProjectState.All,
             int count = 0,
@@ -44,6 +55,11 @@ namespace Infinity.Clients
             return (projects != null) ? projects.Value : new List<Project>();
         }
 
+        /// <summary>
+        /// Get the Team Project by ID.
+        /// </summary>
+        /// <param name="id">The ID of the Team Project.</param>
+        /// <returns>The Team Project, or <code>null</code> if none matched</returns>
         public async Task<Project> GetProject(Guid id)
         {
             Assert.NotNull(id, "id");
@@ -54,6 +70,11 @@ namespace Infinity.Clients
             return await Executor.Execute<Project>(request);
         }
 
+        /// <summary>
+        /// Get the Team Project by name.
+        /// </summary>
+        /// <param name="name">The name of the Team Project.</param>
+        /// <returns>The Team Project, or <code>null</code> if none matched</returns>
         public async Task<Project> GetProject(string name)
         {
             Assert.NotNull(name, "name");

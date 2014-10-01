@@ -8,6 +8,9 @@ using Infinity.Models;
 
 namespace Infinity.Clients
 {
+    /// <summary>
+    /// Client to query user profile information.
+    /// </summary>
     public class UserProfileClient
     {
         internal UserProfileClient(TfsClientExecutor executor)
@@ -17,12 +20,21 @@ namespace Infinity.Clients
 
         private TfsClientExecutor Executor { get; set; }
 
+        /// <summary>
+        /// Get the user profile of the currently authenticated user.
+        /// </summary>
+        /// <returns>The user profile of the current user</returns>
         public async Task<UserProfile> GetUserProfile()
         {
             UserProfileContainer container = await Executor.Execute<UserProfileContainer>(new RestRequest("/_apis/profile/profiles/me"));
             return container.Profile;
         }
 
+        /// <summary>
+        /// Get the user profile of the given user by ID.
+        /// </summary>
+        /// <param name="userId">The ID of the user to query</param>
+        /// <returns>The user profile of the given user</returns>
         public async Task<UserProfile> GetUserProfile(Guid userId)
         {
             var request = new RestRequest("/_apis/profile/profiles/{UserId}");

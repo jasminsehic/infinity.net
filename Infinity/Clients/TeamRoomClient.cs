@@ -9,6 +9,9 @@ using Infinity.Util;
 
 namespace Infinity.Clients
 {
+    /// <summary>
+    /// Client to join Team Rooms and read and write messages within them.
+    /// </summary>
     public class TeamRoomClient
     {
         internal TeamRoomClient(TfsClientExecutor executor)
@@ -18,12 +21,22 @@ namespace Infinity.Clients
 
         private TfsClientExecutor Executor { get; set; }
 
+        /// <summary>
+        /// Get a list of Team Rooms.
+        /// </summary>
+        /// <returns>The list of Team Rooms</returns>
         public async Task<IEnumerable<TeamRoom>> GetRooms()
         {
             TeamRoomList list = await Executor.Execute<TeamRoomList>(new RestRequest("/_apis/chat/rooms"));
             return list.Value;
         }
 
+        /// <summary>
+        /// Join a Team Room.  You will be listed as present in the team room until
+        /// you leave.
+        /// </summary>
+        /// <param name="room">The Team Room to join</param>
+        /// <param name="profile">The profile of the joining user</param>
         public async Task Join(TeamRoom room, UserProfile profile)
         {
             Assert.NotNull(room, "room");
@@ -37,6 +50,11 @@ namespace Infinity.Clients
             await Executor.Execute(request);
         }
 
+        /// <summary>
+        /// Write a message in a Team Room.
+        /// </summary>
+        /// <param name="room">The Team Room to write to</param>
+        /// <param name="message">The message to write</param>
         public async Task Write(TeamRoom room, string message)
         {
             Assert.NotNull(room, "room");
@@ -49,6 +67,15 @@ namespace Infinity.Clients
             await Executor.Execute(request);
         }
 
+        /// <summary>
+        /// Gets the list of messages that have been written to the Team Room.
+        /// 
+        /// You can filter by the PostedTime field for up to 30 days.  If there is
+        /// no filter then messages from the last 24 hours will be returned.
+        /// </summary>
+        /// <param name="room">Team Room to query messages for</param>
+        /// <param name="filter">OData PostedTime filter to apply to the message list</param>
+        /// <returns>The list of messages</returns>
         public async Task<IEnumerable<TeamRoomMessage>> GetMessages(TeamRoom room, string filter = null)
         {
             Assert.NotNull(room, "room");
@@ -65,6 +92,11 @@ namespace Infinity.Clients
             return (messages != null) ? messages.Value : new List<TeamRoomMessage>();
         }
 
+        /// <summary>
+        /// Leave a Team Room.
+        /// </summary>
+        /// <param name="room">The Team Room to leave</param>
+        /// <param name="profile">The profile of the leaving user</param>
         public async Task Leave(TeamRoom room, UserProfile profile)
         {
             Assert.NotNull(room, "room");
