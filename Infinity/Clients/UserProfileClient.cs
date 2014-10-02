@@ -13,12 +13,12 @@ namespace Infinity.Clients
     /// </summary>
     public class UserProfileClient
     {
-        internal UserProfileClient(TfsClientExecutor executor)
+        internal UserProfileClient(ITfsClientExecutor executor)
         {
             Executor = executor;
         }
 
-        private TfsClientExecutor Executor { get; set; }
+        private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
         /// Get the user profile of the currently authenticated user.

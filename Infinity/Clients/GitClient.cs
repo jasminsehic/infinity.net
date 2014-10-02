@@ -15,12 +15,12 @@ namespace Infinity.Clients
     /// </summary>
     public class GitClient
     {
-        internal GitClient(TfsClientExecutor executor)
+        internal GitClient(ITfsClientExecutor executor)
         {
             Executor = executor;
         }
 
-        private TfsClientExecutor Executor { get; set; }
+        private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
         /// Get a list of all Git repositories managed in a TFS Project Collection.

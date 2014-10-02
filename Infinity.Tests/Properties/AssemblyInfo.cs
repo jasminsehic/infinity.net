@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Infinity.NET")]
-[assembly: AssemblyDescription("Visual Studio Online and Team Foundation Server REST API for .NET")]
+[assembly: AssemblyTitle("Infinity.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Edward Thomson")]
-[assembly: AssemblyProduct("Infinity.NET")]
-[assembly: AssemblyCopyright("Copyright © Edward Thomson.  All rights reserved.")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Infinity.Tests")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d8e62e61-b386-4bf4-a9f5-c1bb6d2a7179")]
+[assembly: Guid("60b3c7be-5d26-4866-8000-9fe3668994bf")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.1.0")]
-[assembly: AssemblyFileVersion("0.0.1.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

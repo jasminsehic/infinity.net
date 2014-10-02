@@ -1,6 +1,9 @@
-﻿using Infinity.Clients;
+﻿using System.Runtime.CompilerServices;
+
+using Infinity.Clients;
 using Infinity.Util;
 
+[assembly: InternalsVisibleTo("Infinity.Tests")]
 namespace Infinity
 {
     /// <summary>
@@ -12,12 +15,16 @@ namespace Infinity
         /// Create a new TFS client API.
         /// </summary>
         /// <param name="configuration">The configuration for the TFS server.</param>
-        public TfsClient(TfsClientConfiguration configuration)
+        public TfsClient(TfsClientConfiguration configuration) :
+            this(new TfsClientExecutor(configuration))
         {
-            Assert.NotNull(configuration, "configuration");
-            Assert.NotNull(configuration.Url, "configuration.Url");
+        }
 
-            Executor = new TfsClientExecutor(configuration);
+        internal TfsClient(ITfsClientExecutor executor)
+        {
+            Assert.NotNull(executor, "executor");
+
+            Executor = executor;
 
             Project = new ProjectClient(Executor);
             Git = new GitClient(Executor);
@@ -25,18 +32,7 @@ namespace Infinity
             UserProfile = new UserProfileClient(Executor);
         }
 
-        private TfsClientExecutor Executor { get; set; }
-
-        /// <summary>
-        /// The configuration used for this client.
-        /// </summary>
-        public TfsClientConfiguration Configuration
-        {
-            get
-            {
-                return Executor.Configuration;
-            }
-        }
+        private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
         /// Information about Team Projects.

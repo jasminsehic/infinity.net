@@ -14,12 +14,12 @@ namespace Infinity.Clients
     /// </summary>
     public class TeamRoomClient
     {
-        internal TeamRoomClient(TfsClientExecutor executor)
+        internal TeamRoomClient(ITfsClientExecutor executor)
         {
             Executor = executor;
         }
 
-        private TfsClientExecutor Executor { get; set; }
+        private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
         /// Get a list of Team Rooms.

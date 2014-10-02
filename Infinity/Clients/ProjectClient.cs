@@ -15,12 +15,12 @@ namespace Infinity.Clients
     /// </summary>
     public class ProjectClient
     {
-        internal ProjectClient(TfsClientExecutor executor)
+        internal ProjectClient(ITfsClientExecutor executor)
         {
             Executor = executor;
         }
 
-        private TfsClientExecutor Executor { get; set; }
+        private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
         /// Get a list of all Team Projects within the current Project Collection.

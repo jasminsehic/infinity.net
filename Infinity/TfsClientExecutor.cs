@@ -10,15 +10,16 @@ using Infinity.Exceptions;
 using Infinity.Models;
 using Infinity.Util;
 
-namespace Infinity.Clients
+namespace Infinity
 {
-    internal class TfsClientExecutor
+    internal class TfsClientExecutor : ITfsClientExecutor
     {
         private readonly JsonDeserializer deserializer = new JsonDeserializer();
 
         internal TfsClientExecutor(TfsClientConfiguration configuration)
         {
             Assert.NotNull(configuration, "configuration");
+            Assert.NotNull(configuration.Url, "configuration.Url");
 
             Configuration = configuration;
         }
@@ -42,7 +43,7 @@ namespace Infinity.Clients
             HandleResponse(response);
         }
 
-        private RestClient CreateClient()
+        private IRestClient CreateClient()
         {
             RestClient client = new RestClient(Configuration.Url.ToString());
 
