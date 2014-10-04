@@ -10,7 +10,7 @@ namespace Infinity.Models
     /// The version control type of a Team Project, either
     /// TFVC or Git.
     /// </summary>
-    public enum SourceControlType
+    public enum VersionControlType
     {
         /// <summary>
         /// The Team Project's version control type is not known.

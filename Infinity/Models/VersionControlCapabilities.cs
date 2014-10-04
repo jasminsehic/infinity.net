@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RestSharp;
+using RestSharp.Deserializers;
+
 namespace Infinity.Models
 {
     /// <summary>
@@ -15,6 +18,7 @@ namespace Infinity.Models
         /// The type of version control for this Team Project
         /// (TFVC or Git).
         /// </summary>
-        public SourceControlType SourceControlType { get; private set; }
+        [DeserializeAs(Name = "sourceControlType")]
+        public VersionControlType VersionControlType { get; private set; }
     }
 }

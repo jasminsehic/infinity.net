@@ -74,7 +74,7 @@ namespace Infinity.Tests.Models
             Assert.Equal("FabrikamWeather Team", project.DefaultTeam.Name);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18/teams/66df9be7-3586-467b-9c5f-425b29afedfd"), project.DefaultTeam.Url);
 
-            Assert.Equal(SourceControlType.TFVC, project.Capabilities.VersionControl.SourceControlType);
+            Assert.Equal(VersionControlType.TFVC, project.Capabilities.VersionControl.VersionControlType);
             Assert.Equal("MSF for Agile Software Development 2013.3", project.Capabilities.ProcessTemplate.TemplateName);
         }
     }
