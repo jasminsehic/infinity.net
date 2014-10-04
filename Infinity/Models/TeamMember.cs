@@ -3,9 +3,9 @@
 namespace Infinity.Models
 {
     /// <summary>
-    /// The author of a message in a Team Room.
+    /// The identity of a member of a team.
     /// </summary>
-    public class TeamRoomAuthor
+    public class TeamMember
     {
         /// <summary>
         /// The ID of the user.
@@ -16,6 +16,11 @@ namespace Infinity.Models
         /// The display name of the user.
         /// </summary>
         public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// The unique (to a collection) name for the user.
+        /// </summary>
+        public string UniqueName { get; private set; }
 
         /// <summary>
         /// The URL of this user's REST endpoint.

@@ -35,7 +35,7 @@ namespace Infinity.Models
         /// <summary>
         /// The creator of the Team Room.
         /// </summary>
-        public TeamRoomAuthor CreatedBy { get; internal set; }
+        public TeamMember CreatedBy { get; internal set; }
 
         /// <summary>
         /// The date the Team Room was created.

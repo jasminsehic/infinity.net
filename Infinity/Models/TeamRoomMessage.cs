@@ -35,6 +35,6 @@ namespace Infinity.Models
         /// <summary>
         /// The author of the message.
         /// </summary>
-        public TeamRoomAuthor PostedBy { get; internal set; }
+        public TeamMember PostedBy { get; internal set; }
     }
 }

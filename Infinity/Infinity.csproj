@@ -46,12 +46,14 @@
   <ItemGroup>
     <Compile Include="Clients\GitClient.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
+    <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
     <Compile Include="Models\ProcessTemplateCapabilities.cs" />
     <Compile Include="Models\ProjectCapabilities.cs" />
     <Compile Include="Models\ProjectLink.cs" />
     <Compile Include="Models\ProjectLinks.cs" />
+    <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\VersionControlType.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\VersionControlCapabilities.cs" />
@@ -65,7 +67,6 @@
     <Compile Include="Models\Reference.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\TeamRoom.cs" />
-    <Compile Include="Models\TeamRoomAuthor.cs" />
     <Compile Include="Models\TeamRoomMessage.cs" />
     <Compile Include="Models\TeamRoomMessageType.cs" />
     <Compile Include="Models\UserProfile.cs" />

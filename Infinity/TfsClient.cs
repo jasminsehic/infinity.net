@@ -28,6 +28,7 @@ namespace Infinity
 
             Project = new ProjectClient(Executor);
             Git = new GitClient(Executor);
+            Team = new TeamClient(Executor);
             TeamRoom = new TeamRoomClient(Executor);
             UserProfile = new UserProfileClient(Executor);
         }
@@ -43,6 +44,11 @@ namespace Infinity
         /// Information about Git repositories, commits, references, etc.
         /// </summary>
         public GitClient Git { get; private set; }
+
+        /// <summary>
+        /// Information about project teams.
+        /// </summary>
+        public TeamClient Team { get; private set; }
 
         /// <summary>
         /// Information about Team Rooms.

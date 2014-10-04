@@ -99,5 +99,35 @@ namespace Infinity.Tests.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Team_GetTeam {
+            get {
+                object obj = ResourceManager.GetObject("Team_GetTeam", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Team_GetTeamMembers {
+            get {
+                object obj = ResourceManager.GetObject("Team_GetTeamMembers", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Team_GetTeams {
+            get {
+                object obj = ResourceManager.GetObject("Team_GetTeams", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
