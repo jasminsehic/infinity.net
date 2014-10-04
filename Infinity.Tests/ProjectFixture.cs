@@ -17,7 +17,9 @@ namespace Infinity.Tests.Models
         [Fact]
         public void CanGetProjects()
         {
-            IList<Project> projects = MockRequest<IEnumerable<Project>>("Project.GetProjects", null, null, null).ToList();
+            IList<Project> projects = MockRequest<IEnumerable<Project>>(
+                "Project.GetProjects",
+                (client) => { return client.Project.GetProjects(); }).ToList();
 
             Assert.Equal(3, projects.Count);
 
@@ -35,6 +37,20 @@ namespace Infinity.Tests.Models
             Assert.Equal("TestGit", projects[2].Name);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/281f9a5b-af0d-49b4-a1df-fe6f5e5f84d0"), projects[2].Url);
             Assert.Equal(ProjectState.WellFormed, projects[2].State);
+        }
+
+        [Fact]
+        public void CanGetProject()
+        {
+            Project project = MockRequest<Project>(
+                "Project.GetProject",
+                (client) => { return client.Project.GetProject("fabrikam-fiber-tfvc"); });
+
+            Assert.Equal(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Id);
+            Assert.Equal("Fabrikam-Fiber-TFVC", project.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Url);
+            Assert.Equal("Team Foundation Version Control projects", project.Description);
+            Assert.Equal(ProjectState.WellFormed, project.State);
         }
     }
 }

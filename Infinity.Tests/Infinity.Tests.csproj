@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />
   </ItemGroup>
   <ItemGroup>

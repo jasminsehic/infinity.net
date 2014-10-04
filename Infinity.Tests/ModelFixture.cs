@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -14,7 +15,9 @@ namespace Infinity.Tests
 {
     public abstract class ModelFixture
     {
-        protected T MockRequest<T>(string testName, params string[] args)
+        public delegate R ClientTask<R>(TfsClient client);
+
+        protected R MockRequest<R>(string testName, ClientTask<Task<R>> clientTask)
         {
             Assert.NotNull(testName);
 
@@ -29,20 +32,11 @@ namespace Infinity.Tests
             MockTfsClientExecutor mockExecutor = new MockTfsClientExecutor(resourceJson);
             TfsClient client = new TfsClient(mockExecutor);
 
-            object model = client;
-
-            for (int i = 0; i < testNameComponents.Length - 1; i++)
-            {
-                model = model.GetType().GetProperty(testNameComponents[i]).GetValue(model);
-            }
-
-            MethodInfo testMethodInfo = model.GetType().GetMethod(testNameComponents[testNameComponents.Length - 1]);
-
-            T result = default(T);
+            R result = default(R);
 
             Task.Run(async () =>
             {
-                result = await (Task<T>)testMethodInfo.Invoke(model, args);
+                result = await clientTask(client);
             }).Wait();
 
             return result;

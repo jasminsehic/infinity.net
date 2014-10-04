@@ -18,6 +18,11 @@ namespace Infinity.Models
         public string Name { get; private set; }
 
         /// <summary>
+        /// The description of the Team Project.
+        /// </summary>
+        public string Description { get; private set; }
+
+        /// <summary>
         /// The URL of the Team Project's REST endpoint.
         /// </summary>
         public Uri Url { get; private set; }
