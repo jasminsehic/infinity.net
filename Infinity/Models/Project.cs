@@ -1,5 +1,8 @@
 ﻿using System;
 
+using RestSharp;
+using RestSharp.Deserializers;
+
 namespace Infinity.Models
 {
     /// <summary>
@@ -36,6 +39,12 @@ namespace Infinity.Models
         /// The default team for this Team Project.
         /// </summary>
         public Team DefaultTeam { get; private set; }
+
+        /// <summary>
+        /// Links to other Project resources.
+        /// </summary>
+        [DeserializeAs(Name = "_links")]
+        public ProjectLinks Links { get; private set; }
 
         /// <summary>
         /// The settings and capabilities for this Team Project.

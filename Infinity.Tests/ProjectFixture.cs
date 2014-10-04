@@ -55,6 +55,10 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Guid("66df9be7-3586-467b-9c5f-425b29afedfd"), project.DefaultTeam.Id);
             Assert.Equal("Fabrikam-Fiber-TFVC Team", project.DefaultTeam.Name);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/66df9be7-3586-467b-9c5f-425b29afedfd"), project.DefaultTeam.Url);
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Links.Self.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/_apis/projectCollections/d81542e4-cdfa-4333-b082-1ae2d6c3ad16"), project.Links.Collection.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam-Fiber-TFVC"), project.Links.Web.Url);
         }
 
         [Fact]

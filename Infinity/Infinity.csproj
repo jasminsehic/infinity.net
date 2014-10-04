@@ -50,6 +50,8 @@
     <Compile Include="ITfsClientExecutor.cs" />
     <Compile Include="Models\ProcessTemplateCapabilities.cs" />
     <Compile Include="Models\ProjectCapabilities.cs" />
+    <Compile Include="Models\ProjectLink.cs" />
+    <Compile Include="Models\ProjectLinks.cs" />
     <Compile Include="Models\VersionControlType.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\VersionControlCapabilities.cs" />
