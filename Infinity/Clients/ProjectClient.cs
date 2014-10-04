@@ -105,6 +105,42 @@ namespace Infinity.Clients
             return await Executor.Execute<Project>(request);
         }
 
+        /// <summary>
+        /// Update the project information.
+        /// </summary>
+        /// <param name="id">The ID of the Team Project.</param>
+        /// <param name="description">The description to update in the project</param>
+        /// <returns>The Team Project, after update</returns>
+        public async Task<Project> UpdateProject(Guid id, string description)
+        {
+            Assert.NotNull(id, "id");
+            Assert.NotNull(description, "description");
+
+            var request = new RestRequest("/_apis/projects/{ProjectId}", Method.PATCH);
+            request.AddUrlSegment("ProjectId", id.ToString());
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new { description = description });
+            return await Executor.Execute<Project>(request);
+        }
+
+        /// <summary>
+        /// Update the project information.
+        /// </summary>
+        /// <param name="name">The name of the project to update</param>
+        /// <param name="description">The description to update in the project</param>
+        /// <returns>The Team Project, after update</returns>
+        public async Task<Project> UpdateProject(string name, string description)
+        {
+            Assert.NotNull(name, "name");
+            Assert.NotNull(description, "description");
+
+            var request = new RestRequest("/_apis/projects/{Name}", Method.PATCH);
+            request.AddUrlSegment("Name", name);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new { description = description });
+            return await Executor.Execute<Project>(request);
+        }
+
         private class ProjectList
         {
             public int Count { get; set; }

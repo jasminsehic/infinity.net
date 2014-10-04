@@ -64,6 +64,7 @@
     <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />
     <None Include="Resources\Project.GetProjectWithCapabilities.json" />
+    <None Include="Resources\Project.UpdateProject.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">

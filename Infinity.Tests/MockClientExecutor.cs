@@ -26,6 +26,7 @@ namespace Infinity.Tests
             foreach (MockRequestConfiguration c in Configuration)
             {
                 string uri = request.Resource;
+                string body = null;
 
                 foreach (Parameter param in request.Parameters)
                 {
@@ -33,9 +34,15 @@ namespace Infinity.Tests
                     {
                         uri = uri.Replace(String.Format("{{{0}}}", param.Name), param.Value.ToString());
                     }
+                    else if (param.Type == ParameterType.RequestBody)
+                    {
+                        body = param.Value.ToString();
+                    }
                 }
 
-                if (c.Method == request.Method && c.Uri.Equals(uri))
+                if (c.Method == request.Method &&
+                    ((c.RequestBody == null && body == null) || c.RequestBody.Equals(body)) && 
+                    c.Uri.Equals(uri))
                 {
                     config = c;
                     break;
@@ -58,7 +65,7 @@ namespace Infinity.Tests
             RestResponse<T> responseData = new RestResponse<T>
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = configuration.Response,
+                Content = configuration.ResponseBody,
             };
 
             responseData.Data = new JsonDeserializer().Deserialize<T>(responseData);
@@ -79,7 +86,7 @@ namespace Infinity.Tests
             RestResponse responseData = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = configuration.Response,
+                Content = configuration.ResponseBody,
             };
 
             restClientMock.Setup(x => x.ExecuteTaskAsync(

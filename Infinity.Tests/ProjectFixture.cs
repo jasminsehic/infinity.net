@@ -99,5 +99,27 @@ namespace Infinity.Tests.Models
             Assert.Equal(VersionControlType.TFVC, project.Capabilities.VersionControl.VersionControlType);
             Assert.Equal("MSF for Agile Software Development 2013.3", project.Capabilities.ProcessTemplate.TemplateName);
         }
+
+        [Fact]
+        public void CanUpdateProject()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Method = RestSharp.Method.PATCH,
+                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1",
+                    RequestObject = new { description = "Team Foundation Version Control projects." },
+                    ResponseResource = "Project.UpdateProject",
+                });
+
+            Project project = base.ExecuteSync<Project>(
+                () => { return client.Project.UpdateProject(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), "Team Foundation Version Control projects."); });
+
+            Assert.Equal(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Id);
+            Assert.Equal("Fabrikam-Fiber-TFVC", project.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Url);
+            Assert.Equal("Team Foundation Version Control projects.", project.Description);
+            Assert.Equal(ProjectState.WellFormed, project.State);
+        }
     }
 }
