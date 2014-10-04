@@ -15,28 +15,21 @@ namespace Infinity.Tests
 {
     public abstract class ModelFixture
     {
-        public delegate R ClientTask<R>(TfsClient client);
-
-        protected R MockRequest<R>(string testName, ClientTask<Task<R>> clientTask)
+        protected TfsClient NewMockClient(params MockRequestConfiguration[] configuration)
         {
-            Assert.NotNull(testName);
+            MockClientExecutor mockExecutor = new MockClientExecutor(configuration);
+            return new TfsClient(mockExecutor);
+        }
 
-            string[] testNameComponents = testName.Split(new char[] { '.' });
-            Assert.True(testNameComponents.Length > 1);
+        public delegate T SyncTask<T>();
 
-            string resourceName = String.Join("_", testNameComponents);
-
-            byte[] resourceData = (byte[])typeof(Properties.Resources).GetProperty(resourceName, BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-            string resourceJson = System.Text.Encoding.UTF8.GetString(resourceData);
-
-            MockTfsClientExecutor mockExecutor = new MockTfsClientExecutor(resourceJson);
-            TfsClient client = new TfsClient(mockExecutor);
-
+        protected R ExecuteSync<R>(SyncTask<Task<R>> task)
+        {
             R result = default(R);
 
             Task.Run(async () =>
             {
-                result = await clientTask(client);
+                result = await task();
             }).Wait();
 
             return result;

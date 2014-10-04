@@ -48,7 +48,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockTfsClientExecutor.cs" />
+    <Compile Include="MockRequestConfiguration.cs" />
+    <Compile Include="MockClientExecutor.cs" />
     <Compile Include="ModelFixture.cs" />
     <Compile Include="ProjectFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

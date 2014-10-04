@@ -17,9 +17,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void CanGetProjects()
         {
-            IList<Project> projects = MockRequest<IEnumerable<Project>>(
-                "Project.GetProjects",
-                (client) => { return client.Project.GetProjects(); }).ToList();
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/projects",
+                    ResponseResource = "Project.GetProjects",
+                });
+
+            IList<Project> projects = base.ExecuteSync<IEnumerable<Project>>(
+                () => { return client.Project.GetProjects(); }).ToList();
 
             Assert.Equal(3, projects.Count);
 
@@ -42,9 +48,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void CanGetProject()
         {
-            Project project = MockRequest<Project>(
-                "Project.GetProject",
-                (client) => { return client.Project.GetProject("fabrikam-fiber-tfvc"); });
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/projects/fabrikam-fiber-tfvc",
+                    ResponseResource = "Project.GetProject",
+                });
+
+            Project project = base.ExecuteSync<Project>(
+                () => { return client.Project.GetProject("fabrikam-fiber-tfvc"); });
 
             Assert.Equal(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Id);
             Assert.Equal("Fabrikam-Fiber-TFVC", project.Name);
@@ -64,9 +76,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void CanGetProjectWithCapabilities()
         {
-            Project project = MockRequest<Project>(
-                "Project.GetProjectWithCapabilities",
-                (client) => { return client.Project.GetProject("fabrikam-fiber-tfvc", true); });
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/projects/fabrikam-fiber-tfvc",
+                    ResponseResource = "Project.GetProjectWithCapabilities",
+                });
+
+            Project project = base.ExecuteSync<Project>(
+                () => { return client.Project.GetProject("fabrikam-fiber-tfvc", true); });
 
             Assert.Equal(new Guid("98dd5ded-8110-459b-8241-3d12b2eeaf18"), project.Id);
             Assert.Equal("FabrikamWeather", project.Name);
