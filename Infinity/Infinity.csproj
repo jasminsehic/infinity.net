@@ -48,6 +48,7 @@
     <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="TfsClientExecutor.cs" />
     <Compile Include="Clients\UserProfileClient.cs" />
     <Compile Include="Exceptions\TfsConflictException.cs" />

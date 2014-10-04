@@ -31,5 +31,10 @@ namespace Infinity.Models
         /// The state of the Team Project.
         /// </summary>
         public ProjectState State { get; private set; }
+
+        /// <summary>
+        /// The default team for this Team Project.
+        /// </summary>
+        public Team DefaultTeam { get; private set; }
     }
 }
