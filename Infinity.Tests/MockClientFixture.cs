@@ -13,7 +13,7 @@ using Infinity.Models;
 
 namespace Infinity.Tests
 {
-    public abstract class ModelFixture
+    public abstract class MockClientFixture
     {
         protected TfsClient NewMockClient(params MockRequestConfiguration[] configuration)
         {

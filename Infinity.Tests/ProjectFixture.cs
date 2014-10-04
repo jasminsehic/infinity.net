@@ -12,7 +12,7 @@ using Infinity.Models;
 
 namespace Infinity.Tests.Models
 {
-    public class ProjectFixture : ModelFixture
+    public class ProjectFixture : MockClientFixture
     {
         [Fact]
         public void CanGetProjects()
