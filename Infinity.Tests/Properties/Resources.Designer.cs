@@ -79,5 +79,15 @@ namespace Infinity.Tests.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Project_GetProjectWithCapabilities {
+            get {
+                object obj = ResourceManager.GetObject("Project_GetProjectWithCapabilities", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

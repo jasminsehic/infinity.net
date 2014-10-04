@@ -1,0 +1,31 @@
+{
+  "id": "98dd5ded-8110-459b-8241-3d12b2eeaf18",
+  "name": "FabrikamWeather",
+  "description": "Fabrikam weather app for Windows Phone",
+  "state": "WellFormed",
+  "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18",
+  "defaultTeam": {
+    "id": "66df9be7-3586-467b-9c5f-425b29afedfd",
+    "name": "FabrikamWeather Team",
+    "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18/teams/66df9be7-3586-467b-9c5f-425b29afedfd"
+  },
+  "_links": {
+    "self": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18"
+    },
+    "collection": {
+      "href": "https://fabrikam.visualstudio.com/_apis/projectCollections/d7f9aca3-da1e-4798-8e9c-cb4872516044"
+    },
+    "web": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/FabrikamWeather"
+    }
+  },
+  "capabilities": {
+    "versioncontrol": {
+      "sourceControlType": "Tfvc"
+    },
+    "processTemplate": {
+      "templateName": "MSF for Agile Software Development 2013.3"
+    }
+  }
+}

@@ -36,5 +36,10 @@ namespace Infinity.Models
         /// The default team for this Team Project.
         /// </summary>
         public Team DefaultTeam { get; private set; }
+
+        /// <summary>
+        /// The settings and capabilities for this Team Project.
+        /// </summary>
+        public ProjectCapabilities Capabilities { get; private set; }
     }
 }

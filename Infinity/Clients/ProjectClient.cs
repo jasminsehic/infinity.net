@@ -57,30 +57,50 @@ namespace Infinity.Clients
 
         /// <summary>
         /// Get the Team Project by ID.
+        /// 
+        /// Optionally queries the "capabilities" for the team project,
+        /// including source control type (TFVC or Git) and process
+        /// template.
         /// </summary>
         /// <param name="id">The ID of the Team Project.</param>
+        /// <param name="includeCapabilities">true to include project capabilities</param>
         /// <returns>The Team Project, or <code>null</code> if none matched</returns>
-        public async Task<Project> GetProject(Guid id)
+        public async Task<Project> GetProject(Guid id, bool includeCapabilities = false)
         {
             Assert.NotNull(id, "id");
 
             var request = new RestRequest("/_apis/projects/{ProjectId}");
             request.AddUrlSegment("ProjectId", id.ToString());
 
+            if (includeCapabilities)
+            {
+                request.AddParameter("includecapabilities", "true");
+            }
+
             return await Executor.Execute<Project>(request);
         }
 
         /// <summary>
         /// Get the Team Project by name.
+        /// 
+        /// Optionally queries the "capabilities" for the team project,
+        /// including source control type (TFVC or Git) and process
+        /// template.
         /// </summary>
         /// <param name="name">The name of the Team Project.</param>
+        /// <param name="includeCapabilities">true to include project capabilities</param>
         /// <returns>The Team Project, or <code>null</code> if none matched</returns>
-        public async Task<Project> GetProject(string name)
+        public async Task<Project> GetProject(string name, bool includeCapabilities = false)
         {
             Assert.NotNull(name, "name");
 
             var request = new RestRequest("/_apis/projects/{Name}");
             request.AddUrlSegment("Name", name);
+
+            if (includeCapabilities)
+            {
+                request.AddParameter("includecapabilities", "true");
+            }
 
             return await Executor.Execute<Project>(request);
         }

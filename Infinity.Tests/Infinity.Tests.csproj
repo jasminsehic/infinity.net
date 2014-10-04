@@ -62,6 +62,7 @@
     <None Include="packages.config" />
     <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />
+    <None Include="Resources\Project.GetProjectWithCapabilities.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">
