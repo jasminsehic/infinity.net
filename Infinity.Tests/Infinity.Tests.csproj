@@ -70,9 +70,15 @@
     <None Include="Resources\Team.GetTeam.json" />
     <None Include="Resources\Team.GetTeamMembers.json" />
     <None Include="Resources\Team.GetTeams.json" />
+    <None Include="Resources\TeamRoom.CreateMessage.json" />
     <None Include="Resources\TeamRoom.CreateRoom.json" />
+    <None Include="Resources\TeamRoom.GetMessage.json" />
+    <None Include="Resources\TeamRoom.GetMessages.json" />
     <None Include="Resources\TeamRoom.GetRoom.json" />
     <None Include="Resources\TeamRoom.GetRooms.json" />
+    <None Include="Resources\TeamRoom.GetUser.json" />
+    <None Include="Resources\TeamRoom.GetUsers.json" />
+    <None Include="Resources\TeamRoom.UpdateMessage.json" />
     <None Include="Resources\TeamRoom.UpdateRoom.json" />
   </ItemGroup>
   <ItemGroup>

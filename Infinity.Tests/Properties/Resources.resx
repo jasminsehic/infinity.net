@@ -145,10 +145,28 @@
   <data name="TeamRoom_GetRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.GetRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TeamRoom_CreateMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.CreateMessage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TeamRoom_CreateRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.CreateRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TeamRoom_UpdateRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.UpdateRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_GetMessages" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetMessages.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_GetMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetMessage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_GetUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetUser.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_GetUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetUsers.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_UpdateMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.UpdateMessage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

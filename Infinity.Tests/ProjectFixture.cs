@@ -79,7 +79,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/fabrikam-fiber-tfvc",
+                    Uri = "/_apis/projects/fabrikam-fiber-tfvc?includecapabilities=true",
                     ResponseResource = "Project.GetProjectWithCapabilities",
                 });
 

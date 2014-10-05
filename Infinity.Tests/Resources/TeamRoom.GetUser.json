@@ -1,0 +1,12 @@
+{
+  "roomId":6522,
+  "user": {
+    "id":"fd19aec1-3119-4671-80d7-5dcc4943211d",
+    "displayName":"Edward Thomson",
+    "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d",
+    "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"
+  },
+  "lastActivity":"2014-10-07T21:12:55.107Z",
+  "joinedDate":"2014-10-07T21:12:26.167Z",
+  "isOnline":true
+}

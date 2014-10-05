@@ -54,6 +54,7 @@
     <Compile Include="Models\ProjectLink.cs" />
     <Compile Include="Models\ProjectLinks.cs" />
     <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\TeamRoomUser.cs" />
     <Compile Include="Models\VersionControlType.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\VersionControlCapabilities.cs" />

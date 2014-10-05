@@ -1,0 +1,13 @@
+{
+  "id":74017,
+  "content":"This is a test with an emoticon.  (d)",
+  "messageType":"normal",
+  "postedTime":"2014-10-07T21:12:55.107Z",
+  "postedRoomId":6522,
+  "postedBy": {
+    "id":"fd19aec1-3119-4671-80d7-5dcc4943211d",
+    "displayName":"Edward Thomson",
+    "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d",
+    "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"
+  }
+}

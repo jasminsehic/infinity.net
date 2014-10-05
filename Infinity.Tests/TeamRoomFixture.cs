@@ -191,5 +191,247 @@ namespace Infinity.Tests.Models
             base.ExecuteSync(
                 () => { return client.TeamRoom.DeleteRoom(431); });
         }
+
+        [Fact]
+        public void CanCreateMessage()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/305/messages",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        content = "Here's a new message"
+                    },
+                    ResponseResource = "TeamRoom.CreateMessage",
+                });
+
+            TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
+                () => { return client.TeamRoom.CreateMessage(305, "Here's a new message"); });
+
+            Assert.Equal("Here's a new message", message.Content);
+            Assert.Equal(83626, message.Id);
+            Assert.Equal(TeamRoomMessageType.Normal, message.MessageType);
+            Assert.Equal("Chuck Reinhart", message.PostedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.Url);
+            Assert.Equal(305, message.PostedRoomId);
+            Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 38, 543, DateTimeKind.Utc).ToLocalTime(), message.PostedTime);
+        }
+
+        [Fact]
+        public void CanGetMessages()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/305/messages",
+                    ResponseBody = "{ \"count\": 0, \"value\": [] }",
+                });
+
+            IList<TeamRoomMessage> rooms = base.ExecuteSync<IEnumerable<TeamRoomMessage>>(
+                () => { return client.TeamRoom.GetMessages(305); }).ToList();
+
+            Assert.Equal(0, rooms.Count);
+        }
+
+        [Fact]
+        public void CanGetMessagesWithDateRange()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/2/messages?$filter=postedtime ge 10/06/2014",
+                    ResponseResource = "TeamRoom.GetMessages"
+                });
+
+            IList<TeamRoomMessage> messages = base.ExecuteSync<IEnumerable<TeamRoomMessage>>(
+                () => { return client.TeamRoom.GetMessages(2, "postedtime ge 10/06/2014"); }).ToList();
+
+            Assert.Equal(4, messages.Count);
+
+            Assert.Equal("Edward Thomson entered the room", messages[0].Content);
+            Assert.Equal(74012, messages[0].Id);
+            Assert.Equal(TeamRoomMessageType.System, messages[0].MessageType);
+            Assert.Equal("[DefaultCollection]\\Project Collection Service Accounts", messages[0].PostedBy.DisplayName);
+            Assert.Equal(new Guid("48b1ff63-9db1-4704-ae7a-43950011e061"), messages[0].PostedBy.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=48b1ff63-9db1-4704-ae7a-43950011e061"), messages[0].PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/48b1ff63-9db1-4704-ae7a-43950011e061"), messages[0].PostedBy.Url);
+            Assert.Equal(6522, messages[0].PostedRoomId);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 05, 727, DateTimeKind.Utc).ToLocalTime(), messages[0].PostedTime);
+
+            Assert.Equal("This is a test message.", messages[1].Content);
+            Assert.Equal(74014, messages[1].Id);
+            Assert.Equal(TeamRoomMessageType.Normal, messages[1].MessageType);
+            Assert.Equal("Edward Thomson", messages[1].PostedBy.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[1].PostedBy.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[1].PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[1].PostedBy.Url);
+            Assert.Equal(6522, messages[1].PostedRoomId);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 30, 510, DateTimeKind.Utc).ToLocalTime(), messages[1].PostedTime);
+
+            Assert.Equal("This is\nanother\ntest.", messages[2].Content);
+            Assert.Equal(74015, messages[2].Id);
+            Assert.Equal(TeamRoomMessageType.Normal, messages[2].MessageType);
+            Assert.Equal("Edward Thomson", messages[2].PostedBy.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[2].PostedBy.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[2].PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[2].PostedBy.Url);
+            Assert.Equal(6522, messages[2].PostedRoomId);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 34, 417, DateTimeKind.Utc).ToLocalTime(), messages[2].PostedTime);
+
+            Assert.Equal("This is a test with an emoticon.  (d)", messages[3].Content);
+            Assert.Equal(74017, messages[3].Id);
+            Assert.Equal(TeamRoomMessageType.Normal, messages[3].MessageType);
+            Assert.Equal("Edward Thomson", messages[3].PostedBy.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[3].PostedBy.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[3].PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), messages[3].PostedBy.Url);
+            Assert.Equal(6522, messages[3].PostedRoomId);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc).ToLocalTime(), messages[3].PostedTime);
+        }
+
+        [Fact]
+        public void CanGetMessage()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/2/messages/305",
+                    ResponseResource = "TeamRoom.GetMessage"
+                });
+
+            TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
+                () => { return client.TeamRoom.GetMessage(2, 305); });
+
+            Assert.Equal("This is a test with an emoticon.  (d)", message.Content);
+            Assert.Equal(74017, message.Id);
+            Assert.Equal(TeamRoomMessageType.Normal, message.MessageType);
+            Assert.Equal("Edward Thomson", message.PostedBy.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), message.PostedBy.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), message.PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), message.PostedBy.Url);
+            Assert.Equal(6522, message.PostedRoomId);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc).ToLocalTime(), message.PostedTime);
+        }
+
+        [Fact]
+        public void CanUpdateMessage()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/305/messages/83626",
+                    Method = RestSharp.Method.PATCH,
+                    RequestObject = new { content = "Updated message" },
+                    ResponseResource = "TeamRoom.UpdateMessage",
+                });
+
+            TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
+                () => { return client.TeamRoom.UpdateMessage(305, 83626, "Updated message"); });
+
+            Assert.Equal("Updated message", message.Content);
+            Assert.Equal(83626, message.Id);
+            Assert.Equal(TeamRoomMessageType.Normal, message.MessageType);
+            Assert.Equal("Chuck Reinhart", message.PostedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.ImageUrl);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), message.PostedBy.Url);
+            Assert.Equal(305, message.PostedRoomId);
+            Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 38, 543, DateTimeKind.Utc).ToLocalTime(), message.PostedTime);
+        }
+
+        [Fact]
+        public void CanDeleteMessage()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/305/messages/83626",
+                    Method = RestSharp.Method.DELETE,
+                });
+
+            base.ExecuteSync(
+                () => { return client.TeamRoom.DeleteMessage(305, 83626); });
+        }
+
+        [Fact]
+        public void CanJoinRoom()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d",
+                    Method = RestSharp.Method.PUT,
+                    RequestObject = new { userId = "6db828be-599b-4214-a11d-93067d90744d" },
+                });
+
+            base.ExecuteSync(
+                () => { return client.TeamRoom.JoinRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
+        }
+
+        [Fact]
+        public void CanLeaveRoom()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d",
+                    Method = RestSharp.Method.DELETE,
+                });
+
+            base.ExecuteSync(
+                () => { return client.TeamRoom.LeaveRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
+        }
+
+        [Fact]
+        public void CanGetUsers()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/6522/users",
+                    ResponseResource = "TeamRoom.GetUsers"
+                });
+
+            IList<TeamRoomUserDetails> users = base.ExecuteSync<IEnumerable<TeamRoomUserDetails>>(
+                () => { return client.TeamRoom.GetUsers(6522); }).ToList();
+
+            Assert.Equal(1, users.Count);
+
+            Assert.Equal(true, users[0].IsOnline);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 26, 167, DateTimeKind.Utc).ToLocalTime(), users[0].JoinedDate);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc).ToLocalTime(), users[0].LastActivity);
+            Assert.Equal(6522, users[0].RoomId);
+            Assert.Equal("Edward Thomson", users[0].User.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), users[0].User.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), users[0].User.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), users[0].User.Url);
+        }
+
+        [Fact]
+        public void CanGetUser()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/chat/rooms/6522/users/fd19aec1-3119-4671-80d7-5dcc4943211d",
+                    ResponseResource = "TeamRoom.GetUser"
+                });
+
+            TeamRoomUserDetails user = base.ExecuteSync<TeamRoomUserDetails>(
+                () => { return client.TeamRoom.GetUser(6522, new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d")); });
+
+            Assert.Equal(true, user.IsOnline);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 26, 167, DateTimeKind.Utc).ToLocalTime(), user.JoinedDate);
+            Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc).ToLocalTime(), user.LastActivity);
+            Assert.Equal(6522, user.RoomId);
+            Assert.Equal("Edward Thomson", user.User.DisplayName);
+            Assert.Equal(new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d"), user.User.Id);
+            Assert.Equal(new Uri("https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"), user.User.ImageUrl);
+            Assert.Equal(new Uri("https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d"), user.User.Url);
+        }
     }
 }

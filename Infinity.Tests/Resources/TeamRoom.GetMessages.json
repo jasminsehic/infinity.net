@@ -1,0 +1,57 @@
+{
+  "count":4,
+  "value": [
+    {
+      "id":74012,
+      "content":"Edward Thomson entered the room",
+      "messageType":"system",
+      "postedTime":"2014-10-07T21:12:05.727Z",
+      "postedRoomId":6522,
+      "postedBy": {
+        "id":"48b1ff63-9db1-4704-ae7a-43950011e061",
+        "displayName":"[DefaultCollection]\\Project Collection Service Accounts",
+        "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/48b1ff63-9db1-4704-ae7a-43950011e061",
+        "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=48b1ff63-9db1-4704-ae7a-43950011e061"
+      }
+    },
+    {
+      "id":74014,
+      "content":"This is a test message.",
+      "messageType":"normal",
+      "postedTime":"2014-10-07T21:12:30.51Z",
+      "postedRoomId":6522,
+      "postedBy": {
+        "id":"fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "displayName":"Edward Thomson",
+        "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"
+      }
+    },
+    {
+      "id":74015,
+      "content":"This is\nanother\ntest.",
+      "messageType":"normal",
+      "postedTime":"2014-10-07T21:12:34.417Z",
+      "postedRoomId":6522,
+      "postedBy": {
+        "id":"fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "displayName":"Edward Thomson",
+        "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"
+      }
+    },
+    {
+      "id":74017,
+      "content":"This is a test with an emoticon.  (d)",
+      "messageType":"normal",
+      "postedTime":"2014-10-07T21:12:55.107Z",
+      "postedRoomId":6522,
+      "postedBy": {
+        "id":"fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "displayName":"Edward Thomson",
+        "url":"https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d",
+        "imageUrl":"https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d"
+      }
+    }
+  ]
+}

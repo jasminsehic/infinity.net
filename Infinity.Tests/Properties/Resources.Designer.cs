@@ -133,9 +133,39 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] TeamRoom_CreateMessage {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_CreateMessage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] TeamRoom_CreateRoom {
             get {
                 object obj = ResourceManager.GetObject("TeamRoom_CreateRoom", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TeamRoom_GetMessage {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_GetMessage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TeamRoom_GetMessages {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_GetMessages", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -156,6 +186,36 @@ namespace Infinity.Tests.Properties {
         internal static byte[] TeamRoom_GetRooms {
             get {
                 object obj = ResourceManager.GetObject("TeamRoom_GetRooms", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TeamRoom_GetUser {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_GetUser", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TeamRoom_GetUsers {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_GetUsers", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TeamRoom_UpdateMessage {
+            get {
+                object obj = ResourceManager.GetObject("TeamRoom_UpdateMessage", resourceCulture);
                 return ((byte[])(obj));
             }
         }
