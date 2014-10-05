@@ -30,7 +30,6 @@ namespace Infinity
             Git = new GitClient(Executor);
             Team = new TeamClient(Executor);
             TeamRoom = new TeamRoomClient(Executor);
-            UserProfile = new UserProfileClient(Executor);
         }
 
         private ITfsClientExecutor Executor { get; set; }
@@ -54,10 +53,5 @@ namespace Infinity
         /// Information about Team Rooms.
         /// </summary>
         public TeamRoomClient TeamRoom { get; private set; }
-
-        /// <summary>
-        /// Information about users.
-        /// </summary>
-        public UserProfileClient UserProfile { get; private set; }
     }
 }

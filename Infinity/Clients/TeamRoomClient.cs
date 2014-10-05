@@ -32,36 +32,91 @@ namespace Infinity.Clients
         }
 
         /// <summary>
+        /// Get a Team Room.
+        /// </summary>
+        /// <param name="roomId">The ID of the Team Room</param>
+        /// <returns>The Team Room</returns>
+        public async Task<TeamRoom> GetRoom(int roomId)
+        {
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}");
+            request.AddUrlSegment("RoomId", roomId.ToString());
+            return await Executor.Execute<TeamRoom>(request);
+        }
+
+        /// <summary>
+        /// Create a new Team Room.
+        /// </summary>
+        /// <param name="name">The name of the Team Room to create</param>
+        /// <param name="description">The description of the Team Room</param>
+        /// <returns>The newly created Team Room</returns>
+        public async Task<TeamRoom> CreateRoom(string name, string description)
+        {
+            Assert.NotNull(name, "name");
+            Assert.NotNull(description, "description");
+
+            var request = new RestRequest("/_apis/chat/rooms", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new { name = name, description = description });
+            return await Executor.Execute<TeamRoom>(request);
+        }
+
+        /// <summary>
+        /// Update a Team Room.
+        /// </summary>
+        /// <param name="roomId">The ID of the Team Room to update</param>
+        /// <param name="name">The new name of the Team Room</param>
+        /// <param name="description">The new description of the Team Room</param>
+        /// <returns>The updated Team Room</returns>
+        public async Task<TeamRoom> UpdateRoom(int roomId, string name, string description)
+        {
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.PATCH);
+            request.AddUrlSegment("RoomId", roomId.ToString());
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new { name = name, description = description });
+            return await Executor.Execute<TeamRoom>(request);
+        }
+
+        /// <summary>
+        /// Deletes a Team Room.
+        /// </summary>
+        /// <param name="roomId">The ID of the Team Room to delete</param>
+        public async Task DeleteRoom(int roomId)
+        {
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.DELETE);
+            request.AddUrlSegment("RoomId", roomId.ToString());
+            await Executor.Execute(request);
+        }
+
+        /// <summary>
         /// Join a Team Room.  You will be listed as present in the team room until
         /// you leave.
         /// </summary>
-        /// <param name="room">The Team Room to join</param>
-        /// <param name="profile">The profile of the joining user</param>
-        public async Task Join(TeamRoom room, UserProfile profile)
+        /// <param name="roomId">The ID of the Team Room to join</param>
+        /// <param name="userId">The ID of the user to join</param>
+        public async Task Join(int roomId, Guid userId)
         {
-            Assert.NotNull(room, "room");
-            Assert.NotNull(profile, "profile");
+            Assert.NotNull(userId, "userId");
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.PUT);
-            request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("Identity", profile.Id.ToString());
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
+            request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddUrlSegment("UserId", userId.ToString());
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(new { userId = profile.Id });
+            request.AddBody(new { userId = userId });
             await Executor.Execute(request);
         }
 
         /// <summary>
         /// Write a message in a Team Room.
         /// </summary>
-        /// <param name="room">The Team Room to write to</param>
+        /// <param name="roomId">The ID of the Team Room to write to</param>
         /// <param name="message">The message to write</param>
-        public async Task Write(TeamRoom room, string message)
+        public async Task Write(Guid roomId, string message)
         {
-            Assert.NotNull(room, "room");
+            Assert.NotNull(roomId, "roomId");
             Assert.NotNull(message, "message");
 
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.POST);
-            request.AddUrlSegment("RoomId", room.Id.ToString());
+            request.AddUrlSegment("RoomId", roomId.ToString());
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { content = message });
             await Executor.Execute(request);
@@ -73,15 +128,15 @@ namespace Infinity.Clients
         /// You can filter by the PostedTime field for up to 30 days.  If there is
         /// no filter then messages from the last 24 hours will be returned.
         /// </summary>
-        /// <param name="room">Team Room to query messages for</param>
+        /// <param name="roomId">The ID of the Team Room to query messages for</param>
         /// <param name="filter">OData PostedTime filter to apply to the message list</param>
         /// <returns>The list of messages</returns>
-        public async Task<IEnumerable<TeamRoomMessage>> GetMessages(TeamRoom room, string filter = null)
+        public async Task<IEnumerable<TeamRoomMessage>> GetMessages(Guid roomId, string filter = null)
         {
-            Assert.NotNull(room, "room");
+            Assert.NotNull(roomId, "roomId");
 
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.GET);
-            request.AddUrlSegment("RoomId", room.Id.ToString());
+            request.AddUrlSegment("RoomId", roomId.ToString());
 
             if (filter != null)
             {
@@ -95,16 +150,16 @@ namespace Infinity.Clients
         /// <summary>
         /// Leave a Team Room.
         /// </summary>
-        /// <param name="room">The Team Room to leave</param>
-        /// <param name="profile">The profile of the leaving user</param>
-        public async Task Leave(TeamRoom room, UserProfile profile)
+        /// <param name="roomId">The ID of the Team Room to leave</param>
+        /// <param name="userId">The ID of the user of the leaving user</param>
+        public async Task Leave(Guid roomId, Guid userId)
         {
-            Assert.NotNull(room, "room");
-            Assert.NotNull(profile, "profile");
+            Assert.NotNull(roomId, "roomId");
+            Assert.NotNull(userId, "userId");
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{Identity}", Method.DELETE);
-            request.AddUrlSegment("RoomId", room.Id.ToString());
-            request.AddUrlSegment("Identity", profile.Id.ToString());
+            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
+            request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddUrlSegment("UserId", userId.ToString());
             request.RequestFormat = DataFormat.Json;
             await Executor.Execute(request);
         }

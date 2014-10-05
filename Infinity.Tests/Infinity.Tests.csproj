@@ -59,6 +59,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TeamFixture.cs" />
+    <Compile Include="TeamRoomFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -69,6 +70,10 @@
     <None Include="Resources\Team.GetTeam.json" />
     <None Include="Resources\Team.GetTeamMembers.json" />
     <None Include="Resources\Team.GetTeams.json" />
+    <None Include="Resources\TeamRoom.CreateRoom.json" />
+    <None Include="Resources\TeamRoom.GetRoom.json" />
+    <None Include="Resources\TeamRoom.GetRooms.json" />
+    <None Include="Resources\TeamRoom.UpdateRoom.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">

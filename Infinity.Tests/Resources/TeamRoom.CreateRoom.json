@@ -1,0 +1,15 @@
+{
+  "id": 4207,
+  "name": "newCreatedRoom",
+  "description": "used for API doc generation",
+  "lastActivity": "2014-05-28T16:37:40.987Z",
+  "createdBy": {
+    "id": "8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d",
+    "displayName": "Chuck Reinhart",
+    "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d",
+    "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"
+  },
+  "createdDate": "2014-05-28T16:37:40.987Z",
+  "hasAdminPermissions": true,
+  "hasReadWritePermissions": true
+}

@@ -34,5 +34,13 @@ namespace Infinity.Tests
 
             return result;
         }
+
+        protected void ExecuteSync(SyncTask<Task> task)
+        {
+            Task.Run(async () =>
+            {
+                await task();
+            }).Wait();
+        }
     }
 }

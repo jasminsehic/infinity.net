@@ -58,7 +58,6 @@
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\VersionControlCapabilities.cs" />
     <Compile Include="TfsClientExecutor.cs" />
-    <Compile Include="Clients\UserProfileClient.cs" />
     <Compile Include="Exceptions\TfsConflictException.cs" />
     <Compile Include="Exceptions\TfsRestException.cs" />
     <Compile Include="Exceptions\TfsUnauthorizedException.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="Models\TeamRoom.cs" />
     <Compile Include="Models\TeamRoomMessage.cs" />
     <Compile Include="Models\TeamRoomMessageType.cs" />
-    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="TfsClient.cs" />
     <Compile Include="TfsClientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

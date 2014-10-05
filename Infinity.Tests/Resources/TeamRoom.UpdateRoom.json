@@ -1,0 +1,16 @@
+{
+  "id": 431,
+  "name": "renamedRoom",
+  "description": "updated room description",
+  "lastActivity": "2014-04-29T18:45:10.59Z",
+  "creatorUserTfId": "d291b0c4-a05c-4ea6-8df1-4b41d5f39eff",
+  "createdBy": {
+    "id": "d291b0c4-a05c-4ea6-8df1-4b41d5f39eff",
+    "displayName": "Jamal Hartnett",
+    "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff",
+    "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"
+  },
+  "createdDate": "2014-04-29T18:45:10.59Z",
+  "hasAdminPermissions": true,
+  "hasReadWritePermissions": true
+}

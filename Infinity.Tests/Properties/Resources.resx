@@ -139,4 +139,16 @@
   <data name="Team_GetTeamMembers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Team.GetTeamMembers.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TeamRoom_GetRooms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetRooms.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_GetRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.GetRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_CreateRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.CreateRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TeamRoom_UpdateRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TeamRoom.UpdateRoom.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
