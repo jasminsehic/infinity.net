@@ -33,6 +33,22 @@ namespace Infinity.Clients
         }
 
         /// <summary>
+        /// Get a list of all Git repositories managed in a TFS Team Project.
+        /// </summary>
+        /// <param name="projectId">The ID of the Team Project to query</param>
+        /// <returns>A list of repositories in the Project Collection</returns>
+        public async Task<IEnumerable<Repository>> GetRepositories(Guid projectId)
+        {
+            Assert.NotNull(projectId, "projectId");
+
+            RestRequest request = new RestRequest("/_apis/git/{ProjectId}/repositories");
+            request.AddUrlSegment("ProjectId", projectId.ToString());
+
+            RepositoryList list = await Executor.Execute<RepositoryList>(request);
+            return list.Value;
+        }
+
+        /// <summary>
         /// Get the information about a Git repository by its ID.
         /// </summary>
         /// <param name="id">The ID of the Git repository</param>
@@ -50,13 +66,16 @@ namespace Infinity.Clients
         /// <summary>
         /// Get the information about a Git repository by its name.
         /// </summary>
+        /// <param name="projectId">The ID of the Team Project that contains this repository</param>
         /// <param name="name">The name of the Git repository</param>
         /// <returns>The Git repository</returns>
-        public async Task<Repository> GetRepository(string name)
+        public async Task<Repository> GetRepository(Guid projectId, string name)
         {
+            Assert.NotNull(projectId, "projectId");
             Assert.NotNull(name, "name");
 
-            var request = new RestRequest("/_apis/git/repositories/{Name}");
+            var request = new RestRequest("/_apis/git/{ProjectId}/repositories/{Name}");
+            request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("Name", name);
 
             return await Executor.Execute<Repository>(request);
@@ -65,19 +84,50 @@ namespace Infinity.Clients
         /// <summary>
         /// Create a new Git repository inside a Team Project.
         /// </summary>
-        /// <param name="project">The Team Project that will contain this repository</param>
+        /// <param name="projectId">The ID of the Team Project that will contain this repository</param>
         /// <param name="name">The name of the repository to create</param>
         /// <returns>The Git repository created</returns>
         /// <exception cref="Infinity.Exceptions.TfsConflictException">If a repository by the same name already exists</exception>
-        public async Task<Repository> CreateRepository(Project project, string name)
+        public async Task<Repository> CreateRepository(Guid projectId, string name)
         {
-            Assert.NotNull(project, "project");
+            Assert.NotNull(projectId, "projectId");
             Assert.NotNull(name, "name");
 
             var request = new RestRequest("/_apis/git/repositories", Method.POST);
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(new { name = name, project = new { id = project.Id } });
+            request.AddBody(new { name = name, project = new { id = projectId.ToString() } });
             return await Executor.Execute<Repository>(request);
+        }
+
+        /// <summary>
+        /// Rename a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to rename</param>
+        /// <param name="newName">The new name of the repository</param>
+        /// <returns>The Git repository after update</returns>
+        public async Task<Repository> RenameRepository(Guid repositoryId, string newName)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(newName, "newName");
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new { name = newName });
+            return await Executor.Execute<Repository>(request);
+        }
+
+        /// <summary>
+        /// Delete the given Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to delete</param>
+        public async Task DeleteRepository(Guid repositoryId)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            await Executor.Execute(request);
         }
 
         /// <summary>

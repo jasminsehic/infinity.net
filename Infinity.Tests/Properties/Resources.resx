@@ -157,6 +157,9 @@
   <data name="TeamRoom_GetMessages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.GetMessages.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetRepositories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetRepositories.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TeamRoom_GetMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.GetMessage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -168,5 +171,17 @@
   </data>
   <data name="TeamRoom_UpdateMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeamRoom.UpdateMessage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetRepositoriesForTeamProject" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetRepositoriesForTeamProject.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetRepository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetRepository.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_CreateRepository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.CreateRepository.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_RenameRepository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.RenameRepository.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

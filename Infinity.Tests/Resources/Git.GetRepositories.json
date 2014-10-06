@@ -1,0 +1,40 @@
+{
+  "count": 3,
+  "value": [
+    {
+      "id": "278d5cd2-584d-4b63-824a-2ba458937249",
+      "name": "Fabrikam-Fiber-Git",
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249",
+      "project": {
+        "id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+        "name": "Fabrikam-Fiber-Git",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"
+      },
+      "defaultBranch": "refs/heads/master",
+      "remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"
+    },
+    {
+      "id": "66efb083-777a-4cac-a350-a24b046be6be",
+      "name": "TestGit",
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/66efb083-777a-4cac-a350-a24b046be6be",
+      "project": {
+        "id": "281f9a5b-af0d-49b4-a1df-fe6f5e5f84d0",
+        "name": "TestGit",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/281f9a5b-af0d-49b4-a1df-fe6f5e5f84d0"
+      },
+      "defaultBranch": "refs/heads/master",
+      "remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/TestGit"
+    },
+    {
+      "id": "17c3a073-1785-4f51-ba0a-a877bba5f5c7",
+      "name": "AnotherRepository",
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7",
+      "project": {
+        "id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+        "name": "Fabrikam-Fiber-Git",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"
+      },
+      "remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam-Fiber-Git/_git/AnotherRepository"
+    }
+  ]
+}

@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GitFixture.cs" />
     <Compile Include="MockRequestConfiguration.cs" />
     <Compile Include="MockClientExecutor.cs" />
     <Compile Include="MockClientFixture.cs" />
@@ -63,6 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Git.CreateRepository.json" />
+    <None Include="Resources\Git.GetRepositories.json" />
+    <None Include="Resources\Git.GetRepositoriesForTeamProject.json" />
+    <None Include="Resources\Git.GetRepository.json" />
+    <None Include="Resources\Git.RenameRepository.json" />
     <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />
     <None Include="Resources\Project.GetProjectWithCapabilities.json" />

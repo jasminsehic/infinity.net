@@ -63,6 +63,56 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_CreateRepository {
+            get {
+                object obj = ResourceManager.GetObject("Git_CreateRepository", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetRepositories {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetRepositories", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetRepositoriesForTeamProject {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetRepositoriesForTeamProject", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetRepository {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetRepository", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_RenameRepository {
+            get {
+                object obj = ResourceManager.GetObject("Git_RenameRepository", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Project_GetProject {
             get {
                 object obj = ResourceManager.GetObject("Project_GetProject", resourceCulture);
