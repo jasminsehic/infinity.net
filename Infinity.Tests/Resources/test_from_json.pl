@@ -36,6 +36,8 @@ sub tests_for
 		} else {
 			tests_for_hash($ctx, $data);
 		}
+	} elsif (ref($data) eq 'ARRAY') {
+		tests_for_array($ctx, $data);
 	} else {
 		if ($data =~ /^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$/) {
 			$data = 'new Guid("' . $data . '")';

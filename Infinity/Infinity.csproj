@@ -49,12 +49,16 @@
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
+    <Compile Include="Models\ObjectType.cs" />
     <Compile Include="Models\ProcessTemplateCapabilities.cs" />
     <Compile Include="Models\ProjectCapabilities.cs" />
     <Compile Include="Models\ProjectLink.cs" />
     <Compile Include="Models\ProjectLinks.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />
+    <Compile Include="Models\Tree.cs" />
+    <Compile Include="Models\TreeEntry.cs" />
+    <Compile Include="Models\TreeLinks.cs" />
     <Compile Include="Models\VersionControlType.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\VersionControlCapabilities.cs" />

@@ -6,12 +6,12 @@ using RestSharp.Deserializers;
 namespace Infinity.Models
 {
     /// <summary>
-    /// A link to a project resource.
+    /// A link to a resource.
     /// </summary>
-    public class ProjectLink
+    public class Link
     {
         /// <summary>
-        /// The URL for this project's link.
+        /// The URL for this resource's link.
         /// </summary>
         [DeserializeAs(Name = "href")]
         public Uri Url { get; private set; }

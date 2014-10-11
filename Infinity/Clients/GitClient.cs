@@ -162,6 +162,28 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region Trees
+
+        /// <summary>
+        /// Get the information about a Git tree by its ID.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="treeId">The object ID of the tree</param>
+        /// <returns>The tree</returns>
+        public async Task<Tree> GetTree(Guid repositoryId, string treeId)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(treeId, "treeId");
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("TreeId", treeId);
+
+            return await Executor.Execute<Tree>(request);
+        }
+
+        #endregion
+
         private class RepositoryList
         {
             public int Count { get; set; }

@@ -70,6 +70,7 @@
     <None Include="Resources\Git.GetRepositories.json" />
     <None Include="Resources\Git.GetRepositoriesForTeamProject.json" />
     <None Include="Resources\Git.GetRepository.json" />
+    <None Include="Resources\Git.GetTree.json" />
     <None Include="Resources\Git.RenameRepository.json" />
     <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />

@@ -258,5 +258,66 @@ namespace Infinity.Tests.Models
         }
 
         #endregion
+
+        #region Trees
+
+        [Fact]
+        public void CanGetTree()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29",
+                    ResponseResource = "Git.GetTree",
+                });
+
+            Tree tree = base.ExecuteSync<Tree>(
+                () => { return client.Git.GetTree(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "d1d5c2d49045d52bba6419652d6ecb2cd560dc29"); });
+
+            Assert.Equal("d1d5c2d49045d52bba6419652d6ecb2cd560dc29", tree.ObjectId);
+            Assert.Equal(147, tree.Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), tree.Url);
+
+            Assert.Equal(4, tree.TreeEntries.Count);
+
+            Assert.Equal(ObjectType.Tree, tree.TreeEntries[0].Type);
+            Assert.Equal(40000, tree.TreeEntries[0].Mode);
+            Assert.Equal("ea6765e1976b9e8a6d4981fd8febebd574a91571", tree.TreeEntries[0].ObjectId);
+            Assert.Equal("Home", tree.TreeEntries[0].RelativePath);
+            Assert.Equal(259, tree.TreeEntries[0].Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/ea6765e1976b9e8a6d4981fd8febebd574a91571"), tree.TreeEntries[0].Url);
+
+            Assert.Equal(ObjectType.Tree, tree.TreeEntries[1].Type);
+            Assert.Equal(40000, tree.TreeEntries[1].Mode);
+            Assert.Equal("d1c521e3b401b314d4f9ff17f6cad4652c6a4d14", tree.TreeEntries[1].ObjectId);
+            Assert.Equal("Shared", tree.TreeEntries[1].RelativePath);
+            Assert.Equal(82, tree.TreeEntries[1].Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1c521e3b401b314d4f9ff17f6cad4652c6a4d14"), tree.TreeEntries[1].Url);
+
+            Assert.Equal(ObjectType.Blob, tree.TreeEntries[2].Type);
+            Assert.Equal(100644, tree.TreeEntries[2].Mode);
+            Assert.Equal("f5dd7df5872eae8c39c9491f67d856dafd609683", tree.TreeEntries[2].ObjectId);
+            Assert.Equal("Web.config", tree.TreeEntries[2].RelativePath);
+            Assert.Equal(1670, tree.TreeEntries[2].Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/f5dd7df5872eae8c39c9491f67d856dafd609683"), tree.TreeEntries[2].Url);
+
+            Assert.Equal(ObjectType.Blob, tree.TreeEntries[3].Type);
+            Assert.Equal(100644, tree.TreeEntries[3].Mode);
+            Assert.Equal("2de62418c07c3ffa833543f484445dbfd0fe68d8", tree.TreeEntries[3].ObjectId);
+            Assert.Equal("_ViewStart.cshtml", tree.TreeEntries[3].RelativePath);
+            Assert.Equal(54, tree.TreeEntries[3].Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/2de62418c07c3ffa833543f484445dbfd0fe68d8"), tree.TreeEntries[3].Url);
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), tree.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), tree.Links.Self.Url);
+
+            Assert.Equal(4, tree.Links.TreeEntries.Count);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/ea6765e1976b9e8a6d4981fd8febebd574a91571"), tree.Links.TreeEntries[0].Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1c521e3b401b314d4f9ff17f6cad4652c6a4d14"), tree.Links.TreeEntries[1].Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/f5dd7df5872eae8c39c9491f67d856dafd609683"), tree.Links.TreeEntries[2].Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/2de62418c07c3ffa833543f484445dbfd0fe68d8"), tree.Links.TreeEntries[3].Url);
+        }
+
+        #endregion
     }
 }
