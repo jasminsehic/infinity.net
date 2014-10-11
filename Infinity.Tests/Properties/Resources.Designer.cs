@@ -73,6 +73,26 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetReferences {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetReferences", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetReferencesWithFilter {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetReferencesWithFilter", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetRepositories {
             get {
                 object obj = ResourceManager.GetObject("Git_GetRepositories", resourceCulture);

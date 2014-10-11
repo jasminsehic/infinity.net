@@ -13,6 +13,8 @@ namespace Infinity.Tests.Models
 {
     public class GitFixture : MockClientFixture
     {
+        #region Repositories
+
         [Fact]
         public void CanGetRepositories()
         {
@@ -202,5 +204,59 @@ namespace Infinity.Tests.Models
             base.ExecuteSync(
                 () => { return client.Git.DeleteRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7")); });
         }
+
+        #endregion
+
+        #region References
+
+        [Fact]
+        public void CanGetReferences()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs",
+                    ResponseResource = "Git.GetReferences",
+                });
+
+            IList<Reference> references = base.ExecuteSync<IEnumerable<Reference>>(
+                () => { return client.Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+
+            Assert.Equal(3, references.Count);
+
+            Assert.Equal("refs/heads/develop", references[0].Name);
+            Assert.Equal("67cae2b029dff7eb3dc062b49403aaedca5bad8d", references[0].ObjectId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop"), references[0].Url);
+
+            Assert.Equal("refs/heads/master", references[1].Name);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", references[1].ObjectId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/master"), references[1].Url);
+
+            Assert.Equal("refs/heads/npaulk/feature", references[2].Name);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", references[2].ObjectId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/npaulk/feature"), references[2].Url);
+        }
+
+        [Fact]
+        public void CanGetReferencesWithFilter()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop",
+                    ResponseResource = "Git.GetReferencesWithFilter",
+                });
+
+            IList<Reference> references = base.ExecuteSync<IEnumerable<Reference>>(
+                () => { return client.Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "refs/heads/develop"); }).ToList();
+
+            Assert.Equal(1, references.Count);
+
+            Assert.Equal("refs/heads/develop", references[0].Name);
+            Assert.Equal("67cae2b029dff7eb3dc062b49403aaedca5bad8d", references[0].ObjectId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop"), references[0].Url);
+        }
+
+        #endregion
     }
 }

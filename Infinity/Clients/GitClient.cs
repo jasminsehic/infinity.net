@@ -22,6 +22,8 @@ namespace Infinity.Clients
 
         private ITfsClientExecutor Executor { get; set; }
 
+        #region Repositories
+
         /// <summary>
         /// Get a list of all Git repositories managed in a TFS Project Collection.
         /// </summary>
@@ -130,27 +132,35 @@ namespace Infinity.Clients
             await Executor.Execute(request);
         }
 
+        #endregion
+
+        #region References
+
         /// <summary>
         /// Get the references (branches, tags, notes) in the given repository.
         /// </summary>
-        /// <param name="repository">The Git repository</param>
+        /// <param name="repositoryId">The ID of the Git repository</param>
         /// <param name="filter">The string prefix to match, excepting the <code>refs/</code> prefix.  For example, <code>heads/</code> will return branches.</param>
         /// <returns>The list of references.</returns>
-        public async Task<IEnumerable<Reference>> GetReferences(Repository repository, string filter = null)
+        public async Task<IEnumerable<Reference>> GetReferences(Guid repositoryId, string filter = null)
         {
-            Assert.NotNull(repository, "repository");
-
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs", Method.GET);
-            request.AddUrlSegment("RepositoryId", repository.Id.ToString());
+            Assert.NotNull(repositoryId, "repositoryId");
 
             if (filter != null)
             {
-                request.AddParameter("$filter", filter);
+                Assert.IsTrue(filter.StartsWith("refs/"), "filter.StartsWith(refs/)");
+                filter = filter.Substring(4);
             }
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("Filter", filter != null ? filter : "");
 
             ReferenceList references = await Executor.Execute<ReferenceList>(request);
             return (references != null) ? references.Value : new List<Reference>();
         }
+
+        #endregion
 
         private class RepositoryList
         {
