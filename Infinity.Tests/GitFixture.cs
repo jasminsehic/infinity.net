@@ -21,7 +21,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories",
+                    Uri = "/_apis/git/repositories?api-version=1.0",
                     ResponseResource = "Git.GetRepositories",
                 });
 
@@ -63,7 +63,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories",
+                    Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories?api-version=1.0",
                     ResponseResource = "Git.GetRepositoriesForTeamProject",
                 });
 
@@ -96,7 +96,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7",
+                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
                     ResponseResource = "Git.GetRepository",
                 });
 
@@ -118,7 +118,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories/anotherrepository",
+                    Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories/anotherrepository?api-version=1.0",
                     ResponseResource = "Git.GetRepository",
                 });
 
@@ -140,7 +140,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories",
+                    Uri = "/_apis/git/repositories?api-version=1.0",
                     Method = RestSharp.Method.POST,
                     RequestObject = new
                     {
@@ -170,7 +170,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7",
+                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
                     Method = RestSharp.Method.PATCH,
                     RequestObject = new
                     {
@@ -197,7 +197,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7",
+                    Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
                     Method = RestSharp.Method.DELETE,
                 });
 
@@ -215,7 +215,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs",
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs?api-version=1.0",
                     ResponseResource = "Git.GetReferences",
                 });
 
@@ -243,7 +243,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop",
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop?api-version=1.0",
                     ResponseResource = "Git.GetReferencesWithFilter",
                 });
 
@@ -267,7 +267,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29",
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29?api-version=1.0",
                     ResponseResource = "Git.GetTree",
                 });
 

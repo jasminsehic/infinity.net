@@ -19,6 +19,14 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
+        public string Version
+        {
+            get
+            {
+                return "1.0";
+            }
+        }
+
         private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
@@ -27,7 +35,10 @@ namespace Infinity.Clients
         /// <returns>The list of Team Rooms</returns>
         public async Task<IEnumerable<TeamRoom>> GetRooms()
         {
-            TeamRoomList list = await Executor.Execute<TeamRoomList>(new RestRequest("/_apis/chat/rooms"));
+            var request = new RestRequest("/_apis/chat/rooms");
+            request.AddParameter("api-version", Version);
+
+            TeamRoomList list = await Executor.Execute<TeamRoomList>(request);
             return list.Value;
         }
 
@@ -40,6 +51,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}");
             request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddParameter("api-version", Version);
             return await Executor.Execute<TeamRoom>(request);
         }
 
@@ -55,6 +67,7 @@ namespace Infinity.Clients
             Assert.NotNull(description, "description");
 
             var request = new RestRequest("/_apis/chat/rooms", Method.POST);
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, description = description });
             return await Executor.Execute<TeamRoom>(request);
@@ -71,6 +84,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.PATCH);
             request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, description = description });
             return await Executor.Execute<TeamRoom>(request);
@@ -84,6 +98,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddParameter("api-version", Version);
             await Executor.Execute(request);
         }
 
@@ -98,6 +113,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.POST);
             request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { content = content });
             return await Executor.Execute<TeamRoomMessage>(request);
@@ -116,6 +132,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.GET);
             request.AddUrlSegment("RoomId", roomId.ToString());
+            request.AddParameter("api-version", Version);
 
             if (filter != null)
             {
@@ -137,6 +154,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.GET);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
+            request.AddParameter("api-version", Version);
             return await Executor.Execute<TeamRoomMessage>(request);
         }
 
@@ -152,6 +170,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.PATCH);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { content = content });
             return await Executor.Execute<TeamRoomMessage>(request);
@@ -167,6 +186,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
+            request.AddParameter("api-version", Version);
             await Executor.Execute(request);
         }
 
@@ -183,6 +203,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { userId = userId });
             await Executor.Execute(request);
@@ -213,6 +234,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}");
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
+            request.AddParameter("api-version", Version);
             return await Executor.Execute<TeamRoomUserDetails>(request);
         }
 
@@ -228,6 +250,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             await Executor.Execute(request);
         }

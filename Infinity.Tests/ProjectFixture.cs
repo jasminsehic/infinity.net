@@ -20,7 +20,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects",
+                    Uri = "/_apis/projects?api-version=1.0",
                     ResponseResource = "Project.GetProjects",
                 });
 
@@ -51,7 +51,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/fabrikam-fiber-tfvc",
+                    Uri = "/_apis/projects/fabrikam-fiber-tfvc?api-version=1.0",
                     ResponseResource = "Project.GetProject",
                 });
 
@@ -79,7 +79,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/fabrikam-fiber-tfvc?includecapabilities=true",
+                    Uri = "/_apis/projects/fabrikam-fiber-tfvc?api-version=1.0&includecapabilities=true",
                     ResponseResource = "Project.GetProjectWithCapabilities",
                 });
 
@@ -107,7 +107,7 @@ namespace Infinity.Tests.Models
                 new MockRequestConfiguration
                 {
                     Method = RestSharp.Method.PATCH,
-                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1",
+                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1?api-version=1.0",
                     RequestObject = new { description = "Team Foundation Version Control projects." },
                     ResponseResource = "Project.UpdateProject",
                 });

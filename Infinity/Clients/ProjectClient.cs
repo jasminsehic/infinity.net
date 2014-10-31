@@ -19,6 +19,13 @@ namespace Infinity.Clients
         {
             Executor = executor;
         }
+        public string Version
+        {
+            get
+            {
+                return "1.0";
+            }
+        }
 
         private ITfsClientExecutor Executor { get; set; }
 
@@ -35,6 +42,7 @@ namespace Infinity.Clients
             int skip = 0)
         {
             var request = new RestRequest("/_apis/projects");
+            request.AddParameter("api-version", Version);
 
             if (projectState != ProjectState.All)
             {
@@ -71,6 +79,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/projects/{ProjectId}");
             request.AddUrlSegment("ProjectId", id.ToString());
+            request.AddParameter("api-version", Version);
 
             if (includeCapabilities)
             {
@@ -96,6 +105,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/projects/{Name}");
             request.AddUrlSegment("Name", name);
+            request.AddParameter("api-version", Version);
 
             if (includeCapabilities)
             {
@@ -118,6 +128,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/projects/{ProjectId}", Method.PATCH);
             request.AddUrlSegment("ProjectId", id.ToString());
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);
@@ -136,6 +147,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/projects/{Name}", Method.PATCH);
             request.AddUrlSegment("Name", name);
+            request.AddParameter("api-version", Version);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);

@@ -19,7 +19,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms",
+                    Uri = "/_apis/chat/rooms?api-version=1.0",
                     ResponseResource = "TeamRoom.GetRooms",
                 });
 
@@ -95,7 +95,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/4207",
+                    Uri = "/_apis/chat/rooms/4207?api-version=1.0",
                     ResponseResource = "TeamRoom.GetRoom",
                 });
 
@@ -121,7 +121,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms",
+                    Uri = "/_apis/chat/rooms?api-version=1.0",
                     Method = RestSharp.Method.POST,
                     RequestObject = new {
                         name = "newCreatedRoom",
@@ -152,7 +152,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/431",
+                    Uri = "/_apis/chat/rooms/431?api-version=1.0",
                     Method = RestSharp.Method.PATCH,
                     RequestObject = new
                     {
@@ -184,7 +184,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/431",
+                    Uri = "/_apis/chat/rooms/431?api-version=1.0",
                     Method = RestSharp.Method.DELETE
                 });
 
@@ -198,7 +198,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/305/messages",
+                    Uri = "/_apis/chat/rooms/305/messages?api-version=1.0",
                     Method = RestSharp.Method.POST,
                     RequestObject = new
                     {
@@ -227,7 +227,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/305/messages",
+                    Uri = "/_apis/chat/rooms/305/messages?api-version=1.0",
                     ResponseBody = "{ \"count\": 0, \"value\": [] }",
                 });
 
@@ -243,7 +243,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/2/messages?$filter=postedtime ge 10/06/2014",
+                    Uri = "/_apis/chat/rooms/2/messages?api-version=1.0&$filter=postedtime ge 10/06/2014",
                     ResponseResource = "TeamRoom.GetMessages"
                 });
 
@@ -299,7 +299,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/2/messages/305",
+                    Uri = "/_apis/chat/rooms/2/messages/305?api-version=1.0",
                     ResponseResource = "TeamRoom.GetMessage"
                 });
 
@@ -323,7 +323,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/305/messages/83626",
+                    Uri = "/_apis/chat/rooms/305/messages/83626?api-version=1.0",
                     Method = RestSharp.Method.PATCH,
                     RequestObject = new { content = "Updated message" },
                     ResponseResource = "TeamRoom.UpdateMessage",
@@ -349,7 +349,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/305/messages/83626",
+                    Uri = "/_apis/chat/rooms/305/messages/83626?api-version=1.0",
                     Method = RestSharp.Method.DELETE,
                 });
 
@@ -363,7 +363,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d",
+                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d?api-version=1.0",
                     Method = RestSharp.Method.PUT,
                     RequestObject = new { userId = "6db828be-599b-4214-a11d-93067d90744d" },
                 });
@@ -378,7 +378,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d",
+                    Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d?api-version=1.0",
                     Method = RestSharp.Method.DELETE,
                 });
 
@@ -417,7 +417,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/6522/users/fd19aec1-3119-4671-80d7-5dcc4943211d",
+                    Uri = "/_apis/chat/rooms/6522/users/fd19aec1-3119-4671-80d7-5dcc4943211d?api-version=1.0",
                     ResponseResource = "TeamRoom.GetUser"
                 });
 

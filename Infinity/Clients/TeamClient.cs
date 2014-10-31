@@ -19,6 +19,14 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
+        public string Version
+        {
+            get
+            {
+                return "1.0";
+            }
+        }
+
         private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
@@ -32,6 +40,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/projects/{ProjectId}/teams");
             request.AddUrlSegment("ProjectId", projectId.ToString());
+            request.AddParameter("api-version", Version);
 
             TeamList list = await Executor.Execute<TeamList>(request);
             return list.Value;
@@ -51,6 +60,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("TeamId", teamId.ToString());
+            request.AddParameter("api-version", Version);
 
             return await Executor.Execute<Team>(request);
         }
@@ -69,6 +79,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}/members");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("TeamId", teamId.ToString());
+            request.AddParameter("api-version", Version);
 
             TeamMemberList list = await Executor.Execute<TeamMemberList>(request);
             return list.Value;

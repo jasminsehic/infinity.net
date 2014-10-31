@@ -19,7 +19,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams",
+                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams?api-version=1.0",
                     ResponseResource = "Team.GetTeams",
                 });
 
@@ -47,7 +47,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca",
+                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca?api-version=1.0",
                     ResponseResource = "Team.GetTeam",
                 });
 
@@ -67,7 +67,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca/members",
+                    Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca/members?api-version=1.0",
                     ResponseResource = "Team.GetTeamMembers",
                 });
 
