@@ -49,11 +49,16 @@
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
+    <Compile Include="Models\CommitLink.cs" />
+    <Compile Include="Models\LinkUrl.cs" />
     <Compile Include="Models\ObjectType.cs" />
     <Compile Include="Models\ProcessTemplateCapabilities.cs" />
     <Compile Include="Models\ProjectCapabilities.cs" />
-    <Compile Include="Models\ProjectLink.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\ProjectLinks.cs" />
+    <Compile Include="Models\PullRequest.cs" />
+    <Compile Include="Models\PullRequestMergeStatus.cs" />
+    <Compile Include="Models\PullRequestStatus.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />
     <Compile Include="Models\Tree.cs" />

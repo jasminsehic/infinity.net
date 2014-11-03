@@ -11,9 +11,13 @@ namespace Infinity.Models
     public class Link
     {
         /// <summary>
+        /// The ID for this resource
+        /// </summary>
+        public Guid Id { get; private set; }
+
+        /// <summary>
         /// The URL for this resource's link.
         /// </summary>
-        [DeserializeAs(Name = "href")]
         public Uri Url { get; private set; }
     }
 }

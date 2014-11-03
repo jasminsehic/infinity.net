@@ -34,6 +34,26 @@ namespace Infinity.Clients
 
         private ITfsClientExecutor Executor { get; set; }
 
+        #region Pull Requests
+
+        /// <summary>
+        /// Get a list of pull requests in a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <returns>A list of pull requests in the Git repository</returns>
+        public async Task<IEnumerable<PullRequest>> GetPullRequests(Guid repositoryId)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
+
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddParameter("api-version", Version);
+
+            PullRequestList list = await Executor.Execute<PullRequestList>(request);
+            return list.Value;
+        }
+
+        #endregion
+
         #region Repositories
 
         /// <summary>
@@ -206,6 +226,12 @@ namespace Infinity.Clients
         }
 
         #endregion
+
+        private class PullRequestList
+        {
+            public int Count { get; set; }
+            public List<PullRequest> Value { get; set; }
+        }
 
         private class RepositoryList
         {
