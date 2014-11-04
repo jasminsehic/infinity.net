@@ -20,6 +20,9 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
+        /// <summary>
+        /// The REST API version of this client
+        /// </summary>
         public string Version
         {
             get
