@@ -202,4 +202,7 @@
   <data name="Git_GetPullRequestsByTargetBranch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Git.GetPullRequestsByTargetBranch.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetPullRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPullRequest.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

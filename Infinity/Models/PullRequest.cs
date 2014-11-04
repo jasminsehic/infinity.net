@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using RestSharp;
+using RestSharp.Deserializers;
 
 namespace Infinity.Models
 {
@@ -95,5 +95,16 @@ namespace Infinity.Models
         /// The creator of the pull request.
         /// </summary>
         public TeamMember CreatedBy { get; private set; }
+
+        /// <summary>
+        /// Links to other pull request resources.
+        /// </summary>
+        [DeserializeAs(Name = "_links")]
+        public PullRequestLinks Links { get; private set; }
+
+        /// <summary>
+        /// The list of reviewers on a pull request.
+        /// </summary>
+        public List<PullRequestReviewer> Reviewers { get; private set; }
     }
 }

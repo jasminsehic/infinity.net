@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\Git.CreateRepository.json" />
+    <None Include="Resources\Git.GetPullRequest.json" />
     <None Include="Resources\Git.GetPullRequests.json" />
     <None Include="Resources\Git.GetPullRequestsByStatus.json" />
     <None Include="Resources\Git.GetPullRequestsByTargetBranch.json" />

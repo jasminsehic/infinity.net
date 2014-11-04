@@ -37,6 +37,22 @@ namespace Infinity.Clients
         #region Pull Requests
 
         /// <summary>
+        /// Get a pull request in a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository that contains the pull request</param>
+        /// <param name="id">The ID of the pull request</param>
+        /// <returns>The pull request</returns>
+        public async Task<PullRequest> GetPullRequest(Guid repositoryId, int id)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{Id}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("Id", String.Format("{0}", id));
+            request.AddParameter("api-version", Version);
+
+            return await Executor.Execute<PullRequest>(request);
+        }
+
+        /// <summary>
         /// Get a list of pull requests in a Git repository.
         /// </summary>
         /// <param name="repositoryId">The ID of the repository to query</param>

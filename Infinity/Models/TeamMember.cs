@@ -10,26 +10,26 @@ namespace Infinity.Models
         /// <summary>
         /// The ID of the user.
         /// </summary>
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
 
         /// <summary>
         /// The display name of the user.
         /// </summary>
-        public string DisplayName { get; private set; }
+        public string DisplayName { get; protected set; }
 
         /// <summary>
         /// The unique (to a collection) name for the user.
         /// </summary>
-        public string UniqueName { get; private set; }
+        public string UniqueName { get; protected set; }
 
         /// <summary>
         /// The URL of this user's REST endpoint.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; protected set; }
 
         /// <summary>
         /// The URL of the avatar image of the user.
         /// </summary>
-        public Uri ImageUrl { get; private set; }
+        public Uri ImageUrl { get; protected set; }
     }
 }

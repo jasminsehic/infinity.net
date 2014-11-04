@@ -58,7 +58,9 @@
     <Compile Include="Models\Link.cs" />
     <Compile Include="Models\ProjectLinks.cs" />
     <Compile Include="Models\PullRequest.cs" />
+    <Compile Include="Models\PullRequestLinks.cs" />
     <Compile Include="Models\PullRequestMergeStatus.cs" />
+    <Compile Include="Models\PullRequestReviewer.cs" />
     <Compile Include="Models\PullRequestStatus.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />

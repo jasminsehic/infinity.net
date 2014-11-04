@@ -30,7 +30,9 @@ sub tests_for
 {
 	my($ctx, $data) = @_;
 
-	if (ref($data) eq 'HASH') {
+	if (!defined($data)) {
+		print "Assert.Null($ctx);\n";
+	} elsif (ref($data) eq 'HASH') {
 		if ($data->{'count'} && ref($data->{'value'}) eq 'ARRAY') {
 			tests_for_array($ctx, $data->{'value'});
 		} else {
