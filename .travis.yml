@@ -1,0 +1,18 @@
+language: c
+
+before_install:
+ - export EnableNuGetPackageRestore=true
+ - export PATH=/opt/mono/bin:$PATH
+
+install:
+ - ./build/travis-ci-install.sh
+
+script:
+ - xbuild Infinity.msbuild /t:Test
+
+notifications:
+   recipients:
+    - ethomson@edwardthomson.com
+   email:
+      on_success: change
+      on_failure: always
