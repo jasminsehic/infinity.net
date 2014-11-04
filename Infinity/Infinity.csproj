@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Clients\GitClient.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
+    <Compile Include="Clients\PullRequestFilters.cs" />
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="TfsClientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Assert.cs" />
+    <Compile Include="Util\RestRequestExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

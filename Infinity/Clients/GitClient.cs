@@ -40,13 +40,23 @@ namespace Infinity.Clients
         /// Get a list of pull requests in a Git repository.
         /// </summary>
         /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="filters">Optional pull request query filters</param>
         /// <returns>A list of pull requests in the Git repository</returns>
-        public async Task<IEnumerable<PullRequest>> GetPullRequests(Guid repositoryId)
+        public async Task<IEnumerable<PullRequest>> GetPullRequests(Guid repositoryId, PullRequestFilters filters = null)
         {
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
-
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddParameter("api-version", Version);
+
+            filters = filters ?? new PullRequestFilters();
+
+            request.AddOptionalParameter("status", () => { return filters.Status != null; }, filters.Status.ToString().ToLower());
+            request.AddOptionalParameter("creatorId", filters.CreatorId);
+            request.AddOptionalParameter("reviewerId", filters.ReviewerId);
+            request.AddOptionalParameter("sourceRefName", filters.SourceRefName);
+            request.AddOptionalParameter("targetRefName", filters.TargetRefName);
+            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
 
             PullRequestList list = await Executor.Execute<PullRequestList>(request);
             return list.Value;

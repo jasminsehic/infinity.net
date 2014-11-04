@@ -66,6 +66,11 @@ namespace Infinity.Models
         public DateTime CreationDate { get; private set; }
 
         /// <summary>
+        /// The time the pull request was closed.
+        /// </summary>
+        public DateTime ClosedDate { get; private set; }
+
+        /// <summary>
         /// The head commit of the source branch.
         /// </summary>
         public CommitLink LastMergeSourceCommit { get; private set; }

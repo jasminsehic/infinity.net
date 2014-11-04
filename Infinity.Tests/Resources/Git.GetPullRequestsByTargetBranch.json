@@ -1,0 +1,40 @@
+{
+  "value": [
+    {
+      "repository": {
+        "id": "278d5cd2-584d-4b63-824a-2ba458937249",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"
+      },
+      "pullRequestId": 50,
+      "status": "active",
+      "createdBy": {
+        "id": "d6245f20-2af8-44f4-9451-8107cb2767db",
+        "displayName": "Normal Paulk",
+        "uniqueName": "fabrikamfiber16@hotmail.com",
+        "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db",
+        "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"
+      },
+      "creationDate": "2014-10-28T01:54:43.248Z",
+      "title": "New fix for hello world class",
+      "description": "Example pull request showing review and integration of a simple change.",
+      "sourceRefName": "refs/heads/npaulk/feature",
+      "targetRefName": "refs/heads/master",
+      "mergeStatus": "succeeded",
+      "mergeId": "bdd92391-1291-45dd-b4bf-6b7e6270e8d0",
+      "lastMergeSourceCommit": {
+        "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+      },
+      "lastMergeTargetCommit": {
+        "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+      },
+      "lastMergeCommit": {
+        "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+      },
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"
+    }
+  ],
+  "count": 1
+}
