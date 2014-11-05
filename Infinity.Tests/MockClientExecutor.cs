@@ -101,7 +101,7 @@ namespace Infinity.Tests
                 It.IsAny<IRestRequest>())).
                 ReturnsAsync(responseData);
 
-            IRestResponse response = await restClientMock.Object.ExecuteTaskAsync(request);
+            await restClientMock.Object.ExecuteTaskAsync(request);
         }
     }
 }
