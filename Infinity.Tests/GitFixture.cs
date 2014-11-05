@@ -1031,6 +1031,82 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequests[0].Url);
         }
 
+        [Fact]
+        public void CanCreatePullRequest()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        sourceRefName = "refs/heads/npaulk/feature",
+                        targetRefName = "refs/heads/master",
+                        title = "New fix for hello world class",
+                        description = "Example pull request showing review and integration of a simple change.",
+                        reviewers = new[] {
+                            new { id = "3b5f0c34-4aec-4bf4-8708-1d36f0dbc468" },
+                        },
+                    },
+                    ResponseResource = "Git.CreatePullRequest",
+                });
+
+            PullRequest pullRequest = base.ExecuteSync<PullRequest>(
+                () =>
+                {
+                    return client.Git.CreatePullRequest(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        "refs/heads/npaulk/feature",
+                        "refs/heads/master",
+                        "New fix for hello world class",
+                        "Example pull request showing review and integration of a simple change.",
+                        new Guid[] { new Guid("3b5f0c34-4aec-4bf4-8708-1d36f0dbc468") });
+                });
+
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.Links.CreatedBy.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Links.Self.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/npaulk/feature"), pullRequest.Links.SourceBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.SourceCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"), pullRequest.Links.TargetBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.TargetCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/workitems"), pullRequest.Links.WorkItems.Url);
+            Assert.Equal("Normal Paulk", pullRequest.CreatedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeSourceCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeSourceCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeTargetCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeTargetCommit.Url);
+            Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequest.MergeId);
+            Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequest.MergeStatus);
+            Assert.Equal(50, pullRequest.PullRequestId);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Url);
+            Assert.Equal(1, pullRequest.Reviewers.Count);
+
+            Assert.Equal("Christie Church", pullRequest.Reviewers[0].DisplayName);
+            Assert.Equal(new Guid("3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].ImageUrl);
+            Assert.Null(pullRequest.Reviewers[0].ReviewerUrl);
+            Assert.Equal("fabrikamfiber1@hotmail.com", pullRequest.Reviewers[0].UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Url);
+            Assert.Equal(0, pullRequest.Reviewers[0].Vote);
+
+            Assert.Equal("refs/heads/npaulk/feature", pullRequest.SourceRefName);
+            Assert.Equal(PullRequestStatus.Active, pullRequest.Status);
+            Assert.Equal("refs/heads/master", pullRequest.TargetRefName);
+            Assert.Equal("New fix for hello world class", pullRequest.Title);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Url);
+        }
+
         #endregion
 
         #region Repositories

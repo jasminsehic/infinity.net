@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using RestSharp;
@@ -76,6 +77,44 @@ namespace Infinity.Clients
 
             PullRequestList list = await Executor.Execute<PullRequestList>(request);
             return list.Value;
+        }
+
+        /// <summary>
+        /// Create a new pull request in the given repository, requesting to
+        /// merge the given source branch into the given target branch.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="sourceRefName">Name of the source branch that contains the changes to merge</param>
+        /// <param name="targetRefName">Name of the target branch that will be the destination of the merge</param>
+        /// <param name="title">Title of the pull request</param>
+        /// <param name="description">Description of the pull request</param>
+        /// <param name="reviewers">Reviewers (optional)</param>
+        /// <returns>The new pull request</returns>
+        public async Task<PullRequest> CreatePullRequest(Guid repositoryId, string sourceRefName, string targetRefName, string title, string description, IEnumerable<Guid> reviewers = null)
+        {
+            Assert.NotNull(sourceRefName, "sourceRefName");
+            Assert.NotNull(targetRefName, "targetRefName");
+            Assert.NotNull(title, "title");
+            Assert.NotNull(description, "description");
+
+            if (reviewers == null)
+            {
+                reviewers = new Guid[0];
+            }
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddParameter("api-version", Version);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new {
+                sourceRefName = sourceRefName,
+                targetRefName = targetRefName,
+                title = title,
+                description = description,
+                reviewers = reviewers.Select((id) => { return new { id = id.ToString() }; })
+            });
+
+            return await Executor.Execute<PullRequest>(request);
         }
 
         #endregion
