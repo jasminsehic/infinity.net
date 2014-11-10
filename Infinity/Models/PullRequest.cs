@@ -15,7 +15,8 @@ namespace Infinity.Models
         /// <summary>
         /// The unique ID of the pull request.
         /// </summary>
-        public int PullRequestId { get; private set; }
+        [DeserializeAs(Name = "PullRequestId")]
+        public int Id { get; private set; }
 
         /// <summary>
         /// The URL of the REST endpoint.
