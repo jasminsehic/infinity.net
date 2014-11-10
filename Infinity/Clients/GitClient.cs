@@ -48,7 +48,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{Id}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Id", String.Format("{0}", id));
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<PullRequest>(request);
         }
@@ -63,7 +63,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             filters = filters ?? new PullRequestFilters();
 
@@ -104,7 +104,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new {
                 sourceRefName = sourceRefName,
@@ -140,7 +140,7 @@ namespace Infinity.Clients
                 request = new RestRequest("/_apis/git/repositories");
             }
 
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             RepositoryList list = await Executor.Execute<RepositoryList>(request);
             return list.Value;
@@ -157,7 +157,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}");
             request.AddUrlSegment("RepositoryId", id.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -176,7 +176,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/{ProjectId}/repositories/{Name}");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("Name", name);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -194,7 +194,7 @@ namespace Infinity.Clients
             Assert.NotNull(name, "name");
 
             var request = new RestRequest("/_apis/git/repositories", Method.POST);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, project = new { id = projectId.ToString() } });
             return await Executor.Execute<Repository>(request);
@@ -213,7 +213,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = newName });
             return await Executor.Execute<Repository>(request);
@@ -229,7 +229,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             await Executor.Execute(request);
         }
 
@@ -256,7 +256,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Filter", filter != null ? filter : "");
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             ReferenceList references = await Executor.Execute<ReferenceList>(request);
             return (references != null) ? references.Value : new List<Reference>();
@@ -280,7 +280,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("TreeId", treeId);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Tree>(request);
         }
