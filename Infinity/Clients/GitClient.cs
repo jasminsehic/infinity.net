@@ -122,29 +122,24 @@ namespace Infinity.Clients
         #region Repositories
 
         /// <summary>
-        /// Get a list of all Git repositories managed in a TFS Project Collection.
-        /// </summary>
-        /// <returns>A list of repositories in the Project Collection</returns>
-        public async Task<IEnumerable<Repository>> GetRepositories()
-        {
-            var request = new RestRequest("/_apis/git/repositories");
-            request.AddParameter("api-version", Version);
-
-            RepositoryList list = await Executor.Execute<RepositoryList>(request);
-            return list.Value;
-        }
-
-        /// <summary>
         /// Get a list of all Git repositories managed in a TFS Team Project.
         /// </summary>
         /// <param name="projectId">The ID of the Team Project to query</param>
         /// <returns>A list of repositories in the Project Collection</returns>
-        public async Task<IEnumerable<Repository>> GetRepositories(Guid projectId)
+        public async Task<IEnumerable<Repository>> GetRepositories(Guid? projectId = null)
         {
-            Assert.NotNull(projectId, "projectId");
+            RestRequest request;
 
-            RestRequest request = new RestRequest("/_apis/git/{ProjectId}/repositories");
-            request.AddUrlSegment("ProjectId", projectId.ToString());
+            if (projectId != null)
+            {
+                request = new RestRequest("/_apis/git/{ProjectId}/repositories");
+                request.AddUrlSegment("ProjectId", projectId.ToString());
+            }
+            else
+            {
+                request = new RestRequest("/_apis/git/repositories");
+            }
+
             request.AddParameter("api-version", Version);
 
             RepositoryList list = await Executor.Execute<RepositoryList>(request);
