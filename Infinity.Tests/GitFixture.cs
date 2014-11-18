@@ -53,7 +53,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequest.MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequest.MergeStatus);
-            Assert.Equal(50, pullRequest.PullRequestId);
+            Assert.Equal(50, pullRequest.Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Url);
 
@@ -104,7 +104,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequests[0].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[0].MergeStatus);
-            Assert.Equal(50, pullRequests[0].PullRequestId);
+            Assert.Equal(50, pullRequests[0].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[0].SourceRefName);
@@ -150,7 +150,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequests[0].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[0].MergeStatus);
-            Assert.Equal(50, pullRequests[0].PullRequestId);
+            Assert.Equal(50, pullRequests[0].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[0].SourceRefName);
@@ -175,7 +175,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[1].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("587d8cfb-1397-40e2-96da-77a7fc38df7f"), pullRequests[1].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[1].MergeStatus);
-            Assert.Equal(49, pullRequests[1].PullRequestId);
+            Assert.Equal(49, pullRequests[1].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[1].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[1].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[1].SourceRefName);
@@ -200,7 +200,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[2].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("d83c35db-622e-4c77-8cac-994d4fc66851"), pullRequests[2].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[2].MergeStatus);
-            Assert.Equal(48, pullRequests[2].PullRequestId);
+            Assert.Equal(48, pullRequests[2].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[2].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[2].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[2].SourceRefName);
@@ -225,7 +225,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[3].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("920fd401-e562-47c4-8f2b-bfdf0e1d780b"), pullRequests[3].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[3].MergeStatus);
-            Assert.Equal(47, pullRequests[3].PullRequestId);
+            Assert.Equal(47, pullRequests[3].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[3].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[3].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[3].SourceRefName);
@@ -250,7 +250,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[4].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("281a48c8-8675-4442-9e63-72dabf651147"), pullRequests[4].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[4].MergeStatus);
-            Assert.Equal(46, pullRequests[4].PullRequestId);
+            Assert.Equal(46, pullRequests[4].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[4].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[4].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[4].SourceRefName);
@@ -275,7 +275,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[5].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("c8bb3a02-9ea1-4f14-9c6b-25ecf2ea7dee"), pullRequests[5].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[5].MergeStatus);
-            Assert.Equal(45, pullRequests[5].PullRequestId);
+            Assert.Equal(45, pullRequests[5].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[5].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[5].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[5].SourceRefName);
@@ -300,7 +300,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[6].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("7db28c08-7f5e-4c75-848d-352b83f7d223"), pullRequests[6].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[6].MergeStatus);
-            Assert.Equal(44, pullRequests[6].PullRequestId);
+            Assert.Equal(44, pullRequests[6].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[6].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[6].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[6].SourceRefName);
@@ -325,7 +325,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[7].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("c5cbd8ff-7d76-4292-84d2-5bd70df12e56"), pullRequests[7].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[7].MergeStatus);
-            Assert.Equal(43, pullRequests[7].PullRequestId);
+            Assert.Equal(43, pullRequests[7].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[7].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[7].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[7].SourceRefName);
@@ -350,7 +350,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[8].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("43de9c66-e417-4203-b99e-0b3a51e88c8f"), pullRequests[8].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[8].MergeStatus);
-            Assert.Equal(42, pullRequests[8].PullRequestId);
+            Assert.Equal(42, pullRequests[8].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[8].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[8].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[8].SourceRefName);
@@ -375,7 +375,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[9].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("dabb8751-0c44-4aef-9ea5-f1e0f0ed0d2e"), pullRequests[9].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[9].MergeStatus);
-            Assert.Equal(41, pullRequests[9].PullRequestId);
+            Assert.Equal(41, pullRequests[9].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[9].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[9].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[9].SourceRefName);
@@ -400,7 +400,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[10].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("a9296a39-edeb-4606-9244-03f418bc40a9"), pullRequests[10].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[10].MergeStatus);
-            Assert.Equal(40, pullRequests[10].PullRequestId);
+            Assert.Equal(40, pullRequests[10].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[10].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[10].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[10].SourceRefName);
@@ -425,7 +425,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[11].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("86add78f-286a-4578-bbb2-a2817af015b1"), pullRequests[11].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[11].MergeStatus);
-            Assert.Equal(39, pullRequests[11].PullRequestId);
+            Assert.Equal(39, pullRequests[11].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[11].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[11].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[11].SourceRefName);
@@ -450,7 +450,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[12].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("c0757679-d11b-4cec-ba60-98e6e2b2683f"), pullRequests[12].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[12].MergeStatus);
-            Assert.Equal(38, pullRequests[12].PullRequestId);
+            Assert.Equal(38, pullRequests[12].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[12].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[12].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[12].SourceRefName);
@@ -475,7 +475,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[13].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("e5565255-857c-427f-8968-a29e8e22dd19"), pullRequests[13].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[13].MergeStatus);
-            Assert.Equal(37, pullRequests[13].PullRequestId);
+            Assert.Equal(37, pullRequests[13].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[13].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[13].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[13].SourceRefName);
@@ -500,7 +500,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[14].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("d63985c6-6533-4faa-a456-65150f63e9b0"), pullRequests[14].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[14].MergeStatus);
-            Assert.Equal(36, pullRequests[14].PullRequestId);
+            Assert.Equal(36, pullRequests[14].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[14].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[14].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[14].SourceRefName);
@@ -525,7 +525,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[15].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("35bc006b-2cc8-4228-87fb-306a5d6f36d3"), pullRequests[15].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[15].MergeStatus);
-            Assert.Equal(35, pullRequests[15].PullRequestId);
+            Assert.Equal(35, pullRequests[15].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[15].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[15].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[15].SourceRefName);
@@ -550,7 +550,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[16].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("1f640dc7-d6b4-4cae-a2f3-b2c868492217"), pullRequests[16].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[16].MergeStatus);
-            Assert.Equal(34, pullRequests[16].PullRequestId);
+            Assert.Equal(34, pullRequests[16].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[16].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[16].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[16].SourceRefName);
@@ -575,7 +575,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[17].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("c93d13f7-e8d3-43a4-add7-a6aaefeac489"), pullRequests[17].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[17].MergeStatus);
-            Assert.Equal(33, pullRequests[17].PullRequestId);
+            Assert.Equal(33, pullRequests[17].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[17].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[17].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[17].SourceRefName);
@@ -600,7 +600,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[18].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("d7ad086e-7c9e-4806-9f01-8201f385cdd0"), pullRequests[18].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[18].MergeStatus);
-            Assert.Equal(32, pullRequests[18].PullRequestId);
+            Assert.Equal(32, pullRequests[18].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[18].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[18].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[18].SourceRefName);
@@ -625,7 +625,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[19].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("206efb5b-4218-430d-858f-bfc064f6f797"), pullRequests[19].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[19].MergeStatus);
-            Assert.Equal(31, pullRequests[19].PullRequestId);
+            Assert.Equal(31, pullRequests[19].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[19].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[19].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[19].SourceRefName);
@@ -650,7 +650,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[20].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("ebf3505c-4972-4bd6-9f0e-a2288153cfa5"), pullRequests[20].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[20].MergeStatus);
-            Assert.Equal(30, pullRequests[20].PullRequestId);
+            Assert.Equal(30, pullRequests[20].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[20].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[20].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[20].SourceRefName);
@@ -675,7 +675,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[21].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("4bacf29c-9b60-4c79-9f8a-3cdd9ca1b212"), pullRequests[21].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[21].MergeStatus);
-            Assert.Equal(29, pullRequests[21].PullRequestId);
+            Assert.Equal(29, pullRequests[21].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[21].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[21].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[21].SourceRefName);
@@ -700,7 +700,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[22].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("14e99962-e9b6-4658-87e2-7ea402f8aa00"), pullRequests[22].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[22].MergeStatus);
-            Assert.Equal(28, pullRequests[22].PullRequestId);
+            Assert.Equal(28, pullRequests[22].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[22].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[22].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[22].SourceRefName);
@@ -725,7 +725,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[23].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("8f74ac43-b931-4788-9976-6e03d628b485"), pullRequests[23].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[23].MergeStatus);
-            Assert.Equal(27, pullRequests[23].PullRequestId);
+            Assert.Equal(27, pullRequests[23].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[23].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[23].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[23].SourceRefName);
@@ -750,7 +750,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[24].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("0f85a75c-0541-4868-a4c6-e7fd9e524374"), pullRequests[24].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[24].MergeStatus);
-            Assert.Equal(26, pullRequests[24].PullRequestId);
+            Assert.Equal(26, pullRequests[24].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[24].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[24].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[24].SourceRefName);
@@ -775,7 +775,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[25].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("4db38225-9b2f-4828-ba6d-527ce025f944"), pullRequests[25].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[25].MergeStatus);
-            Assert.Equal(25, pullRequests[25].PullRequestId);
+            Assert.Equal(25, pullRequests[25].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[25].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[25].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[25].SourceRefName);
@@ -800,7 +800,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[26].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("4f705dcf-a786-45d4-851f-07081a0e2e77"), pullRequests[26].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[26].MergeStatus);
-            Assert.Equal(24, pullRequests[26].PullRequestId);
+            Assert.Equal(24, pullRequests[26].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[26].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[26].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[26].SourceRefName);
@@ -825,7 +825,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[27].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("106e5b55-6f02-46f2-988a-78419330d1d7"), pullRequests[27].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[27].MergeStatus);
-            Assert.Equal(23, pullRequests[27].PullRequestId);
+            Assert.Equal(23, pullRequests[27].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[27].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[27].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[27].SourceRefName);
@@ -850,7 +850,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[28].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("358f0b6f-f7c1-41b4-b158-900ff55b6775"), pullRequests[28].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[28].MergeStatus);
-            Assert.Equal(22, pullRequests[28].PullRequestId);
+            Assert.Equal(22, pullRequests[28].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[28].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[28].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[28].SourceRefName);
@@ -875,7 +875,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[29].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("73c4c912-e557-446f-8030-f9572380bf16"), pullRequests[29].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[29].MergeStatus);
-            Assert.Equal(21, pullRequests[29].PullRequestId);
+            Assert.Equal(21, pullRequests[29].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[29].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[29].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[29].SourceRefName);
@@ -900,7 +900,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[30].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("e02914de-e59a-481e-9609-dad2ed3b6d9c"), pullRequests[30].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[30].MergeStatus);
-            Assert.Equal(20, pullRequests[30].PullRequestId);
+            Assert.Equal(20, pullRequests[30].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[30].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[30].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[30].SourceRefName);
@@ -925,7 +925,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), pullRequests[31].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("4d45d7fd-4c4d-4966-829e-6ccce4f057d9"), pullRequests[31].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[31].MergeStatus);
-            Assert.Equal(19, pullRequests[31].PullRequestId);
+            Assert.Equal(19, pullRequests[31].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[31].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[31].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[31].SourceRefName);
@@ -950,7 +950,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/0360c963d7d86d040e9c33bba836feab14da4ad3"), pullRequests[32].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("20d1a573-cb72-40d8-a6bc-8365912d5821"), pullRequests[32].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[32].MergeStatus);
-            Assert.Equal(18, pullRequests[32].PullRequestId);
+            Assert.Equal(18, pullRequests[32].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[32].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[32].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[32].SourceRefName);
@@ -975,7 +975,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/097d82b8aeabe493bf4c3553d320ae2529bba591"), pullRequests[33].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("356016f4-9e81-44e6-82cc-c3d2e9fe4566"), pullRequests[33].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[33].MergeStatus);
-            Assert.Equal(14, pullRequests[33].PullRequestId);
+            Assert.Equal(14, pullRequests[33].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[33].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[33].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[33].SourceRefName);
@@ -1021,7 +1021,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeTargetCommit.Url);
             Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequests[0].MergeId);
             Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequests[0].MergeStatus);
-            Assert.Equal(50, pullRequests[0].PullRequestId);
+            Assert.Equal(50, pullRequests[0].Id);
             Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequests[0].Repository.Url);
             Assert.Equal("refs/heads/npaulk/feature", pullRequests[0].SourceRefName);
@@ -1029,6 +1029,153 @@ namespace Infinity.Tests.Models
             Assert.Equal("refs/heads/master", pullRequests[0].TargetRefName);
             Assert.Equal("New fix for hello world class", pullRequests[0].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequests[0].Url);
+        }
+
+        [Fact]
+        public void CanCreatePullRequest()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        sourceRefName = "refs/heads/npaulk/feature",
+                        targetRefName = "refs/heads/master",
+                        title = "New fix for hello world class",
+                        description = "Example pull request showing review and integration of a simple change.",
+                        reviewers = new[] {
+                            new { id = "3b5f0c34-4aec-4bf4-8708-1d36f0dbc468" },
+                        },
+                    },
+                    ResponseResource = "Git.CreatePullRequest",
+                });
+
+            PullRequest pullRequest = base.ExecuteSync<PullRequest>(
+                () =>
+                {
+                    return client.Git.CreatePullRequest(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        "refs/heads/npaulk/feature",
+                        "refs/heads/master",
+                        "New fix for hello world class",
+                        "Example pull request showing review and integration of a simple change.",
+                        new Guid[] { new Guid("3b5f0c34-4aec-4bf4-8708-1d36f0dbc468") });
+                });
+
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.Links.CreatedBy.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Links.Self.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/npaulk/feature"), pullRequest.Links.SourceBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.SourceCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"), pullRequest.Links.TargetBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.TargetCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/workitems"), pullRequest.Links.WorkItems.Url);
+            Assert.Equal("Normal Paulk", pullRequest.CreatedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeSourceCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeSourceCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeTargetCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeTargetCommit.Url);
+            Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequest.MergeId);
+            Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequest.MergeStatus);
+            Assert.Equal(50, pullRequest.Id);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Url);
+            Assert.Equal(1, pullRequest.Reviewers.Count);
+
+            Assert.Equal("Christie Church", pullRequest.Reviewers[0].DisplayName);
+            Assert.Equal(new Guid("3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].ImageUrl);
+            Assert.Null(pullRequest.Reviewers[0].ReviewerUrl);
+            Assert.Equal("fabrikamfiber1@hotmail.com", pullRequest.Reviewers[0].UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Url);
+            Assert.Equal(0, pullRequest.Reviewers[0].Vote);
+
+            Assert.Equal("refs/heads/npaulk/feature", pullRequest.SourceRefName);
+            Assert.Equal(PullRequestStatus.Active, pullRequest.Status);
+            Assert.Equal("refs/heads/master", pullRequest.TargetRefName);
+            Assert.Equal("New fix for hello world class", pullRequest.Title);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Url);
+        }
+
+        [Fact]
+        public void CanUpdatePullRequest()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50?api-version=1.0",
+                    Method = RestSharp.Method.PATCH,
+                    RequestObject = new
+                    {
+                        status = "completed",
+                        lastMergeSourceCommit = new { commitId = "23d0bc5b128a10056dc68afece360d8a0fabb014" }
+                    },
+                    ResponseResource = "Git.UpdatePullRequest",
+                });
+
+            PullRequest pullRequest = base.ExecuteSync<PullRequest>(
+                () =>
+                {
+                    return client.Git.UpdatePullRequest(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        50,
+                        PullRequestStatus.Completed,
+                        "23d0bc5b128a10056dc68afece360d8a0fabb014");
+                });
+
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.Links.CreatedBy.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.MergeCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Links.Self.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/npaulk/feature"), pullRequest.Links.SourceBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.SourceCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"), pullRequest.Links.TargetBranch.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.TargetCommit.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/workitems"), pullRequest.Links.WorkItems.Url);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 46, 640, DateTimeKind.Utc).ToLocalTime(), pullRequest.ClosedDate);
+            Assert.Equal("Normal Paulk", pullRequest.CreatedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeSourceCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeSourceCommit.Url);
+            Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeTargetCommit.CommitId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeTargetCommit.Url);
+            Assert.Equal(new Guid("bdd92391-1291-45dd-b4bf-6b7e6270e8d0"), pullRequest.MergeId);
+            Assert.Equal(PullRequestMergeStatus.Succeeded, pullRequest.MergeStatus);
+            Assert.Equal(50, pullRequest.Id);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Repository.Url);
+            Assert.Equal(1, pullRequest.Reviewers.Count);
+
+            Assert.Equal("Christie Church", pullRequest.Reviewers[0].DisplayName);
+            Assert.Equal(new Guid("3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].ImageUrl);
+            Assert.Null(pullRequest.Reviewers[0].ReviewerUrl);
+            Assert.Equal("fabrikamfiber1@hotmail.com", pullRequest.Reviewers[0].UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"), pullRequest.Reviewers[0].Url);
+            Assert.Equal(10, pullRequest.Reviewers[0].Vote);
+
+            Assert.Equal("refs/heads/npaulk/feature", pullRequest.SourceRefName);
+            Assert.Equal(PullRequestStatus.Completed, pullRequest.Status);
+            Assert.Equal("refs/heads/master", pullRequest.TargetRefName);
+            Assert.Equal("New fix for hello world class", pullRequest.Title);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequest.Url);
         }
 
         #endregion

@@ -1,0 +1,76 @@
+{
+  "repository": {
+    "id": "278d5cd2-584d-4b63-824a-2ba458937249",
+    "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"
+  },
+  "pullRequestId": 50,
+  "status": "completed",
+  "createdBy": {
+    "id": "d6245f20-2af8-44f4-9451-8107cb2767db",
+    "displayName": "Normal Paulk",
+    "uniqueName": "fabrikamfiber16@hotmail.com",
+    "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db",
+    "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"
+  },
+  "creationDate": "2014-10-28T01:54:43.248Z",
+  "closedDate": "2014-10-28T01:54:46.640Z",
+  "title": "New fix for hello world class",
+  "description": "Example pull request showing review and integration of a simple change.",
+  "sourceRefName": "refs/heads/npaulk/feature",
+  "targetRefName": "refs/heads/master",
+  "mergeStatus": "succeeded",
+  "mergeId": "bdd92391-1291-45dd-b4bf-6b7e6270e8d0",
+  "lastMergeSourceCommit": {
+    "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+    "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+  },
+  "lastMergeTargetCommit": {
+    "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+    "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+  },
+  "lastMergeCommit": {
+    "commitId": "23d0bc5b128a10056dc68afece360d8a0fabb014",
+    "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+  },
+  "reviewers": [
+    {
+      "reviewerUrl": null,
+      "vote": 10,
+      "id": "3b5f0c34-4aec-4bf4-8708-1d36f0dbc468",
+      "displayName": "Christie Church",
+      "uniqueName": "fabrikamfiber1@hotmail.com",
+      "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468",
+      "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=3b5f0c34-4aec-4bf4-8708-1d36f0dbc468"
+    }
+  ],
+  "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50",
+  "_links": {
+    "self": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"
+    },
+    "repository": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"
+    },
+    "workItems": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/workitems"
+    },
+    "sourceBranch": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/npaulk/feature"
+    },
+    "targetBranch": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"
+    },
+    "sourceCommit": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+    },
+    "targetCommit": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+    },
+    "mergeCommit": {
+      "href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"
+    },
+    "createdBy": {
+      "href": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"
+    }
+  }
+}

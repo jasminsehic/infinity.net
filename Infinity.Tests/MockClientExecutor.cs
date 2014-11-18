@@ -35,7 +35,9 @@ namespace Infinity.Tests
                     {
                         uri = uri.Replace(String.Format("{{{0}}}", param.Name), param.Value.ToString());
                     }
-                    else if (param.Type == ParameterType.GetOrPost)
+                    else if (
+                        param.Type == ParameterType.QueryString ||
+                        param.Type == ParameterType.GetOrPost)
                     {
                         uri = String.Format("{0}{1}{2}={3}", uri,
                             getParams == 0 ? "?" : "&",

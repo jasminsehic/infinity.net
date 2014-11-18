@@ -44,5 +44,10 @@
         /// Link to the creator's REST API endpoint.
         /// </summary>
         public LinkUrl CreatedBy { get; private set; }
+
+        /// <summary>
+        /// Link to the merged commit's REST API endpoint
+        /// </summary>
+        public LinkUrl MergeCommit { get; private set; }
     }
 }

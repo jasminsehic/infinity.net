@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using RestSharp;
@@ -47,7 +48,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{Id}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Id", String.Format("{0}", id));
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<PullRequest>(request);
         }
@@ -62,7 +63,7 @@ namespace Infinity.Clients
         {
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             filters = filters ?? new PullRequestFilters();
 
@@ -78,35 +79,94 @@ namespace Infinity.Clients
             return list.Value;
         }
 
+        /// <summary>
+        /// Create a new pull request in the given repository, requesting to
+        /// merge the given source branch into the given target branch.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="sourceRefName">Name of the source branch that contains the changes to merge</param>
+        /// <param name="targetRefName">Name of the target branch that will be the destination of the merge</param>
+        /// <param name="title">Title of the pull request</param>
+        /// <param name="description">Description of the pull request</param>
+        /// <param name="reviewers">Reviewers (optional)</param>
+        /// <returns>The new pull request</returns>
+        public async Task<PullRequest> CreatePullRequest(Guid repositoryId, string sourceRefName, string targetRefName, string title, string description, IEnumerable<Guid> reviewers = null)
+        {
+            Assert.NotNull(sourceRefName, "sourceRefName");
+            Assert.NotNull(targetRefName, "targetRefName");
+            Assert.NotNull(title, "title");
+            Assert.NotNull(description, "description");
+
+            if (reviewers == null)
+            {
+                reviewers = new Guid[0];
+            }
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new {
+                sourceRefName = sourceRefName,
+                targetRefName = targetRefName,
+                title = title,
+                description = description,
+                reviewers = reviewers.Select((id) => { return new { id = id.ToString() }; })
+            });
+
+            return await Executor.Execute<PullRequest>(request);
+        }
+
+        /// <summary>
+        /// Updates the pull request data, abandoning or completing it.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request to update</param>
+        /// <param name="status">The new status</param>
+        /// <param name="lastMergeSourceCommitId">The last merge source commit ID (to confirm)</param>
+        /// <returns>The updated pull request</returns>
+        public async Task<PullRequest> UpdatePullRequest(Guid repositoryId, int pullRequestId, PullRequestStatus status, string lastMergeSourceCommitId)
+        {
+            Assert.NotNull(lastMergeSourceCommitId, "lastMergeSourceCommitId");
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", Method.PATCH);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new
+            {
+                status = status.ToString().ToLower(),
+                lastMergeSourceCommit = new { commitId = lastMergeSourceCommitId }
+            });
+
+            return await Executor.Execute<PullRequest>(request);
+        }
+
         #endregion
 
         #region Repositories
-
-        /// <summary>
-        /// Get a list of all Git repositories managed in a TFS Project Collection.
-        /// </summary>
-        /// <returns>A list of repositories in the Project Collection</returns>
-        public async Task<IEnumerable<Repository>> GetRepositories()
-        {
-            var request = new RestRequest("/_apis/git/repositories");
-            request.AddParameter("api-version", Version);
-
-            RepositoryList list = await Executor.Execute<RepositoryList>(request);
-            return list.Value;
-        }
 
         /// <summary>
         /// Get a list of all Git repositories managed in a TFS Team Project.
         /// </summary>
         /// <param name="projectId">The ID of the Team Project to query</param>
         /// <returns>A list of repositories in the Project Collection</returns>
-        public async Task<IEnumerable<Repository>> GetRepositories(Guid projectId)
+        public async Task<IEnumerable<Repository>> GetRepositories(Guid? projectId = null)
         {
-            Assert.NotNull(projectId, "projectId");
+            RestRequest request;
 
-            RestRequest request = new RestRequest("/_apis/git/{ProjectId}/repositories");
-            request.AddUrlSegment("ProjectId", projectId.ToString());
-            request.AddParameter("api-version", Version);
+            if (projectId != null)
+            {
+                request = new RestRequest("/_apis/git/{ProjectId}/repositories");
+                request.AddUrlSegment("ProjectId", projectId.ToString());
+            }
+            else
+            {
+                request = new RestRequest("/_apis/git/repositories");
+            }
+
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             RepositoryList list = await Executor.Execute<RepositoryList>(request);
             return list.Value;
@@ -123,7 +183,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}");
             request.AddUrlSegment("RepositoryId", id.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -142,7 +202,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/{ProjectId}/repositories/{Name}");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("Name", name);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -160,7 +220,7 @@ namespace Infinity.Clients
             Assert.NotNull(name, "name");
 
             var request = new RestRequest("/_apis/git/repositories", Method.POST);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, project = new { id = projectId.ToString() } });
             return await Executor.Execute<Repository>(request);
@@ -179,7 +239,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = newName });
             return await Executor.Execute<Repository>(request);
@@ -195,7 +255,7 @@ namespace Infinity.Clients
 
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
             await Executor.Execute(request);
         }
 
@@ -222,7 +282,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Filter", filter != null ? filter : "");
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             ReferenceList references = await Executor.Execute<ReferenceList>(request);
             return (references != null) ? references.Value : new List<Reference>();
@@ -246,7 +306,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("TreeId", treeId);
-            request.AddParameter("api-version", Version);
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Tree>(request);
         }
