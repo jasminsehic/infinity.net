@@ -145,6 +145,35 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region References
+
+        /// <summary>
+        /// Get the references (branches, tags, notes) in the given repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the Git repository</param>
+        /// <param name="filter">The string prefix to match, excepting the <code>refs/</code> prefix.  For example, <code>heads/</code> will return branches.</param>
+        /// <returns>The list of references.</returns>
+        public async Task<IEnumerable<Reference>> GetReferences(Guid repositoryId, string filter = null)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+
+            if (filter != null)
+            {
+                Assert.IsTrue(filter.StartsWith("refs/"), "filter.StartsWith(refs/)");
+                filter = filter.Substring(4);
+            }
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("Filter", filter != null ? filter : "");
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
+            ReferenceList references = await Executor.Execute<ReferenceList>(request);
+            return (references != null) ? references.Value : new List<Reference>();
+        }
+
+        #endregion
+
         #region Repositories
 
         /// <summary>
@@ -261,35 +290,6 @@ namespace Infinity.Clients
 
         #endregion
 
-        #region References
-
-        /// <summary>
-        /// Get the references (branches, tags, notes) in the given repository.
-        /// </summary>
-        /// <param name="repositoryId">The ID of the Git repository</param>
-        /// <param name="filter">The string prefix to match, excepting the <code>refs/</code> prefix.  For example, <code>heads/</code> will return branches.</param>
-        /// <returns>The list of references.</returns>
-        public async Task<IEnumerable<Reference>> GetReferences(Guid repositoryId, string filter = null)
-        {
-            Assert.NotNull(repositoryId, "repositoryId");
-
-            if (filter != null)
-            {
-                Assert.IsTrue(filter.StartsWith("refs/"), "filter.StartsWith(refs/)");
-                filter = filter.Substring(4);
-            }
-
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
-            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddUrlSegment("Filter", filter != null ? filter : "");
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
-
-            ReferenceList references = await Executor.Execute<ReferenceList>(request);
-            return (references != null) ? references.Value : new List<Reference>();
-        }
-
-        #endregion
-
         #region Trees
 
         /// <summary>
@@ -319,16 +319,16 @@ namespace Infinity.Clients
             public List<PullRequest> Value { get; set; }
         }
 
-        private class RepositoryList
-        {
-            public int Count { get; set; }
-            public List<Repository> Value { get; set; }
-        }
-
         private class ReferenceList
         {
             public int Count { get; set; }
             public List<Reference> Value { get; set; }
+        }
+
+        private class RepositoryList
+        {
+            public int Count { get; set; }
+            public List<Repository> Value { get; set; }
         }
     }
 }
