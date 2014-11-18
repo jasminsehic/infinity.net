@@ -193,6 +193,16 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_UpdatePullRequest {
+            get {
+                object obj = ResourceManager.GetObject("Git_UpdatePullRequest", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Project_GetProject {
             get {
                 object obj = ResourceManager.GetObject("Project_GetProject", resourceCulture);

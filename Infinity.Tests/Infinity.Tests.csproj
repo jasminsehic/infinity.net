@@ -77,6 +77,7 @@
     <None Include="Resources\Git.GetRepository.json" />
     <None Include="Resources\Git.GetTree.json" />
     <None Include="Resources\Git.RenameRepository.json" />
+    <None Include="Resources\Git.UpdatePullRequest.json" />
     <None Include="Resources\Project.GetProject.json" />
     <None Include="Resources\Project.GetProjects.json" />
     <None Include="Resources\Project.GetProjectWithCapabilities.json" />

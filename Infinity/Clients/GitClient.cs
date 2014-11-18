@@ -117,6 +117,32 @@ namespace Infinity.Clients
             return await Executor.Execute<PullRequest>(request);
         }
 
+        /// <summary>
+        /// Updates the pull request data, abandoning or completing it.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request to update</param>
+        /// <param name="status">The new status</param>
+        /// <param name="lastMergeSourceCommitId">The last merge source commit ID (to confirm)</param>
+        /// <returns>The updated pull request</returns>
+        public async Task<PullRequest> UpdatePullRequest(Guid repositoryId, int pullRequestId, PullRequestStatus status, string lastMergeSourceCommitId)
+        {
+            Assert.NotNull(lastMergeSourceCommitId, "lastMergeSourceCommitId");
+
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", Method.PATCH);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new
+            {
+                status = status.ToString().ToLower(),
+                lastMergeSourceCommit = new { commitId = lastMergeSourceCommitId }
+            });
+
+            return await Executor.Execute<PullRequest>(request);
+        }
+
         #endregion
 
         #region Repositories
