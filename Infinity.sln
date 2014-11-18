@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity", "Infinity\Infini
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity.Tests", "Infinity.Tests\Infinity.Tests.csproj", "{AF93F6FD-DBE3-4DD8-9A22-E5836FC8B518}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity.Client", "Infinity.Client\Infinity.Client.csproj", "{C94AB800-EC46-4823-A06F-CDECBBC3FFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AF93F6FD-DBE3-4DD8-9A22-E5836FC8B518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF93F6FD-DBE3-4DD8-9A22-E5836FC8B518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF93F6FD-DBE3-4DD8-9A22-E5836FC8B518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94AB800-EC46-4823-A06F-CDECBBC3FFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94AB800-EC46-4823-A06F-CDECBBC3FFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94AB800-EC46-4823-A06F-CDECBBC3FFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94AB800-EC46-4823-A06F-CDECBBC3FFA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

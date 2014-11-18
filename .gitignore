@@ -6,3 +6,5 @@
 *.nupkg
 **/packages/*
 !**/packages/build/
+
+*.user
