@@ -14,7 +14,7 @@ namespace Infinity.Tests.Models
     public class TeamRoomFixture : MockClientFixture
     {
         [Fact]
-        public void CanGetRooms()
+        public void TeamRoom_GetRooms()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -90,7 +90,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetRoom()
+        public void TeamRoom_GetRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -116,7 +116,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanCreateRoom()
+        public void TeamRoom_CreateRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -147,7 +147,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanUpdateRoom()
+        public void TeamRoom_UpdateRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -179,7 +179,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanDeleteRoom()
+        public void TeamRoom_DeleteRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -193,7 +193,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanCreateMessage()
+        public void TeamRoom_CreateMessage()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -222,7 +222,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetMessages()
+        public void TeamRoom_GetMessages()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -238,7 +238,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetMessagesWithDateRange()
+        public void TeamRoom_GetMessagesWithDateRange()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -294,7 +294,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetMessage()
+        public void TeamRoom_GetMessage()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -318,7 +318,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanUpdateMessage()
+        public void TeamRoom_UpdateMessage()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -344,7 +344,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanDeleteMessage()
+        public void TeamRoom_DeleteMessage()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -358,7 +358,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanJoinRoom()
+        public void TeamRoom_JoinRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -373,7 +373,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanLeaveRoom()
+        public void TeamRoom_LeaveRoom()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -387,7 +387,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetUsers()
+        public void TeamRoom_GetUsers()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -412,7 +412,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetUser()
+        public void TeamRoom_GetUser()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration

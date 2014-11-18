@@ -17,7 +17,7 @@ namespace Infinity.Tests.Models
         #region Pull Requests
 
         [Fact]
-        public void CanGetPullRequest()
+        public void Git_PullRequest_GetPullRequest()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -75,7 +75,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetPullRequests()
+        public void Git_PullRequest_GetPullRequests()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -115,7 +115,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetPullRequestsByStatus()
+        public void Git_PullRequest_GetPullRequestsByStatus()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -986,7 +986,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetPullRequestsByTargetBranch()
+        public void Git_PullRequest_GetPullRequestsByTargetBranch()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1032,7 +1032,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanCreatePullRequest()
+        public void Git_PullRequest_CreatePullRequest()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1108,7 +1108,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanUpdatePullRequest()
+        public void Git_PullRequest_UpdatePullRequest()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1183,7 +1183,7 @@ namespace Infinity.Tests.Models
         #region Repositories
 
         [Fact]
-        public void CanGetRepositories()
+        public void Git_Repositories_GetRepositories()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1225,7 +1225,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetRepositoriesForTeamProject()
+        public void Git_Repositories_GetRepositoriesForTeamProject()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1258,7 +1258,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetRepositoryById()
+        public void Git_Repositories_GetRepositoryById()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1280,7 +1280,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetRepositoryByName()
+        public void Git_Repositories_GetRepositoryByName()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1302,7 +1302,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanCreateRepository()
+        public void Git_Repositories_CreateRepository()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1332,7 +1332,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanRenameRepository()
+        public void Git_Repositories_RenameRepository()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1359,7 +1359,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanDeleteRepository()
+        public void Git_Repositories_DeleteRepository()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1377,7 +1377,7 @@ namespace Infinity.Tests.Models
         #region References
 
         [Fact]
-        public void CanGetReferences()
+        public void Git_References_GetReferences()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1405,7 +1405,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetReferencesWithFilter()
+        public void Git_References_GetReferencesWithFilter()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -1429,7 +1429,7 @@ namespace Infinity.Tests.Models
         #region Trees
 
         [Fact]
-        public void CanGetTree()
+        public void Git_Trees_GetTree()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration

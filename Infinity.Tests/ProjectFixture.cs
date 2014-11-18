@@ -15,7 +15,7 @@ namespace Infinity.Tests.Models
     public class ProjectFixture : MockClientFixture
     {
         [Fact]
-        public void CanGetProjects()
+        public void Project_GetProjects()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -46,7 +46,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetProject()
+        public void Project_GetProject()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -74,7 +74,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetProjectWithCapabilities()
+        public void Project_GetProjectWithCapabilities()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -101,7 +101,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanUpdateProject()
+        public void Project_UpdateProject()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration

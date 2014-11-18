@@ -14,7 +14,7 @@ namespace Infinity.Tests.Models
     public class TeamFixture : MockClientFixture
     {
         [Fact]
-        public void CanGetTeams()
+        public void Team_GetTeams()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -42,7 +42,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetTeam()
+        public void Team_GetTeam()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
@@ -62,7 +62,7 @@ namespace Infinity.Tests.Models
         }
 
         [Fact]
-        public void CanGetTeamMembers()
+        public void Team_GetTeamMembers()
         {
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
