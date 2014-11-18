@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Infinity.Client")]
 namespace Infinity.Util
 {
     internal static class Assert
