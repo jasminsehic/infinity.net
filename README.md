@@ -23,7 +23,7 @@ servers.
         projects = await client.Project.GetProjects();
     }).Wait();
 
-## Testing
+## Unit Tests
 
 The REST APIs are tested by mocking them, using the [Visual Studio
 Online REST API Reference][1] examples.  To add a new test:
@@ -52,6 +52,18 @@ Online REST API Reference][1] examples.  To add a new test:
 4. Write the test assertions.  You can use the
    `Infinity.Tests/Resources/test_from_json.pl` script to generate
    assertions from the expected JSON output.
+
+## Command-Line Interface
+
+A simple command-line interface is available in the `Infinity.Clients`
+project.  For example, to merge a pull request:
+
+    Infinity.Client https://account.visualstudio.com/DefaultCollection
+    --username=username --password=password Git.UpdatePullRequest
+    <RepositoryId> <PullRequestId> Completed <CommitId
+
+This project is not made to be authoritative, but it may help in
+development and debugging.
 
 ## License
 
