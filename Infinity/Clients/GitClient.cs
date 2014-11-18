@@ -143,6 +143,41 @@ namespace Infinity.Clients
             return await Executor.Execute<PullRequest>(request);
         }
 
+        /// <summary>
+        /// Get the reviewers listed for a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <returns>The list of reviewers listed for the pull request</returns>
+        public async Task<IEnumerable<PullRequestReviewer>> GetPullRequestReviewers(Guid repositoryId, int pullRequestId)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
+            PullRequestReviewerList list = await Executor.Execute<PullRequestReviewerList>(request);
+            return list.Value;
+        }
+
+        /// <summary>
+        /// Get the information about a reviewer listed for a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="reviewerId">The reviewer</param>
+        /// <returns>The reviewer for the pull request</returns>
+        public async Task<PullRequestReviewer> GetPullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("ReviewerId", reviewerId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
+            return await Executor.Execute<PullRequestReviewer>(request);
+        }
+
         #endregion
 
         #region References
@@ -317,6 +352,12 @@ namespace Infinity.Clients
         {
             public int Count { get; set; }
             public List<PullRequest> Value { get; set; }
+        }
+
+        private class PullRequestReviewerList
+        {
+            public int Count { get; set; }
+            public List<PullRequestReviewer> Value { get; set; }
         }
 
         private class ReferenceList

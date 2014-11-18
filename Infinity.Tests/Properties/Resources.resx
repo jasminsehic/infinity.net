@@ -211,4 +211,10 @@
   <data name="Git_UpdatePullRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Git.UpdatePullRequest.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetPullRequestReviewers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPullRequestReviewers.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPullRequestReviewer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPullRequestReviewer.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

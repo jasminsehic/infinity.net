@@ -67,6 +67,8 @@
     <None Include="Resources\Git.CreatePullRequest.json" />
     <None Include="Resources\Git.CreateRepository.json" />
     <None Include="Resources\Git.GetPullRequest.json" />
+    <None Include="Resources\Git.GetPullRequestReviewer.json" />
+    <None Include="Resources\Git.GetPullRequestReviewers.json" />
     <None Include="Resources\Git.GetPullRequests.json" />
     <None Include="Resources\Git.GetPullRequestsByStatus.json" />
     <None Include="Resources\Git.GetPullRequestsByTargetBranch.json" />
@@ -95,6 +97,7 @@
     <None Include="Resources\TeamRoom.GetUsers.json" />
     <None Include="Resources\TeamRoom.UpdateMessage.json" />
     <None Include="Resources\TeamRoom.UpdateRoom.json" />
+    <None Include="Resources\tests" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">
