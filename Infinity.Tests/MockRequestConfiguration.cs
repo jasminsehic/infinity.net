@@ -30,7 +30,14 @@ namespace Infinity.Tests
             {
                 string resourceName = value.Replace('.', '_');
 
-                byte[] resourceData = (byte[])typeof(Properties.Resources).GetProperty(resourceName, BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                PropertyInfo resourceProperty = typeof(Properties.Resources).GetProperty(resourceName, BindingFlags.Static | BindingFlags.NonPublic);
+
+                if (resourceProperty == null)
+                {
+                    throw new Exception(String.Format("Could not load resource {0}", resourceName));
+                }
+
+                byte[] resourceData = (byte[])resourceProperty.GetValue(null);
                 ResponseBody = System.Text.Encoding.UTF8.GetString(resourceData);
             }
         }
