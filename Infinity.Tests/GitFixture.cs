@@ -1234,6 +1234,93 @@ namespace Infinity.Tests.Models
             Assert.Equal(0, pullRequestReviewer.Vote);
         }
 
+        [Fact]
+        public void Git_PullRequest_AddReviewer()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        vote = 0,
+                    },
+                    ResponseResource = "Git.AddPullRequestReviewer",
+                });
+
+            PullRequestReviewer pullRequestReviewer = base.ExecuteSync<PullRequestReviewer>(
+                () =>
+                {
+                    return client.Git.AddPullRequestReviewer(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        50,
+                        new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"));
+                });
+
+            Assert.Equal("Johnnie McLeod", pullRequestReviewer.DisplayName);
+            Assert.Equal(new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.ImageUrl);
+            Assert.Null(pullRequestReviewer.ReviewerUrl);
+            Assert.Equal("fabrikamfiber2@hotmail.com", pullRequestReviewer.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.Url);
+            Assert.Equal(0, pullRequestReviewer.Vote);
+        }
+
+        [Fact]
+        public void Git_PullRequest_DeleteReviewer()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
+                    Method = RestSharp.Method.DELETE,
+                });
+
+            base.ExecuteSync(
+                () =>
+                {
+                    return client.Git.DeletePullRequestReviewer(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        50,
+                        new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"));
+                });
+        }
+
+        [Fact]
+        public void Git_PullRequest_UpdateReviewer()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
+                    Method = RestSharp.Method.PUT,
+                    RequestObject = new
+                    {
+                        vote = 10,
+                    },
+                    ResponseResource = "Git.UpdatePullRequestReviewer",
+                });
+
+            PullRequestReviewer pullRequestReviewer = base.ExecuteSync<PullRequestReviewer>(
+                () =>
+                {
+                    return client.Git.UpdatePullRequestReviewer(
+                        new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        50,
+                        new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"),
+                        PullRequestVote.Yes);
+                });
+
+            Assert.Equal("Johnnie McLeod", pullRequestReviewer.DisplayName);
+            Assert.Equal(new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.ImageUrl);
+            Assert.Null(pullRequestReviewer.ReviewerUrl);
+            Assert.Equal("fabrikamfiber2@hotmail.com", pullRequestReviewer.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.Url);
+            Assert.Equal(10, pullRequestReviewer.Vote);
+        }
+
         #endregion
 
         #region Repositories

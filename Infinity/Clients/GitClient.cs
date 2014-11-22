@@ -178,6 +178,72 @@ namespace Infinity.Clients
             return await Executor.Execute<PullRequestReviewer>(request);
         }
 
+        /// <summary>
+        /// Adds a reviewer to a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="reviewerId">The reviewer</param>
+        /// <param name="vote">The (optional) vote for the reviewer</param>
+        /// <returns>The reviewer for the pull request</returns>
+        public async Task<PullRequestReviewer> AddPullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote = PullRequestVote.None)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.POST);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("ReviewerId", reviewerId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new
+            {
+                vote = (int)vote
+            });
+
+            return await Executor.Execute<PullRequestReviewer>(request);
+        }
+
+        /// <summary>
+        /// Deletes a reviewer from a pull request
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="reviewerId">The reviewer</param>
+        /// <returns>The reviewer for the pull request</returns>
+        public async Task DeletePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.DELETE);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("ReviewerId", reviewerId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
+            await Executor.Execute(request);
+        }
+
+        /// <summary>
+        /// Updates the reviewer's vote for a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="reviewerId">The reviewer</param>
+        /// <param name="vote">The vote for the reviewer</param>
+        /// <returns>The reviewer for the pull request</returns>
+        public async Task<PullRequestReviewer> UpdatePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.PUT);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("ReviewerId", reviewerId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new
+            {
+                vote = (int)vote
+            });
+
+            return await Executor.Execute<PullRequestReviewer>(request);
+        }
+
         #endregion
 
         #region References

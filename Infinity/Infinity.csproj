@@ -62,6 +62,7 @@
     <Compile Include="Models\PullRequestMergeStatus.cs" />
     <Compile Include="Models\PullRequestReviewer.cs" />
     <Compile Include="Models\PullRequestStatus.cs" />
+    <Compile Include="Models\PullRequestVote.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />
     <Compile Include="Models\Tree.cs" />

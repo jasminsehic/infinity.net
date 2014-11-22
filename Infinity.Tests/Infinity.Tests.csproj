@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Git.UpdatePullRequestReviewer.json" />
+    <None Include="Resources\Git.AddPullRequestReviewer.json" />
     <None Include="Resources\Git.CreatePullRequest.json" />
     <None Include="Resources\Git.CreateRepository.json" />
     <None Include="Resources\Git.GetPullRequest.json" />

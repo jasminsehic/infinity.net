@@ -51,7 +51,7 @@ namespace Infinity.Tests
                 }
 
                 if (c.Method == request.Method &&
-                    ((c.RequestBody == null && body == null) || c.RequestBody.Equals(body)) && 
+                    ((c.RequestBody == null && body == null) || (c.RequestBody != null && c.RequestBody.Equals(body))) && 
                     c.Uri.Equals(uri))
                 {
                     config = c;

@@ -63,6 +63,16 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_AddPullRequestReviewer {
+            get {
+                object obj = ResourceManager.GetObject("Git_AddPullRequestReviewer", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_CreatePullRequest {
             get {
                 object obj = ResourceManager.GetObject("Git_CreatePullRequest", resourceCulture);
@@ -216,6 +226,16 @@ namespace Infinity.Tests.Properties {
         internal static byte[] Git_UpdatePullRequest {
             get {
                 object obj = ResourceManager.GetObject("Git_UpdatePullRequest", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_UpdatePullRequestReviewer {
+            get {
+                object obj = ResourceManager.GetObject("Git_UpdatePullRequestReviewer", resourceCulture);
                 return ((byte[])(obj));
             }
         }
