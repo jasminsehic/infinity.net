@@ -63,7 +63,7 @@ namespace Infinity.Clients
                 request.AddParameter("$skip", skip);
             }
 
-            ProjectList projects = await Executor.Execute<ProjectList>(request);
+            Sequence<Project> projects = await Executor.Execute<Sequence<Project>>(request);
             return (projects != null) ? projects.Value : new List<Project>();
         }
 
@@ -155,12 +155,6 @@ namespace Infinity.Clients
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);
-        }
-
-        private class ProjectList
-        {
-            public int Count { get; set; }
-            public List<Project> Value { get; set; }
         }
     }
 }

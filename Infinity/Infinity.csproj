@@ -50,6 +50,7 @@
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
+    <Compile Include="Models\Sequence.cs" />
     <Compile Include="Models\CommitLink.cs" />
     <Compile Include="Models\LinkUrl.cs" />
     <Compile Include="Models\ObjectType.cs" />

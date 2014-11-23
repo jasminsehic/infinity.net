@@ -45,7 +45,7 @@ namespace Infinity.Clients
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            TeamList list = await Executor.Execute<TeamList>(request);
+            Sequence<Team> list = await Executor.Execute<Sequence<Team>>(request);
             return list.Value;
         }
 
@@ -84,20 +84,8 @@ namespace Infinity.Clients
             request.AddUrlSegment("TeamId", teamId.ToString());
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            TeamMemberList list = await Executor.Execute<TeamMemberList>(request);
+            Sequence<TeamMember> list = await Executor.Execute<Sequence<TeamMember>>(request);
             return list.Value;
-        }
-
-        private class TeamList
-        {
-            public int Count { get; set; }
-            public List<Team> Value { get; set; }
-        }
-
-        private class TeamMemberList
-        {
-            public int Count { get; set; }
-            public List<TeamMember> Value { get; set; }
         }
     }
 }

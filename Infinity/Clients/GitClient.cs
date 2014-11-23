@@ -75,7 +75,7 @@ namespace Infinity.Clients
             request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
             request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
 
-            PullRequestList list = await Executor.Execute<PullRequestList>(request);
+            Sequence<PullRequest> list = await Executor.Execute<Sequence<PullRequest>>(request);
             return list.Value;
         }
 
@@ -156,7 +156,7 @@ namespace Infinity.Clients
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            PullRequestReviewerList list = await Executor.Execute<PullRequestReviewerList>(request);
+            Sequence<PullRequestReviewer> list = await Executor.Execute<Sequence<PullRequestReviewer>>(request);
             return list.Value;
         }
 
@@ -269,7 +269,7 @@ namespace Infinity.Clients
             request.AddUrlSegment("Filter", filter != null ? filter : "");
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            ReferenceList references = await Executor.Execute<ReferenceList>(request);
+            Sequence<Reference> references = await Executor.Execute<Sequence<Reference>>(request);
             return (references != null) ? references.Value : new List<Reference>();
         }
 
@@ -298,7 +298,7 @@ namespace Infinity.Clients
 
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            RepositoryList list = await Executor.Execute<RepositoryList>(request);
+            Sequence<Repository> list = await Executor.Execute<Sequence<Repository>>(request);
             return list.Value;
         }
 
@@ -413,29 +413,5 @@ namespace Infinity.Clients
         }
 
         #endregion
-
-        private class PullRequestList
-        {
-            public int Count { get; set; }
-            public List<PullRequest> Value { get; set; }
-        }
-
-        private class PullRequestReviewerList
-        {
-            public int Count { get; set; }
-            public List<PullRequestReviewer> Value { get; set; }
-        }
-
-        private class ReferenceList
-        {
-            public int Count { get; set; }
-            public List<Reference> Value { get; set; }
-        }
-
-        private class RepositoryList
-        {
-            public int Count { get; set; }
-            public List<Repository> Value { get; set; }
-        }
     }
 }

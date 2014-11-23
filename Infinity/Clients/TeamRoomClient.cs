@@ -41,7 +41,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms");
             request.AddParameter("api-version", Version, ParameterType.QueryString);
 
-            TeamRoomList list = await Executor.Execute<TeamRoomList>(request);
+            Sequence<TeamRoom> list = await Executor.Execute<Sequence<TeamRoom>>(request);
             return list.Value;
         }
 
@@ -142,7 +142,7 @@ namespace Infinity.Clients
                 request.AddParameter("$filter", filter);
             }
 
-            TeamRoomMessageList messages = await Executor.Execute<TeamRoomMessageList>(request);
+            Sequence<TeamRoomMessage> messages = await Executor.Execute<Sequence<TeamRoomMessage>>(request);
             return (messages != null) ? messages.Value : new List<TeamRoomMessage>();
         }
 
@@ -222,7 +222,7 @@ namespace Infinity.Clients
             var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users");
             request.AddUrlSegment("RoomId", roomId.ToString());
 
-            TeamRoomUserList list = await Executor.Execute<TeamRoomUserList>(request);
+            Sequence<TeamRoomUserDetails> list = await Executor.Execute<Sequence<TeamRoomUserDetails>>(request);
             return list.Value;
         }
 
@@ -256,24 +256,6 @@ namespace Infinity.Clients
             request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             await Executor.Execute(request);
-        }
-
-        private class TeamRoomList
-        {
-            public int Count { get; set; }
-            public List<TeamRoom> Value { get; set; }
-        }
-
-        private class TeamRoomMessageList
-        {
-            public int Count { get; set; }
-            public List<TeamRoomMessage> Value { get; set; }
-        }
-
-        private class TeamRoomUserList
-        {
-            public int Count { get; set; }
-            public List<TeamRoomUserDetails> Value { get; set; }
         }
     }
 }
