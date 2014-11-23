@@ -50,6 +50,11 @@
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
     <Compile Include="ITfsClientExecutor.cs" />
+    <Compile Include="Models\Commit.cs" />
+    <Compile Include="Clients\CommitFilters.cs" />
+    <Compile Include="Models\CommitChangeCounts.cs" />
+    <Compile Include="Models\CommitLinks.cs" />
+    <Compile Include="Models\PushDetails.cs" />
     <Compile Include="Models\Sequence.cs" />
     <Compile Include="Models\CommitLink.cs" />
     <Compile Include="Models\LinkUrl.cs" />
@@ -64,6 +69,7 @@
     <Compile Include="Models\PullRequestReviewer.cs" />
     <Compile Include="Models\PullRequestStatus.cs" />
     <Compile Include="Models\PullRequestVote.cs" />
+    <Compile Include="Models\Signature.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />
     <Compile Include="Models\Tree.cs" />

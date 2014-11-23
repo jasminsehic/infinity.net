@@ -35,6 +35,35 @@ namespace Infinity.Clients
 
         private ITfsClientExecutor Executor { get; set; }
 
+        #region Commits
+
+        /// <summary>
+        /// Get a list of commits in a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="filters">Optional commit query filters</param>
+        /// <returns>A list of commits in the Git repository</returns>
+        public async Task<IEnumerable<Commit>> GetCommits(Guid repositoryId, CommitFilters filters = null)
+        {
+            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/commits");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
+            filters = filters ?? new CommitFilters();
+
+            request.AddOptionalParameter("itemPath", filters.ItemPath);
+            request.AddOptionalParameter("committer", filters.Committer);
+            request.AddOptionalParameter("fromDate", filters.FromDate);
+            request.AddOptionalParameter("toDate", filters.ToDate);
+            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
+
+            Sequence<Commit> list = await Executor.Execute<Sequence<Commit>>(request);
+            return list.Value;
+        }
+
+        #endregion
+
         #region Pull Requests
 
         /// <summary>
