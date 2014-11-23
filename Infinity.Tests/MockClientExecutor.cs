@@ -19,7 +19,7 @@ namespace Infinity.Tests
 
         private MockRequestConfiguration[] Configuration { get; set; }
 
-        private MockRequestConfiguration GetConfigurationForRequest(IRestRequest request)
+        private MockRequestConfiguration GetConfigurationForRequest(TfsRestRequest request)
         {
             MockRequestConfiguration config = null;
 
@@ -67,7 +67,7 @@ namespace Infinity.Tests
             return config;
         }
 
-        public async Task<T> Execute<T>(IRestRequest request) where T : new()
+        public async Task<T> Execute<T>(TfsRestRequest request) where T : new()
         {
             MockRequestConfiguration configuration = GetConfigurationForRequest(request);
             Mock<IRestClient> restClientMock = new Mock<IRestClient>();
@@ -88,7 +88,7 @@ namespace Infinity.Tests
             return response.Data;
         }
 
-        public async Task Execute(IRestRequest request)
+        public async Task Execute(TfsRestRequest request)
         {
             MockRequestConfiguration configuration = GetConfigurationForRequest(request);
             Mock<IRestClient> restClientMock = new Mock<IRestClient>();

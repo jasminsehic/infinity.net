@@ -392,7 +392,7 @@ namespace Infinity.Tests.Models
             TfsClient client = NewMockClient(
                 new MockRequestConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/6522/users",
+                    Uri = "/_apis/chat/rooms/6522/users?api-version=1.0",
                     ResponseResource = "TeamRoom.GetUsers"
                 });
 

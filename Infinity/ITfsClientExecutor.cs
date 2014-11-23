@@ -9,7 +9,7 @@ namespace Infinity
 {
     internal interface ITfsClientExecutor
     {
-        Task<T> Execute<T>(IRestRequest request) where T : new();
-        Task Execute(IRestRequest request);
+        Task<T> Execute<T>(TfsRestRequest request) where T : new();
+        Task Execute(TfsRestRequest request);
     }
 }

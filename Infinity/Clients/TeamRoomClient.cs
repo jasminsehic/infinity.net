@@ -19,17 +19,6 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
-        /// <summary>
-        /// The REST API version of this client
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                return "1.0";
-            }
-        }
-
         private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
@@ -38,8 +27,7 @@ namespace Infinity.Clients
         /// <returns>The list of Team Rooms</returns>
         public async Task<IEnumerable<TeamRoom>> GetRooms()
         {
-            var request = new RestRequest("/_apis/chat/rooms");
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            var request = new TfsRestRequest("/_apis/chat/rooms");
 
             Sequence<TeamRoom> list = await Executor.Execute<Sequence<TeamRoom>>(request);
             return list.Value;
@@ -52,9 +40,9 @@ namespace Infinity.Clients
         /// <returns>The Team Room</returns>
         public async Task<TeamRoom> GetRoom(int roomId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}");
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}");
             request.AddUrlSegment("RoomId", roomId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
             return await Executor.Execute<TeamRoom>(request);
         }
 
@@ -69,10 +57,10 @@ namespace Infinity.Clients
             Assert.NotNull(name, "name");
             Assert.NotNull(description, "description");
 
-            var request = new RestRequest("/_apis/chat/rooms", Method.POST);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            var request = new TfsRestRequest("/_apis/chat/rooms", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, description = description });
+
             return await Executor.Execute<TeamRoom>(request);
         }
 
@@ -85,11 +73,11 @@ namespace Infinity.Clients
         /// <returns>The updated Team Room</returns>
         public async Task<TeamRoom> UpdateRoom(int roomId, string name, string description)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}", Method.PATCH);
             request.AddUrlSegment("RoomId", roomId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, description = description });
+
             return await Executor.Execute<TeamRoom>(request);
         }
 
@@ -99,9 +87,9 @@ namespace Infinity.Clients
         /// <param name="roomId">The ID of the Team Room to delete</param>
         public async Task DeleteRoom(int roomId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
             await Executor.Execute(request);
         }
 
@@ -114,11 +102,11 @@ namespace Infinity.Clients
         {
             Assert.NotNull(content, "content");
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.POST);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.POST);
             request.AddUrlSegment("RoomId", roomId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { content = content });
+            
             return await Executor.Execute<TeamRoomMessage>(request);
         }
 
@@ -133,9 +121,8 @@ namespace Infinity.Clients
         /// <returns>The list of messages</returns>
         public async Task<IEnumerable<TeamRoomMessage>> GetMessages(int roomId, string filter = null)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.GET);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/messages", Method.GET);
             request.AddUrlSegment("RoomId", roomId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             if (filter != null)
             {
@@ -154,10 +141,10 @@ namespace Infinity.Clients
         /// <returns>The message</returns>
         public async Task<TeamRoomMessage> GetMessage(int roomId, int messageId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.GET);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.GET);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+
             return await Executor.Execute<TeamRoomMessage>(request);
         }
 
@@ -170,12 +157,12 @@ namespace Infinity.Clients
         /// <returns>The updated message</returns>
         public async Task<TeamRoomMessage> UpdateMessage(int roomId, int messageId, string content)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.PATCH);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { content = content });
+
             return await Executor.Execute<TeamRoomMessage>(request);
         }
 
@@ -186,10 +173,9 @@ namespace Infinity.Clients
         /// <param name="messageId">The ID of the message to delete</param>
         public async Task DeleteMessage(int roomId, int messageId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/messages/{MessageId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("MessageId", messageId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             await Executor.Execute(request);
         }
 
@@ -203,10 +189,9 @@ namespace Infinity.Clients
         {
             Assert.NotNull(userId, "userId");
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.PUT);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { userId = userId });
             await Executor.Execute(request);
@@ -219,7 +204,7 @@ namespace Infinity.Clients
         /// <returns>The list of users</returns>
         public async Task<IEnumerable<TeamRoomUserDetails>> GetUsers(int roomId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users");
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/users");
             request.AddUrlSegment("RoomId", roomId.ToString());
 
             Sequence<TeamRoomUserDetails> list = await Executor.Execute<Sequence<TeamRoomUserDetails>>(request);
@@ -234,10 +219,9 @@ namespace Infinity.Clients
         /// <returns>The user details</returns>
         public async Task<TeamRoomUserDetails> GetUser(int roomId, Guid userId)
         {
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}");
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}");
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             return await Executor.Execute<TeamRoomUserDetails>(request);
         }
 
@@ -250,10 +234,9 @@ namespace Infinity.Clients
         {
             Assert.NotNull(userId, "userId");
 
-            var request = new RestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/chat/rooms/{RoomId}/users/{UserId}", Method.DELETE);
             request.AddUrlSegment("RoomId", roomId.ToString());
             request.AddUrlSegment("UserId", userId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             await Executor.Execute(request);
         }

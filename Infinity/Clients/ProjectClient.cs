@@ -20,17 +20,6 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
-        /// <summary>
-        /// The REST API version of this client
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                return "1.0";
-            }
-        }
-
         private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
@@ -45,8 +34,7 @@ namespace Infinity.Clients
             int count = 0,
             int skip = 0)
         {
-            var request = new RestRequest("/_apis/projects");
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            var request = new TfsRestRequest("/_apis/projects");
 
             if (projectState != ProjectState.All)
             {
@@ -81,9 +69,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull(id, "id");
 
-            var request = new RestRequest("/_apis/projects/{ProjectId}");
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}");
             request.AddUrlSegment("ProjectId", id.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             if (includeCapabilities)
             {
@@ -107,9 +94,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull(name, "name");
 
-            var request = new RestRequest("/_apis/projects/{Name}");
+            var request = new TfsRestRequest("/_apis/projects/{Name}");
             request.AddUrlSegment("Name", name);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             if (includeCapabilities)
             {
@@ -130,9 +116,8 @@ namespace Infinity.Clients
             Assert.NotNull(id, "id");
             Assert.NotNull(description, "description");
 
-            var request = new RestRequest("/_apis/projects/{ProjectId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}", Method.PATCH);
             request.AddUrlSegment("ProjectId", id.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);
@@ -149,9 +134,8 @@ namespace Infinity.Clients
             Assert.NotNull(name, "name");
             Assert.NotNull(description, "description");
 
-            var request = new RestRequest("/_apis/projects/{Name}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/projects/{Name}", Method.PATCH);
             request.AddUrlSegment("Name", name);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);

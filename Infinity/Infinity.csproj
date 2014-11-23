@@ -93,6 +93,7 @@
     <Compile Include="TfsClient.cs" />
     <Compile Include="TfsClientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TfsRestRequest.cs" />
     <Compile Include="Util\Assert.cs" />
     <Compile Include="Util\RestRequestExtensions.cs" />
   </ItemGroup>

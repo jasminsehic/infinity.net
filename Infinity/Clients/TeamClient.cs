@@ -19,17 +19,6 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
-        /// <summary>
-        /// The REST API version of this client
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                return "1.0";
-            }
-        }
-
         private ITfsClientExecutor Executor { get; set; }
 
         /// <summary>
@@ -41,9 +30,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull(projectId, "projectId");
 
-            var request = new RestRequest("/_apis/projects/{ProjectId}/teams");
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}/teams");
             request.AddUrlSegment("ProjectId", projectId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             Sequence<Team> list = await Executor.Execute<Sequence<Team>>(request);
             return list.Value;
@@ -60,10 +48,9 @@ namespace Infinity.Clients
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(teamId, "teamId");
 
-            var request = new RestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}");
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("TeamId", teamId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Team>(request);
         }
@@ -79,10 +66,9 @@ namespace Infinity.Clients
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(teamId, "teamId");
 
-            var request = new RestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}/members");
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}/teams/{TeamId}/members");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("TeamId", teamId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             Sequence<TeamMember> list = await Executor.Execute<Sequence<TeamMember>>(request);
             return list.Value;

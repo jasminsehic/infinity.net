@@ -30,14 +30,14 @@ namespace Infinity
             private set;
         }
 
-        public async Task<T> Execute<T>(IRestRequest request) where T : new()
+        public async Task<T> Execute<T>(TfsRestRequest request) where T : new()
         {
             IRestResponse<T> response = await CreateClient().ExecuteTaskAsync<T>(request);
             HandleResponse(response);
             return response.Data;
         }
 
-        public async Task Execute(IRestRequest request)
+        public async Task Execute(TfsRestRequest request)
         {
             IRestResponse response = await CreateClient().ExecuteTaskAsync(request);
             HandleResponse(response);

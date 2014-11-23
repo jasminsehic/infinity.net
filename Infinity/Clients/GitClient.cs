@@ -21,18 +21,6 @@ namespace Infinity.Clients
             Executor = executor;
         }
 
-        /// <summary>
-        /// The REST API version of this client
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                return "1.0";
-            }
-        }
-
-
         private ITfsClientExecutor Executor { get; set; }
 
         #region Commits
@@ -45,9 +33,8 @@ namespace Infinity.Clients
         /// <returns>A list of commits in the Git repository</returns>
         public async Task<IEnumerable<Commit>> GetCommits(Guid repositoryId, CommitFilters filters = null)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/commits");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commits");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             filters = filters ?? new CommitFilters();
 
@@ -74,10 +61,9 @@ namespace Infinity.Clients
         /// <returns>The pull request</returns>
         public async Task<PullRequest> GetPullRequest(Guid repositoryId, int id)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{Id}");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{Id}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Id", String.Format("{0}", id));
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<PullRequest>(request);
         }
@@ -90,9 +76,8 @@ namespace Infinity.Clients
         /// <returns>A list of pull requests in the Git repository</returns>
         public async Task<IEnumerable<PullRequest>> GetPullRequests(Guid repositoryId, PullRequestFilters filters = null)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             filters = filters ?? new PullRequestFilters();
 
@@ -131,9 +116,8 @@ namespace Infinity.Clients
                 reviewers = new Guid[0];
             }
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new {
                 sourceRefName = sourceRefName,
@@ -158,10 +142,9 @@ namespace Infinity.Clients
         {
             Assert.NotNull(lastMergeSourceCommitId, "lastMergeSourceCommitId");
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", Method.PATCH);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
@@ -180,10 +163,9 @@ namespace Infinity.Clients
         /// <returns>The list of reviewers listed for the pull request</returns>
         public async Task<IEnumerable<PullRequestReviewer>> GetPullRequestReviewers(Guid repositoryId, int pullRequestId)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             Sequence<PullRequestReviewer> list = await Executor.Execute<Sequence<PullRequestReviewer>>(request);
             return list.Value;
@@ -198,11 +180,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task<PullRequestReviewer> GetPullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<PullRequestReviewer>(request);
         }
@@ -217,11 +198,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task<PullRequestReviewer> AddPullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote = PullRequestVote.None)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.POST);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
@@ -240,11 +220,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task DeletePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.DELETE);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             await Executor.Execute(request);
         }
@@ -259,11 +238,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task<PullRequestReviewer> UpdatePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote)
         {
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.PUT);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.PUT);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
@@ -293,10 +271,9 @@ namespace Infinity.Clients
                 filter = filter.Substring(4);
             }
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Filter", filter != null ? filter : "");
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             Sequence<Reference> references = await Executor.Execute<Sequence<Reference>>(request);
             return (references != null) ? references.Value : new List<Reference>();
@@ -313,19 +290,17 @@ namespace Infinity.Clients
         /// <returns>A list of repositories in the Project Collection</returns>
         public async Task<IEnumerable<Repository>> GetRepositories(Guid? projectId = null)
         {
-            RestRequest request;
+            TfsRestRequest request;
 
             if (projectId != null)
             {
-                request = new RestRequest("/_apis/git/{ProjectId}/repositories");
+                request = new TfsRestRequest("/_apis/git/{ProjectId}/repositories");
                 request.AddUrlSegment("ProjectId", projectId.ToString());
             }
             else
             {
-                request = new RestRequest("/_apis/git/repositories");
+                request = new TfsRestRequest("/_apis/git/repositories");
             }
-
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             Sequence<Repository> list = await Executor.Execute<Sequence<Repository>>(request);
             return list.Value;
@@ -340,9 +315,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull(id, "id");
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}");
             request.AddUrlSegment("RepositoryId", id.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -358,10 +332,9 @@ namespace Infinity.Clients
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(name, "name");
 
-            var request = new RestRequest("/_apis/git/{ProjectId}/repositories/{Name}");
+            var request = new TfsRestRequest("/_apis/git/{ProjectId}/repositories/{Name}");
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("Name", name);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Repository>(request);
         }
@@ -378,8 +351,7 @@ namespace Infinity.Clients
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(name, "name");
 
-            var request = new RestRequest("/_apis/git/repositories", Method.POST);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
+            var request = new TfsRestRequest("/_apis/git/repositories", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = name, project = new { id = projectId.ToString() } });
             return await Executor.Execute<Repository>(request);
@@ -396,9 +368,8 @@ namespace Infinity.Clients
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(newName, "newName");
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = newName });
             return await Executor.Execute<Repository>(request);
@@ -412,9 +383,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull(repositoryId, "repositoryId");
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
             await Executor.Execute(request);
         }
 
@@ -433,10 +403,9 @@ namespace Infinity.Clients
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(treeId, "treeId");
 
-            var request = new RestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("TreeId", treeId);
-            request.AddParameter("api-version", Version, ParameterType.QueryString);
 
             return await Executor.Execute<Tree>(request);
         }
