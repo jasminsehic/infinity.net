@@ -395,7 +395,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequest.CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);
@@ -446,7 +446,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[0].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequests[0].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequests[0].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[0].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[0].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeCommit.Url);
@@ -486,13 +486,13 @@ namespace Infinity.Tests.Models
 
             Assert.Equal(34, pullRequests.Count);
 
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 46, 640, DateTimeKind.Utc).ToLocalTime(), pullRequests[0].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 46, 640, DateTimeKind.Utc), pullRequests[0].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[0].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[0].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequests[0].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequests[0].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[0].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[0].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeCommit.Url);
@@ -511,13 +511,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[0].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50"), pullRequests[0].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 24, 610, DateTimeKind.Utc).ToLocalTime(), pullRequests[1].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 24, 610, DateTimeKind.Utc), pullRequests[1].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[1].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[1].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[1].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[1].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[1].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 17, 970, DateTimeKind.Utc).ToLocalTime(), pullRequests[1].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 17, 970, DateTimeKind.Utc), pullRequests[1].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[1].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[1].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[1].LastMergeCommit.Url);
@@ -536,13 +536,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[1].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/49"), pullRequests[1].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 07, 22, 18, 07, 151, DateTimeKind.Utc).ToLocalTime(), pullRequests[2].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 07, 22, 18, 07, 151, DateTimeKind.Utc), pullRequests[2].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[2].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[2].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[2].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[2].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[2].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 07, 22, 18, 01, 986, DateTimeKind.Utc).ToLocalTime(), pullRequests[2].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 07, 22, 18, 01, 986, DateTimeKind.Utc), pullRequests[2].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[2].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[2].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[2].LastMergeCommit.Url);
@@ -561,13 +561,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[2].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/48"), pullRequests[2].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 06, 22, 40, 47, 933, DateTimeKind.Utc).ToLocalTime(), pullRequests[3].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 06, 22, 40, 47, 933, DateTimeKind.Utc), pullRequests[3].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[3].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[3].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[3].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[3].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[3].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 06, 22, 40, 30, 047, DateTimeKind.Utc).ToLocalTime(), pullRequests[3].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 06, 22, 40, 30, 047, DateTimeKind.Utc), pullRequests[3].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[3].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[3].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[3].LastMergeCommit.Url);
@@ -586,13 +586,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[3].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/47"), pullRequests[3].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 24, 41, 370, DateTimeKind.Utc).ToLocalTime(), pullRequests[4].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 24, 41, 370, DateTimeKind.Utc), pullRequests[4].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[4].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[4].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[4].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[4].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[4].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 24, 36, 910, DateTimeKind.Utc).ToLocalTime(), pullRequests[4].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 24, 36, 910, DateTimeKind.Utc), pullRequests[4].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[4].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[4].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[4].LastMergeCommit.Url);
@@ -611,13 +611,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[4].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/46"), pullRequests[4].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 10, 32, 689, DateTimeKind.Utc).ToLocalTime(), pullRequests[5].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 10, 32, 689, DateTimeKind.Utc), pullRequests[5].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[5].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[5].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[5].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[5].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[5].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 10, 27, 260, DateTimeKind.Utc).ToLocalTime(), pullRequests[5].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 10, 27, 260, DateTimeKind.Utc), pullRequests[5].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[5].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[5].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[5].LastMergeCommit.Url);
@@ -636,13 +636,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[5].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/45"), pullRequests[5].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 02, 42, 720, DateTimeKind.Utc).ToLocalTime(), pullRequests[6].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 02, 42, 720, DateTimeKind.Utc), pullRequests[6].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[6].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[6].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[6].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[6].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[6].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 18, 02, 36, 592, DateTimeKind.Utc).ToLocalTime(), pullRequests[6].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 18, 02, 36, 592, DateTimeKind.Utc), pullRequests[6].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[6].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[6].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[6].LastMergeCommit.Url);
@@ -661,13 +661,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[6].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/44"), pullRequests[6].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 17, 33, 01, 379, DateTimeKind.Utc).ToLocalTime(), pullRequests[7].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 17, 33, 01, 379, DateTimeKind.Utc), pullRequests[7].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[7].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[7].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[7].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[7].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[7].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 17, 32, 56, 66, DateTimeKind.Utc).ToLocalTime(), pullRequests[7].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 17, 32, 56, 66, DateTimeKind.Utc), pullRequests[7].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[7].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[7].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[7].LastMergeCommit.Url);
@@ -686,13 +686,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[7].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/43"), pullRequests[7].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 37, 52, 814, DateTimeKind.Utc).ToLocalTime(), pullRequests[8].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 37, 52, 814, DateTimeKind.Utc), pullRequests[8].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[8].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[8].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[8].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[8].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[8].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 37, 48, 67, DateTimeKind.Utc).ToLocalTime(), pullRequests[8].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 37, 48, 67, DateTimeKind.Utc), pullRequests[8].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[8].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[8].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[8].LastMergeCommit.Url);
@@ -711,13 +711,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[8].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/42"), pullRequests[8].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 25, 01, 841, DateTimeKind.Utc).ToLocalTime(), pullRequests[9].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 25, 01, 841, DateTimeKind.Utc), pullRequests[9].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[9].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[9].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[9].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[9].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[9].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 24, 56, 607, DateTimeKind.Utc).ToLocalTime(), pullRequests[9].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 24, 56, 607, DateTimeKind.Utc), pullRequests[9].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[9].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[9].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[9].LastMergeCommit.Url);
@@ -736,13 +736,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[9].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/41"), pullRequests[9].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 03, 44, 687, DateTimeKind.Utc).ToLocalTime(), pullRequests[10].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 03, 44, 687, DateTimeKind.Utc), pullRequests[10].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[10].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[10].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[10].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[10].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[10].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 02, 16, 03, 40, 000, DateTimeKind.Utc).ToLocalTime(), pullRequests[10].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 02, 16, 03, 40, 000, DateTimeKind.Utc), pullRequests[10].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[10].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[10].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[10].LastMergeCommit.Url);
@@ -761,13 +761,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[10].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/40"), pullRequests[10].Url);
 
-            Assert.Equal(new DateTime(2014, 10, 01, 23, 22, 49, 497, DateTimeKind.Utc).ToLocalTime(), pullRequests[11].ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 01, 23, 22, 49, 497, DateTimeKind.Utc), pullRequests[11].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[11].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[11].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[11].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[11].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[11].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 01, 23, 22, 44, 888, DateTimeKind.Utc).ToLocalTime(), pullRequests[11].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 01, 23, 22, 44, 888, DateTimeKind.Utc), pullRequests[11].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[11].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[11].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[11].LastMergeCommit.Url);
@@ -786,13 +786,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[11].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/39"), pullRequests[11].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 31, 29, 548, DateTimeKind.Utc).ToLocalTime(), pullRequests[12].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 31, 29, 548, DateTimeKind.Utc), pullRequests[12].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[12].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[12].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[12].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[12].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[12].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 31, 27, 29, DateTimeKind.Utc).ToLocalTime(), pullRequests[12].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 31, 27, 29, DateTimeKind.Utc), pullRequests[12].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[12].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[12].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[12].LastMergeCommit.Url);
@@ -811,13 +811,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[12].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/38"), pullRequests[12].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 30, 02, 002, DateTimeKind.Utc).ToLocalTime(), pullRequests[13].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 30, 02, 002, DateTimeKind.Utc), pullRequests[13].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[13].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[13].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[13].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[13].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[13].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 29, 59, 86, DateTimeKind.Utc).ToLocalTime(), pullRequests[13].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 29, 59, 86, DateTimeKind.Utc), pullRequests[13].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[13].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[13].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[13].LastMergeCommit.Url);
@@ -836,13 +836,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[13].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/37"), pullRequests[13].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 27, 37, 191, DateTimeKind.Utc).ToLocalTime(), pullRequests[14].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 27, 37, 191, DateTimeKind.Utc), pullRequests[14].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[14].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[14].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[14].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[14].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[14].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 27, 35, 066, DateTimeKind.Utc).ToLocalTime(), pullRequests[14].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 27, 35, 066, DateTimeKind.Utc), pullRequests[14].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[14].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[14].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[14].LastMergeCommit.Url);
@@ -861,13 +861,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[14].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/36"), pullRequests[14].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 23, 55, 50, DateTimeKind.Utc).ToLocalTime(), pullRequests[15].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 23, 55, 50, DateTimeKind.Utc), pullRequests[15].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[15].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[15].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[15].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[15].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[15].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 23, 53, 079, DateTimeKind.Utc).ToLocalTime(), pullRequests[15].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 23, 53, 079, DateTimeKind.Utc), pullRequests[15].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[15].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[15].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[15].LastMergeCommit.Url);
@@ -886,13 +886,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[15].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/35"), pullRequests[15].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 21, 47, 296, DateTimeKind.Utc).ToLocalTime(), pullRequests[16].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 21, 47, 296, DateTimeKind.Utc), pullRequests[16].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[16].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[16].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[16].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[16].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[16].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 21, 45, 124, DateTimeKind.Utc).ToLocalTime(), pullRequests[16].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 21, 45, 124, DateTimeKind.Utc), pullRequests[16].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[16].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[16].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[16].LastMergeCommit.Url);
@@ -911,13 +911,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[16].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/34"), pullRequests[16].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 56, 438, DateTimeKind.Utc).ToLocalTime(), pullRequests[17].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 56, 438, DateTimeKind.Utc), pullRequests[17].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[17].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[17].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[17].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[17].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[17].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 53, 420, DateTimeKind.Utc).ToLocalTime(), pullRequests[17].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 53, 420, DateTimeKind.Utc), pullRequests[17].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[17].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[17].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[17].LastMergeCommit.Url);
@@ -936,13 +936,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[17].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/33"), pullRequests[17].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 36, 747, DateTimeKind.Utc).ToLocalTime(), pullRequests[18].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 36, 747, DateTimeKind.Utc), pullRequests[18].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[18].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[18].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[18].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[18].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[18].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 34, 232, DateTimeKind.Utc).ToLocalTime(), pullRequests[18].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 19, 34, 232, DateTimeKind.Utc), pullRequests[18].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[18].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[18].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[18].LastMergeCommit.Url);
@@ -961,13 +961,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[18].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/32"), pullRequests[18].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 16, 41, 275, DateTimeKind.Utc).ToLocalTime(), pullRequests[19].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 16, 41, 275, DateTimeKind.Utc), pullRequests[19].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[19].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[19].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[19].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[19].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[19].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 16, 38, 75, DateTimeKind.Utc).ToLocalTime(), pullRequests[19].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 16, 38, 75, DateTimeKind.Utc), pullRequests[19].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[19].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[19].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[19].LastMergeCommit.Url);
@@ -986,13 +986,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[19].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/31"), pullRequests[19].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 15, 57, 086, DateTimeKind.Utc).ToLocalTime(), pullRequests[20].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 15, 57, 086, DateTimeKind.Utc), pullRequests[20].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[20].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[20].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[20].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[20].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[20].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 15, 54, 101, DateTimeKind.Utc).ToLocalTime(), pullRequests[20].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 15, 54, 101, DateTimeKind.Utc), pullRequests[20].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[20].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[20].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[20].LastMergeCommit.Url);
@@ -1011,13 +1011,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[20].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/30"), pullRequests[20].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 13, 34, 113, DateTimeKind.Utc).ToLocalTime(), pullRequests[21].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 13, 34, 113, DateTimeKind.Utc), pullRequests[21].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[21].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[21].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[21].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[21].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[21].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 20, 13, 29, 712, DateTimeKind.Utc).ToLocalTime(), pullRequests[21].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 20, 13, 29, 712, DateTimeKind.Utc), pullRequests[21].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[21].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[21].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[21].LastMergeCommit.Url);
@@ -1036,13 +1036,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[21].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/29"), pullRequests[21].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 59, 07, 311, DateTimeKind.Utc).ToLocalTime(), pullRequests[22].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 59, 07, 311, DateTimeKind.Utc), pullRequests[22].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[22].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[22].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[22].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[22].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[22].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 59, 04, 388, DateTimeKind.Utc).ToLocalTime(), pullRequests[22].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 59, 04, 388, DateTimeKind.Utc), pullRequests[22].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[22].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[22].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[22].LastMergeCommit.Url);
@@ -1061,13 +1061,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[22].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/28"), pullRequests[22].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 18, 749, DateTimeKind.Utc).ToLocalTime(), pullRequests[23].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 18, 749, DateTimeKind.Utc), pullRequests[23].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[23].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[23].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[23].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[23].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[23].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 16, 108, DateTimeKind.Utc).ToLocalTime(), pullRequests[23].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 16, 108, DateTimeKind.Utc), pullRequests[23].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[23].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[23].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[23].LastMergeCommit.Url);
@@ -1086,13 +1086,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[23].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/27"), pullRequests[23].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 04, 369, DateTimeKind.Utc).ToLocalTime(), pullRequests[24].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 04, 369, DateTimeKind.Utc), pullRequests[24].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[24].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[24].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[24].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[24].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[24].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 01, 281, DateTimeKind.Utc).ToLocalTime(), pullRequests[24].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 58, 01, 281, DateTimeKind.Utc), pullRequests[24].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[24].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[24].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[24].LastMergeCommit.Url);
@@ -1111,13 +1111,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[24].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/26"), pullRequests[24].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 57, 22, 872, DateTimeKind.Utc).ToLocalTime(), pullRequests[25].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 57, 22, 872, DateTimeKind.Utc), pullRequests[25].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[25].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[25].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[25].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[25].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[25].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 57, 20, 466, DateTimeKind.Utc).ToLocalTime(), pullRequests[25].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 57, 20, 466, DateTimeKind.Utc), pullRequests[25].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[25].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[25].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[25].LastMergeCommit.Url);
@@ -1136,13 +1136,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[25].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/25"), pullRequests[25].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 56, 51, 456, DateTimeKind.Utc).ToLocalTime(), pullRequests[26].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 56, 51, 456, DateTimeKind.Utc), pullRequests[26].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[26].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[26].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[26].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[26].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[26].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 56, 49, 221, DateTimeKind.Utc).ToLocalTime(), pullRequests[26].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 56, 49, 221, DateTimeKind.Utc), pullRequests[26].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[26].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[26].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[26].LastMergeCommit.Url);
@@ -1161,13 +1161,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[26].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/24"), pullRequests[26].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 55, 28, 009, DateTimeKind.Utc).ToLocalTime(), pullRequests[27].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 55, 28, 009, DateTimeKind.Utc), pullRequests[27].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[27].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[27].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[27].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[27].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[27].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 55, 24, 822, DateTimeKind.Utc).ToLocalTime(), pullRequests[27].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 55, 24, 822, DateTimeKind.Utc), pullRequests[27].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[27].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[27].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[27].LastMergeCommit.Url);
@@ -1186,13 +1186,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[27].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/23"), pullRequests[27].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 53, 44, 996, DateTimeKind.Utc).ToLocalTime(), pullRequests[28].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 53, 44, 996, DateTimeKind.Utc), pullRequests[28].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[28].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[28].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[28].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[28].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[28].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 53, 39, 816, DateTimeKind.Utc).ToLocalTime(), pullRequests[28].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 53, 39, 816, DateTimeKind.Utc), pullRequests[28].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[28].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[28].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[28].LastMergeCommit.Url);
@@ -1211,13 +1211,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[28].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/22"), pullRequests[28].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 46, 58, 642, DateTimeKind.Utc).ToLocalTime(), pullRequests[29].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 46, 58, 642, DateTimeKind.Utc), pullRequests[29].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[29].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[29].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[29].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[29].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[29].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 30, 18, 46, 50, 774, DateTimeKind.Utc).ToLocalTime(), pullRequests[29].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 30, 18, 46, 50, 774, DateTimeKind.Utc), pullRequests[29].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[29].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[29].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[29].LastMergeCommit.Url);
@@ -1236,13 +1236,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[29].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/21"), pullRequests[29].Url);
 
-            Assert.Equal(new DateTime(2014, 09, 25, 17, 41, 08, 430, DateTimeKind.Utc).ToLocalTime(), pullRequests[30].ClosedDate);
+            Assert.Equal(new DateTime(2014, 09, 25, 17, 41, 08, 430, DateTimeKind.Utc), pullRequests[30].ClosedDate);
             Assert.Equal("Chuck Reinhart", pullRequests[30].CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[30].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[30].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber3@hotmail.com", pullRequests[30].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pullRequests[30].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 09, 25, 17, 41, 01, 945, DateTimeKind.Utc).ToLocalTime(), pullRequests[30].CreationDate);
+            Assert.Equal(new DateTime(2014, 09, 25, 17, 41, 01, 945, DateTimeKind.Utc), pullRequests[30].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[30].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[30].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[30].LastMergeCommit.Url);
@@ -1261,13 +1261,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[30].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/20"), pullRequests[30].Url);
 
-            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 108, DateTimeKind.Utc).ToLocalTime(), pullRequests[31].ClosedDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 108, DateTimeKind.Utc), pullRequests[31].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[31].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[31].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[31].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[31].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[31].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 15, 249, DateTimeKind.Utc).ToLocalTime(), pullRequests[31].CreationDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 15, 249, DateTimeKind.Utc), pullRequests[31].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[31].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[31].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[31].LastMergeCommit.Url);
@@ -1286,13 +1286,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[31].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/19"), pullRequests[31].Url);
 
-            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 34, 176, DateTimeKind.Utc).ToLocalTime(), pullRequests[32].ClosedDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 34, 176, DateTimeKind.Utc), pullRequests[32].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[32].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[32].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[32].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[32].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[32].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 32, 34, DateTimeKind.Utc).ToLocalTime(), pullRequests[32].CreationDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 32, 34, DateTimeKind.Utc), pullRequests[32].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[32].Description);
             Assert.Equal("fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f", pullRequests[32].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), pullRequests[32].LastMergeCommit.Url);
@@ -1311,13 +1311,13 @@ namespace Infinity.Tests.Models
             Assert.Equal("New fix for hello world class", pullRequests[32].Title);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/18"), pullRequests[32].Url);
 
-            Assert.Equal(new DateTime(2014, 06, 30, 17, 48, 43, 184, DateTimeKind.Utc).ToLocalTime(), pullRequests[33].ClosedDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 48, 43, 184, DateTimeKind.Utc), pullRequests[33].ClosedDate);
             Assert.Equal("Normal Paulk", pullRequests[33].CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[33].CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[33].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[33].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[33].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 06, 30, 17, 29, 24, 685, DateTimeKind.Utc).ToLocalTime(), pullRequests[33].CreationDate);
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 29, 24, 685, DateTimeKind.Utc), pullRequests[33].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[33].Description);
             Assert.Equal("0360c963d7d86d040e9c33bba836feab14da4ad3", pullRequests[33].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/0360c963d7d86d040e9c33bba836feab14da4ad3"), pullRequests[33].LastMergeCommit.Url);
@@ -1363,7 +1363,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequests[0].CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequests[0].CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequests[0].CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequests[0].CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequests[0].Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequests[0].LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequests[0].LastMergeCommit.Url);
@@ -1429,7 +1429,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequest.CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);
@@ -1494,13 +1494,13 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"), pullRequest.Links.TargetBranch.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.Links.TargetCommit.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/workitems"), pullRequest.Links.WorkItems.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 46, 640, DateTimeKind.Utc).ToLocalTime(), pullRequest.ClosedDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 46, 640, DateTimeKind.Utc), pullRequest.ClosedDate);
             Assert.Equal("Normal Paulk", pullRequest.CreatedBy.DisplayName);
             Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.ImageUrl);
             Assert.Equal("fabrikamfiber16@hotmail.com", pullRequest.CreatedBy.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.CreatedBy.Url);
-            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc).ToLocalTime(), pullRequest.CreationDate);
+            Assert.Equal(new DateTime(2014, 10, 28, 01, 54, 43, 248, DateTimeKind.Utc), pullRequest.CreationDate);
             Assert.Equal("Example pull request showing review and integration of a simple change.", pullRequest.Description);
             Assert.Equal("23d0bc5b128a10056dc68afece360d8a0fabb014", pullRequest.LastMergeCommit.CommitId);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), pullRequest.LastMergeCommit.Url);

@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 
 using RestSharp;
-using RestSharp.Deserializers;
 
 using Infinity.Exceptions;
 using Infinity.Models;
@@ -46,6 +45,7 @@ namespace Infinity
         private IRestClient CreateClient()
         {
             RestClient client = new RestClient(Configuration.Url.ToString());
+            client.AddHandler("application/json", deserializer);
 
             if (Configuration.UserAgent != null)
             {

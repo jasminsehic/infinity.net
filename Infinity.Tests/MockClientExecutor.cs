@@ -3,10 +3,10 @@ using System.Net;
 using System.Threading.Tasks;
 
 using RestSharp;
-using RestSharp.Deserializers;
 using Moq;
 
 using Infinity;
+using Infinity.Util;
 
 namespace Infinity.Tests
 {
