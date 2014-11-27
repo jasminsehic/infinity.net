@@ -42,8 +42,8 @@ namespace Infinity.Clients
             request.AddOptionalParameter("committer", filters.Committer);
             request.AddOptionalParameter("fromDate", filters.FromDate);
             request.AddOptionalParameter("toDate", filters.ToDate);
-            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
             request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
+            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
 
             Sequence<Commit> list = await Executor.Execute<Sequence<Commit>>(request);
             return list.Value;

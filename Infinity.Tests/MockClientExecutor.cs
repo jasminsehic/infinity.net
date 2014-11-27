@@ -39,9 +39,20 @@ namespace Infinity.Tests
                         param.Type == ParameterType.QueryString ||
                         param.Type == ParameterType.GetOrPost)
                     {
+                        string value;
+
+                        if (param.Value is DateTime)
+                        {
+                            value = ((DateTime)param.Value).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                        }
+                        else
+                        {
+                            value = param.Value.ToString();
+                        }
+
                         uri = String.Format("{0}{1}{2}={3}", uri,
                             getParams == 0 ? "?" : "&",
-                            param.Name, param.Value);
+                            param.Name, value);
                         getParams++;
                     }
                     else if (param.Type == ParameterType.RequestBody)

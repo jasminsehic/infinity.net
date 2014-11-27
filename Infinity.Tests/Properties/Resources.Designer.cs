@@ -113,9 +113,29 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetCommitsByDate {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetCommitsByDate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetCommitsByItem {
             get {
                 object obj = ResourceManager.GetObject("Git_GetCommitsByItem", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetCommitsPaged {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetCommitsPaged", resourceCulture);
                 return ((byte[])(obj));
             }
         }
