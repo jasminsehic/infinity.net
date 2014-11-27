@@ -27,6 +27,8 @@ using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Extensions;
 
+using Infinity.Json;
+
 namespace Infinity.Util
 {
     internal class JsonDeserializer : IDeserializer
@@ -259,6 +261,7 @@ namespace Infinity.Util
 
         private object ConvertValue(Type type, object value)
         {
+            object[] attributes;
             var stringValue = Convert.ToString(value, Culture);
 
             // check for nullable and extract underlying type
@@ -376,6 +379,13 @@ namespace Infinity.Util
             {
                 // simplify JsonObject into a Dictionary<string, object> 
                 return BuildDictionary(typeof(Dictionary<string, object>), value);
+            }
+            else if (
+                ((attributes = type.GetCustomAttributes(typeof(JsonDeserializable), false)) != null) &&
+                attributes.Length > 0)
+            {
+                Console.WriteLine("foo");
+                return System.Activator.CreateInstance(type, stringValue);
             }
             else
             {
