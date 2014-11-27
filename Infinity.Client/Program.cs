@@ -29,7 +29,7 @@ namespace Infinity.Client
 
             if (!commandLine)
             {
-                Console.Error.WriteLine("usage: {0} <command>  <url> [--username=<username> [--password=<password>]] [<argument>...]", ProgramName);
+                Console.Error.WriteLine("usage: {0} <url> <command> [--username=<username> [--password=<password>]] [<argument>...]", ProgramName);
                 return 1;
             }
             if (command == null)

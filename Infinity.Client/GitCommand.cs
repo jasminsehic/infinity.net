@@ -21,11 +21,89 @@ namespace Infinity.Client
 
         private TfsClient Client { get; set; }
 
+        public int GetCommits(string[] args)
+        {
+            if (args.Length < 1)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetCommits [repositoryId]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+
+            CommitFilters filters = new CommitFilters();
+
+            for (int i = 1; i < args.Length; i++)
+            {
+                if (args[i].StartsWith("--") || args[i].StartsWith("/"))
+                {
+                    string arg = args[i].Substring(args[i].StartsWith("--") ? 2 : 1);
+                    string[] options = arg.Split(new char[] { '=' }, 2);
+
+                    if (options[0] != null &&
+                        options[0].Equals("author", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.Author = options[1];
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("committer", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.Committer = options[1];
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("itempath", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.ItemPath = options[1];
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("fromdate", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.FromDate = DateTime.Parse(options[1]);
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("todate", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.ToDate = DateTime.Parse(options[1]);
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("skip", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.Skip = int.Parse(options[1]);
+                    }
+                    else if (options[0] != null &&
+                        options[0].Equals("count", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filters.Count = int.Parse(options[1]);
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine("{0}: unknown option '{1}'", Program.ProgramName, args[i]);
+                        return 1;
+                    }
+                }
+            }
+
+            IEnumerable<Commit> commits = null;
+
+            Task.Run(async () =>
+            {
+                commits = await Client.Git.GetCommits(repositoryId, filters);
+            }).Wait();
+
+            foreach (Commit commit in commits)
+            {
+                Console.WriteLine("Commit {0}:", commit.Id);
+                Model.Write(commit);
+            }
+
+            return 0;
+        }
+
         public int GetRepositories(string[] args)
         {
             if (args.Length > 1)
             {
-                Console.Error.WriteLine("usage: {0} Git.GetRepositories [projectId]", Program.ProgramName);
+                Console.Error.WriteLine("usage: {0} <url> Git.GetRepositories [projectId]", Program.ProgramName);
                 return 1;
             }
 
@@ -51,7 +129,7 @@ namespace Infinity.Client
         {
             if (args.Length != 1)
             {
-                Console.Error.WriteLine("usage: {0} Git.GetPullRequests <repositoryId>", Program.ProgramName);
+                Console.Error.WriteLine("usage: {0} <url> Git.GetPullRequests <repositoryId>", Program.ProgramName);
                 return 1;
             }
 
@@ -77,7 +155,7 @@ namespace Infinity.Client
         {
             if (args.Length < 4)
             {
-                Console.Error.WriteLine("usage: {0} Git.UpdatePullRequest <repositoryId> <pullRequestId> <status> <lastMergeSourceCommitId>", Program.ProgramName);
+                Console.Error.WriteLine("usage: {0} <url> Git.UpdatePullRequest <repositoryId> <pullRequestId> <status> <lastMergeSourceCommitId>", Program.ProgramName);
                 return 1;
             }
 
