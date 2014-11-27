@@ -13,7 +13,8 @@ namespace Infinity.Models
         /// <summary>
         /// The Git object ID for this tree entry.
         /// </summary>
-        public string ObjectId { get; private set; }
+        [DeserializeAs(Name = "ObjectId")]
+        public ObjectId Id { get; private set; }
 
         /// <summary>
         /// The name of the entry in the tree.

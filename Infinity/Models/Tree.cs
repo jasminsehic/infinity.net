@@ -14,7 +14,8 @@ namespace Infinity.Models
         /// <summary>
         /// The Git object ID for this tree.
         /// </summary>
-        public string ObjectId { get; private set; }
+        [DeserializeAs(Name = "ObjectId")]
+        public ObjectId Id { get; private set; }
 
         /// <summary>
         /// The URL of this tree's REST endpoint

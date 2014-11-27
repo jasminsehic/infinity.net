@@ -14,17 +14,18 @@ namespace Infinity.Models
         /// <summary>
         /// The commit ID.
         /// </summary>
-        public string CommitId { get; private set; }
+        [DeserializeAs(Name = "CommitId")]
+        public ObjectId Id { get; private set; }
 
         /// <summary>
         /// The parents of the commit.
         /// </summary>
-        public List<string> Parents { get; private set; }
+        public List<ObjectId> Parents { get; private set; }
 
         /// <summary>
         /// The tree that makes up this commit.
         /// </summary>
-        public string TreeId { get; private set; }
+        public ObjectId TreeId { get; private set; }
 
         /// <summary>
         /// The signature of the person who placed these changes in the

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using RestSharp;
+using RestSharp.Deserializers;
 
 namespace Infinity.Models
 {
@@ -14,7 +13,8 @@ namespace Infinity.Models
         /// <summary>
         /// The ID of the commit.
         /// </summary>
-        public string CommitId { get; private set; }
+        [DeserializeAs(Name = "CommitId")]
+        public ObjectId Id { get; private set; }
 
         /// <summary>
         /// The URL of the rest endpoint for the commit.

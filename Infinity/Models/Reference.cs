@@ -1,5 +1,8 @@
 ﻿using System;
 
+using RestSharp;
+using RestSharp.Deserializers;
+
 namespace Infinity.Models
 {
     /// <summary>
@@ -17,7 +20,8 @@ namespace Infinity.Models
         /// <summary>
         /// The object ID that this reference points to.
         /// </summary>
-        public string ObjectId { get; private set; }
+        [DeserializeAs(Name = "ObjectId")]
+        public ObjectId Id { get; private set; }
 
         /// <summary>
         /// The URL of the reference's REST endpoint.
