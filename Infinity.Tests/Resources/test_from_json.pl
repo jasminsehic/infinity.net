@@ -47,7 +47,7 @@ sub tests_for
 			my $t = defined($7) && $7 ?
 				($7 < 100 ? ($7 < 10 ? $7 * 100 : $7 * 10) : $7) : 0;
 			$data = "new DateTime($1, $2, $3, $4, $5, $6, $t" .
-				", DateTimeKind.Utc).ToLocalTime()";
+				", DateTimeKind.Utc)";
 		} elsif ($data =~ m.^http://. || $data =~ m.^https://.) {
 			$data = 'new Uri("' . $data . '")';
 		} elsif ($data !~ /^[0-9]+$/ &&
