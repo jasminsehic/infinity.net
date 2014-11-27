@@ -384,7 +384,6 @@ namespace Infinity.Util
                 ((attributes = type.GetCustomAttributes(typeof(JsonDeserializable), false)) != null) &&
                 attributes.Length > 0)
             {
-                Console.WriteLine("foo");
                 return System.Activator.CreateInstance(type, stringValue);
             }
             else
