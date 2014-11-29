@@ -49,6 +49,38 @@ namespace Infinity.Clients
             return list.Value;
         }
 
+        /// <summary>
+        /// Get a list of commits leading to a revision, optionally beginning
+        /// from a prior revision.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="endRevision">The revision to query from</param>
+        /// <param name="startRevision">The revision to begin querying</param>
+        /// <returns>A list of commits in the Git repository</returns>
+        public async Task<IEnumerable<Commit>> GetCommits(Guid repositoryId, Revision endRevision, Revision startRevision = null)
+        {
+            Assert.NotNull("endRevision", "endRevision");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commitsBatch", Method.POST);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.RequestFormat = DataFormat.Json;
+
+            if (startRevision != null)
+            {
+                request.AddBody(new {
+                    itemVersion = endRevision.GetProperties(),
+                    compareVersion = startRevision.GetProperties()
+                });
+            }
+            else
+            {
+                request.AddBody(new { itemVersion = endRevision.GetProperties() });
+            }
+
+            Sequence<Commit> list = await Executor.Execute<Sequence<Commit>>(request);
+            return list.Value;
+        }
+
         #endregion
 
         #region Pull Requests

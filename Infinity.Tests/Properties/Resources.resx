@@ -238,4 +238,10 @@
   <data name="Git_GetCommitsPaged" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Git.GetCommitsPaged.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetCommitsToRevision" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetCommitsToRevision.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetCommitsBetweenTwoRevisions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetCommitsBetweenTwoRevisions.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

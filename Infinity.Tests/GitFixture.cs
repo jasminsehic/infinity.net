@@ -432,6 +432,291 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/0360c963d7d86d040e9c33bba836feab14da4ad3"), commits[1].Url);
         }
 
+        [Fact]
+        public void Git_Commit_GetCommitsToRevision()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commitsBatch?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        itemVersion = new
+                        {
+                            versionType = "branch",
+                            version = "develop",
+                        }
+                    },
+
+                    ResponseResource = "Git.GetCommitsToRevision",
+                });
+
+            IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
+                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop")); }).ToList();
+
+            Assert.Equal(2, commits.Count);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), commits[0].Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[0].Author.Email);
+            Assert.Equal("Chuck Reinhart", commits[0].Author.Name);
+            Assert.Equal(1, commits[0].ChangeCounts.Edit);
+            Assert.Equal("home page", commits[0].Comment);
+            Assert.Equal(new ObjectId("67cae2b029dff7eb3dc062b49403aaedca5bad8d"), commits[0].Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), commits[0].Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[0].Committer.Email);
+            Assert.Equal("Chuck Reinhart", commits[0].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/67cae2b029dff7eb3dc062b49403aaedca5bad8d"), commits[0].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d"), commits[0].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 32, 09, 0, DateTimeKind.Utc), commits[1].Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[1].Author.Email);
+            Assert.Equal("Chuck Reinhart", commits[1].Author.Name);
+            Assert.Equal(305, commits[1].ChangeCounts.Add);
+            Assert.Equal("First cut", commits[1].Comment);
+            Assert.Equal(new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commits[1].Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 32, 09, 0, DateTimeKind.Utc), commits[1].Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[1].Committer.Email);
+            Assert.Equal("Chuck Reinhart", commits[1].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commits[1].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commits[1].Url);
+        }
+
+        [Fact]
+        public void Git_Commit_GetCommitsBetweenTwoRevisions()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commitsBatch?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        itemVersion = new
+                        {
+                            versionType = "branch",
+                            version = "develop",
+                        },
+                        compareVersion = new
+                        {
+                            versionType = "branch",
+                            version = "master",
+                        }
+                    },
+
+                    ResponseResource = "Git.GetCommitsBetweenTwoRevisions",
+                });
+
+            IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
+                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop"), new Revision("refs/heads/master")); }).ToList();
+
+            Assert.Equal(17, commits.Count);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), commits[0].Author.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[0].Author.Email);
+            Assert.Equal("Norman Paulk", commits[0].Author.Name);
+            Assert.Equal(1, commits[0].ChangeCounts.Edit);
+            Assert.Equal("Better description for hello world", commits[0].Comment);
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), commits[0].Id);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), commits[0].Committer.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[0].Committer.Email);
+            Assert.Equal("Norman Paulk", commits[0].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/23d0bc5b128a10056dc68afece360d8a0fabb014"), commits[0].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), commits[0].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 51, 09, 0, DateTimeKind.Utc), commits[1].Author.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[1].Author.Email);
+            Assert.Equal("Norman Paulk", commits[1].Author.Name);
+            Assert.Equal(1, commits[1].ChangeCounts.Edit);
+            Assert.Equal("Better description for hello world", commits[1].Comment);
+            Assert.Equal(new ObjectId("fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), commits[1].Id);
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 51, 09, 0, DateTimeKind.Utc), commits[1].Committer.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[1].Committer.Email);
+            Assert.Equal("Norman Paulk", commits[1].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), commits[1].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), commits[1].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 10, 19, 42, 13, 0, DateTimeKind.Utc), commits[2].Author.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[2].Author.Email);
+            Assert.Equal("Norman Paulk", commits[2].Author.Name);
+            Assert.Equal(1, commits[2].ChangeCounts.Edit);
+            Assert.Equal("Fix for hello world class", commits[2].Comment);
+            Assert.Equal(new ObjectId("0360c963d7d86d040e9c33bba836feab14da4ad3"), commits[2].Id);
+            Assert.Equal(new DateTime(2014, 06, 10, 19, 42, 13, 0, DateTimeKind.Utc), commits[2].Committer.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", commits[2].Committer.Email);
+            Assert.Equal("Norman Paulk", commits[2].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/0360c963d7d86d040e9c33bba836feab14da4ad3"), commits[2].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/0360c963d7d86d040e9c33bba836feab14da4ad3"), commits[2].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 09, 21, 43, 25, 0, DateTimeKind.Utc), commits[3].Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[3].Author.Email);
+            Assert.Equal("Chuck Reinhart", commits[3].Author.Name);
+            Assert.Equal(1, commits[3].ChangeCounts.Edit);
+            Assert.Equal("fix registration page", commits[3].Comment);
+            Assert.Equal(new ObjectId("097d82b8aeabe493bf4c3553d320ae2529bba591"), commits[3].Id);
+            Assert.Equal(new DateTime(2014, 06, 09, 21, 43, 25, 0, DateTimeKind.Utc), commits[3].Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[3].Committer.Email);
+            Assert.Equal("Chuck Reinhart", commits[3].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/097d82b8aeabe493bf4c3553d320ae2529bba591"), commits[3].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/097d82b8aeabe493bf4c3553d320ae2529bba591"), commits[3].Url);
+
+            Assert.Equal(new DateTime(2014, 05, 02, 19, 17, 05, 0, DateTimeKind.Utc), commits[4].Author.Date);
+            Assert.Equal("wismythe@microsoft.com", commits[4].Author.Email);
+            Assert.Equal("Will Smythe", commits[4].Author.Name);
+            Assert.Equal(1, commits[4].ChangeCounts.Edit);
+            Assert.Equal("Fixed bug in web.config file", commits[4].Comment);
+            Assert.Equal(new ObjectId("33b55f7cb7e7e245323987634f960cf4a6e6bc74"), commits[4].Id);
+            Assert.Equal(new DateTime(2014, 05, 02, 19, 17, 05, 0, DateTimeKind.Utc), commits[4].Committer.Date);
+            Assert.Equal("wismythe@microsoft.com", commits[4].Committer.Email);
+            Assert.Equal("Will Smythe", commits[4].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/33b55f7cb7e7e245323987634f960cf4a6e6bc74"), commits[4].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/33b55f7cb7e7e245323987634f960cf4a6e6bc74"), commits[4].Url);
+
+            Assert.Equal(new DateTime(2014, 04, 14, 21, 34, 52, 0, DateTimeKind.Utc), commits[5].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[5].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[5].Author.Name);
+            Assert.Equal(1, commits[5].ChangeCounts.Edit);
+            Assert.Equal("Fixed bug for address validation.", commits[5].Comment);
+            Assert.Equal(new ObjectId("aad331d8d3b131fa9ae03cf5e53965b51942618a"), commits[5].Id);
+            Assert.Equal(new DateTime(2014, 04, 14, 21, 34, 52, 0, DateTimeKind.Utc), commits[5].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[5].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[5].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/aad331d8d3b131fa9ae03cf5e53965b51942618a"), commits[5].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/aad331d8d3b131fa9ae03cf5e53965b51942618a"), commits[5].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 28, 17, 05, 58, 0, DateTimeKind.Utc), commits[6].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[6].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[6].Author.Name);
+            Assert.Equal(1, commits[6].ChangeCounts.Edit);
+            Assert.Equal("Added validation logic.", commits[6].Comment);
+            Assert.Equal(new ObjectId("7c18355d8c2d946c5e1ce7a56f49653854445a1a"), commits[6].Id);
+            Assert.Equal(new DateTime(2014, 03, 28, 17, 05, 58, 0, DateTimeKind.Utc), commits[6].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[6].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[6].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/7c18355d8c2d946c5e1ce7a56f49653854445a1a"), commits[6].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/7c18355d8c2d946c5e1ce7a56f49653854445a1a"), commits[6].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 27, 19, 51, 11, 0, DateTimeKind.Utc), commits[7].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[7].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[7].Author.Name);
+            Assert.Equal(1, commits[7].ChangeCounts.Edit);
+            Assert.Equal("Added validation logic for zip code.", commits[7].Comment);
+            Assert.Equal(new ObjectId("cdaeef70a358ede7b4dc7b4a089f3853f37a6d2c"), commits[7].Id);
+            Assert.Equal(new DateTime(2014, 03, 27, 19, 51, 11, 0, DateTimeKind.Utc), commits[7].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[7].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[7].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/cdaeef70a358ede7b4dc7b4a089f3853f37a6d2c"), commits[7].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/cdaeef70a358ede7b4dc7b4a089f3853f37a6d2c"), commits[7].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 20, 25, 39, 0, DateTimeKind.Utc), commits[8].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[8].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[8].Author.Name);
+            Assert.Equal(1, commits[8].ChangeCounts.Edit);
+            Assert.Equal("Add validation code for zip code values.", commits[8].Comment);
+            Assert.Equal(new ObjectId("ef837766c5eb3ae81a4c663d36bf95a8aed91312"), commits[8].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 20, 25, 39, 0, DateTimeKind.Utc), commits[8].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[8].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[8].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/ef837766c5eb3ae81a4c663d36bf95a8aed91312"), commits[8].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/ef837766c5eb3ae81a4c663d36bf95a8aed91312"), commits[8].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 56, 21, 0, DateTimeKind.Utc), commits[9].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[9].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[9].Author.Name);
+            Assert.Equal(1, commits[9].ChangeCounts.Edit);
+            Assert.Equal("Added validation logic for zip code values.", commits[9].Comment);
+            Assert.Equal(new ObjectId("bd73638408daff89bcdac549a5a3396c9a7ce9dd"), commits[9].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 56, 21, 0, DateTimeKind.Utc), commits[9].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[9].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[9].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/bd73638408daff89bcdac549a5a3396c9a7ce9dd"), commits[9].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/bd73638408daff89bcdac549a5a3396c9a7ce9dd"), commits[9].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 42, 24, 0, DateTimeKind.Utc), commits[10].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[10].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[10].Author.Name);
+            Assert.Equal(1, commits[10].ChangeCounts.Edit);
+            Assert.Equal("Added validation logic for address values.", commits[10].Comment);
+            Assert.Equal(new ObjectId("03bea1cebffa5726da0e3c0bc1487796d0dd0ee8"), commits[10].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 42, 24, 0, DateTimeKind.Utc), commits[10].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[10].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[10].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/03bea1cebffa5726da0e3c0bc1487796d0dd0ee8"), commits[10].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/03bea1cebffa5726da0e3c0bc1487796d0dd0ee8"), commits[10].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 37, 32, 0, DateTimeKind.Utc), commits[11].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[11].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[11].Author.Name);
+            Assert.Equal(1, commits[11].ChangeCounts.Edit);
+            Assert.Equal("Added validation logic for zip code values.", commits[11].Comment);
+            Assert.Equal(new ObjectId("c093714168cdd190c1e171a803e996d685454352"), commits[11].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 37, 32, 0, DateTimeKind.Utc), commits[11].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[11].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[11].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/c093714168cdd190c1e171a803e996d685454352"), commits[11].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/c093714168cdd190c1e171a803e996d685454352"), commits[11].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 00, 14, 0, DateTimeKind.Utc), commits[12].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[12].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[12].Author.Name);
+            Assert.Equal(1, commits[12].ChangeCounts.Edit);
+            Assert.Equal("Added code.", commits[12].Comment);
+            Assert.Equal(new ObjectId("3d203ea73427cec36b77a3a5a2e4f1f8ba7de170"), commits[12].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 00, 14, 0, DateTimeKind.Utc), commits[12].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[12].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[12].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/3d203ea73427cec36b77a3a5a2e4f1f8ba7de170"), commits[12].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/3d203ea73427cec36b77a3a5a2e4f1f8ba7de170"), commits[12].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 16, 17, 11, 0, DateTimeKind.Utc), commits[13].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[13].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[13].Author.Name);
+            Assert.Equal(1, commits[13].ChangeCounts.Edit);
+            Assert.Equal("Added code.", commits[13].Comment);
+            Assert.Equal(new ObjectId("1eea03b2ad9f14a5e7297c1307e36c980eb910ea"), commits[13].Id);
+            Assert.Equal(new DateTime(2014, 03, 26, 16, 17, 11, 0, DateTimeKind.Utc), commits[13].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[13].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[13].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/1eea03b2ad9f14a5e7297c1307e36c980eb910ea"), commits[13].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/1eea03b2ad9f14a5e7297c1307e36c980eb910ea"), commits[13].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 54, 10, 0, DateTimeKind.Utc), commits[14].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[14].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[14].Author.Name);
+            Assert.Equal(2, commits[14].ChangeCounts.Edit);
+            Assert.Equal("Added method for submitting new customer addrress.", commits[14].Comment);
+            Assert.Equal(new ObjectId("c40b5ceb9c77096b9f59e6a9193dae527bda79d9"), commits[14].Id);
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 54, 10, 0, DateTimeKind.Utc), commits[14].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[14].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[14].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/c40b5ceb9c77096b9f59e6a9193dae527bda79d9"), commits[14].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/c40b5ceb9c77096b9f59e6a9193dae527bda79d9"), commits[14].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 50, 08, 0, DateTimeKind.Utc), commits[15].Author.Date);
+            Assert.Equal("hhill@microsoft.com", commits[15].Author.Email);
+            Assert.Equal("Howie Hilliker", commits[15].Author.Name);
+            Assert.Equal(12, commits[15].ChangeCounts.Add);
+            Assert.Equal("Adding customer address module project", commits[15].Comment);
+            Assert.Equal(new ObjectId("6ff5e8f6256cc58aa062dbb1e096c1e3b3435ebe"), commits[15].Id);
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 50, 08, 0, DateTimeKind.Utc), commits[15].Committer.Date);
+            Assert.Equal("hhill@microsoft.com", commits[15].Committer.Email);
+            Assert.Equal("Howie Hilliker", commits[15].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/6ff5e8f6256cc58aa062dbb1e096c1e3b3435ebe"), commits[15].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/6ff5e8f6256cc58aa062dbb1e096c1e3b3435ebe"), commits[15].Url);
+
+            Assert.Equal(new DateTime(2014, 02, 10, 21, 52, 47, 0, DateTimeKind.Utc), commits[16].Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[16].Author.Email);
+            Assert.Equal("Chuck Reinhart", commits[16].Author.Name);
+            Assert.Equal(5, commits[16].ChangeCounts.Add);
+            Assert.Equal("Add Hello World to TFS", commits[16].Comment);
+            Assert.Equal(new ObjectId("03b1b831e41df536d836c95e2f68a42db4f3e0db"), commits[16].Id);
+            Assert.Equal(new DateTime(2014, 02, 10, 21, 52, 47, 0, DateTimeKind.Utc), commits[16].Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commits[16].Committer.Email);
+            Assert.Equal("Chuck Reinhart", commits[16].Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/03b1b831e41df536d836c95e2f68a42db4f3e0db"), commits[16].RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/03b1b831e41df536d836c95e2f68a42db4f3e0db"), commits[16].Url);
+        }
+
         #endregion
 
         #region Pull Requests

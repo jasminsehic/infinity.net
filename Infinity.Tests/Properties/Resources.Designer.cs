@@ -103,6 +103,16 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetCommitsBetweenTwoRevisions {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetCommitsBetweenTwoRevisions", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetCommitsByCommitter {
             get {
                 object obj = ResourceManager.GetObject("Git_GetCommitsByCommitter", resourceCulture);
@@ -136,6 +146,16 @@ namespace Infinity.Tests.Properties {
         internal static byte[] Git_GetCommitsPaged {
             get {
                 object obj = ResourceManager.GetObject("Git_GetCommitsPaged", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetCommitsToRevision {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetCommitsToRevision", resourceCulture);
                 return ((byte[])(obj));
             }
         }
