@@ -14,6 +14,30 @@ namespace Infinity.Tests.Models
 {
     public class GitFixture : MockClientFixture
     {
+        #region Blob
+
+        [Fact]
+        public void Git_BlobGetBlob()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c?api-version=1.0",
+                    ResponseResource = "Git.GetBlob",
+                });
+
+            Blob blob = base.ExecuteSync<Blob>(
+                () => { return client.Git.GetBlob(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c")); });
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), blob.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), blob.Links.Self.Url);
+            Assert.Equal(new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), blob.Id);
+            Assert.Equal(1486, blob.Size);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), blob.Url);
+        }
+
+        #endregion
+
         #region Commits
 
         [Fact]

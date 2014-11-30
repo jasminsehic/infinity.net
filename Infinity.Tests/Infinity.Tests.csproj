@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Git.GetBlob.json" />
     <None Include="Resources\Git.GetCommit.json" />
     <None Include="Resources\Git.GetCommitsBetweenTwoRevisions.json" />
     <None Include="Resources\Git.GetCommitsByCommitter.json" />

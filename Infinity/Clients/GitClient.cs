@@ -24,6 +24,28 @@ namespace Infinity.Clients
 
         private ITfsClientExecutor Executor { get; set; }
 
+        #region Blobs
+
+        /// <summary>
+        /// Get the information about a Git blob by its ID.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="blobId">The object ID of the blob</param>
+        /// <returns>The blob</returns>
+        public async Task<Blob> GetBlob(Guid repositoryId, ObjectId blobId)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(blobId, "blobId");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/blobs/{BlobId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("BlobId", blobId.ToString());
+
+            return await Executor.Execute<Blob>(request);
+        }
+
+        #endregion
+
         #region Commits
 
         /// <summary>
