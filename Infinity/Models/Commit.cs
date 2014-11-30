@@ -44,9 +44,19 @@ namespace Infinity.Models
         public string Comment { get; private set; }
 
         /// <summary>
+        /// Information about who pushed this commit.
+        /// </summary>
+        public PushDetails Push { get; private set; }
+
+        /// <summary>
         /// Information about the changes in this commit.
         /// </summary>
         public CommitChangeCounts ChangeCounts { get; private set; }
+
+        /// <summary>
+        /// List of the changes in this commit.
+        /// </summary>
+        public List<CommitChange> Changes { get; private set; }
 
         /// <summary>
         /// The URL for this commit information.

@@ -81,6 +81,25 @@ namespace Infinity.Clients
             return list.Value;
         }
 
+        /// <summary>
+        /// Get a commit in a repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="commitId">The ID of the commit</param>
+        /// <param name="changeCount">The number of changes to return, or 0 for none.</param>
+        /// <returns>The commit in the Git repository</returns>
+        public async Task<Commit> GetCommit(Guid repositoryId, ObjectId commitId, int changeCount = 0)
+        {
+            Assert.NotNull("commitId", "commitId");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commits/{CommitId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("CommitId", commitId.ToString());
+            request.AddOptionalParameter("changeCount", () => { return changeCount > 0; }, changeCount);
+
+            return await Executor.Execute<Commit>(request);
+        }
+
         #endregion
 
         #region Pull Requests

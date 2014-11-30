@@ -99,6 +99,58 @@ namespace Infinity.Client
             return 0;
         }
 
+        public int GetCommit(string[] args)
+        {
+            if (args.Length < 1)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetCommit [repositoryId] [commitId]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+            ObjectId commitId = new ObjectId(args[1]);
+            int? changeCount = null;
+
+            for (int i = 1; i < args.Length; i++)
+            {
+                if (args[i].StartsWith("--") || args[i].StartsWith("/"))
+                {
+                    string arg = args[i].Substring(args[i].StartsWith("--") ? 2 : 1);
+                    string[] options = arg.Split(new char[] { '=' }, 2);
+
+                    if (options[0] != null &&
+                        options[0].Equals("changeCount", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        changeCount = int.Parse(options[1]);
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine("{0}: unknown option '{1}'", Program.ProgramName, args[i]);
+                        return 1;
+                    }
+                }
+            }
+
+            Commit commit = null;
+
+            Task.Run(async () =>
+            {
+                if (changeCount.HasValue)
+                {
+                    commit = await Client.Git.GetCommit(repositoryId, commitId, changeCount.Value);
+                }
+                else
+                {
+                    commit = await Client.Git.GetCommit(repositoryId, commitId);
+                }
+            }).Wait();
+
+            Console.WriteLine("Commit {0}:", commit.Id);
+            Model.Write(commit);
+
+            return 0;
+        }
+
         public int GetRepositories(string[] args)
         {
             if (args.Length > 1)

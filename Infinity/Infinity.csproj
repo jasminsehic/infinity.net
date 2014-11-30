@@ -55,9 +55,12 @@
     <Compile Include="Json\JsonDeserializable.cs" />
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Clients\CommitFilters.cs" />
+    <Compile Include="Models\CommitChange.cs" />
     <Compile Include="Models\CommitChangeCounts.cs" />
+    <Compile Include="Models\CommitItem.cs" />
     <Compile Include="Models\CommitLinks.cs" />
     <Compile Include="Models\Identity.cs" />
+    <Compile Include="Models\ChangeType.cs" />
     <Compile Include="Models\ObjectId.cs" />
     <Compile Include="Models\PushDetails.cs" />
     <Compile Include="Clients\Revision.cs" />
