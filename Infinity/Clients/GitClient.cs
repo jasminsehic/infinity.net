@@ -449,14 +449,14 @@ namespace Infinity.Clients
         /// <param name="repositoryId">The ID of the repository</param>
         /// <param name="treeId">The object ID of the tree</param>
         /// <returns>The tree</returns>
-        public async Task<Tree> GetTree(Guid repositoryId, string treeId)
+        public async Task<Tree> GetTree(Guid repositoryId, ObjectId treeId)
         {
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(treeId, "treeId");
 
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.AddUrlSegment("TreeId", treeId);
+            request.AddUrlSegment("TreeId", treeId.ToString());
 
             return await Executor.Execute<Tree>(request);
         }

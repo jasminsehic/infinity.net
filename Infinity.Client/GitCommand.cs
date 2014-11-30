@@ -151,6 +151,30 @@ namespace Infinity.Client
             return 0;
         }
 
+        public int GetTree(string[] args)
+        {
+            if (args.Length != 2)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetTree [repositoryId] [treeId]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+            ObjectId treeId = new ObjectId(args[1]);
+
+            Tree tree = null;
+
+            Task.Run(async () =>
+            {
+                tree = await Client.Git.GetTree(repositoryId, treeId);
+            }).Wait();
+
+            Console.WriteLine("Tree {0}:", tree.Id);
+            Model.Write(tree);
+
+            return 0;
+        }
+
         public int GetRepositories(string[] args)
         {
             if (args.Length > 1)

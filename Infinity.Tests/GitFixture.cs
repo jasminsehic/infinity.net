@@ -2427,7 +2427,7 @@ namespace Infinity.Tests.Models
                 });
 
             Tree tree = base.ExecuteSync<Tree>(
-                () => { return client.Git.GetTree(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "d1d5c2d49045d52bba6419652d6ecb2cd560dc29"); });
+                () => { return client.Git.GetTree(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29")); });
 
             Assert.Equal(new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), tree.Id);
             Assert.Equal(147, tree.Size);
