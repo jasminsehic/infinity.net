@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -459,6 +460,28 @@ namespace Infinity.Clients
             request.AddUrlSegment("TreeId", treeId.ToString());
 
             return await Executor.Execute<Tree>(request);
+        }
+
+        /// <summary>
+        /// Download the contents of a tree as a zip file.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="treeId">The object ID of the tree</param>
+        /// <param name="responseWriter">The callback to process the file as a stream.</param>
+        public async Task DownloadTree(Guid repositoryId, ObjectId treeId, Action<Stream> responseWriter)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(treeId, "treeId");
+            Assert.NotNull(responseWriter, "responseWriter");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("TreeId", treeId.ToString());
+            request.AddUrlSegment("$format", "zip");
+            request.AddHeader("Accept", "application/zip");
+            request.ResponseWriter = responseWriter;
+
+            await Executor.Execute(request);
         }
 
         #endregion

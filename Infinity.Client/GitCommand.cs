@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -171,6 +172,53 @@ namespace Infinity.Client
 
             Console.WriteLine("Tree {0}:", tree.Id);
             Model.Write(tree);
+
+            return 0;
+        }
+
+        public int DownloadTree(string[] args)
+        {
+            if (args.Length < 2)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.DownloadTree [repositoryId] [treeId] [--filename=filename]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+            ObjectId treeId = new ObjectId(args[1]);
+            string filename = String.Format("{0}.zip", args[1]);
+
+            for (int i = 1; i < args.Length; i++)
+            {
+                if (args[i].StartsWith("--") || args[i].StartsWith("/"))
+                {
+                    string arg = args[i].Substring(args[i].StartsWith("--") ? 2 : 1);
+                    string[] options = arg.Split(new char[] { '=' }, 2);
+
+                    if (options[0] != null &&
+                        options[0].Equals("filename", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filename = options[1];
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine("{0}: unknown option '{1}'", Program.ProgramName, args[i]);
+                        return 1;
+                    }
+                }
+            }
+
+            Task.Run(async () =>
+            {
+                await Client.Git.DownloadTree(repositoryId, treeId, (responseStream) =>
+                {
+                    using (Stream outputStream = File.OpenWrite(filename))
+                    {
+                        responseStream.CopyTo(outputStream);
+                        outputStream.Close();
+                    }
+                });
+            }).Wait();
 
             return 0;
         }
