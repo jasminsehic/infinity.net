@@ -25,5 +25,10 @@ namespace Infinity.Models
         /// The URL of the REST endpoint of the changed item.
         /// </summary>
         public Uri Url { get; private set; }
+
+        /// <summary>
+        /// Whether the item is a folder.
+        /// </summary>
+        public bool IsFolder { get; private set; }
     }
 }

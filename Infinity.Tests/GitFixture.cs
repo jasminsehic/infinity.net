@@ -757,6 +757,106 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.Url);
         }
 
+        [Fact]
+        public void Git_Commit_GetCommitWithChangedItems()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4?api-version=1.0&changeCount=10",
+                    ResponseResource = "Git.GetCommitWithChangedItems",
+                });
+
+            Commit commit = base.ExecuteSync<Commit>(
+                () => { return client.Git.GetCommit(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), 10); });
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4/changes"), commit.Links.Changes.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), commit.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.Links.Self.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/7fa1a3523ffef51c525ea476bffff7d648b8cb3d"), commit.Links.Tree.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.Links.Web.Url);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 32, 09, 0, DateTimeKind.Utc), commit.Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commit.Author.Email);
+            Assert.Equal("Chuck Reinhart", commit.Author.Name);
+            Assert.Equal(456, commit.ChangeCounts.Add);
+            Assert.Equal(10, commit.Changes.Count);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[0].Type);
+            Assert.Equal(ObjectType.Blob, commit.Changes[0].Item.Type);
+            Assert.Equal("/.gitattributes", commit.Changes[0].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/.gitattributes?versionType=Commit"), commit.Changes[0].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[1].Type);
+            Assert.Equal(ObjectType.Blob, commit.Changes[1].Item.Type);
+            Assert.Equal("/.gitignore", commit.Changes[1].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/.gitignore?versionType=Commit"), commit.Changes[1].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[2].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[2].Item.Type);
+            Assert.Equal(true, commit.Changes[2].Item.IsFolder);
+            Assert.Equal("/MyWebSite", commit.Changes[2].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite?versionType=Commit"), commit.Changes[2].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[3].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[3].Item.Type);
+            Assert.Equal(true, commit.Changes[3].Item.IsFolder);
+            Assert.Equal("/MyWebSite/MyWebSite", commit.Changes[3].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite?versionType=Commit"), commit.Changes[3].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[4].Type);
+            Assert.Equal(ObjectType.Blob, commit.Changes[4].Item.Type);
+            Assert.Equal("/MyWebSite/MyWebSite.sln", commit.Changes[4].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite.sln?versionType=Commit"), commit.Changes[4].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[5].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[5].Item.Type);
+            Assert.Equal(true, commit.Changes[5].Item.IsFolder);
+            Assert.Equal("/MyWebSite/packages", commit.Changes[5].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/packages?versionType=Commit"), commit.Changes[5].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[6].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[6].Item.Type);
+            Assert.Equal(true, commit.Changes[6].Item.IsFolder);
+            Assert.Equal("/MyWebSite/MyWebSite/App_Start", commit.Changes[6].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/App_Start?versionType=Commit"), commit.Changes[6].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[7].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[7].Item.Type);
+            Assert.Equal(true, commit.Changes[7].Item.IsFolder);
+            Assert.Equal("/MyWebSite/MyWebSite/Areas", commit.Changes[7].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Areas?versionType=Commit"), commit.Changes[7].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[8].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[8].Item.Type);
+            Assert.Equal(true, commit.Changes[8].Item.IsFolder);
+            Assert.Equal("/MyWebSite/MyWebSite/Content", commit.Changes[8].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Content?versionType=Commit"), commit.Changes[8].Item.Url);
+
+            Assert.Equal(ChangeType.Add, commit.Changes[9].Type);
+            Assert.Equal(ObjectType.Tree, commit.Changes[9].Item.Type);
+            Assert.Equal(true, commit.Changes[9].Item.IsFolder);
+            Assert.Equal("/MyWebSite/MyWebSite/Controllers", commit.Changes[9].Item.Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Controllers?versionType=Commit"), commit.Changes[9].Item.Url);
+
+            Assert.Equal("First cut\n", commit.Comment);
+            Assert.Equal(new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 32, 09, 0, DateTimeKind.Utc), commit.Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commit.Committer.Email);
+            Assert.Equal("Chuck Reinhart", commit.Committer.Name);
+            Assert.Equal(0, commit.Parents.Count);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 33, 15, 243, DateTimeKind.Utc), commit.Push.Date);
+            Assert.Equal(1, commit.Push.PushId);
+            Assert.Equal("Chuck Reinhart", commit.Push.PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", commit.Push.PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.RemoteUrl);
+            Assert.Equal(new ObjectId("7fa1a3523ffef51c525ea476bffff7d648b8cb3d"), commit.TreeId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), commit.Url);
+        }
+
         #endregion
 
         #region Pull Requests

@@ -76,6 +76,7 @@
     <None Include="Resources\Git.GetCommits.json" />
     <None Include="Resources\Git.GetCommitsPaged.json" />
     <None Include="Resources\Git.GetCommitsToRevision.json" />
+    <None Include="Resources\Git.GetCommitWithChangedItems.json" />
     <None Include="Resources\Git.UpdatePullRequestReviewer.json" />
     <None Include="Resources\Git.AddPullRequestReviewer.json" />
     <None Include="Resources\Git.CreatePullRequest.json" />
