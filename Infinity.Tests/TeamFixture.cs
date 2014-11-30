@@ -71,7 +71,7 @@ namespace Infinity.Tests.Models
                     ResponseResource = "Team.GetTeamMembers",
                 });
 
-            IList<TeamMember> members = base.ExecuteSync<IEnumerable<TeamMember>>(
+            IList<Identity> members = base.ExecuteSync<IEnumerable<Identity>>(
                 () => { return client.Team.GetTeamMembers(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), new Guid("564e8204-a90b-4432-883b-d4363c6125ca")); }).ToList();
 
             Assert.Equal(3, members.Count);

@@ -95,7 +95,7 @@ namespace Infinity.Models
         /// <summary>
         /// The creator of the pull request.
         /// </summary>
-        public TeamMember CreatedBy { get; private set; }
+        public Identity CreatedBy { get; private set; }
 
         /// <summary>
         /// Links to other pull request resources.

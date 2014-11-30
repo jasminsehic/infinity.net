@@ -15,7 +15,7 @@ namespace Infinity.Models
         /// <summary>
         /// The user information for this user.
         /// </summary>
-        public TeamMember User { get; private set; }
+        public Identity User { get; private set; }
 
         /// <summary>
         /// The last date the user was seen in this Team Room.

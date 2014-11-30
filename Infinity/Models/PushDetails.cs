@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using RestSharp;
+using RestSharp.Deserializers;
 
 namespace Infinity.Models
 {
@@ -24,6 +23,6 @@ namespace Infinity.Models
         /// <summary>
         /// The user who pushed the change.
         /// </summary>
-        public TeamMember PushedBy { get; private set; }
+        public Identity PushedBy { get; private set; }
     }
 }

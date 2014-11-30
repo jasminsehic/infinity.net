@@ -61,7 +61,7 @@ namespace Infinity.Clients
         /// <param name="projectId">The ID of the project that contains the team</param>
         /// <param name="teamId">The ID of the team</param>
         /// <returns>A list of team members</returns>
-        public async Task<IEnumerable<TeamMember>> GetTeamMembers(Guid projectId, Guid teamId)
+        public async Task<IEnumerable<Identity>> GetTeamMembers(Guid projectId, Guid teamId)
         {
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(teamId, "teamId");
@@ -70,7 +70,7 @@ namespace Infinity.Clients
             request.AddUrlSegment("ProjectId", projectId.ToString());
             request.AddUrlSegment("TeamId", teamId.ToString());
 
-            Sequence<TeamMember> list = await Executor.Execute<Sequence<TeamMember>>(request);
+            Sequence<Identity> list = await Executor.Execute<Sequence<Identity>>(request);
             return list.Value;
         }
     }

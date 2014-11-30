@@ -5,7 +5,7 @@ namespace Infinity.Models
     /// <summary>
     /// The identity of a member of a team.
     /// </summary>
-    public class TeamMember
+    public class Identity
     {
         /// <summary>
         /// The ID of the user.

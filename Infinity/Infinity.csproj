@@ -57,6 +57,7 @@
     <Compile Include="Clients\CommitFilters.cs" />
     <Compile Include="Models\CommitChangeCounts.cs" />
     <Compile Include="Models\CommitLinks.cs" />
+    <Compile Include="Models\Identity.cs" />
     <Compile Include="Models\ObjectId.cs" />
     <Compile Include="Models\PushDetails.cs" />
     <Compile Include="Clients\Revision.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="Models\PullRequestStatus.cs" />
     <Compile Include="Models\PullRequestVote.cs" />
     <Compile Include="Models\Signature.cs" />
-    <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamRoomUser.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\TreeEntry.cs" />
