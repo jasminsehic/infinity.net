@@ -44,6 +44,50 @@ namespace Infinity.Clients
             return await Executor.Execute<Blob>(request);
         }
 
+        /// <summary>
+        /// Download a blob's contents.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="blobId">The object ID of the blob</param>
+        /// <param name="responseWriter">The callback to process the file as a stream.</param>
+        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, Action<Stream> responseWriter)
+        {
+            await DownloadBlob(repositoryId, blobId, BlobFormat.Raw, responseWriter);
+        }
+
+        /// <summary>
+        /// Download a blob's contents.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="blobId">The object ID of the blob</param>
+        /// <param name="format">The format to download as</param>
+        /// <param name="responseWriter">The callback to process the file as a stream.</param>
+        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, BlobFormat format, Action<Stream> responseWriter)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(blobId, "blobId");
+            Assert.NotNull(responseWriter, "responseWriter");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/blobs/{BlobId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("BlobId", blobId.ToString());
+
+            if (format == BlobFormat.Zip)
+            {
+                request.AddUrlSegment("$format", "zip");
+                request.AddHeader("Accept", "application/zip");
+            }
+            else
+            {
+                request.AddUrlSegment("$format", "octetstream");
+                request.AddHeader("Accept", "application/octet-stream");
+            }
+
+            request.ResponseWriter = responseWriter;
+
+            await Executor.Execute(request);
+        }
+
         #endregion
 
         #region Commits

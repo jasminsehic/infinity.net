@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\BlobFormat.cs" />
     <Compile Include="Clients\GitClient.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\PullRequestFilters.cs" />
