@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+
+using Infinity.Models;
 
 namespace Infinity.Client
 {
@@ -10,32 +14,74 @@ namespace Infinity.Client
             Write(o, 1);
         }
 
+        private static void Indent(int level)
+        {
+            for (int i = 0; i < level; i++)
+            {
+                Console.Write("    ");
+            }
+        }
+
+        private static string GetValue(object o)
+        {
+            if (o == null)
+            {
+                return "(null)";
+            }
+
+            if (o is IList || o.ToString().StartsWith("Infinity.Models."))
+            {
+                return null;
+            }
+
+            return o.ToString();
+        }
+
+        private static void WriteChild(string key, object child, int indentLevel)
+        {
+            Indent(indentLevel);
+
+            string childValue = GetValue(child);
+
+            if (childValue != null)
+            {
+                Console.WriteLine("{0}: {1}", key, childValue);
+            }
+            else
+            {
+                Console.WriteLine("{0}:", key);
+                Write(child, indentLevel + 1);
+            }
+        }
+
+        private static void WriteChild(int i, object child, int indentLevel)
+        {
+            WriteChild(String.Format("[{0}]", i), child, indentLevel);
+        }
+
         public static void Write(object o, int indentLevel)
         {
-            foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(o))
+            string valueString = GetValue(o);
+
+            if (valueString != null)
             {
-                object value = descriptor.GetValue(o);
-                string valueString = "";
+                Indent(indentLevel);
+                Console.WriteLine(valueString);
+                return;
+            }
 
-                if (value == null)
+            if (o is IList)
+            {
+                for (int i = 0; i < ((IList)o).Count; i++)
                 {
-                    valueString = "(null)";
+                    WriteChild(i, ((IList)o)[i], indentLevel);
                 }
-                else if (!value.ToString().StartsWith("Infinity.Models."))
+            }
+            else
+            {
+                foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(o))
                 {
-                    valueString = value.ToString();
-                }
-
-                for (int i = 0; i < indentLevel; i++)
-                {
-                    Console.Write("    ");
-                }
-
-                Console.WriteLine("{0}: {1}", descriptor.Name, valueString);
-
-                if (value != null && value.ToString().StartsWith("Infinity.Models."))
-                {
-                    Write(value, indentLevel + 1);
+                    WriteChild(descriptor.Name, descriptor.GetValue(o), indentLevel);
                 }
             }
         }
