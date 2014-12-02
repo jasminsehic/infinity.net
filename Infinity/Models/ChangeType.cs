@@ -12,6 +12,11 @@ namespace Infinity.Models
     public enum ChangeType
     {
         /// <summary>
+        /// Invalid change type.
+        /// </summary>
+        Invalid,
+
+        /// <summary>
         /// An added file.
         /// </summary>
         Add,

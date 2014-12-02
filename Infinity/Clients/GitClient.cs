@@ -169,6 +169,33 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region Diffs
+
+        /// <summary>
+        /// Get the differences between two commits.
+        /// </summary>
+        /// <param name="repositoryId">The repository containing the commits.</param>
+        /// <param name="filters">The data to difference.</param>
+        /// <returns>The differences betweeo commits.</returns>
+        public async Task<Diff> GetDiff(Guid repositoryId, DiffFilters filters = null)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/diffs/commits");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            filters = filters ?? new DiffFilters();
+
+            request.AddOptionalParameter("targetVersionType", () => { return filters.TargetRevision != null; }, filters.TargetRevision.Type.ToString().ToLowerInvariant());
+            request.AddOptionalParameter("targetVersion", () => { return filters.TargetRevision != null; }, filters.TargetRevision.Version);
+            request.AddOptionalParameter("baseVersionType", () => { return filters.BaseRevision != null; }, filters.BaseRevision.Type.ToString().ToLowerInvariant());
+            request.AddOptionalParameter("baseVersion", () => { return filters.BaseRevision != null; }, filters.BaseRevision.Version);
+            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
+            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+
+            return await Executor.Execute<Diff>(request);
+        }
+
+        #endregion
+
         #region Pull Requests
 
         /// <summary>

@@ -50,6 +50,22 @@ namespace Infinity.Clients
             version = commitId.ToString();
         }
 
+        internal RevisionType Type
+        {
+            get
+            {
+                return type;
+            }
+        }
+
+        internal string Version
+        {
+            get
+            {
+                return version;
+            }
+        }
+
         internal object GetProperties()
         {
             return new

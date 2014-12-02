@@ -1,4 +1,6 @@
-﻿
+﻿using RestSharp;
+using RestSharp.Deserializers;
+
 namespace Infinity.Models
 {
     /// <summary>
@@ -9,6 +11,7 @@ namespace Infinity.Models
         /// <summary>
         /// The type of change (edit, delete, or add).
         /// </summary>
+        [DeserializeAs(Name = "changeType")]
         public ChangeType Type { get; private set; }
 
         /// <summary>
