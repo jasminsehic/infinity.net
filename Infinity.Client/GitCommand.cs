@@ -288,6 +288,56 @@ namespace Infinity.Client
             return 0;
         }
 
+        public int GetPushes(string[] args)
+        {
+            if (args.Length > 1)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetPushes [repositoryId]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+
+            IEnumerable<PushDetails> pushes = null;
+
+            Task.Run(async () =>
+            {
+                pushes = await Client.Git.GetPushes(repositoryId);
+            }).Wait();
+
+            foreach (PushDetails push in pushes)
+            {
+                Console.WriteLine("Push {0}:", push.Id);
+                Model.Write(push);
+            }
+
+            return 0;
+        }
+
+        public int GetPush(string[] args)
+        {
+            if (args.Length < 1)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetPush [repositoryId] [pushId]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+            int pushId = int.Parse(args[1]);
+
+            PushDetails push = null;
+
+            Task.Run(async () =>
+            {
+                push = await Client.Git.GetPush(repositoryId, pushId);
+            }).Wait();
+
+            Console.WriteLine("Push {0}:", push.Id);
+            Model.Write(push);
+
+            return 0;
+        }
+
         public int GetRepositories(string[] args)
         {
             if (args.Length > 1)

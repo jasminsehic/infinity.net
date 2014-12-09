@@ -303,6 +303,66 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetPush {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPush", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetPushes {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPushes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetPushesByDate {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPushesByDate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetPushesByPage {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPushesByPage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetPushesByPusher {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPushesByPusher", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetPushWithReferences {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetPushWithReferences", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetReferences {
             get {
                 object obj = ResourceManager.GetObject("Git_GetReferences", resourceCulture);

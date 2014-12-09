@@ -268,4 +268,22 @@
   <data name="Git_GetBranchStatisticsForAllBranches" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Git.GetBranchStatisticsForAllBranches.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetPushes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPushes.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPushesByDate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPushesByDate.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPushesByPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPushesByPage.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPushesByPusher" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPushesByPusher.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPushWithReferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPushWithReferences.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetPush" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetPush.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -445,6 +445,54 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region Pushes
+
+        /// <summary>
+        /// Get a push in a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="id">The ID of the push</param>
+        /// <param name="includeRefUpdates">Whether to include information about references that were updated</param>
+        /// <returns>A list of pushes in the Git repository</returns>
+        public async Task<PushDetails> GetPush(Guid repositoryId, int id, bool includeRefUpdates = false)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pushes/{PushId}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PushId", id.ToString());
+
+            if (includeRefUpdates)
+            {
+                request.AddOptionalParameter("includeRefUpdates", "true");
+            }
+
+            return await Executor.Execute<PushDetails>(request);
+        }
+
+        /// <summary>
+        /// Get a list of pushes in a Git repository.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="filters">Optional push filters</param>
+        /// <returns>A list of pushes in the Git repository</returns>
+        public async Task<IEnumerable<PushDetails>> GetPushes(Guid repositoryId, PushFilters filters = null)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pushes");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            filters = filters ?? new PushFilters();
+
+            request.AddOptionalParameter("fromDate", filters.FromDate);
+            request.AddOptionalParameter("toDate", filters.ToDate);
+            request.AddOptionalParameter("pusherId", filters.Pusher);
+            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
+            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+
+            Sequence<PushDetails> list = await Executor.Execute<Sequence<PushDetails>>(request);
+            return list.Value;
+        }
+
+        #endregion
+
         #region References
 
         /// <summary>

@@ -50,6 +50,7 @@
     <Compile Include="Clients\GitClient.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\PullRequestFilters.cs" />
+    <Compile Include="Clients\PushFilters.cs" />
     <Compile Include="Clients\RevisionType.cs" />
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Models\ObjectId.cs" />
     <Compile Include="Models\PushDetails.cs" />
     <Compile Include="Clients\Revision.cs" />
+    <Compile Include="Models\PushLinks.cs" />
+    <Compile Include="Models\RefUpdate.cs" />
     <Compile Include="Models\Sequence.cs" />
     <Compile Include="Models\CommitLink.cs" />
     <Compile Include="Models\LinkUrl.cs" />

@@ -897,7 +897,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(0, commit.Parents.Count);
 
             Assert.Equal(new DateTime(2014, 01, 29, 23, 33, 15, 243, DateTimeKind.Utc), commit.Push.Date);
-            Assert.Equal(1, commit.Push.PushId);
+            Assert.Equal(1, commit.Push.Id);
             Assert.Equal("Chuck Reinhart", commit.Push.PushedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.ImageUrl);
@@ -997,7 +997,7 @@ namespace Infinity.Tests.Models
             Assert.Equal(0, commit.Parents.Count);
 
             Assert.Equal(new DateTime(2014, 01, 29, 23, 33, 15, 243, DateTimeKind.Utc), commit.Push.Date);
-            Assert.Equal(1, commit.Push.PushId);
+            Assert.Equal(1, commit.Push.Id);
             Assert.Equal("Chuck Reinhart", commit.Push.PushedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.Id);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), commit.Push.PushedBy.ImageUrl);
@@ -2535,6 +2535,702 @@ namespace Infinity.Tests.Models
             Assert.Equal("fabrikamfiber2@hotmail.com", pullRequestReviewer.UniqueName);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9"), pullRequestReviewer.Url);
             Assert.Equal(10, pullRequestReviewer.Vote);
+        }
+
+        #endregion
+
+        #region Pushes
+
+        [Fact]
+        public void Git_Pushes_GetPush()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23?api-version=1.0",
+                    ResponseResource = "Git.GetPush",
+                });
+
+            PushDetails push = base.ExecuteSync<PushDetails>(
+                () => { return client.Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23); });
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 092, DateTimeKind.Utc), push.Date);
+            Assert.Equal(23, push.Id);
+            Assert.Equal("Normal Paulk", push.PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", push.PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), push.Url);
+
+            Assert.Equal(0, push.Commits.Count);
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23/commits"), push.Links.Commits.Url);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), push.Links.Pusher.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), push.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), push.Links.Self.Url);
+        }
+
+        [Fact]
+        public void Git_Pushes_GetPushWithReferences()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23?api-version=1.0&includeRefUpdates=true",
+                    ResponseResource = "Git.GetPushWithReferences",
+                });
+
+            PushDetails push = base.ExecuteSync<PushDetails>(
+                () => { return client.Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23, true); });
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23/commits"), push.Links.Commits.Url);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), push.Links.Pusher.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/refs/heads/master"), push.Links.Refs.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), push.Links.Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), push.Links.Self.Url);
+            Assert.Equal(0, push.Commits.Count);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 092, DateTimeKind.Utc), push.Date);
+            Assert.Equal(23, push.Id);
+            Assert.Equal("Normal Paulk", push.PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", push.PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), push.PushedBy.Url);
+
+            Assert.Equal(1, push.RefUpdates.Count);
+            Assert.Equal("refs/heads/master", push.RefUpdates[0].Name);
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), push.RefUpdates[0].NewObjectId);
+            Assert.Equal(new ObjectId("fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), push.RefUpdates[0].OldObjectId);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), push.RefUpdates[0].RepositoryId);
+
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), push.Url);
+        }
+
+        [Fact]
+        public void Git_Pushes_GetPushes()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0",
+                    ResponseResource = "Git.GetPushes",
+                });
+
+            IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
+                () => { return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+
+            Assert.Equal(22, pushes.Count);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 92, DateTimeKind.Utc), pushes[0].Date);
+            Assert.Equal(23, pushes[0].Id);
+            Assert.Equal("Normal Paulk", pushes[0].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[0].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[0].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[0].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[0].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), pushes[0].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 58, 342, DateTimeKind.Utc), pushes[1].Date);
+            Assert.Equal(22, pushes[1].Id);
+            Assert.Equal("Jamal Hartnett", pushes[1].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[1].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[1].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[1].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[1].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/22"), pushes[1].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 34, 176, DateTimeKind.Utc), pushes[2].Date);
+            Assert.Equal(21, pushes[2].Id);
+            Assert.Equal("Normal Paulk", pushes[2].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[2].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[2].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[2].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[2].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/21"), pushes[2].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 51, 33, 624, DateTimeKind.Utc), pushes[3].Date);
+            Assert.Equal(20, pushes[3].Id);
+            Assert.Equal("Jamal Hartnett", pushes[3].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[3].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[3].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[3].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[3].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[3].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[3].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[3].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[3].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[3].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[3].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[3].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[3].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[3].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/20"), pushes[3].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 48, 43, 27, DateTimeKind.Utc), pushes[4].Date);
+            Assert.Equal(19, pushes[4].Id);
+            Assert.Equal("Normal Paulk", pushes[4].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[4].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[4].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[4].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[4].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[4].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[4].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[4].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[4].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[4].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[4].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[4].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[4].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[4].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/19"), pushes[4].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 10, 19, 42, 18, 997, DateTimeKind.Utc), pushes[5].Date);
+            Assert.Equal(18, pushes[5].Id);
+            Assert.Equal("Jamal Hartnett", pushes[5].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[5].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[5].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[5].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[5].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[5].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[5].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[5].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[5].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[5].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[5].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[5].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[5].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[5].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/18"), pushes[5].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 10, 19, 41, 17, 122, DateTimeKind.Utc), pushes[6].Date);
+            Assert.Equal(17, pushes[6].Id);
+            Assert.Equal("Jamal Hartnett", pushes[6].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[6].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[6].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[6].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[6].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[6].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[6].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[6].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[6].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[6].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[6].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[6].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[6].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[6].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/17"), pushes[6].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 09, 21, 43, 41, 901, DateTimeKind.Utc), pushes[7].Date);
+            Assert.Equal(16, pushes[7].Id);
+            Assert.Equal("Chuck Reinhart", pushes[7].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[7].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[7].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[7].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[7].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[7].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[7].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[7].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[7].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[7].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[7].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[7].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[7].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[7].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/16"), pushes[7].Url);
+
+            Assert.Equal(new DateTime(2014, 05, 02, 19, 17, 13, 330, DateTimeKind.Utc), pushes[8].Date);
+            Assert.Equal(14, pushes[8].Id);
+            Assert.Equal("Jamal Hartnett", pushes[8].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[8].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[8].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[8].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[8].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[8].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[8].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[8].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[8].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[8].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[8].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[8].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[8].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[8].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/14"), pushes[8].Url);
+
+            Assert.Equal(new DateTime(2014, 04, 14, 21, 35, 01, 130, DateTimeKind.Utc), pushes[9].Date);
+            Assert.Equal(13, pushes[9].Id);
+            Assert.Equal("Chuck Reinhart", pushes[9].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[9].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[9].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[9].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[9].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[9].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[9].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[9].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[9].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[9].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[9].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[9].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[9].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[9].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/13"), pushes[9].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 28, 17, 06, 05, 339, DateTimeKind.Utc), pushes[10].Date);
+            Assert.Equal(12, pushes[10].Id);
+            Assert.Equal("Chuck Reinhart", pushes[10].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[10].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[10].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[10].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[10].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[10].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[10].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[10].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[10].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[10].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[10].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[10].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[10].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[10].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/12"), pushes[10].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 27, 19, 51, 18, 572, DateTimeKind.Utc), pushes[11].Date);
+            Assert.Equal(11, pushes[11].Id);
+            Assert.Equal("Chuck Reinhart", pushes[11].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[11].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[11].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[11].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[11].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[11].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[11].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[11].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[11].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[11].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[11].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[11].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[11].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[11].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/11"), pushes[11].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 20, 25, 46, 966, DateTimeKind.Utc), pushes[12].Date);
+            Assert.Equal(10, pushes[12].Id);
+            Assert.Equal("Chuck Reinhart", pushes[12].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[12].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[12].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[12].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[12].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[12].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[12].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[12].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[12].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[12].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[12].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[12].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[12].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[12].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/10"), pushes[12].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 56, 27, 511, DateTimeKind.Utc), pushes[13].Date);
+            Assert.Equal(9, pushes[13].Id);
+            Assert.Equal("Chuck Reinhart", pushes[13].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[13].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[13].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[13].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[13].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[13].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[13].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[13].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[13].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[13].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[13].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[13].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[13].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[13].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/9"), pushes[13].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 18, 38, 57, 589, DateTimeKind.Utc), pushes[14].Date);
+            Assert.Equal(8, pushes[14].Id);
+            Assert.Equal("Chuck Reinhart", pushes[14].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[14].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[14].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[14].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[14].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[14].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[14].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[14].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[14].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[14].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[14].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[14].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[14].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[14].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/8"), pushes[14].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 26, 16, 17, 22, 0, DateTimeKind.Utc), pushes[15].Date);
+            Assert.Equal(7, pushes[15].Id);
+            Assert.Equal("Chuck Reinhart", pushes[15].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[15].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[15].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[15].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[15].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[15].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[15].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[15].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[15].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[15].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[15].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[15].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[15].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[15].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/7"), pushes[15].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 54, 16, 590, DateTimeKind.Utc), pushes[16].Date);
+            Assert.Equal(6, pushes[16].Id);
+            Assert.Equal("Chuck Reinhart", pushes[16].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[16].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[16].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[16].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[16].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[16].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[16].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[16].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[16].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[16].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[16].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[16].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[16].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[16].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/6"), pushes[16].Url);
+
+            Assert.Equal(new DateTime(2014, 03, 10, 20, 50, 17, 949, DateTimeKind.Utc), pushes[17].Date);
+            Assert.Equal(5, pushes[17].Id);
+            Assert.Equal("Chuck Reinhart", pushes[17].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[17].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[17].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[17].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[17].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[17].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[17].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[17].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[17].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[17].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[17].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[17].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[17].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[17].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/5"), pushes[17].Url);
+
+            Assert.Equal(new DateTime(2014, 02, 10, 21, 53, 19, 657, DateTimeKind.Utc), pushes[18].Date);
+            Assert.Equal(4, pushes[18].Id);
+            Assert.Equal("Jamal Hartnett", pushes[18].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[18].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[18].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[18].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[18].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[18].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[18].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[18].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[18].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[18].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[18].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[18].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[18].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[18].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/4"), pushes[18].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 53, 35, 700, DateTimeKind.Utc), pushes[19].Date);
+            Assert.Equal(3, pushes[19].Id);
+            Assert.Equal("Chuck Reinhart", pushes[19].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[19].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[19].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[19].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[19].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[19].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[19].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[19].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[19].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[19].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[19].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[19].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[19].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[19].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/3"), pushes[19].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 34, 00, 101, DateTimeKind.Utc), pushes[20].Date);
+            Assert.Equal(2, pushes[20].Id);
+            Assert.Equal("Chuck Reinhart", pushes[20].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[20].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[20].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[20].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[20].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[20].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[20].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[20].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[20].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[20].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[20].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[20].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[20].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[20].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/2"), pushes[20].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 33, 15, 243, DateTimeKind.Utc), pushes[21].Date);
+            Assert.Equal(1, pushes[21].Id);
+            Assert.Equal("Chuck Reinhart", pushes[21].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[21].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[21].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[21].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[21].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[21].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[21].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[21].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[21].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[21].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[21].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[21].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[21].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[21].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/1"), pushes[21].Url);
+        }
+
+        [Fact]
+        public void Git_Pushes_GetPushesByDate()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&fromDate=2014-01-15T00:00:00Z&toDate=2014-02-01T14:00:00Z",
+                    ResponseResource = "Git.GetPushesByDate",
+                });
+
+            IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
+                () =>
+                {
+                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        new PushFilters {
+                            FromDate = new DateTime(2014, 01, 15),
+                            ToDate = new DateTime(2014, 02, 01, 14, 00, 00)
+                        });
+                }).ToList();
+
+            Assert.Equal(3, pushes.Count);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 53, 35, 705, DateTimeKind.Utc), pushes[0].Date);
+            Assert.Equal(3, pushes[0].Id);
+            Assert.Equal("Chuck Reinhart", pushes[0].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[0].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[0].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[0].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[0].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[0].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[0].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[0].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/3"), pushes[0].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 34, 00, 101, DateTimeKind.Utc), pushes[1].Date);
+            Assert.Equal(2, pushes[1].Id);
+            Assert.Equal("Chuck Reinhart", pushes[1].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[1].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[1].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[1].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[1].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[1].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[1].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[1].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/2"), pushes[1].Url);
+
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 33, 15, 243, DateTimeKind.Utc), pushes[2].Date);
+            Assert.Equal(1, pushes[2].Id);
+            Assert.Equal("Chuck Reinhart", pushes[2].PushedBy.DisplayName);
+            Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[2].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[2].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber3@hotmail.com", pushes[2].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), pushes[2].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[2].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[2].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[2].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/1"), pushes[2].Url);
+        }
+
+        [Fact]
+        public void Git_Pushes_GetPushesByPusher()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&pusherId=d6245f20-2af8-44f4-9451-8107cb2767db",
+                    ResponseResource = "Git.GetPushesByPusher",
+                });
+
+            IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
+                () =>
+                {
+                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        new PushFilters {
+                            Pusher = new Guid("d6245f20-2af8-44f4-9451-8107cb2767db")
+                        });
+                }).ToList();
+
+            Assert.Equal(3, pushes.Count);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 092, DateTimeKind.Utc), pushes[0].Date);
+            Assert.Equal(23, pushes[0].Id);
+            Assert.Equal("Normal Paulk", pushes[0].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[0].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[0].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[0].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[0].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23"), pushes[0].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 34, 176, DateTimeKind.Utc), pushes[1].Date);
+            Assert.Equal(21, pushes[1].Id);
+            Assert.Equal("Normal Paulk", pushes[1].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[1].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[1].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[1].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[1].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[1].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[1].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[1].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/21"), pushes[1].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 48, 43, 027, DateTimeKind.Utc), pushes[2].Date);
+            Assert.Equal(19, pushes[2].Id);
+            Assert.Equal("Normal Paulk", pushes[2].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[2].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[2].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[2].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[2].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[2].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[2].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[2].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[2].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/19"), pushes[2].Url);
+        }
+
+        [Fact]
+        public void Git_Pushes_GetPushesByPage()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&$skip=2&$top=2",
+                    ResponseResource = "Git.GetPushesByPage",
+                });
+
+            IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
+                () =>
+                {
+                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        new PushFilters
+                        {
+                            Skip = 2,
+                            Count = 2
+                        });
+                }).ToList();
+
+            Assert.Equal(2, pushes.Count);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 58, 34, 176, DateTimeKind.Utc), pushes[0].Date);
+            Assert.Equal(21, pushes[0].Id);
+            Assert.Equal("Normal Paulk", pushes[0].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber16@hotmail.com", pushes[0].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pushes[0].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[0].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[0].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[0].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[0].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[0].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[0].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/21"), pushes[0].Url);
+
+            Assert.Equal(new DateTime(2014, 06, 30, 17, 51, 33, 624, DateTimeKind.Utc), pushes[1].Date);
+            Assert.Equal(20, pushes[1].Id);
+            Assert.Equal("Jamal Hartnett", pushes[1].PushedBy.DisplayName);
+            Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.Id);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.ImageUrl);
+            Assert.Equal("fabrikamfiber4@hotmail.com", pushes[1].PushedBy.UniqueName);
+            Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), pushes[1].PushedBy.Url);
+            Assert.Equal("refs/heads/master", pushes[1].Repository.DefaultBranch);
+            Assert.Equal(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Name);
+            Assert.Equal(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Id);
+            Assert.Equal("Fabrikam-Fiber-Git", pushes[1].Repository.Project.Name);
+            Assert.Equal(ProjectState.WellFormed, pushes[1].Repository.Project.State);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), pushes[1].Repository.Project.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"), pushes[1].Repository.RemoteUrl);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pushes[1].Repository.Url);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/20"), pushes[1].Url);
         }
 
         #endregion

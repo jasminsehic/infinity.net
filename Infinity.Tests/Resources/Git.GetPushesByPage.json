@@ -1,0 +1,55 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "repository": {
+        "id": "278d5cd2-584d-4b63-824a-2ba458937249",
+        "name": "Fabrikam-Fiber-Git",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249",
+        "project": {
+          "id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+          "name": "Fabrikam-Fiber-Git",
+          "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+          "state": "wellFormed"
+        },
+        "defaultBranch": "refs/heads/master",
+        "remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"
+      },
+      "pushedBy": {
+        "id": "d6245f20-2af8-44f4-9451-8107cb2767db",
+        "displayName": "Normal Paulk",
+        "uniqueName": "fabrikamfiber16@hotmail.com",
+        "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db",
+        "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db"
+      },
+      "pushId": 21,
+      "date": "2014-06-30T17:58:34.176Z",
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/21"
+    },
+    {
+      "repository": {
+        "id": "278d5cd2-584d-4b63-824a-2ba458937249",
+        "name": "Fabrikam-Fiber-Git",
+        "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249",
+        "project": {
+          "id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+          "name": "Fabrikam-Fiber-Git",
+          "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+          "state": "wellFormed"
+        },
+        "defaultBranch": "refs/heads/master",
+        "remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"
+      },
+      "pushedBy": {
+        "id": "d291b0c4-a05c-4ea6-8df1-4b41d5f39eff",
+        "displayName": "Jamal Hartnett",
+        "uniqueName": "fabrikamfiber4@hotmail.com",
+        "url": "https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff",
+        "imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"
+      },
+      "pushId": 20,
+      "date": "2014-06-30T17:51:33.624Z",
+      "url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/20"
+    }
+  ]
+}
