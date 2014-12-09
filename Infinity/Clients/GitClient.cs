@@ -491,6 +491,22 @@ namespace Infinity.Clients
             return list.Value;
         }
 
+        /// <summary>
+        /// Get a list of commits included in the push.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="pushId">The ID of the push to query</param>
+        /// <returns>A list of commits in the push</returns>
+        public async Task<IEnumerable<Commit>> GetPushCommits(Guid repositoryId, int pushId)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pushes/{PushId}/commits");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PushId", pushId.ToString());
+
+            Sequence<Commit> list = await Executor.Execute<Sequence<Commit>>(request);
+            return list.Value;
+        }
+
         #endregion
 
         #region References

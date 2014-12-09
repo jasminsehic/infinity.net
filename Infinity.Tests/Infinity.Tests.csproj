@@ -78,6 +78,7 @@
     <None Include="Resources\Git.GetCommitsByDate.json" />
     <None Include="Resources\Git.GetCommitsByItem.json" />
     <None Include="Resources\Git.GetCommits.json" />
+    <None Include="Resources\Git.GetPushCommits.json" />
     <None Include="Resources\Git.GetCommitsPaged.json" />
     <None Include="Resources\Git.GetCommitsToRevision.json" />
     <None Include="Resources\Git.GetCommitWithChangedItems.json" />
