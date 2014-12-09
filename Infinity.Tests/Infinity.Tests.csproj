@@ -69,6 +69,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\Git.GetBlob.json" />
+    <None Include="Resources\Git.GetBranchStatistics.json" />
+    <None Include="Resources\Git.GetBranchStatisticsAgainstVersion.json" />
+    <None Include="Resources\Git.GetBranchStatisticsForAllBranches.json" />
     <None Include="Resources\Git.GetCommit.json" />
     <None Include="Resources\Git.GetCommitsBetweenTwoRevisions.json" />
     <None Include="Resources\Git.GetCommitsByCommitter.json" />

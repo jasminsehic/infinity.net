@@ -38,6 +38,133 @@ namespace Infinity.Tests.Models
 
         #endregion
 
+        #region Branch Statistics
+
+        [Fact]
+        public void Git_BranchStatistics_GetBranchStatistics()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches/develop?api-version=1.0",
+                    ResponseResource = "Git.GetBranchStatistics",
+                });
+
+            BranchStatistics branchStatistics = base.ExecuteSync<BranchStatistics>(
+                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
+
+            Assert.Equal(1, branchStatistics.AheadCount);
+            Assert.Equal(17, branchStatistics.BehindCount);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics.Commit.Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics.Commit.Author.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics.Commit.Author.Name);
+            Assert.Equal("home page", branchStatistics.Commit.Comment);
+            Assert.Equal(new ObjectId("67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics.Commit.Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics.Commit.Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics.Commit.Committer.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics.Commit.Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics.Commit.Url);
+            Assert.Equal(false, branchStatistics.IsBaseVersion);
+            Assert.Equal("develop", branchStatistics.Name);
+        }
+
+        [Fact]
+        public void Git_BranchStatistics_GetBranchStatisticsAgainstVersion()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches/develop?api-version=1.0",
+                    ResponseResource = "Git.GetBranchStatisticsAgainstVersion",
+                });
+
+            BranchStatistics branchStatistics = base.ExecuteSync<BranchStatistics>(
+                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
+
+            Assert.Equal(0, branchStatistics.AheadCount);
+            Assert.Equal(0, branchStatistics.BehindCount);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics.Commit.Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics.Commit.Author.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics.Commit.Author.Name);
+            Assert.Equal("home page\n", branchStatistics.Commit.Comment);
+            Assert.Equal(new ObjectId("67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics.Commit.Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics.Commit.Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics.Commit.Committer.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics.Commit.Committer.Name);
+            Assert.Equal(1, branchStatistics.Commit.Parents.Count);
+            Assert.Equal(new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), branchStatistics.Commit.Parents[0]);
+            Assert.Equal(new ObjectId("f9a2a90cbeac747fff9dadcf77ff5bcd12b65a44"), branchStatistics.Commit.TreeId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics.Commit.Url);
+            Assert.Equal(true, branchStatistics.IsBaseVersion);
+            Assert.Equal("develop", branchStatistics.Name);
+        }
+
+        [Fact]
+        public void Git_BranchStatistics_GetBranchStatisticsForAllBranches()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches?api-version=1.0",
+                    ResponseResource = "Git.GetBranchStatisticsForAllBranches",
+                });
+
+            IList<BranchStatistics> branchStatistics = base.ExecuteSync<IEnumerable<BranchStatistics>>(
+                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+
+            Assert.Equal(3, branchStatistics.Count);
+
+            Assert.Equal(1, branchStatistics[0].AheadCount);
+            Assert.Equal(17, branchStatistics[0].BehindCount);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics[0].Commit.Author.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics[0].Commit.Author.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics[0].Commit.Author.Name);
+            Assert.Equal("home page", branchStatistics[0].Commit.Comment);
+            Assert.Equal(new ObjectId("67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics[0].Commit.Id);
+            Assert.Equal(new DateTime(2014, 01, 29, 23, 52, 56, 0, DateTimeKind.Utc), branchStatistics[0].Commit.Committer.Date);
+            Assert.Equal("fabrikamfiber3@hotmail.com", branchStatistics[0].Commit.Committer.Email);
+            Assert.Equal("Chuck Reinhart", branchStatistics[0].Commit.Committer.Name);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d"), branchStatistics[0].Commit.Url);
+            Assert.Equal(false, branchStatistics[0].IsBaseVersion);
+            Assert.Equal("develop", branchStatistics[0].Name);
+
+            Assert.Equal(0, branchStatistics[1].AheadCount);
+            Assert.Equal(0, branchStatistics[1].BehindCount);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), branchStatistics[1].Commit.Author.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", branchStatistics[1].Commit.Author.Email);
+            Assert.Equal("Norman Paulk", branchStatistics[1].Commit.Author.Name);
+            Assert.Equal("Better description for hello world\n", branchStatistics[1].Commit.Comment);
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), branchStatistics[1].Commit.Id);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), branchStatistics[1].Commit.Committer.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", branchStatistics[1].Commit.Committer.Email);
+            Assert.Equal("Norman Paulk", branchStatistics[1].Commit.Committer.Name);
+            Assert.Equal(1, branchStatistics[1].Commit.Parents.Count);
+            Assert.Equal(new ObjectId("fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), branchStatistics[1].Commit.Parents[0]);
+            Assert.Equal(new ObjectId("8263e7232a2331c563d737e4fc4e9c66a8286c63"), branchStatistics[1].Commit.TreeId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), branchStatistics[1].Commit.Url);
+            Assert.Equal(true, branchStatistics[1].IsBaseVersion);
+            Assert.Equal("master", branchStatistics[1].Name);
+
+            Assert.Equal(0, branchStatistics[2].AheadCount);
+            Assert.Equal(0, branchStatistics[2].BehindCount);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), branchStatistics[2].Commit.Author.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", branchStatistics[2].Commit.Author.Email);
+            Assert.Equal("Norman Paulk", branchStatistics[2].Commit.Author.Name);
+            Assert.Equal("Better description for hello world\n", branchStatistics[2].Commit.Comment);
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), branchStatistics[2].Commit.Id);
+            Assert.Equal(new DateTime(2014, 06, 30, 18, 10, 55, 0, DateTimeKind.Utc), branchStatistics[2].Commit.Committer.Date);
+            Assert.Equal("Fabrikamfiber16@hotmail.com", branchStatistics[2].Commit.Committer.Email);
+            Assert.Equal("Norman Paulk", branchStatistics[2].Commit.Committer.Name);
+            Assert.Equal(1, branchStatistics[2].Commit.Parents.Count);
+            Assert.Equal(new ObjectId("fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f"), branchStatistics[2].Commit.Parents[0]);
+            Assert.Equal(new ObjectId("8263e7232a2331c563d737e4fc4e9c66a8286c63"), branchStatistics[2].Commit.TreeId);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014"), branchStatistics[2].Commit.Url);
+            Assert.Equal(true, branchStatistics[2].IsBaseVersion);
+            Assert.Equal("npaulk/feature", branchStatistics[2].Name);
+        }
+
+        #endregion
+
         #region Commits
 
         [Fact]

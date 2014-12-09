@@ -90,6 +90,53 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region Branch Statistics
+
+        /// <summary>
+        /// Get the statistics about a branch.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <param name="branch">The name of the branch to return statistics for</param>
+        /// <param name="baseRevision">The revision to compare this branch to</param>
+        /// <returns>The branch statistics</returns>
+        public async Task<BranchStatistics> GetBranchStatistics(Guid repositoryId, string branch, Revision baseRevision = null)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(branch, "branch");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/stats/branches/{Branch}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("Branch", branch);
+
+            if (baseRevision != null)
+            {
+                request.RequestFormat = DataFormat.Json;
+
+                request.AddBody(new {
+                    baseVersionType = baseRevision.Type,
+                    baseVersion = baseRevision.Version
+                });
+            }
+
+            return await Executor.Execute<BranchStatistics>(request);
+        }
+
+        /// <summary>
+        /// Get the statistics about all branches.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository</param>
+        /// <returns>The branch statistics</returns>
+        public async Task<IEnumerable<BranchStatistics>> GetBranchStatistics(Guid repositoryId)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/stats/branches");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            Sequence<BranchStatistics> list = await Executor.Execute<Sequence<BranchStatistics>>(request);
+            return list.Value;
+        }
+
+        #endregion
+
         #region Commits
 
         /// <summary>

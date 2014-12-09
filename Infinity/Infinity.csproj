@@ -57,6 +57,7 @@
     <Compile Include="Json\JsonDeserializable.cs" />
     <Compile Include="Models\Blob.cs" />
     <Compile Include="Models\BlobLinks.cs" />
+    <Compile Include="Models\BranchStatistics.cs" />
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Clients\CommitFilters.cs" />
     <Compile Include="Models\CommitChange.cs" />

@@ -103,6 +103,46 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetBranchStatistics {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetBranchStatistics", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetBranchStatistics1 {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetBranchStatistics1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetBranchStatisticsAgainstVersion {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetBranchStatisticsAgainstVersion", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetBranchStatisticsForAllBranches {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetBranchStatisticsForAllBranches", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetCommit {
             get {
                 object obj = ResourceManager.GetObject("Git_GetCommit", resourceCulture);

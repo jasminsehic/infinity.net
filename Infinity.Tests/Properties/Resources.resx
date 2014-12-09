@@ -256,4 +256,16 @@
   <data name="Git_GetDiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Git.GetDiff.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Git_GetBranchStatistics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetBranchStatistics.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetBranchStatistics1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetBranchStatistics.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetBranchStatisticsAgainstVersion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetBranchStatisticsAgainstVersion.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Git_GetBranchStatisticsForAllBranches" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Git.GetBranchStatisticsForAllBranches.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
