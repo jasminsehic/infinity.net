@@ -243,6 +243,42 @@ namespace Infinity.Clients
 
         #endregion
 
+        #region Items
+
+        /// <summary>
+        /// Get the item in the repository at the given path.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="path">Path of the item to query</param>
+        /// <param name="filters">Filters to provide additional query information</param>
+        /// <returns>A list of commits in the Git repository</returns>
+        public async Task<IEnumerable<Item>> GetItem(Guid repositoryId, string path, ItemFilters filters = null)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(path, "path");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/items");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            filters = filters ?? new ItemFilters();
+
+            request.AddParameter("scopePath", path);
+
+            request.AddOptionalParameter("recursionLevel",
+                () => { return filters.RecursionLevel != RecursionLevel.None; },
+                filters.RecursionLevel);
+
+            if (filters.IncludeContentMetadata)
+            {
+                request.AddParameter("includeContentMetadata", "true");
+            }
+
+            Sequence<Item> list = await Executor.Execute<Sequence<Item>>(request);
+            return list.Value;
+        }
+
+        #endregion
+
         #region Pull Requests
 
         /// <summary>
@@ -462,7 +498,7 @@ namespace Infinity.Clients
 
             if (includeRefUpdates)
             {
-                request.AddOptionalParameter("includeRefUpdates", "true");
+                request.AddParameter("includeRefUpdates", "true");
             }
 
             return await Executor.Execute<PushDetails>(request);

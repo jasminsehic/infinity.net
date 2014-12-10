@@ -48,9 +48,11 @@
     <Compile Include="Clients\BlobFormat.cs" />
     <Compile Include="Clients\DiffFilters.cs" />
     <Compile Include="Clients\GitClient.cs" />
+    <Compile Include="Clients\ItemFilters.cs" />
     <Compile Include="Clients\ProjectClient.cs" />
     <Compile Include="Clients\PullRequestFilters.cs" />
     <Compile Include="Clients\PushFilters.cs" />
+    <Compile Include="Clients\RecursionLevel.cs" />
     <Compile Include="Clients\RevisionType.cs" />
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />
@@ -65,9 +67,11 @@
     <Compile Include="Models\CommitChangeCounts.cs" />
     <Compile Include="Models\CommitItem.cs" />
     <Compile Include="Models\CommitLinks.cs" />
+    <Compile Include="Models\ContentMetadata.cs" />
     <Compile Include="Models\Diff.cs" />
     <Compile Include="Models\Identity.cs" />
     <Compile Include="Models\ChangeType.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ObjectId.cs" />
     <Compile Include="Models\PushDetails.cs" />
     <Compile Include="Clients\Revision.cs" />

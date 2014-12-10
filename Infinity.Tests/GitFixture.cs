@@ -1230,6 +1230,152 @@ namespace Infinity.Tests.Models
 
         #endregion
 
+        #region Items
+
+        [Fact]
+        public void Git_Item_GetItemFile()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/mywebsite/mywebsite/views/home/_home.cshtml",
+                    ResponseResource = "Git.GetItemFile",
+                });
+
+            IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
+                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/mywebsite/mywebsite/views/home/_home.cshtml"); }).ToList();
+
+            Assert.Equal(1, items.Count);
+
+            Assert.Equal(new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), items[0].Id);
+            Assert.Equal(ObjectType.Blob, items[0].Type);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_Home.cshtml", items[0].Path);
+            Assert.Equal(new ObjectId("03b1b831e41df536d836c95e2f68a42db4f3e0db"), items[0].CommitId);
+        }
+
+        [Fact]
+        public void Git_Item_GetItemFolder()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/MyWebSite/MyWebSite/Views",
+                    ResponseResource = "Git.GetItemFolder",
+                });
+
+            IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
+                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views"); }).ToList();
+
+            Assert.Equal(1, items.Count);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[0].CommitId);
+            Assert.Equal(ObjectType.Tree, items[0].Type);
+            Assert.Equal(true, items[0].IsFolder);
+            Assert.Equal(new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), items[0].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views", items[0].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views?versionType=Branch&amp;versionOptions=None"), items[0].Url);
+        }
+
+        [Fact]
+        public void Git_Item_GetItemFolderRecursive()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/MyWebSite/MyWebSite/Views&recursionLevel=Full&includeContentMetadata=true",
+                    ResponseResource = "Git.GetItemFolderRecursive",
+                });
+
+            IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
+                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views", new ItemFilters { RecursionLevel = RecursionLevel.Full, IncludeContentMetadata = true }); }).ToList();
+
+            Assert.Equal(13, items.Count);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[0].CommitId);
+            Assert.Equal("Views", items[0].Metadata.Filename);
+            Assert.Equal(ObjectType.Tree, items[0].Type);
+            Assert.Equal(true, items[0].IsFolder);
+            Assert.Equal(new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), items[0].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views", items[0].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views?versionType=Branch&amp;versionOptions=None"), items[0].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[1].CommitId);
+            Assert.Equal(ObjectType.Tree, items[1].Type);
+            Assert.Equal(true, items[1].IsFolder);
+            Assert.Equal(new ObjectId("ea6765e1976b9e8a6d4981fd8febebd574a91571"), items[1].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home", items[1].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home?versionType=Branch&amp;versionOptions=None"), items[1].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[2].CommitId);
+            Assert.Equal(ObjectType.Blob, items[2].Type);
+            Assert.Equal(new ObjectId("9093f030aa7dd8c802cad228fae4c6bafae4b32f"), items[2].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/Index.cshtml", items[2].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/Index.cshtml?versionType=Branch&amp;versionOptions=None"), items[2].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[3].CommitId);
+            Assert.Equal(ObjectType.Blob, items[3].Type);
+            Assert.Equal(new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), items[3].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_Home.cshtml", items[3].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/_Home.cshtml?versionType=Branch&amp;versionOptions=None"), items[3].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[4].CommitId);
+            Assert.Equal(ObjectType.Blob, items[4].Type);
+            Assert.Equal(new ObjectId("445986f7957f0478686b6def4dcd04d2bad00594"), items[4].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_Login.cshtml", items[4].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/_Login.cshtml?versionType=Branch&amp;versionOptions=None"), items[4].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[5].CommitId);
+            Assert.Equal(ObjectType.Blob, items[5].Type);
+            Assert.Equal(new ObjectId("d95a992b555367d1332be5407ba653261543c190"), items[5].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_Manage.cshtml", items[5].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/_Manage.cshtml?versionType=Branch&amp;versionOptions=None"), items[5].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[6].CommitId);
+            Assert.Equal(ObjectType.Blob, items[6].Type);
+            Assert.Equal(new ObjectId("8052a02bee6f82ae02c4d408d1b5b98ab1bf56a6"), items[6].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_Register.cshtml", items[6].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/_Register.cshtml?versionType=Branch&amp;versionOptions=None"), items[6].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[7].CommitId);
+            Assert.Equal(ObjectType.Blob, items[7].Type);
+            Assert.Equal(new ObjectId("d3ea8b1ffab4736168e4b1d225ebc5aa0ade8cfe"), items[7].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Home/_RegisterExternal.cshtml", items[7].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Home/_RegisterExternal.cshtml?versionType=Branch&amp;versionOptions=None"), items[7].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[8].CommitId);
+            Assert.Equal(ObjectType.Tree, items[8].Type);
+            Assert.Equal(true, items[8].IsFolder);
+            Assert.Equal(new ObjectId("d1c521e3b401b314d4f9ff17f6cad4652c6a4d14"), items[8].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Shared", items[8].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Shared?versionType=Branch&amp;versionOptions=None"), items[8].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[9].CommitId);
+            Assert.Equal(ObjectType.Blob, items[9].Type);
+            Assert.Equal(new ObjectId("a89723ddddb14cd956fae1a6f118ba29f1667cf4"), items[9].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Shared/Error.cshtml", items[9].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Shared/Error.cshtml?versionType=Branch&amp;versionOptions=None"), items[9].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[10].CommitId);
+            Assert.Equal(ObjectType.Blob, items[10].Type);
+            Assert.Equal(new ObjectId("86b48073d8ce15039ce18219d8fda43ba7f0c467"), items[10].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Shared/_Layout.cshtml", items[10].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Shared/_Layout.cshtml?versionType=Branch&amp;versionOptions=None"), items[10].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[11].CommitId);
+            Assert.Equal(ObjectType.Blob, items[11].Type);
+            Assert.Equal(new ObjectId("f5dd7df5872eae8c39c9491f67d856dafd609683"), items[11].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/Web.config", items[11].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/Web.config?versionType=Branch&amp;versionOptions=None"), items[11].Url);
+
+            Assert.Equal(new ObjectId("23d0bc5b128a10056dc68afece360d8a0fabb014"), items[12].CommitId);
+            Assert.Equal(ObjectType.Blob, items[12].Type);
+            Assert.Equal(new ObjectId("2de62418c07c3ffa833543f484445dbfd0fe68d8"), items[12].Id);
+            Assert.Equal("/MyWebSite/MyWebSite/Views/_ViewStart.cshtml", items[12].Path);
+            Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/_ViewStart.cshtml?versionType=Branch&amp;versionOptions=None"), items[12].Url);
+        }
+
+        #endregion
+
         #region Pull Requests
 
         [Fact]

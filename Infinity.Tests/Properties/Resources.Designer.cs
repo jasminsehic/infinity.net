@@ -243,6 +243,36 @@ namespace Infinity.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Git_GetItemFile {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetItemFile", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetItemFolder {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetItemFolder", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Git_GetItemFolderRecursive {
+            get {
+                object obj = ResourceManager.GetObject("Git_GetItemFolderRecursive", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Git_GetPullRequest {
             get {
                 object obj = ResourceManager.GetObject("Git_GetPullRequest", resourceCulture);
