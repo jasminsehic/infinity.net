@@ -53,6 +53,7 @@
     <Compile Include="Clients\PullRequestFilters.cs" />
     <Compile Include="Clients\PushFilters.cs" />
     <Compile Include="Clients\RecursionLevel.cs" />
+    <Compile Include="Clients\RevisionOptions.cs" />
     <Compile Include="Clients\RevisionType.cs" />
     <Compile Include="Clients\TeamClient.cs" />
     <Compile Include="Clients\TeamRoomClient.cs" />

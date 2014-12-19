@@ -19,6 +19,19 @@ namespace Infinity.Tests
 
         private MockRequestConfiguration[] Configuration { get; set; }
 
+        private static string Cleanup(string json)
+        {
+            json = json.Replace('\r', ' ');
+            json = json.Replace('\n', ' ');
+
+            while (json.Contains("  "))
+            {
+                json = json.Replace("  ", " ");
+            }
+
+            return json;
+        }
+
         private MockRequestConfiguration GetConfigurationForRequest(TfsRestRequest request)
         {
             MockRequestConfiguration config = null;
@@ -62,7 +75,7 @@ namespace Infinity.Tests
                 }
 
                 if (c.Method == request.Method &&
-                    ((c.RequestBody == null && body == null) || (c.RequestBody != null && c.RequestBody.Equals(body))) && 
+                    ((c.RequestBody == null && body == null) || (c.RequestBody != null && Cleanup(c.RequestBody).Equals(Cleanup(body)))) && 
                     c.Uri.Equals(uri))
                 {
                     config = c;

@@ -17,8 +17,13 @@ namespace Infinity.Clients
         public RecursionLevel RecursionLevel { get; set; }
 
         /// <summary>
-        /// Whether to include metadata about the contents.
+        /// The revision of the item to query.
         /// </summary>
-        public bool IncludeContentMetadata { get; set; }
+        public Revision Revision { get; set; }
+
+        /// <summary>
+        /// The query to perform using the Revision.
+        /// </summary>
+        public RevisionOptions RevisionOptions { get; set; }
     }
 }

@@ -410,5 +410,38 @@ namespace Infinity.Client
 
             return 0;
         }
+
+        public int GetItems(string[] args)
+        {
+            if (args.Length < 2)
+            {
+                Console.Error.WriteLine("usage: {0} <url> Git.GetItems <repositoryId> <pullRequestId> [paths...]", Program.ProgramName);
+                return 1;
+            }
+
+            Guid repositoryId = new Guid(args[0]);
+
+            List<Tuple<string, ItemFilters>> paths = new List<Tuple<string, ItemFilters>>();
+
+            foreach (string path in args.Skip(1))
+            {
+                paths.Add(new Tuple<string, ItemFilters>(path, new ItemFilters()));
+            }
+
+            IEnumerable<Item> items = null;
+
+            Task.Run(async () =>
+            {
+                items = await Client.Git.GetItems(repositoryId, paths, true);
+            }).Wait();
+
+            foreach (Item item in items)
+            {
+                Console.WriteLine("Item {0}:", item.Id);
+                Model.Write(item);
+            }
+
+            return 0;
+        }
     }
 }

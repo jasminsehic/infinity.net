@@ -1287,7 +1287,7 @@ namespace Infinity.Tests.Models
                 });
 
             IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
-                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views", new ItemFilters { RecursionLevel = RecursionLevel.Full, IncludeContentMetadata = true }); }).ToList();
+                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views", new ItemFilters { RecursionLevel = RecursionLevel.Full }, true); }).ToList();
 
             Assert.Equal(13, items.Count);
 
@@ -1372,6 +1372,94 @@ namespace Infinity.Tests.Models
             Assert.Equal(new ObjectId("2de62418c07c3ffa833543f484445dbfd0fe68d8"), items[12].Id);
             Assert.Equal("/MyWebSite/MyWebSite/Views/_ViewStart.cshtml", items[12].Path);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views/_ViewStart.cshtml?versionType=Branch&amp;versionOptions=None"), items[12].Url);
+        }
+
+        [Fact]
+        public void Git_Item_GetItemsBatch()
+        {
+            TfsClient client = NewMockClient(
+                new MockRequestConfiguration
+                {
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/itemsBatch?api-version=1.0",
+                    Method = RestSharp.Method.POST,
+                    RequestObject = new
+                    {
+                        itemDescriptors = new[] {
+                            new {
+                                path = "/MyWebSite/MyWebSite/Views",
+                                version = "23d0bc5b128a10056dc68afece360d8a0fabb014",
+                                versionType = "commit",
+                                versionOptions = "none",
+                                recursionLevel = "onelevel"
+                            },
+                            new {
+                                path = "/MyWebSite/MyWebSite/Views/Home",
+                                version = "23d0bc5b128a10056dc68afece360d8a0fabb014",
+                                versionType = "commit",
+                                versionOptions = "none",
+                                recursionLevel = "none"
+                            },
+                            new {
+                                path = "/MyWebSite/MyWebSite/Views/Shared",
+                                version = "23d0bc5b128a10056dc68afece360d8a0fabb014",
+                                versionType = "commit",
+                                versionOptions = "none",
+                                recursionLevel = "none"
+                            },
+                            new {
+                                path = "/MyWebSite/MyWebSite/Views/Web.config",
+                                version = "23d0bc5b128a10056dc68afece360d8a0fabb014",
+                                versionType = "commit",
+                                versionOptions = "none",
+                                recursionLevel = "none"
+                            },
+                            new {
+                                path = "/MyWebSite/MyWebSite/Views/_ViewStart.cshtml",
+                                version = "23d0bc5b128a10056dc68afece360d8a0fabb014",
+                                versionType = "commit",
+                                versionOptions = "none",
+                                recursionLevel = "none"
+                            }
+                        },
+                        includeContentMetadata = "true",
+                    },
+                    ResponseResource = "Git.GetItemsBatch",
+                });
+
+            IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
+                () =>
+                {
+                    return client.Git.GetItems(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                        new Tuple<string, ItemFilters>[] {
+                            new Tuple<string, ItemFilters>(
+                                "/MyWebSite/MyWebSite/Views",
+                                new ItemFilters {
+                                    Revision = new Revision("23d0bc5b128a10056dc68afece360d8a0fabb014"),
+                                    RevisionOptions = RevisionOptions.None,
+                                    RecursionLevel = RecursionLevel.OneLevel
+                                }),
+                            new Tuple<string, ItemFilters>(
+                                "/MyWebSite/MyWebSite/Views/Home",
+                                new ItemFilters {
+                                    Revision = new Revision("23d0bc5b128a10056dc68afece360d8a0fabb014"),
+                                }),
+                            new Tuple<string, ItemFilters>(
+                                "/MyWebSite/MyWebSite/Views/Shared",
+                                new ItemFilters {
+                                    Revision = new Revision("23d0bc5b128a10056dc68afece360d8a0fabb014"),
+                                }),
+                            new Tuple<string, ItemFilters>(
+                                "/MyWebSite/MyWebSite/Views/Web.config",
+                                new ItemFilters {
+                                    Revision = new Revision("23d0bc5b128a10056dc68afece360d8a0fabb014"),
+                                }),
+                            new Tuple<string, ItemFilters>(
+                                "/MyWebSite/MyWebSite/Views/_ViewStart.cshtml",
+                                new ItemFilters {
+                                    Revision = new Revision("23d0bc5b128a10056dc68afece360d8a0fabb014"),
+                                }),
+                    }, true);
+                }).ToList();
         }
 
         #endregion
