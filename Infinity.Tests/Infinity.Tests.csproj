@@ -81,6 +81,7 @@
     <None Include="Resources\Git.GetItemFile.json" />
     <None Include="Resources\Git.GetItemFolder.json" />
     <None Include="Resources\Git.GetItemFolderRecursive.json" />
+    <None Include="Resources\Git.GetItemsBatch.json" />
     <None Include="Resources\Git.GetPushCommits.json" />
     <None Include="Resources\Git.GetCommitsPaged.json" />
     <None Include="Resources\Git.GetCommitsToRevision.json" />
@@ -127,7 +128,6 @@
     <None Include="Resources\TeamRoom.GetUsers.json" />
     <None Include="Resources\TeamRoom.UpdateMessage.json" />
     <None Include="Resources\TeamRoom.UpdateRoom.json" />
-    <None Include="Resources\tests" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">

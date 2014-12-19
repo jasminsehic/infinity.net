@@ -251,8 +251,9 @@ namespace Infinity.Clients
         /// <param name="repositoryId">The ID of the repository to query</param>
         /// <param name="path">Path of the item to query</param>
         /// <param name="filters">Filters to provide additional query information</param>
+        /// <param name="includeMetadata">To include item metadata or not</param>
         /// <returns>A list of commits in the Git repository</returns>
-        public async Task<IEnumerable<Item>> GetItem(Guid repositoryId, string path, ItemFilters filters = null)
+        public async Task<IEnumerable<Item>> GetItem(Guid repositoryId, string path, ItemFilters filters = null, bool includeMetadata = false)
         {
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(path, "path");
@@ -268,12 +269,44 @@ namespace Infinity.Clients
                 () => { return filters.RecursionLevel != RecursionLevel.None; },
                 filters.RecursionLevel);
 
-            if (filters.IncludeContentMetadata)
+            if (includeMetadata)
             {
                 request.AddParameter("includeContentMetadata", "true");
             }
 
             Sequence<Item> list = await Executor.Execute<Sequence<Item>>(request);
+            return list.Value;
+        }
+
+        /// <summary>
+        /// Get the items in the repository at the given path.
+        /// </summary>
+        /// <param name="repositoryId">The ID of the repository to query</param>
+        /// <param name="paths">Paths (and filters) of the items to query</param>
+        /// <param name="includeMetadata">True to include item metadata</param>
+        /// <returns>A list of commits in the Git repository</returns>
+        public async Task<IEnumerable<IEnumerable<Item>>> GetItems(Guid repositoryId, IEnumerable<Tuple<string, ItemFilters>> paths, bool includeMetadata = false)
+        {
+            Assert.NotNull(repositoryId, "repositoryId");
+            Assert.NotNull(paths, "paths");
+
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/itemsBatch", Method.POST);
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new
+            {
+                itemDescriptors = paths.Select(x => new { 
+                    path = x.Item1,
+                    version = x.Item2.Revision != null ? x.Item2.Revision.Version : "",
+                    versionType = x.Item2.Revision != null ? x.Item2.Revision.Type.ToString().ToLowerInvariant() : "",
+                    versionOptions = x.Item2.RevisionOptions.ToString().ToLowerInvariant(),
+                    recursionLevel = x.Item2.RecursionLevel.ToString().ToLowerInvariant(),
+                }),
+                includeContentMetadata = includeMetadata ? "true" : "false",
+            });
+
+            Sequence<List<Item>> list = await Executor.Execute<Sequence<List<Item>>>(request);
             return list.Value;
         }
 
