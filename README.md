@@ -1,6 +1,6 @@
 # Infinity.NET
 
-[![Build Status](https://api.travis-ci.org/ethomson/infinity.net.png?branch=master)](http://travis-ci.org/ethomson/infinity.net)
+[![Win32 Build status](https://ci.appveyor.com/api/projects/status/5mx8tbpry8slg7bg?svg=true)](https://ci.appveyor.com/project/ethomson/infinity-net) [![Unix Build Status](https://api.travis-ci.org/ethomson/infinity.net.png?branch=master)](http://travis-ci.org/ethomson/infinity.net)
 
 Infinity.NET is a .NET client library for the [Visual Studio REST API][0],
 providing access to Visual Studio Online and Team Foundation Server 14.0
