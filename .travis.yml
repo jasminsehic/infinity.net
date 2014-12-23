@@ -1,5 +1,9 @@
 language: c
 
+os:
+ - linux
+ - osx
+
 before_install:
  - export EnableNuGetPackageRestore=true
  - export PATH=/opt/mono/bin:$PATH
