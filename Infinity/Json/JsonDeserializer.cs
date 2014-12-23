@@ -245,7 +245,7 @@ namespace Infinity.Util
                 return date;
             }
 
-            if ((date = DateTime.ParseExact(input, formats[0], culture)) != null)
+            if (DateTime.TryParseExact(input, formats[0], culture, DateTimeStyles.None, out date))
             {
                 return date;
             }
