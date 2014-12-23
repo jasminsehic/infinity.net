@@ -23,6 +23,20 @@ servers.
         projects = await client.Project.GetProjects();
     }).Wait();
 
+## Progress
+
+Infinity.NET is a work in progress; it is not yet fully complete.
+Here are the currently implemented client functions:
+
+* Git: 100%
+* Projects and Teams
+  * Projects: 100%
+  * Teams: 100%
+* Team Rooms
+  * Messages: 100%
+  * Rooms: 100%
+  * Users: 100%
+
 ## Unit Tests
 
 The REST APIs are tested by mocking them, using the [Visual Studio
