@@ -1,8 +1,5 @@
 ﻿using System;
 
-using RestSharp;
-using RestSharp.Deserializers;
-
 namespace Infinity.Models
 {
     /// <summary>
@@ -13,11 +10,11 @@ namespace Infinity.Models
         /// <summary>
         /// The ID for this resource
         /// </summary>
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The URL for this resource's link.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
     }
 }

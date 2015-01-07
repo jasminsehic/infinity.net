@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -14,7 +12,7 @@ namespace Infinity.Models
         /// <summary>
         /// The name of the item.
         /// </summary>
-        [DeserializeAs(Name = "FileName")]
+        [JsonProperty("FileName")]
         public string Filename { get; set; }
 
         /// <summary>

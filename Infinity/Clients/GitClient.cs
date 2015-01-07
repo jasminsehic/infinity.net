@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-using RestSharp;
+using Newtonsoft.Json;
 
 using Infinity.Models;
 using Infinity.Util;
@@ -49,10 +49,10 @@ namespace Infinity.Clients
         /// </summary>
         /// <param name="repositoryId">The ID of the repository</param>
         /// <param name="blobId">The object ID of the blob</param>
-        /// <param name="responseWriter">The callback to process the file as a stream.</param>
-        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, Action<Stream> responseWriter)
+        /// <param name="outputStream">The stream to write the response content to asynchronously</param>
+        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, Stream outputStream)
         {
-            await DownloadBlob(repositoryId, blobId, BlobFormat.Raw, responseWriter);
+            await DownloadBlob(repositoryId, blobId, BlobFormat.Raw, outputStream);
         }
 
         /// <summary>
@@ -61,12 +61,12 @@ namespace Infinity.Clients
         /// <param name="repositoryId">The ID of the repository</param>
         /// <param name="blobId">The object ID of the blob</param>
         /// <param name="format">The format to download as</param>
-        /// <param name="responseWriter">The callback to process the file as a stream.</param>
-        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, BlobFormat format, Action<Stream> responseWriter)
+        /// <param name="outputStream">The stream to write the response content to asynchronously</param>
+        public async Task DownloadBlob(Guid repositoryId, ObjectId blobId, BlobFormat format, Stream outputStream)
         {
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(blobId, "blobId");
-            Assert.NotNull(responseWriter, "responseWriter");
+            Assert.NotNull(outputStream, "outputStream");
 
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/blobs/{BlobId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
@@ -83,9 +83,7 @@ namespace Infinity.Clients
                 request.AddHeader("Accept", "application/octet-stream");
             }
 
-            request.ResponseWriter = responseWriter;
-
-            await Executor.Execute(request);
+            await Executor.Execute(request, outputStream);
         }
 
         #endregion
@@ -110,8 +108,6 @@ namespace Infinity.Clients
 
             if (baseRevision != null)
             {
-                request.RequestFormat = DataFormat.Json;
-
                 request.AddBody(new {
                     baseVersionType = baseRevision.Type,
                     baseVersion = baseRevision.Version
@@ -156,8 +152,8 @@ namespace Infinity.Clients
             request.AddOptionalParameter("committer", filters.Committer);
             request.AddOptionalParameter("fromDate", filters.FromDate);
             request.AddOptionalParameter("toDate", filters.ToDate);
-            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
-            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+            request.AddOptionalParameter("$skip", filters.Skip, () => { return filters.Skip > 0; });
+            request.AddOptionalParameter("$top", filters.Count, () => { return filters.Count > 0; });
 
             Sequence<Commit> list = await Executor.Execute<Sequence<Commit>>(request);
             return list.Value;
@@ -175,9 +171,8 @@ namespace Infinity.Clients
         {
             Assert.NotNull("targetRevision", "targetRevision");
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commitsBatch", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commitsBatch", HttpMethod.Post);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.RequestFormat = DataFormat.Json;
 
             if (baseRevision != null)
             {
@@ -209,7 +204,7 @@ namespace Infinity.Clients
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/commits/{CommitId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("CommitId", commitId.ToString());
-            request.AddOptionalParameter("changeCount", () => { return changeCount > 0; }, changeCount);
+            request.AddOptionalParameter("changeCount", changeCount, () => { return changeCount > 0; });
 
             return await Executor.Execute<Commit>(request);
         }
@@ -231,12 +226,12 @@ namespace Infinity.Clients
 
             filters = filters ?? new DiffFilters();
 
-            request.AddOptionalParameter("targetVersionType", () => { return filters.TargetRevision != null; }, filters.TargetRevision.Type.ToString().ToLowerInvariant());
-            request.AddOptionalParameter("targetVersion", () => { return filters.TargetRevision != null; }, filters.TargetRevision.Version);
-            request.AddOptionalParameter("baseVersionType", () => { return filters.BaseRevision != null; }, filters.BaseRevision.Type.ToString().ToLowerInvariant());
-            request.AddOptionalParameter("baseVersion", () => { return filters.BaseRevision != null; }, filters.BaseRevision.Version);
-            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
-            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+            request.AddOptionalParameter("targetVersionType", filters.TargetRevision.Type.ToString().ToLowerInvariant(), () => { return filters.TargetRevision != null; });
+            request.AddOptionalParameter("targetVersion", filters.TargetRevision.Version, () => { return filters.TargetRevision != null; });
+            request.AddOptionalParameter("baseVersionType", filters.BaseRevision.Type.ToString().ToLowerInvariant(), () => { return filters.BaseRevision != null; });
+            request.AddOptionalParameter("baseVersion", filters.BaseRevision.Version, () => { return filters.BaseRevision != null; });
+            request.AddOptionalParameter("$skip", filters.Skip, () => { return filters.Skip > 0; });
+            request.AddOptionalParameter("$top", filters.Count, () => { return filters.Count > 0; });
 
             return await Executor.Execute<Diff>(request);
         }
@@ -266,8 +261,8 @@ namespace Infinity.Clients
             request.AddParameter("scopePath", path);
 
             request.AddOptionalParameter("recursionLevel",
-                () => { return filters.RecursionLevel != RecursionLevel.None; },
-                filters.RecursionLevel);
+                filters.RecursionLevel,
+                () => { return filters.RecursionLevel != RecursionLevel.None; });
 
             if (includeMetadata)
             {
@@ -290,10 +285,9 @@ namespace Infinity.Clients
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(paths, "paths");
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/itemsBatch", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/itemsBatch", HttpMethod.Post);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
 
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
                 itemDescriptors = paths.Select(x => new { 
@@ -342,13 +336,13 @@ namespace Infinity.Clients
 
             filters = filters ?? new PullRequestFilters();
 
-            request.AddOptionalParameter("status", () => { return filters.Status != null; }, filters.Status.ToString().ToLower());
+            request.AddOptionalParameter("status", filters.Status.ToString().ToLower(), () => { return filters.Status != null; });
             request.AddOptionalParameter("creatorId", filters.CreatorId);
             request.AddOptionalParameter("reviewerId", filters.ReviewerId);
             request.AddOptionalParameter("sourceRefName", filters.SourceRefName);
             request.AddOptionalParameter("targetRefName", filters.TargetRefName);
-            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
-            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
+            request.AddOptionalParameter("$top", filters.Count, () => { return filters.Count > 0; });
+            request.AddOptionalParameter("$skip", filters.Skip, () => { return filters.Skip > 0; });
 
             Sequence<PullRequest> list = await Executor.Execute<Sequence<PullRequest>>(request);
             return list.Value;
@@ -377,9 +371,8 @@ namespace Infinity.Clients
                 reviewers = new Guid[0];
             }
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests", HttpMethod.Post);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new {
                 sourceRefName = sourceRefName,
                 targetRefName = targetRefName,
@@ -403,10 +396,9 @@ namespace Infinity.Clients
         {
             Assert.NotNull(lastMergeSourceCommitId, "lastMergeSourceCommitId");
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}", new HttpMethod("PATCH"));
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
                 status = status.ToString().ToLower(),
@@ -459,11 +451,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task<PullRequestReviewer> AddPullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote = PullRequestVote.None)
         {
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.POST);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", HttpMethod.Post);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
                 vote = (int)vote
@@ -481,7 +472,7 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task DeletePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
         {
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", HttpMethod.Delete);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
@@ -499,11 +490,10 @@ namespace Infinity.Clients
         /// <returns>The reviewer for the pull request</returns>
         public async Task<PullRequestReviewer> UpdatePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId, PullRequestVote vote)
         {
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", Method.PUT);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", HttpMethod.Put);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
             request.AddUrlSegment("ReviewerId", reviewerId.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new
             {
                 vote = (int)vote
@@ -553,8 +543,8 @@ namespace Infinity.Clients
             request.AddOptionalParameter("fromDate", filters.FromDate);
             request.AddOptionalParameter("toDate", filters.ToDate);
             request.AddOptionalParameter("pusherId", filters.Pusher);
-            request.AddOptionalParameter("$skip", () => { return filters.Skip > 0; }, filters.Skip);
-            request.AddOptionalParameter("$top", () => { return filters.Count > 0; }, filters.Count);
+            request.AddOptionalParameter("$skip", filters.Skip, () => { return filters.Skip > 0; });
+            request.AddOptionalParameter("$top", filters.Count, () => { return filters.Count > 0; });
 
             Sequence<PushDetails> list = await Executor.Execute<Sequence<PushDetails>>(request);
             return list.Value;
@@ -596,7 +586,7 @@ namespace Infinity.Clients
                 filter = filter.Substring(4);
             }
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", Method.GET);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/refs{Filter}", HttpMethod.Get);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("Filter", filter != null ? filter : "");
 
@@ -676,8 +666,7 @@ namespace Infinity.Clients
             Assert.NotNull(projectId, "projectId");
             Assert.NotNull(name, "name");
 
-            var request = new TfsRestRequest("/_apis/git/repositories", Method.POST);
-            request.RequestFormat = DataFormat.Json;
+            var request = new TfsRestRequest("/_apis/git/repositories", HttpMethod.Post);
             request.AddBody(new { name = name, project = new { id = projectId.ToString() } });
             return await Executor.Execute<Repository>(request);
         }
@@ -693,9 +682,8 @@ namespace Infinity.Clients
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(newName, "newName");
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", new HttpMethod("PATCH"));
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new { name = newName });
             return await Executor.Execute<Repository>(request);
         }
@@ -708,7 +696,7 @@ namespace Infinity.Clients
         {
             Assert.NotNull(repositoryId, "repositoryId");
 
-            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", Method.DELETE);
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}", HttpMethod.Delete);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             await Executor.Execute(request);
         }
@@ -740,21 +728,20 @@ namespace Infinity.Clients
         /// </summary>
         /// <param name="repositoryId">The ID of the repository</param>
         /// <param name="treeId">The object ID of the tree</param>
-        /// <param name="responseWriter">The callback to process the file as a stream.</param>
-        public async Task DownloadTree(Guid repositoryId, ObjectId treeId, Action<Stream> responseWriter)
+        /// <param name="outputStream">The stream to write to asynchronously</param>
+        public async Task DownloadTree(Guid repositoryId, ObjectId treeId, Stream outputStream)
         {
             Assert.NotNull(repositoryId, "repositoryId");
             Assert.NotNull(treeId, "treeId");
-            Assert.NotNull(responseWriter, "responseWriter");
+            Assert.NotNull(outputStream, "outputStream");
 
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/trees/{TreeId}");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
             request.AddUrlSegment("TreeId", treeId.ToString());
             request.AddUrlSegment("$format", "zip");
             request.AddHeader("Accept", "application/zip");
-            request.ResponseWriter = responseWriter;
 
-            await Executor.Execute(request);
+            await Executor.Execute(request, outputStream);
         }
 
         #endregion

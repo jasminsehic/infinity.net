@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -10,21 +11,23 @@ namespace Infinity.Models
         /// <summary>
         /// The name of the reference that was updated.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The repository ID that contained the push.
         /// </summary>
-        public Guid RepositoryId { get; private set; }
+        public Guid RepositoryId { get; set; }
 
         /// <summary>
         /// The object ID before the push.
         /// </summary>
-        public ObjectId OldObjectId { get; private set; }
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId OldObjectId { get; set; }
 
         /// <summary>
         /// The object ID after the push.
         /// </summary>
-        public ObjectId NewObjectId { get; private set; }
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId NewObjectId { get; set; }
     }
 }

@@ -210,14 +210,11 @@ namespace Infinity.Client
 
             Task.Run(async () =>
             {
-                await Client.Git.DownloadTree(repositoryId, treeId, (responseStream) =>
+                using (Stream outputStream = File.Create(filename))
                 {
-                    using (Stream outputStream = File.Create(filename))
-                    {
-                        responseStream.CopyTo(outputStream);
-                        outputStream.Close();
-                    }
-                });
+                    await Client.Git.DownloadTree(repositoryId, treeId, outputStream);
+                    outputStream.Close();
+                }
             }).Wait();
 
             return 0;
@@ -233,7 +230,7 @@ namespace Infinity.Client
 
             Guid repositoryId = new Guid(args[0]);
             ObjectId blobId = new ObjectId(args[1]);
-            string filename = String.Format("{0}.zip", args[1]);
+            string filename = null;
             BlobFormat format = BlobFormat.Raw;
 
             for (int i = 1; i < args.Length; i++)
@@ -273,16 +270,18 @@ namespace Infinity.Client
                 }
             }
 
+            if (filename == null)
+            {
+                filename = (format == BlobFormat.Zip) ? String.Format("{0}", args[1]) : args[1];
+            }
+
             Task.Run(async () =>
             {
-                await Client.Git.DownloadBlob(repositoryId, blobId, format, (responseStream) =>
+                using (Stream outputStream = File.Create(filename))
                 {
-                    using (Stream outputStream = File.Create(filename))
-                    {
-                        responseStream.CopyTo(outputStream);
-                        outputStream.Close();
-                    }
-                });
+                    await Client.Git.DownloadBlob(repositoryId, blobId, format, outputStream);
+                    outputStream.Close();
+                }
             }).Wait();
 
             return 0;

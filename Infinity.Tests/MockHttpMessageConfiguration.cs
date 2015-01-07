@@ -1,26 +1,25 @@
 ﻿using System;
+using System.Net.Http;
 using System.Reflection;
-
-using RestSharp;
-using RestSharp.Serializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Tests
 {
-    public class MockRequestConfiguration
+    public class MockHttpMessageConfiguration
     {
-        public MockRequestConfiguration()
+        public MockHttpMessageConfiguration()
         {
-            Method = Method.GET;
+            Method = HttpMethod.Get;
         }
 
-        public Method Method { get; set; }
+        public HttpMethod Method { get; set; }
         public string Uri { get; set; }
         public string RequestBody { get; set; }
         public object RequestObject
         {
             set
             {
-                RequestBody = new JsonSerializer().Serialize(value);
+                RequestBody = JsonConvert.SerializeObject(value);
             }
         }
         public string ResponseBody { get; set; }

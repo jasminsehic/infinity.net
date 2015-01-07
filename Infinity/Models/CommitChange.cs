@@ -1,5 +1,4 @@
-﻿using RestSharp;
-using RestSharp.Deserializers;
+﻿using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -11,12 +10,12 @@ namespace Infinity.Models
         /// <summary>
         /// The type of change (edit, delete, or add).
         /// </summary>
-        [DeserializeAs(Name = "changeType")]
-        public ChangeType Type { get; private set; }
+        [JsonProperty("changeType")]
+        public ChangeType Type { get; set; }
 
         /// <summary>
         /// The item changed.
         /// </summary>
-        public CommitItem Item { get; private set; }
+        public CommitItem Item { get; set; }
     }
 }

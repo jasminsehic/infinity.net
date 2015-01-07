@@ -11,11 +11,11 @@ namespace Infinity.Models
         /// The value of the vote: 1 for thumbs up, 0 for neutral (or not
         /// voted); -1 for thumbs down
         /// </summary>
-        public int Vote { get; private set; }
+        public int Vote { get; set; }
 
         /// <summary>
         /// The URL of the reviewer.
         /// </summary>
-        public Uri ReviewerUrl { get; private set; }
+        public Uri ReviewerUrl { get; set; }
     }
 }

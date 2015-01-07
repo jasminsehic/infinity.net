@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infinity.Models
+﻿namespace Infinity.Models
 {
     /// <summary>
     /// The capabilities and settings for a Team Project.
@@ -14,11 +8,11 @@ namespace Infinity.Models
         /// <summary>
         /// The version control settings for a Team Project.
         /// </summary>
-        public VersionControlCapabilities VersionControl { get; private set; }
+        public VersionControlCapabilities VersionControl { get; set; }
 
         /// <summary>
         /// The process template settings for a Team Project.
         /// </summary>
-        public ProcessTemplateCapabilities ProcessTemplate { get; private set; }
+        public ProcessTemplateCapabilities ProcessTemplate { get; set; }
     }
 }

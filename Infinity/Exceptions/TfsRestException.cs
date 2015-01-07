@@ -1,6 +1,5 @@
 ﻿using System;
-
-using RestSharp;
+using System.Net.Http;
 
 namespace Infinity.Exceptions
 {
@@ -14,7 +13,7 @@ namespace Infinity.Exceptions
         {
         }
 
-        internal TfsRestException(string message, IRestResponse response)
+        internal TfsRestException(string message, HttpResponseMessage response)
             : base(message)
         {
             Response = response;
@@ -23,7 +22,7 @@ namespace Infinity.Exceptions
         /// <summary>
         /// The REST response that led to the failure.
         /// </summary>
-        public IRestResponse Response
+        public HttpResponseMessage Response
         {
             get;
             private set;

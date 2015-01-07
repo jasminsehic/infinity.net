@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-using RestSharp;
+using Newtonsoft.Json;
 using Xunit;
 
 using Infinity;
@@ -16,15 +16,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetRooms()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms?api-version=1.0",
                     ResponseResource = "TeamRoom.GetRooms",
                 });
 
             IList<TeamRoom> rooms = base.ExecuteSync<IEnumerable<TeamRoom>>(
-                () => { return client.TeamRoom.GetRooms(); }).ToList();
+                () => { return NewMockClient().TeamRoom.GetRooms(); }).ToList();
 
             Assert.Equal(5, rooms.Count);
 
@@ -92,15 +92,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/4207?api-version=1.0",
                     ResponseResource = "TeamRoom.GetRoom",
                 });
 
             TeamRoom room = base.ExecuteSync<TeamRoom>(
-                () => { return client.TeamRoom.GetRoom(4207); });
+                () => { return NewMockClient().TeamRoom.GetRoom(4207); });
 
             Assert.Equal("Chuck Reinhart", room.CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), room.CreatedBy.Id);
@@ -118,11 +118,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_CreateRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new {
                         name = "newCreatedRoom",
                         description = "used for API doc generation"
@@ -131,7 +131,7 @@ namespace Infinity.Tests.Models
                 });
 
             TeamRoom room = base.ExecuteSync<TeamRoom>(
-                () => { return client.TeamRoom.CreateRoom("newCreatedRoom", "used for API doc generation"); });
+                () => { return NewMockClient().TeamRoom.CreateRoom("newCreatedRoom", "used for API doc generation"); });
 
             Assert.Equal("Chuck Reinhart", room.CreatedBy.DisplayName);
             Assert.Equal(new Guid("8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), room.CreatedBy.Id);
@@ -149,11 +149,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_UpdateRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/431?api-version=1.0",
-                    Method = RestSharp.Method.PATCH,
+                    Method = new HttpMethod("PATCH"),
                     RequestObject = new
                     {
                         name = "renamedRoom",
@@ -163,7 +163,7 @@ namespace Infinity.Tests.Models
                 });
 
             TeamRoom room = base.ExecuteSync<TeamRoom>(
-                () => { return client.TeamRoom.UpdateRoom(431, "renamedRoom", "updated room description"); });
+                () => { return NewMockClient().TeamRoom.UpdateRoom(431, "renamedRoom", "updated room description"); });
 
             Assert.Equal("Jamal Hartnett", room.CreatedBy.DisplayName);
             Assert.Equal(new Guid("d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), room.CreatedBy.Id);
@@ -181,25 +181,25 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_DeleteRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/431?api-version=1.0",
-                    Method = RestSharp.Method.DELETE
+                    Method = HttpMethod.Delete
                 });
 
             base.ExecuteSync(
-                () => { return client.TeamRoom.DeleteRoom(431); });
+                () => { return NewMockClient().TeamRoom.DeleteRoom(431); });
         }
 
         [Fact]
         public void TeamRoom_CreateMessage()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/305/messages?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         content = "Here's a new message"
@@ -208,7 +208,7 @@ namespace Infinity.Tests.Models
                 });
 
             TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
-                () => { return client.TeamRoom.CreateMessage(305, "Here's a new message"); });
+                () => { return NewMockClient().TeamRoom.CreateMessage(305, "Here's a new message"); });
 
             Assert.Equal("Here's a new message", message.Content);
             Assert.Equal(83626, message.Id);
@@ -224,15 +224,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetMessages()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/305/messages?api-version=1.0",
                     ResponseBody = "{ \"count\": 0, \"value\": [] }",
                 });
 
             IList<TeamRoomMessage> rooms = base.ExecuteSync<IEnumerable<TeamRoomMessage>>(
-                () => { return client.TeamRoom.GetMessages(305); }).ToList();
+                () => { return NewMockClient().TeamRoom.GetMessages(305); }).ToList();
 
             Assert.Equal(0, rooms.Count);
         }
@@ -240,15 +240,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetMessagesWithDateRange()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
-                    Uri = "/_apis/chat/rooms/2/messages?api-version=1.0&$filter=postedtime ge 10/06/2014",
+                    Uri = "/_apis/chat/rooms/2/messages?api-version=1.0&$filter=postedtime%20ge%2010/06/2014",
                     ResponseResource = "TeamRoom.GetMessages"
                 });
 
             IList<TeamRoomMessage> messages = base.ExecuteSync<IEnumerable<TeamRoomMessage>>(
-                () => { return client.TeamRoom.GetMessages(2, "postedtime ge 10/06/2014"); }).ToList();
+                () => { return NewMockClient().TeamRoom.GetMessages(2, "postedtime ge 10/06/2014"); }).ToList();
 
             Assert.Equal(4, messages.Count);
 
@@ -296,15 +296,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetMessage()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/2/messages/305?api-version=1.0",
                     ResponseResource = "TeamRoom.GetMessage"
                 });
 
             TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
-                () => { return client.TeamRoom.GetMessage(2, 305); });
+                () => { return NewMockClient().TeamRoom.GetMessage(2, 305); });
 
             Assert.Equal("This is a test with an emoticon.  (d)", message.Content);
             Assert.Equal(74017, message.Id);
@@ -320,17 +320,17 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_UpdateMessage()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/305/messages/83626?api-version=1.0",
-                    Method = RestSharp.Method.PATCH,
+                    Method = new HttpMethod("PATCH"),
                     RequestObject = new { content = "Updated message" },
                     ResponseResource = "TeamRoom.UpdateMessage",
                 });
 
             TeamRoomMessage message = base.ExecuteSync<TeamRoomMessage>(
-                () => { return client.TeamRoom.UpdateMessage(305, 83626, "Updated message"); });
+                () => { return NewMockClient().TeamRoom.UpdateMessage(305, 83626, "Updated message"); });
 
             Assert.Equal("Updated message", message.Content);
             Assert.Equal(83626, message.Id);
@@ -346,58 +346,58 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_DeleteMessage()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/305/messages/83626?api-version=1.0",
-                    Method = RestSharp.Method.DELETE,
+                    Method = HttpMethod.Delete,
                 });
 
             base.ExecuteSync(
-                () => { return client.TeamRoom.DeleteMessage(305, 83626); });
+                () => { return NewMockClient().TeamRoom.DeleteMessage(305, 83626); });
         }
 
         [Fact]
         public void TeamRoom_JoinRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d?api-version=1.0",
-                    Method = RestSharp.Method.PUT,
+                    Method = HttpMethod.Put,
                     RequestObject = new { userId = "6db828be-599b-4214-a11d-93067d90744d" },
                 });
 
             base.ExecuteSync(
-                () => { return client.TeamRoom.JoinRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
+                () => { return NewMockClient().TeamRoom.JoinRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
         }
 
         [Fact]
         public void TeamRoom_LeaveRoom()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/2/users/6db828be-599b-4214-a11d-93067d90744d?api-version=1.0",
-                    Method = RestSharp.Method.DELETE,
+                    Method = HttpMethod.Delete,
                 });
 
             base.ExecuteSync(
-                () => { return client.TeamRoom.LeaveRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
+                () => { return NewMockClient().TeamRoom.LeaveRoom(2, new Guid("6db828be-599b-4214-a11d-93067d90744d")); });
         }
 
         [Fact]
         public void TeamRoom_GetUsers()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/6522/users?api-version=1.0",
                     ResponseResource = "TeamRoom.GetUsers"
                 });
 
             IList<TeamRoomUserDetails> users = base.ExecuteSync<IEnumerable<TeamRoomUserDetails>>(
-                () => { return client.TeamRoom.GetUsers(6522); }).ToList();
+                () => { return NewMockClient().TeamRoom.GetUsers(6522); }).ToList();
 
             Assert.Equal(1, users.Count);
 
@@ -414,15 +414,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void TeamRoom_GetUser()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/chat/rooms/6522/users/fd19aec1-3119-4671-80d7-5dcc4943211d?api-version=1.0",
                     ResponseResource = "TeamRoom.GetUser"
                 });
 
             TeamRoomUserDetails user = base.ExecuteSync<TeamRoomUserDetails>(
-                () => { return client.TeamRoom.GetUser(6522, new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d")); });
+                () => { return NewMockClient().TeamRoom.GetUser(6522, new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d")); });
 
             Assert.Equal(true, user.IsOnline);
             Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 26, 167, DateTimeKind.Utc), user.JoinedDate);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-using RestSharp;
-using RestSharp.Deserializers;
+using Infinity.Util;
 
 namespace Infinity.Models
 {
@@ -14,64 +14,67 @@ namespace Infinity.Models
         /// <summary>
         /// The commit ID.
         /// </summary>
-        [DeserializeAs(Name = "CommitId")]
-        public ObjectId Id { get; private set; }
+        [JsonProperty("CommitId")]
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// The parents of the commit.
         /// </summary>
-        public List<ObjectId> Parents { get; private set; }
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public List<ObjectId> Parents { get; set; }
 
         /// <summary>
         /// The tree that makes up this commit.
         /// </summary>
-        public ObjectId TreeId { get; private set; }
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId TreeId { get; set; }
 
         /// <summary>
         /// The signature of the person who placed these changes in the
         /// repository.
         /// </summary>
-        public Signature Committer { get; private set; }
+        public Signature Committer { get; set; }
 
         /// <summary>
         /// The signature of the person who authored these changes.
         /// </summary>
-        public Signature Author { get; private set; }
+        public Signature Author { get; set; }
 
         /// <summary>
         /// The commit message.
         /// </summary>
-        public string Comment { get; private set; }
+        public string Comment { get; set; }
 
         /// <summary>
         /// Information about who pushed this commit.
         /// </summary>
-        public PushDetails Push { get; private set; }
+        public PushDetails Push { get; set; }
 
         /// <summary>
         /// Information about the changes in this commit.
         /// </summary>
-        public CommitChangeCounts ChangeCounts { get; private set; }
+        public CommitChangeCounts ChangeCounts { get; set; }
 
         /// <summary>
         /// List of the changes in this commit.
         /// </summary>
-        public List<CommitChange> Changes { get; private set; }
+        public List<CommitChange> Changes { get; set; }
 
         /// <summary>
         /// The URL for this commit information.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// The URL to display the commit information in the web.
         /// </summary>
-        public Uri RemoteUrl { get; private set; }
+        public Uri RemoteUrl { get; set; }
 
         /// <summary>
         /// Links to REST resources.
         /// </summary>
-        [DeserializeAs(Name = "_links")]
-        public CommitLinks Links { get; private set; }    
+        [JsonProperty("_links")]
+        public CommitLinks Links { get; set; }    
     }
 }

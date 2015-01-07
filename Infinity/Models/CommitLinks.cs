@@ -8,26 +8,26 @@
         /// <summary>
         /// Link to the Team Project's REST API endpoint.
         /// </summary>
-        public LinkUrl Self { get; private set; }
+        public LinkUrl Self { get; set; }
 
         /// <summary>
         /// Link to the Git Repository REST API endpoint.
         /// </summary>
-        public LinkUrl Repository { get; private set; }
+        public LinkUrl Repository { get; set; }
 
         /// <summary>
         /// Link to the Git Repository's changes REST API endpoint.
         /// </summary>
-        public LinkUrl Changes { get; private set; }
+        public LinkUrl Changes { get; set; }
 
         /// <summary>
         /// Link to the Git Tree's REST API endpoint.
         /// </summary>
-        public LinkUrl Tree { get; private set; }
+        public LinkUrl Tree { get; set; }
 
         /// <summary>
         /// Link to the web access portal for this Team Project.
         /// </summary>
-        public LinkUrl Web { get; private set; }
+        public LinkUrl Web { get; set; }
     }
 }

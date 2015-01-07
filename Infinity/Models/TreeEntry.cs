@@ -1,7 +1,5 @@
 ﻿using System;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -13,33 +11,34 @@ namespace Infinity.Models
         /// <summary>
         /// The Git object ID for this tree entry.
         /// </summary>
-        [DeserializeAs(Name = "ObjectId")]
-        public ObjectId Id { get; private set; }
+        [JsonProperty("ObjectId")]
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// The name of the entry in the tree.
         /// </summary>
-        public string RelativePath { get; private set; }
+        public string RelativePath { get; set; }
 
         /// <summary>
         /// The mode of the tree entry.
         /// </summary>
-        public int Mode { get; private set; }
+        public int Mode { get; set; }
 
         /// <summary>
         /// The type of the tree entry.
         /// </summary>
-        [DeserializeAs(Name = "gitObjectType")]
-        public ObjectType Type { get; private set; }
+        [JsonProperty("gitObjectType")]
+        public ObjectType Type { get; set; }
 
         /// <summary>
         /// The URL of this tree's REST endpoint
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// The size of the tree as a serialized Git object.
         /// </summary>
-        public int Size { get; private set; }
+        public int Size { get; set; }
     }
 }

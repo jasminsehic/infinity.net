@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-using RestSharp;
 
 using Infinity.Models;
 using Infinity.Util;
@@ -116,9 +115,8 @@ namespace Infinity.Clients
             Assert.NotNull(id, "id");
             Assert.NotNull(description, "description");
 
-            var request = new TfsRestRequest("/_apis/projects/{ProjectId}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/projects/{ProjectId}", new HttpMethod("PATCH"));
             request.AddUrlSegment("ProjectId", id.ToString());
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);
         }
@@ -134,9 +132,8 @@ namespace Infinity.Clients
             Assert.NotNull(name, "name");
             Assert.NotNull(description, "description");
 
-            var request = new TfsRestRequest("/_apis/projects/{Name}", Method.PATCH);
+            var request = new TfsRestRequest("/_apis/projects/{Name}", new HttpMethod("PATCH"));
             request.AddUrlSegment("Name", name);
-            request.RequestFormat = DataFormat.Json;
             request.AddBody(new { description = description });
             return await Executor.Execute<Project>(request);
         }

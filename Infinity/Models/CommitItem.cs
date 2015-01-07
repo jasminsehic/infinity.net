@@ -1,7 +1,5 @@
 ﻿using System;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -13,27 +11,28 @@ namespace Infinity.Models
         /// <summary>
         /// The type of object changed (blob or tree).
         /// </summary>
-        [DeserializeAs(Name = "gitObjectType")]
-        public ObjectType Type { get; private set; }
+        [JsonProperty("gitObjectType")]
+        public ObjectType Type { get; set; }
 
         /// <summary>
         /// Whether the item is a folder.
         /// </summary>
-        public bool IsFolder { get; private set; }
+        public bool IsFolder { get; set; }
 
         /// <summary>
         /// The path to the changed item.
         /// </summary>
-        public string Path { get; private set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// The commit ID that changed this item.
         /// </summary>
-        public ObjectId CommitId { get; private set; }
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId CommitId { get; set; }
 
         /// <summary>
         /// The URL of the REST endpoint of the changed item.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-using RestSharp;
 using Xunit;
-using Moq;
 
 using Infinity;
 using Infinity.Models;
@@ -17,15 +15,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Project_GetProjects()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects?api-version=1.0",
                     ResponseResource = "Project.GetProjects",
                 });
 
             IList<Project> projects = base.ExecuteSync<IEnumerable<Project>>(
-                () => { return client.Project.GetProjects(); }).ToList();
+                () => { return NewMockClient().Project.GetProjects(); }).ToList();
 
             Assert.Equal(3, projects.Count);
 
@@ -48,15 +46,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Project_GetProject()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects/fabrikam-fiber-tfvc?api-version=1.0",
                     ResponseResource = "Project.GetProject",
                 });
 
             Project project = base.ExecuteSync<Project>(
-                () => { return client.Project.GetProject("fabrikam-fiber-tfvc"); });
+                () => { return NewMockClient().Project.GetProject("fabrikam-fiber-tfvc"); });
 
             Assert.Equal(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Id);
             Assert.Equal("Fabrikam-Fiber-TFVC", project.Name);
@@ -76,15 +74,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Project_GetProjectWithCapabilities()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects/fabrikam-fiber-tfvc?api-version=1.0&includecapabilities=true",
                     ResponseResource = "Project.GetProjectWithCapabilities",
                 });
 
             Project project = base.ExecuteSync<Project>(
-                () => { return client.Project.GetProject("fabrikam-fiber-tfvc", true); });
+                () => { return NewMockClient().Project.GetProject("fabrikam-fiber-tfvc", true); });
 
             Assert.Equal(new Guid("98dd5ded-8110-459b-8241-3d12b2eeaf18"), project.Id);
             Assert.Equal("FabrikamWeather", project.Name);
@@ -103,17 +101,17 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Project_UpdateProject()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
-                    Method = RestSharp.Method.PATCH,
+                    Method = new HttpMethod("PATCH"),
                     Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1?api-version=1.0",
                     RequestObject = new { description = "Team Foundation Version Control projects." },
                     ResponseResource = "Project.UpdateProject",
                 });
 
             Project project = base.ExecuteSync<Project>(
-                () => { return client.Project.UpdateProject(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), "Team Foundation Version Control projects."); });
+                () => { return NewMockClient().Project.UpdateProject(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), "Team Foundation Version Control projects."); });
 
             Assert.Equal(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), project.Id);
             Assert.Equal("Fabrikam-Fiber-TFVC", project.Name);

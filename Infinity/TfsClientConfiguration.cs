@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Infinity
 {
@@ -17,8 +18,7 @@ namespace Infinity
         internal TfsClientConfiguration(TfsClientConfiguration original)
         {
             Url = original.Url;
-            Username = original.Username;
-            Password = original.Password;
+            Credentials = new NetworkCredential(original.Credentials.UserName, original.Credentials.Password, original.Credentials.Domain);
             UserAgent = original.UserAgent;
         }
 
@@ -37,22 +37,12 @@ namespace Infinity
         }
 
         /// <summary>
-        /// The username to authenticate with.  For Visual Studio Online,
+        /// The credentials to authenticate with.  For Visual Studio Online,
         /// this should be the username of the "alternate credentials"
         /// that you have configured for your account.  For on-premises
-        /// servers, you may leave this blank to perform Integrated
-        /// Windows Authentication, or you may set this to a domain user.
+        /// servers, you may specify credentials or use default.
         /// </summary>
-        public string Username
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The password to authenticate with.
-        /// </summary>
-        public string Password
+        public NetworkCredential Credentials
         {
             get;
             set;

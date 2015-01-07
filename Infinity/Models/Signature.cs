@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infinity.Models
 {
@@ -15,17 +11,17 @@ namespace Infinity.Models
         /// <summary>
         /// The name of the person who authored or committed the change.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The email address of the person who authored or committed the
         /// change.
         /// </summary>
-        public string Email { get; private set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// The date the change was authored or committed.
         /// </summary>
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -14,23 +11,24 @@ namespace Infinity.Models
         /// <summary>
         /// The Git object ID for this blob.
         /// </summary>
-        [DeserializeAs(Name = "ObjectId")]
-        public ObjectId Id { get; private set; }
+        [JsonProperty("ObjectId")]
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// The size of the Git blob.
         /// </summary>
-        public long Size { get; private set; }
+        public long Size { get; set; }
 
         /// <summary>
         /// The URL of this blob's REST endpoint
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Links to other blob resources.
         /// </summary>
-        [DeserializeAs(Name = "_links")]
-        public BlobLinks Links { get; private set; }
+        [JsonProperty("_links")]
+        public BlobLinks Links { get; set; }
     }
 }

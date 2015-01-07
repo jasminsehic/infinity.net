@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infinity.Models
+﻿namespace Infinity.Models
 {
     /// <summary>
     /// The type of change to a file in a commit.
