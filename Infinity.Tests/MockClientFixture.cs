@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-
-using RestSharp;
 using Xunit;
-using Moq;
 
 using Infinity;
 using Infinity.Models;
 
 namespace Infinity.Tests
 {
-    public abstract class MockClientFixture
+    public abstract class MockClientFixture : IDisposable
     {
-        protected TfsClient NewMockClient(params MockRequestConfiguration[] configuration)
+        private MockHttpMessageHandler messageHandler = new MockHttpMessageHandler();
+
+        protected MockHttpMessageHandler MessageHandler
         {
-            MockClientExecutor mockExecutor = new MockClientExecutor(configuration);
-            return new TfsClient(mockExecutor);
+            get
+            {
+                return messageHandler;
+            }
+        }
+
+        protected TfsClient NewMockClient()
+        {
+            TfsClientExecutor tfsExecutor = new TfsClientExecutor(new TfsClientConfiguration
+            {
+                Url = new Uri("https://mock.contoso.com/"),
+            });
+            tfsExecutor.MessageHandler = messageHandler;
+            return new TfsClient(tfsExecutor);
         }
 
         public delegate T SyncTask<T>();
@@ -41,6 +52,11 @@ namespace Infinity.Tests
             {
                 await task();
             }).Wait();
+        }
+
+        public void Dispose()
+        {
+            messageHandler.Dispose();
         }
     }
 }

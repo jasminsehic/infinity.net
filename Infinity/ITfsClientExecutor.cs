@@ -1,8 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-using RestSharp;
 
 [assembly: InternalsVisibleTo("Infinity.Tests")]
 namespace Infinity
@@ -11,5 +10,6 @@ namespace Infinity
     {
         Task<T> Execute<T>(TfsRestRequest request) where T : new();
         Task Execute(TfsRestRequest request);
+        Task Execute(TfsRestRequest request, Stream outputStream);
     }
 }

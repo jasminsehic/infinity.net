@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-using Infinity.Json;
 using Infinity.Util;
 
 namespace Infinity.Models
@@ -12,7 +12,6 @@ namespace Infinity.Models
     /// <summary>
     /// A SHA-1 ID of a Git object.
     /// </summary>
-    [JsonDeserializable]
     public class ObjectId
     {
         private const int Length = 20;
@@ -126,6 +125,50 @@ namespace Infinity.Models
         public override int GetHashCode()
         {
             return id[0] << 24 | id[1] << 16 | id[2] << 8 | id[3];
+        }
+
+        internal class JsonConverter : Newtonsoft.Json.JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return (typeof(ObjectId).Equals(objectType) ||
+                    typeof(IEnumerable<ObjectId>).Equals(objectType) ||
+                    typeof(IList<ObjectId>).Equals(objectType) ||
+                    typeof(List<ObjectId>).Equals(objectType));
+            }
+
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer)
+            {
+                if (typeof(IEnumerable<ObjectId>).Equals(objectType) ||
+                    typeof(IList<ObjectId>).Equals(objectType) ||
+                    typeof(List<ObjectId>).Equals(objectType))
+                {
+                    List<ObjectId> result = new List<ObjectId>();
+
+                    foreach (string id in (IEnumerable<string>)serializer.Deserialize(reader, typeof(IEnumerable<string>)))
+                    {
+                        result.Add(new ObjectId(id));
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    return new ObjectId((String)reader.Value);
+                }
+            }
+
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

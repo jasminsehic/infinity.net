@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using RestSharp;
-
 using Infinity.Models;
 using Infinity.Util;
 

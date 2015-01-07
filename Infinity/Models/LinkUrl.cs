@@ -1,7 +1,5 @@
 ﻿using System;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -13,7 +11,7 @@ namespace Infinity.Models
         /// <summary>
         /// The URL for this resource's link.
         /// </summary>
-        [DeserializeAs(Name = "href")]
+        [JsonProperty("href")]
         public Uri Url { get; private set; }
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RestSharp;
-using RestSharp.Deserializers;
+﻿using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -18,7 +11,7 @@ namespace Infinity.Models
         /// The type of version control for this Team Project
         /// (TFVC or Git).
         /// </summary>
-        [DeserializeAs(Name = "sourceControlType")]
-        public VersionControlType VersionControlType { get; private set; }
+        [JsonProperty("sourceControlType")]
+        public VersionControlType VersionControlType { get; set; }
     }
 }

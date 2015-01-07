@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using RestSharp;
 using Xunit;
 
 using Infinity;
@@ -16,15 +14,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Team_GetTeams()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams?api-version=1.0",
                     ResponseResource = "Team.GetTeams",
                 });
 
-            IList<Team> teams = base.ExecuteSync<IEnumerable<Team>>(
-                () => { return client.Team.GetTeams(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1")); }).ToList();
+            IList<Team> teams = ExecuteSync<IEnumerable<Team>>(
+                () => { return NewMockClient().Team.GetTeams(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1")); }).ToList();
 
             Assert.Equal(2, teams.Count);
 
@@ -44,15 +42,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Team_GetTeam()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca?api-version=1.0",
                     ResponseResource = "Team.GetTeam",
                 });
 
             Team team = base.ExecuteSync<Team>(
-                () => { return client.Team.GetTeam(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), new Guid("564e8204-a90b-4432-883b-d4363c6125ca")); });
+                () => { return NewMockClient().Team.GetTeam(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), new Guid("564e8204-a90b-4432-883b-d4363c6125ca")); });
 
             Assert.Equal(new Guid("564e8204-a90b-4432-883b-d4363c6125ca"), team.Id);
             Assert.Equal("Quality assurance", team.Name);
@@ -64,15 +62,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Team_GetTeamMembers()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca/members?api-version=1.0",
                     ResponseResource = "Team.GetTeamMembers",
                 });
 
             IList<Identity> members = base.ExecuteSync<IEnumerable<Identity>>(
-                () => { return client.Team.GetTeamMembers(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), new Guid("564e8204-a90b-4432-883b-d4363c6125ca")); }).ToList();
+                () => { return NewMockClient().Team.GetTeamMembers(new Guid("eb6e4656-77fc-42a1-9181-4c6d8e9da5d1"), new Guid("564e8204-a90b-4432-883b-d4363c6125ca")); }).ToList();
 
             Assert.Equal(3, members.Count);
 

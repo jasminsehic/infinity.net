@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 
 using Infinity;
@@ -80,6 +81,7 @@ namespace Infinity.Client
             ref string[] commandArgs)
         {
             List<string> commandArgList = new List<string>();
+            string username = null, password = null;
             int i = 0;
 
             if (args.Length < 2)
@@ -97,12 +99,12 @@ namespace Infinity.Client
                     if (options[0] != null &&
                         options[0].Equals("username", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        clientConfiguration.Username = options[1];
+                        username = options[1];
                     }
                     else if (options[0] != null && 
                         options[0].Equals("password", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        clientConfiguration.Password = options[1];
+                        password = options[1];
                     }
                     else if (options[0] != null && 
                         options[0].Equals("useragent", StringComparison.InvariantCultureIgnoreCase))
@@ -132,6 +134,11 @@ namespace Infinity.Client
                 {
                     commandArgList.Add(args[i]);
                 }
+            }
+
+            if (username != null || password != null)
+            {
+                clientConfiguration.Credentials = new NetworkCredential(username, password);
             }
 
             commandArgs = commandArgList.ToArray();

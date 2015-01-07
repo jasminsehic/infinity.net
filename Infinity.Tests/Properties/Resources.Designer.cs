@@ -10,6 +10,7 @@
 
 namespace Infinity.Tests.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace Infinity.Tests.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infinity.Tests.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infinity.Tests.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,612 +62,1275 @@ namespace Infinity.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;reviewerUrl&quot;: null,
+        ///  &quot;vote&quot;: 0,
+        ///  &quot;id&quot;: &quot;19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;displayName&quot;: &quot;Johnnie McLeod&quot;,
+        ///  &quot;uniqueName&quot;: &quot;fabrikamfiber2@hotmail.com&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_AddPullRequestReviewer {
+        internal static string Git_AddPullRequestReviewer {
             get {
-                object obj = ResourceManager.GetObject("Git_AddPullRequestReviewer", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_AddPullRequestReviewer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;repository&quot;: {
+        ///    &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///  },
+        ///  &quot;pullRequestId&quot;: 50,
+        ///  &quot;status&quot;: &quot;active&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///    &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-81 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_CreatePullRequest {
+        internal static string Git_CreatePullRequest {
             get {
-                object obj = ResourceManager.GetObject("Git_CreatePullRequest", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_CreatePullRequest", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;name&quot;: &quot;AnotherRepository&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;project&quot;: {
+        ///    &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///    &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;
+        ///  },
+        ///  &quot;remoteUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_CreateRepository {
+        internal static string Git_CreateRepository {
             get {
-                object obj = ResourceManager.GetObject("Git_CreateRepository", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_CreateRepository", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;objectId&quot;: &quot;61a86fdaa79e5c6f5fb6e4026508489feb6ed92c&quot;,
+        ///  &quot;size&quot;: 1486,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c&quot;,
+        ///  &quot;_links&quot;: {
+        ///    &quot;self&quot;: {
+        ///      &quot;href&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c&quot;
+        ///    },
+        ///    &quot;repository&quot;: {
+        ///      &quot;href&quot;: &quot;https://fab [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetBlob {
+        internal static string Git_GetBlob {
             get {
-                object obj = ResourceManager.GetObject("Git_GetBlob", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetBlob", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;commit&quot;: {
+        ///    &quot;commitId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///    &quot;author&quot;: {
+        ///      &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///    },
+        ///    &quot;committer&quot;: {
+        ///      &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///    },
+        ///    &quot;comment&quot;: &quot;home page&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetBranchStatistics {
+        internal static string Git_GetBranchStatistics {
             get {
-                object obj = ResourceManager.GetObject("Git_GetBranchStatistics", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetBranchStatistics", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;commit&quot;: {
+        ///    &quot;parents&quot;: [
+        ///      &quot;be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4&quot;
+        ///    ],
+        ///    &quot;treeId&quot;: &quot;f9a2a90cbeac747fff9dadcf77ff5bcd12b65a44&quot;,
+        ///    &quot;commitId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///    &quot;author&quot;: {
+        ///      &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///    },
+        ///    &quot;committer&quot;: {
+        ///      &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///    },
+        ///    &quot;commen [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetBranchStatistics1 {
+        internal static string Git_GetBranchStatisticsAgainstVersion {
             get {
-                object obj = ResourceManager.GetObject("Git_GetBranchStatistics1", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetBranchStatisticsAgainstVersion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commit&quot;: {
+        ///        &quot;commitId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///        &quot;author&quot;: {
+        ///          &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///          &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///          &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///        },
+        ///        &quot;committer&quot;: {
+        ///          &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///          &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///          &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///        },
+        ///        &quot;comment&quot;: &quot;home page&quot;,
+        ///        &quot;url&quot;: &quot;https://fabri [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetBranchStatisticsAgainstVersion {
+        internal static string Git_GetBranchStatisticsForAllBranches {
             get {
-                object obj = ResourceManager.GetObject("Git_GetBranchStatisticsAgainstVersion", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetBranchStatisticsForAllBranches", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;parents&quot;: [],
+        ///  &quot;treeId&quot;: &quot;7fa1a3523ffef51c525ea476bffff7d648b8cb3d&quot;,
+        ///  &quot;push&quot;: {
+        ///    &quot;pushedBy&quot;: {
+        ///      &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///      &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;uniqueName&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///      &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetBranchStatisticsForAllBranches {
+        internal static string Git_GetCommit {
             get {
-                object obj = ResourceManager.GetObject("Git_GetBranchStatisticsForAllBranches", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 19,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T18:10:55Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T18:10:55Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;Better description for hello world&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommit {
+        internal static string Git_GetCommits {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommit", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommits", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 17,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T18:10:55Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T18:10:55Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;Better description for hello world&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommits {
+        internal static string Git_GetCommitsBetweenTwoRevisions {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommits", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsBetweenTwoRevisions", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 4,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;097d82b8aeabe493bf4c3553d320ae2529bba591&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-09T21:43:25Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-09T21:43:25Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;fix registration page&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///      },
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsBetweenTwoRevisions {
+        internal static string Git_GetCommitsByCommitter {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsBetweenTwoRevisions", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsByCommitter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:32:09Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:32:09Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;First cut&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Add&quot;: 305
+        ///      },
+        ///      &quot;url&quot;: &quot;htt [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsByCommitter {
+        internal static string Git_GetCommitsByDate {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsByCommitter", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsByDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 2,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;home page&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///      },
+        ///      &quot;url&quot;: &quot;http [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsByDate {
+        internal static string Git_GetCommitsByItem {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsByDate", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsByItem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 2,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T17:51:09Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Norman Paulk&quot;,
+        ///        &quot;email&quot;: &quot;Fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-06-30T17:51:09Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;Better description for hello world&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///      [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsByItem {
+        internal static string Git_GetCommitsPaged {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsByItem", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsPaged", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 2,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:52:56Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;home page&quot;,
+        ///      &quot;changeCounts&quot;: {
+        ///        &quot;Edit&quot;: 1
+        ///      },
+        ///      &quot;url&quot;: &quot;http [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsPaged {
+        internal static string Git_GetCommitsToRevision {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsPaged", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitsToRevision", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;parents&quot;: [],
+        ///  &quot;treeId&quot;: &quot;7fa1a3523ffef51c525ea476bffff7d648b8cb3d&quot;,
+        ///  &quot;push&quot;: {
+        ///    &quot;pushedBy&quot;: {
+        ///      &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///      &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;uniqueName&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///      &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitsToRevision {
+        internal static string Git_GetCommitWithChangedItems {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitsToRevision", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetCommitWithChangedItems", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;allChangesIncluded&quot;: true,
+        ///  &quot;changeCounts&quot;: {
+        ///    &quot;Add&quot;: 24,
+        ///    &quot;Edit&quot;: 6
+        ///  },
+        ///  &quot;changes&quot;: [
+        ///    {
+        ///      &quot;item&quot;: {
+        ///        &quot;gitObjectType&quot;: &quot;tree&quot;,
+        ///        &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///        &quot;path&quot;: &quot;/CustomerAddressModule&quot;,
+        ///        &quot;isFolder&quot;: true,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/CustomerAddressModule?versionType=Commit&amp;amp;version=23d0bc5b128a10056dc68afe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetCommitWithChangedItems {
+        internal static string Git_GetDiff {
             get {
-                object obj = ResourceManager.GetObject("Git_GetCommitWithChangedItems", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetDiff", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;objectId&quot;: &quot;61a86fdaa79e5c6f5fb6e4026508489feb6ed92c&quot;,
+        ///      &quot;gitObjectType&quot;: &quot;blob&quot;,
+        ///      &quot;commitId&quot;: &quot;03b1b831e41df536d836c95e2f68a42db4f3e0db&quot;,
+        ///      &quot;path&quot;: &quot;/MyWebSite/MyWebSite/Views/Home/_Home.cshtml&quot;
+        ///    }
+        ///  ]
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_GetDiff {
+        internal static string Git_GetItemFile {
             get {
-                object obj = ResourceManager.GetObject("Git_GetDiff", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetItemFile", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;objectId&quot;: &quot;d1d5c2d49045d52bba6419652d6ecb2cd560dc29&quot;,
+        ///      &quot;gitObjectType&quot;: &quot;tree&quot;,
+        ///      &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///      &quot;path&quot;: &quot;/MyWebSite/MyWebSite/Views&quot;,
+        ///      &quot;isFolder&quot;: true,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views?versionType=Branch&amp;amp;versionOptions=None&quot;
+        ///    }
+        ///  ]
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_GetItemFile {
+        internal static string Git_GetItemFolder {
             get {
-                object obj = ResourceManager.GetObject("Git_GetItemFile", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetItemFolder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 13,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;objectId&quot;: &quot;d1d5c2d49045d52bba6419652d6ecb2cd560dc29&quot;,
+        ///      &quot;gitObjectType&quot;: &quot;tree&quot;,
+        ///      &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///      &quot;path&quot;: &quot;/MyWebSite/MyWebSite/Views&quot;,
+        ///      &quot;isFolder&quot;: true,
+        ///      &quot;contentMetadata&quot;: {
+        ///        &quot;fileName&quot;: &quot;Views&quot;
+        ///      },
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite/Views?versionType=Branch&amp; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetItemFolder {
+        internal static string Git_GetItemFolderRecursive {
             get {
-                object obj = ResourceManager.GetObject("Git_GetItemFolder", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetItemFolderRecursive", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 5,
+        ///  &quot;value&quot;: [
+        ///    [
+        ///      {
+        ///        &quot;objectId&quot;: &quot;d1d5c2d49045d52bba6419652d6ecb2cd560dc29&quot;,
+        ///        &quot;gitObjectType&quot;: &quot;tree&quot;,
+        ///        &quot;commitId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///        &quot;path&quot;: &quot;/MyWebSite/MyWebSite/Views&quot;,
+        ///        &quot;isFolder&quot;: true,
+        ///        &quot;contentMetadata&quot;: {
+        ///          &quot;fileName&quot;: &quot;Views&quot;
+        ///        },
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items/MyWebSite/MyWebSite [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetItemFolderRecursive {
+        internal static string Git_GetItemsBatch {
             get {
-                object obj = ResourceManager.GetObject("Git_GetItemFolderRecursive", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetItemsBatch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;repository&quot;: {
+        ///    &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///  },
+        ///  &quot;pullRequestId&quot;: 50,
+        ///  &quot;status&quot;: &quot;active&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///    &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-81 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetItemsBatch {
+        internal static string Git_GetPullRequest {
             get {
-                object obj = ResourceManager.GetObject("Git_GetItemsBatch", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequest", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;reviewerUrl&quot;: null,
+        ///  &quot;vote&quot;: 0,
+        ///  &quot;id&quot;: &quot;19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;displayName&quot;: &quot;Johnnie McLeod&quot;,
+        ///  &quot;uniqueName&quot;: &quot;fabrikamfiber2@hotmail.com&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_GetPullRequest {
+        internal static string Git_GetPullRequestReviewer {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequest", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequestReviewer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;reviewerUrl&quot;: null,
+        ///      &quot;vote&quot;: 0,
+        ///      &quot;id&quot;: &quot;3b5f0c34-4aec-4bf4-8708-1d36f0dbc468&quot;,
+        ///      &quot;displayName&quot;: &quot;Christie Church&quot;,
+        ///      &quot;uniqueName&quot;: &quot;fabrikamfiber1@hotmail.com&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468&quot;,
+        ///      &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=3b5f0c34-4aec-4bf4-8708-1d36f0dbc468&quot;
+        ///    }
+        ///  ]
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_GetPullRequestReviewer {
+        internal static string Git_GetPullRequestReviewers {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequestReviewer", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequestReviewers", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///      },
+        ///      &quot;pullRequestId&quot;: 50,
+        ///      &quot;status&quot;: &quot;active&quot;,
+        ///      &quot;createdBy&quot;: {
+        ///        &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///        &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///        &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;url&quot;: &quot;https://fabri [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPullRequestReviewers {
+        internal static string Git_GetPullRequests {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequestReviewers", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequests", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///      },
+        ///      &quot;pullRequestId&quot;: 50,
+        ///      &quot;status&quot;: &quot;completed&quot;,
+        ///      &quot;createdBy&quot;: {
+        ///        &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///        &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///        &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam-fiber-in [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPullRequests {
+        internal static string Git_GetPullRequestsByStatus {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequests", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequestsByStatus", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///      },
+        ///      &quot;pullRequestId&quot;: 50,
+        ///      &quot;status&quot;: &quot;active&quot;,
+        ///      &quot;createdBy&quot;: {
+        ///        &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///        &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///        &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam-fiber-inc.v [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPullRequestsByStatus {
+        internal static string Git_GetPullRequestsByTargetBranch {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequestsByStatus", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPullRequestsByTargetBranch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;commits&quot;: [],
+        ///  &quot;pushedBy&quot;: {
+        ///    &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///    &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=d6245f20-2af8-44f4-9451-8107cb2767db&quot;
+        ///  },
+        ///  &quot;pushId&quot;: 23,
+        ///  &quot;date&quot;: &quot;2014-06-30T18:11:18.092Z&quot;,
+        ///  &quot;url&quot;: &quot;https:// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPullRequestsByTargetBranch {
+        internal static string Git_GetPush {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPullRequestsByTargetBranch", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPush", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;commitId&quot;: &quot;be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4&quot;,
+        ///      &quot;author&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:32:09Z&quot;
+        ///      },
+        ///      &quot;committer&quot;: {
+        ///        &quot;name&quot;: &quot;Chuck Reinhart&quot;,
+        ///        &quot;email&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///        &quot;date&quot;: &quot;2014-01-29T23:32:09Z&quot;
+        ///      },
+        ///      &quot;comment&quot;: &quot;First cut&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/ [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPush {
+        internal static string Git_GetPushCommits {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPush", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushCommits", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 22,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;project&quot;: {
+        ///          &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///          &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///          &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushCommits {
+        internal static string Git_GetPushes {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushCommits", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushes", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;project&quot;: {
+        ///          &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///          &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///          &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushes {
+        internal static string Git_GetPushesByDate {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushes", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushesByDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 2,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;project&quot;: {
+        ///          &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///          &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///          &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushesByDate {
+        internal static string Git_GetPushesByPage {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushesByDate", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushesByPage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;repository&quot;: {
+        ///        &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///        &quot;project&quot;: {
+        ///          &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///          &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///          &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushesByPage {
+        internal static string Git_GetPushesByPusher {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushesByPage", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushesByPusher", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;commits&quot;: [],
+        ///  &quot;refUpdates&quot;: [
+        ///    {
+        ///      &quot;repositoryId&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///      &quot;name&quot;: &quot;refs/heads/master&quot;,
+        ///      &quot;oldObjectId&quot;: &quot;fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f&quot;,
+        ///      &quot;newObjectId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;
+        ///    }
+        ///  ],
+        ///  &quot;pushedBy&quot;: {
+        ///    &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///    &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/ [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushesByPusher {
+        internal static string Git_GetPushWithReferences {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushesByPusher", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetPushWithReferences", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;name&quot;: &quot;refs/heads/develop&quot;,
+        ///      &quot;objectId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop&quot;
+        ///    },
+        ///    {
+        ///      &quot;name&quot;: &quot;refs/heads/master&quot;,
+        ///      &quot;objectId&quot;: &quot;23d0bc5b128a10056dc68afece360d8a0fabb014&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetPushWithReferences {
+        internal static string Git_GetReferences {
             get {
-                object obj = ResourceManager.GetObject("Git_GetPushWithReferences", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetReferences", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;name&quot;: &quot;refs/heads/develop&quot;,
+        ///      &quot;objectId&quot;: &quot;67cae2b029dff7eb3dc062b49403aaedca5bad8d&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop&quot;
+        ///    }
+        ///  ]
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_GetReferences {
+        internal static string Git_GetReferencesWithFilter {
             get {
-                object obj = ResourceManager.GetObject("Git_GetReferences", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetReferencesWithFilter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///      &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///      &quot;project&quot;: {
+        ///        &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;
+        ///      },
+        ///      &quot;d [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetReferencesWithFilter {
+        internal static string Git_GetRepositories {
             get {
-                object obj = ResourceManager.GetObject("Git_GetReferencesWithFilter", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetRepositories", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 2,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///      &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///      &quot;project&quot;: {
+        ///        &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///        &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;
+        ///      },
+        ///      &quot;d [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetRepositories {
+        internal static string Git_GetRepositoriesForTeamProject {
             get {
-                object obj = ResourceManager.GetObject("Git_GetRepositories", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetRepositoriesForTeamProject", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;name&quot;: &quot;AnotherRepository&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;project&quot;: {
+        ///    &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///    &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;
+        ///  },
+        ///  &quot;remoteUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetRepositoriesForTeamProject {
+        internal static string Git_GetRepository {
             get {
-                object obj = ResourceManager.GetObject("Git_GetRepositoriesForTeamProject", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetRepository", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;objectId&quot;: &quot;d1d5c2d49045d52bba6419652d6ecb2cd560dc29&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29&quot;,
+        ///  &quot;treeEntries&quot;: [
+        ///    {
+        ///      &quot;objectId&quot;: &quot;ea6765e1976b9e8a6d4981fd8febebd574a91571&quot;,
+        ///      &quot;relativePath&quot;: &quot;Home&quot;,
+        ///      &quot;mode&quot;: &quot;40000&quot;,
+        ///      &quot;gitObjectType&quot;: &quot;tree&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetRepository {
+        internal static string Git_GetTree {
             get {
-                object obj = ResourceManager.GetObject("Git_GetRepository", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_GetTree", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;name&quot;: &quot;RenamedRepository&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7&quot;,
+        ///  &quot;project&quot;: {
+        ///    &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///    &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;
+        ///  },
+        ///  &quot;remoteUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_GetTree {
+        internal static string Git_RenameRepository {
             get {
-                object obj = ResourceManager.GetObject("Git_GetTree", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_RenameRepository", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;repository&quot;: {
+        ///    &quot;id&quot;: &quot;278d5cd2-584d-4b63-824a-2ba458937249&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249&quot;
+        ///  },
+        ///  &quot;pullRequestId&quot;: 50,
+        ///  &quot;status&quot;: &quot;completed&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;d6245f20-2af8-44f4-9451-8107cb2767db&quot;,
+        ///    &quot;displayName&quot;: &quot;Normal Paulk&quot;,
+        ///    &quot;uniqueName&quot;: &quot;fabrikamfiber16@hotmail.com&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_RenameRepository {
+        internal static string Git_UpdatePullRequest {
             get {
-                object obj = ResourceManager.GetObject("Git_RenameRepository", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_UpdatePullRequest", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;reviewerUrl&quot;: null,
+        ///  &quot;vote&quot;: 10,
+        ///  &quot;id&quot;: &quot;19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;displayName&quot;: &quot;Johnnie McLeod&quot;,
+        ///  &quot;uniqueName&quot;: &quot;fabrikamfiber2@hotmail.com&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;,
+        ///  &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=19d9411e-9a34-45bb-b985-d24d9d87c0c9&quot;
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Git_UpdatePullRequest {
+        internal static string Git_UpdatePullRequestReviewer {
             get {
-                object obj = ResourceManager.GetObject("Git_UpdatePullRequest", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Git_UpdatePullRequestReviewer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///  &quot;name&quot;: &quot;Fabrikam-Fiber-TFVC&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///  &quot;description&quot;: &quot;Team Foundation Version Control projects&quot;,
+        ///  &quot;state&quot;: &quot;wellFormed&quot;,
+        ///  &quot;_links&quot;: {
+        ///    &quot;self&quot;: {
+        ///      &quot;href&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;
+        ///    },
+        ///    &quot;collection&quot;: {
+        ///      &quot;href&quot;: &quot;https://fabrikam.visualstu [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Git_UpdatePullRequestReviewer {
+        internal static string Project_GetProject {
             get {
-                object obj = ResourceManager.GetObject("Git_UpdatePullRequestReviewer", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Project_GetProject", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 3,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///      &quot;name&quot;: &quot;Fabrikam-Fiber-TFVC&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///      &quot;state&quot;: &quot;wellFormed&quot;
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///      &quot;name&quot;: &quot;Fabrikam-Fiber-Git&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c&quot;,
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Project_GetProject {
+        internal static string Project_GetProjects {
             get {
-                object obj = ResourceManager.GetObject("Project_GetProject", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Project_GetProjects", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;98dd5ded-8110-459b-8241-3d12b2eeaf18&quot;,
+        ///  &quot;name&quot;: &quot;FabrikamWeather&quot;,
+        ///  &quot;description&quot;: &quot;Fabrikam weather app for Windows Phone&quot;,
+        ///  &quot;state&quot;: &quot;WellFormed&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18&quot;,
+        ///  &quot;defaultTeam&quot;: {
+        ///    &quot;id&quot;: &quot;66df9be7-3586-467b-9c5f-425b29afedfd&quot;,
+        ///    &quot;name&quot;: &quot;FabrikamWeather Team&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/98dd5ded-8110-459b-8241-3d12b2eeaf18/tea [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Project_GetProjects {
+        internal static string Project_GetProjectWithCapabilities {
             get {
-                object obj = ResourceManager.GetObject("Project_GetProjects", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Project_GetProjectWithCapabilities", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///  &quot;name&quot;: &quot;Fabrikam-Fiber-TFVC&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;,
+        ///  &quot;description&quot;: &quot;Team Foundation Version Control projects.&quot;,
+        ///  &quot;state&quot;: &quot;wellFormed&quot;,
+        ///  &quot;_links&quot;: {
+        ///    &quot;self&quot;: {
+        ///      &quot;href&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1&quot;
+        ///    },
+        ///    &quot;collection&quot;: {
+        ///      &quot;href&quot;: &quot;https://fabrikam.visualst [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Project_GetProjectWithCapabilities {
+        internal static string Project_UpdateProject {
             get {
-                object obj = ResourceManager.GetObject("Project_GetProjectWithCapabilities", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Project_UpdateProject", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: &quot;564e8204-a90b-4432-883b-d4363c6125ca&quot;,
+        ///  &quot;name&quot;: &quot;Quality assurance&quot;,
+        ///  &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca&quot;,
+        ///  &quot;description&quot;: &quot;Testing staff&quot;,
+        ///  &quot;identityUrl&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/564e8204-a90b-4432-883b-d4363c6125ca&quot;
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] Project_UpdateProject {
+        internal static string Team_GetTeam {
             get {
-                object obj = ResourceManager.GetObject("Project_UpdateProject", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Team_GetTeam", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;3b5f0c34-4aec-4bf4-8708-1d36f0dbc468&quot;,
+        ///      &quot;displayName&quot;: &quot;Christie Church&quot;,
+        ///      &quot;uniqueName&quot;: &quot;fabrikamfiber1@hotmail.com&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/3b5f0c34-4aec-4bf4-8708-1d36f0dbc468&quot;
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///      &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///      &quot;uniqueName&quot;: &quot;fabrikamfiber3@hotmail.com&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/ [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Team_GetTeam {
+        internal static string Team_GetTeamMembers {
             get {
-                object obj = ResourceManager.GetObject("Team_GetTeam", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Team_GetTeamMembers", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;564e8204-a90b-4432-883b-d4363c6125ca&quot;,
+        ///      &quot;name&quot;: &quot;Quality assurance&quot;,
+        ///      &quot;url&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/eb6e4656-77fc-42a1-9181-4c6d8e9da5d1/teams/564e8204-a90b-4432-883b-d4363c6125ca&quot;,
+        ///      &quot;description&quot;: &quot;Testing staff&quot;,
+        ///      &quot;identityUrl&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/564e8204-a90b-4432-883b-d4363c6125ca&quot;
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;66df9be7-3586-467b-9c5f-425b29afedfd&quot;,
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Team_GetTeamMembers {
+        internal static string Team_GetTeams {
             get {
-                object obj = ResourceManager.GetObject("Team_GetTeamMembers", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("Team_GetTeams", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: 83626,
+        ///  &quot;content&quot;: &quot;Here&apos;s a new message&quot;,
+        ///  &quot;messageType&quot;: &quot;normal&quot;,
+        ///  &quot;postedTime&quot;: &quot;2014-05-28T16:37:38.543Z&quot;,
+        ///  &quot;postedRoomId&quot;: 305,
+        ///  &quot;postedBy&quot;: {
+        ///    &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] Team_GetTeams {
+        internal static string TeamRoom_CreateMessage {
             get {
-                object obj = ResourceManager.GetObject("Team_GetTeams", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_CreateMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: 4207,
+        ///  &quot;name&quot;: &quot;newCreatedRoom&quot;,
+        ///  &quot;description&quot;: &quot;used for API doc generation&quot;,
+        ///  &quot;lastActivity&quot;: &quot;2014-05-28T16:37:40.987Z&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;
+        ///  },
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_CreateMessage {
+        internal static string TeamRoom_CreateRoom {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_CreateMessage", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_CreateRoom", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;:74017,
+        ///  &quot;content&quot;:&quot;This is a test with an emoticon.  (d)&quot;,
+        ///  &quot;messageType&quot;:&quot;normal&quot;,
+        ///  &quot;postedTime&quot;:&quot;2014-10-07T21:12:55.107Z&quot;,
+        ///  &quot;postedRoomId&quot;:6522,
+        ///  &quot;postedBy&quot;: {
+        ///    &quot;id&quot;:&quot;fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///    &quot;displayName&quot;:&quot;Edward Thomson&quot;,
+        ///    &quot;url&quot;:&quot;https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///    &quot;imageUrl&quot;:&quot;https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_CreateRoom {
+        internal static string TeamRoom_GetMessage {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_CreateRoom", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;:4,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;:74012,
+        ///      &quot;content&quot;:&quot;Edward Thomson entered the room&quot;,
+        ///      &quot;messageType&quot;:&quot;system&quot;,
+        ///      &quot;postedTime&quot;:&quot;2014-10-07T21:12:05.727Z&quot;,
+        ///      &quot;postedRoomId&quot;:6522,
+        ///      &quot;postedBy&quot;: {
+        ///        &quot;id&quot;:&quot;48b1ff63-9db1-4704-ae7a-43950011e061&quot;,
+        ///        &quot;displayName&quot;:&quot;[DefaultCollection]\\Project Collection Service Accounts&quot;,
+        ///        &quot;url&quot;:&quot;https://ethomson.vssps.visualstudio.com/_apis/Identities/48b1ff63-9db1-4704-ae7a-43950011e061&quot;,
+        ///        &quot;imageUrl&quot;:&quot;https: [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_GetMessage {
+        internal static string TeamRoom_GetMessages {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetMessage", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetMessages", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: 4207,
+        ///  &quot;name&quot;: &quot;newCreatedRoom&quot;,
+        ///  &quot;description&quot;: &quot;used for API doc generation&quot;,
+        ///  &quot;lastActivity&quot;: &quot;2014-05-28T16:37:40.987Z&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;
+        ///  },
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_GetMessages {
+        internal static string TeamRoom_GetRoom {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetMessages", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetRoom", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;: 5,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;id&quot;: 305,
+        ///      &quot;name&quot;: &quot;Fabrikam-Fiber-Git Team Room&quot;,
+        ///      &quot;description&quot;: &quot;&quot;,
+        ///      &quot;lastActivity&quot;: &quot;2014-05-28T16:37:38.543Z&quot;,
+        ///      &quot;createdBy&quot;: {
+        ///        &quot;id&quot;: &quot;47d25e84-de54-49ce-8f3d-351c77422775&quot;,
+        ///        &quot;displayName&quot;: &quot;[DefaultCollection]\\Project Collection Service Accounts&quot;,
+        ///        &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/47d25e84-de54-49ce-8f3d-351c77422775&quot;,
+        ///        &quot;imageUrl&quot;: &quot;https://fabrikam.visualstu [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_GetRoom {
+        internal static string TeamRoom_GetRooms {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetRoom", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetRooms", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;roomId&quot;:6522,
+        ///  &quot;user&quot;: {
+        ///    &quot;id&quot;:&quot;fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///    &quot;displayName&quot;:&quot;Edward Thomson&quot;,
+        ///    &quot;url&quot;:&quot;https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///    &quot;imageUrl&quot;:&quot;https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d&quot;
+        ///  },
+        ///  &quot;lastActivity&quot;:&quot;2014-10-07T21:12:55.107Z&quot;,
+        ///  &quot;joinedDate&quot;:&quot;2014-10-07T21:12:26.167Z&quot;,
+        ///  &quot;isOnline&quot;:true
+        ///}
+        ///.
         /// </summary>
-        internal static byte[] TeamRoom_GetRooms {
+        internal static string TeamRoom_GetUser {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetRooms", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetUser", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;count&quot;:1,
+        ///  &quot;value&quot;: [
+        ///    {
+        ///      &quot;roomId&quot;:6522,
+        ///      &quot;user&quot;: {
+        ///        &quot;id&quot;:&quot;fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///        &quot;displayName&quot;:&quot;Edward Thomson&quot;,
+        ///        &quot;url&quot;:&quot;https://ethomson.vssps.visualstudio.com/_apis/Identities/fd19aec1-3119-4671-80d7-5dcc4943211d&quot;,
+        ///         &quot;imageUrl&quot;:&quot;https://ethomson.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=fd19aec1-3119-4671-80d7-5dcc4943211d&quot;
+        ///        },
+        ///      &quot;lastActivity&quot;:&quot;2014-10-07T21:12:55.107Z&quot;,
+        ///      &quot;joinedDate&quot;:&quot;2014 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_GetUser {
+        internal static string TeamRoom_GetUsers {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetUser", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_GetUsers", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: 83626,
+        ///  &quot;content&quot;: &quot;Updated message&quot;,
+        ///  &quot;messageType&quot;: &quot;normal&quot;,
+        ///  &quot;postedTime&quot;: &quot;2014-05-28T16:37:38.543Z&quot;,
+        ///  &quot;postedRoomId&quot;: 305,
+        ///  &quot;postedBy&quot;: {
+        ///    &quot;id&quot;: &quot;8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;displayName&quot;: &quot;Chuck Reinhart&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d&quot;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_GetUsers {
+        internal static string TeamRoom_UpdateMessage {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_GetUsers", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_UpdateMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to {
+        ///  &quot;id&quot;: 431,
+        ///  &quot;name&quot;: &quot;renamedRoom&quot;,
+        ///  &quot;description&quot;: &quot;updated room description&quot;,
+        ///  &quot;lastActivity&quot;: &quot;2014-04-29T18:45:10.59Z&quot;,
+        ///  &quot;creatorUserTfId&quot;: &quot;d291b0c4-a05c-4ea6-8df1-4b41d5f39eff&quot;,
+        ///  &quot;createdBy&quot;: {
+        ///    &quot;id&quot;: &quot;d291b0c4-a05c-4ea6-8df1-4b41d5f39eff&quot;,
+        ///    &quot;displayName&quot;: &quot;Jamal Hartnett&quot;,
+        ///    &quot;url&quot;: &quot;https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff&quot;,
+        ///    &quot;imageUrl&quot;: &quot;https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identit [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] TeamRoom_UpdateMessage {
+        internal static string TeamRoom_UpdateRoom {
             get {
-                object obj = ResourceManager.GetObject("TeamRoom_UpdateMessage", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] TeamRoom_UpdateRoom {
-            get {
-                object obj = ResourceManager.GetObject("TeamRoom_UpdateRoom", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("TeamRoom_UpdateRoom", resourceCulture);
             }
         }
     }

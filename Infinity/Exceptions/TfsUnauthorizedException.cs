@@ -1,6 +1,5 @@
 ﻿using System;
-
-using RestSharp;
+using System.Net.Http;
 
 namespace Infinity.Exceptions
 {
@@ -9,7 +8,7 @@ namespace Infinity.Exceptions
     /// </summary>
     public class TfsUnauthorizedException : TfsRestException
     {
-        internal TfsUnauthorizedException(string message, IRestResponse response)
+        internal TfsUnauthorizedException(string message, HttpResponseMessage response)
             : base(message, response)
         {
         }

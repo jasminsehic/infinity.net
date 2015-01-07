@@ -10,26 +10,26 @@ namespace Infinity.Models
         /// <summary>
         /// The ID of the Team Room.
         /// </summary>
-        public int RoomId { get; private set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// The user information for this user.
         /// </summary>
-        public Identity User { get; private set; }
+        public Identity User { get; set; }
 
         /// <summary>
         /// The last date the user was seen in this Team Room.
         /// </summary>
-        public DateTime LastActivity { get; private set; }
+        public DateTime LastActivity { get; set; }
 
         /// <summary>
         /// The join date of the user.
         /// </summary>
-        public DateTime JoinedDate { get; private set; }
+        public DateTime JoinedDate { get; set; }
 
         /// <summary>
         /// Whether the user is currently online or not.
         /// </summary>
-        public bool IsOnline { get; private set; }
+        public bool IsOnline { get; set; }
     }
 }

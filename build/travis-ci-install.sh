@@ -1,17 +1,17 @@
 #!/bin/bash
 set -ev
 
-sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/tpokorra:/mono/xUbuntu_12.04/ /' >> /etc/apt/sources.list.d/mono-opt.list"
-
-curl http://download.opensuse.org/repositories/home:/tpokorra:/mono/xUbuntu_12.04/Release.key | sudo apt-key add -
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+sudo sh -c "echo 'deb http://download.mono-project.com/repo/debian wheezy main' >> /etc/apt/sources.list.d/mono-xamarin.list"
+sudo sh -c "echo 'deb http://download.mono-project.com/repo/debian wheezy-libtiff-compat main' >> /etc/apt/sources.list.d/mono-xamarin.list"
 
 sudo apt-get update
-sudo apt-get install mono-opt
+sudo apt-get install mono-devel referenceassemblies-pcl
 
-sudo /opt/mono/bin/mozroots --import --machine --sync
-yes | sudo /opt/mono/bin/certmgr -ssl https://go.microsoft.com
-yes | sudo /opt/mono/bin/certmgr -ssl https://nugetgallery.blob.core.windows.net
-yes | sudo /opt/mono/bin/certmgr -ssl https://nuget.org
+sudo mozroots --import --machine --sync
+yes | sudo certmgr -ssl https://go.microsoft.com
+yes | sudo certmgr -ssl https://nugetgallery.blob.core.windows.net
+yes | sudo certmgr -ssl https://nuget.org
 
 curl -L https://nuget.org/nuget.exe > build/nuget.exe
 

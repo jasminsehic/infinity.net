@@ -1,6 +1,5 @@
 ﻿using System;
-
-using RestSharp;
+using System.Net.Http;
 
 namespace Infinity.Exceptions
 {
@@ -10,7 +9,7 @@ namespace Infinity.Exceptions
     /// </summary>
     public class TfsConflictException : TfsRestException
     {
-        internal TfsConflictException(string message, IRestResponse response)
+        internal TfsConflictException(string message, HttpResponseMessage response)
             : base(message, response)
         {
         }

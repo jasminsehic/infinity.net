@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-using RestSharp;
 using Xunit;
 
 using Infinity;
@@ -19,15 +18,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_BlobGetBlob()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c?api-version=1.0",
                     ResponseResource = "Git.GetBlob",
                 });
 
             Blob blob = base.ExecuteSync<Blob>(
-                () => { return client.Git.GetBlob(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c")); });
+                () => { return NewMockClient().Git.GetBlob(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("61a86fdaa79e5c6f5fb6e4026508489feb6ed92c")); });
 
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), blob.Links.Repository.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/blobs/61a86fdaa79e5c6f5fb6e4026508489feb6ed92c"), blob.Links.Self.Url);
@@ -43,15 +42,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_BranchStatistics_GetBranchStatistics()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches/develop?api-version=1.0",
                     ResponseResource = "Git.GetBranchStatistics",
                 });
 
             BranchStatistics branchStatistics = base.ExecuteSync<BranchStatistics>(
-                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
+                () => { return NewMockClient().Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
 
             Assert.Equal(1, branchStatistics.AheadCount);
             Assert.Equal(17, branchStatistics.BehindCount);
@@ -71,15 +70,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_BranchStatistics_GetBranchStatisticsAgainstVersion()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches/develop?api-version=1.0",
                     ResponseResource = "Git.GetBranchStatisticsAgainstVersion",
                 });
 
             BranchStatistics branchStatistics = base.ExecuteSync<BranchStatistics>(
-                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
+                () => { return NewMockClient().Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "develop"); });
 
             Assert.Equal(0, branchStatistics.AheadCount);
             Assert.Equal(0, branchStatistics.BehindCount);
@@ -102,15 +101,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_BranchStatistics_GetBranchStatisticsForAllBranches()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/stats/branches?api-version=1.0",
                     ResponseResource = "Git.GetBranchStatisticsForAllBranches",
                 });
 
             IList<BranchStatistics> branchStatistics = base.ExecuteSync<IEnumerable<BranchStatistics>>(
-                () => { return client.Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+                () => { return NewMockClient().Git.GetBranchStatistics(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
 
             Assert.Equal(3, branchStatistics.Count);
 
@@ -170,15 +169,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommits()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0",
                     ResponseResource = "Git.GetCommits",
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
 
             Assert.Equal(19, commits.Count);
 
@@ -414,15 +413,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsByCommitter()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
-                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0&committer=Chuck Reinhart",
+                    Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0&committer=Chuck%20Reinhart",
                     ResponseResource = "Git.GetCommitsByCommitter",
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { Committer = "Chuck Reinhart" }); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { Committer = "Chuck Reinhart" }); }).ToList();
 
             Assert.Equal(4, commits.Count);
 
@@ -478,15 +477,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsByItem()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0&itemPath=/MyWebSite/MyWebSite/Views/Home/_Home.cshtml",
                     ResponseResource = "Git.GetCommitsByItem",
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { ItemPath = "/MyWebSite/MyWebSite/Views/Home/_Home.cshtml" }); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { ItemPath = "/MyWebSite/MyWebSite/Views/Home/_Home.cshtml" }); }).ToList();
 
             Assert.Equal(2, commits.Count);
 
@@ -518,15 +517,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsByDate()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0&fromDate=2014-01-29T23:32:09Z&toDate=2014-01-29T23:32:09Z",
                     ResponseResource = "Git.GetCommitsByDate",
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { FromDate = new DateTime(2014, 01, 29, 23, 32, 09, DateTimeKind.Utc), ToDate = new DateTime(2014, 01, 29, 23, 32, 09, DateTimeKind.Utc) }); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { FromDate = new DateTime(2014, 01, 29, 23, 32, 09, DateTimeKind.Utc), ToDate = new DateTime(2014, 01, 29, 23, 32, 09, DateTimeKind.Utc) }); }).ToList();
 
             Assert.Equal(1, commits.Count);
 
@@ -546,15 +545,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsPaged()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits?api-version=1.0&$skip=1&$top=2",
                     ResponseResource = "Git.GetCommitsPaged",
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { Skip = 1, Count = 2 }); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new CommitFilters { Skip = 1, Count = 2 }); }).ToList();
 
             Assert.Equal(2, commits.Count);
 
@@ -586,11 +585,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsToRevision()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commitsBatch?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         itemVersion = new
@@ -604,7 +603,7 @@ namespace Infinity.Tests.Models
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop")); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop")); }).ToList();
 
             Assert.Equal(2, commits.Count);
 
@@ -636,11 +635,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitsBetweenTwoRevisions()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commitsBatch?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         itemVersion = new
@@ -659,7 +658,7 @@ namespace Infinity.Tests.Models
                 });
 
             IList<Commit> commits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop"), new Revision("refs/heads/master")); }).ToList();
+                () => { return NewMockClient().Git.GetCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new Revision("refs/heads/develop"), new Revision("refs/heads/master")); }).ToList();
 
             Assert.Equal(17, commits.Count);
 
@@ -871,15 +870,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommit()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4?api-version=1.0",
                     ResponseResource = "Git.GetCommit",
                 });
 
             Commit commit = base.ExecuteSync<Commit>(
-                () => { return client.Git.GetCommit(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4")); });
+                () => { return NewMockClient().Git.GetCommit(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4")); });
 
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4/changes"), commit.Links.Changes.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), commit.Links.Repository.Url);
@@ -911,15 +910,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Commit_GetCommitWithChangedItems()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4?api-version=1.0&changeCount=10",
                     ResponseResource = "Git.GetCommitWithChangedItems",
                 });
 
             Commit commit = base.ExecuteSync<Commit>(
-                () => { return client.Git.GetCommit(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), 10); });
+                () => { return NewMockClient().Git.GetCommit(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), 10); });
 
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4/changes"), commit.Links.Changes.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), commit.Links.Repository.Url);
@@ -1015,15 +1014,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Diffs_GetDiff()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/diffs/commits?api-version=1.0&targetVersionType=branch&targetVersion=master&baseVersionType=branch&baseVersion=develop",
                     ResponseResource = "Git.GetDiff",
                 });
 
             Diff diff = base.ExecuteSync<Diff>(
-                () => { return client.Git.GetDiff(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new DiffFilters() { TargetRevision = new Revision("refs/heads/master"), BaseRevision = new Revision("refs/heads/develop") }); });
+                () => { return NewMockClient().Git.GetDiff(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new DiffFilters() { TargetRevision = new Revision("refs/heads/master"), BaseRevision = new Revision("refs/heads/develop") }); });
 
             Assert.Equal(new ObjectId("be67f8871a4d2c75f13a51c1d3c30ac0d74d4ef4"), diff.CommonCommit);
             Assert.Equal(true, diff.AllChangesIncluded);
@@ -1235,15 +1234,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Item_GetItemFile()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/mywebsite/mywebsite/views/home/_home.cshtml",
                     ResponseResource = "Git.GetItemFile",
                 });
 
             IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
-                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/mywebsite/mywebsite/views/home/_home.cshtml"); }).ToList();
+                () => { return NewMockClient().Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/mywebsite/mywebsite/views/home/_home.cshtml"); }).ToList();
 
             Assert.Equal(1, items.Count);
 
@@ -1256,15 +1255,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Item_GetItemFolder()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/MyWebSite/MyWebSite/Views",
                     ResponseResource = "Git.GetItemFolder",
                 });
 
             IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
-                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views"); }).ToList();
+                () => { return NewMockClient().Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views"); }).ToList();
 
             Assert.Equal(1, items.Count);
 
@@ -1279,15 +1278,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Item_GetItemFolderRecursive()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/items?api-version=1.0&scopePath=/MyWebSite/MyWebSite/Views&recursionLevel=Full&includeContentMetadata=true",
                     ResponseResource = "Git.GetItemFolderRecursive",
                 });
 
             IList<Item> items = base.ExecuteSync<IEnumerable<Item>>(
-                () => { return client.Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views", new ItemFilters { RecursionLevel = RecursionLevel.Full }, true); }).ToList();
+                () => { return NewMockClient().Git.GetItem(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "/MyWebSite/MyWebSite/Views", new ItemFilters { RecursionLevel = RecursionLevel.Full }, true); }).ToList();
 
             Assert.Equal(13, items.Count);
 
@@ -1377,11 +1376,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Item_GetItemsBatch()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/itemsBatch?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         itemDescriptors = new[] {
@@ -1429,7 +1428,7 @@ namespace Infinity.Tests.Models
             IList<IEnumerable<Item>> itemLists = base.ExecuteSync<IEnumerable<IEnumerable<Item>>>(
                 () =>
                 {
-                    return client.Git.GetItems(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                    return NewMockClient().Git.GetItems(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new Tuple<string, ItemFilters>[] {
                             new Tuple<string, ItemFilters>(
                                 "/MyWebSite/MyWebSite/Views",
@@ -1554,15 +1553,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetPullRequest()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50?api-version=1.0",
                     ResponseResource = "Git.GetPullRequest",
                 });
 
             PullRequest pullRequest = base.ExecuteSync<PullRequest>(
-                () => { return client.Git.GetPullRequest(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 50); });
+                () => { return NewMockClient().Git.GetPullRequest(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 50); });
 
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), pullRequest.Links.CreatedBy.Url);
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249"), pullRequest.Links.Repository.Url);
@@ -1612,15 +1611,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetPullRequests()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0",
                     ResponseResource = "Git.GetPullRequests",
                 });
 
             IList<PullRequest> pullRequests = base.ExecuteSync<IEnumerable<PullRequest>>(
-                () => { return client.Git.GetPullRequests(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+                () => { return NewMockClient().Git.GetPullRequests(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
 
             Assert.Equal(1, pullRequests.Count);
 
@@ -1652,8 +1651,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetPullRequestsByStatus()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0&status=completed",
                     ResponseResource = "Git.GetPullRequestsByStatus",
@@ -1661,7 +1660,7 @@ namespace Infinity.Tests.Models
 
             IList<PullRequest> pullRequests = base.ExecuteSync<IEnumerable<PullRequest>>(
                 () => {
-                    return client.Git.GetPullRequests(
+                    return NewMockClient().Git.GetPullRequests(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new PullRequestFilters { Status = PullRequestStatus.Completed }
                         );
@@ -2523,8 +2522,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetPullRequestsByTargetBranch()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0&targetRefName=refs/heads/master",
                     ResponseResource = "Git.GetPullRequestsByTargetBranch",
@@ -2533,7 +2532,7 @@ namespace Infinity.Tests.Models
             IList<PullRequest> pullRequests = base.ExecuteSync<IEnumerable<PullRequest>>(
                 () =>
                 {
-                    return client.Git.GetPullRequests(
+                    return NewMockClient().Git.GetPullRequests(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new PullRequestFilters { TargetRefName = "refs/heads/master" }
                         );
@@ -2569,11 +2568,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_CreatePullRequest()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         sourceRefName = "refs/heads/npaulk/feature",
@@ -2590,7 +2589,7 @@ namespace Infinity.Tests.Models
             PullRequest pullRequest = base.ExecuteSync<PullRequest>(
                 () =>
                 {
-                    return client.Git.CreatePullRequest(
+                    return NewMockClient().Git.CreatePullRequest(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         "refs/heads/npaulk/feature",
                         "refs/heads/master",
@@ -2645,11 +2644,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_UpdatePullRequest()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50?api-version=1.0",
-                    Method = RestSharp.Method.PATCH,
+                    Method = new HttpMethod("PATCH"),
                     RequestObject = new
                     {
                         status = "completed",
@@ -2661,7 +2660,7 @@ namespace Infinity.Tests.Models
             PullRequest pullRequest = base.ExecuteSync<PullRequest>(
                 () =>
                 {
-                    return client.Git.UpdatePullRequest(
+                    return NewMockClient().Git.UpdatePullRequest(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50,
                         PullRequestStatus.Completed,
@@ -2716,8 +2715,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetReviewers()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers?api-version=1.0",
                     ResponseResource = "Git.GetPullRequestReviewers",
@@ -2725,7 +2724,7 @@ namespace Infinity.Tests.Models
 
             IList<PullRequestReviewer> pullRequestReviewers = base.ExecuteSync<IEnumerable<PullRequestReviewer>>(
                 () => {
-                    return client.Git.GetPullRequestReviewers(
+                    return NewMockClient().Git.GetPullRequestReviewers(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50);
                 }).ToList();
@@ -2744,8 +2743,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_GetReviewer()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
                     ResponseResource = "Git.GetPullRequestReviewer",
@@ -2754,7 +2753,7 @@ namespace Infinity.Tests.Models
             PullRequestReviewer pullRequestReviewer = base.ExecuteSync<PullRequestReviewer>(
                 () =>
                 {
-                    return client.Git.GetPullRequestReviewer(
+                    return NewMockClient().Git.GetPullRequestReviewer(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50,
                         new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"));
@@ -2772,11 +2771,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_AddReviewer()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         vote = 0,
@@ -2787,7 +2786,7 @@ namespace Infinity.Tests.Models
             PullRequestReviewer pullRequestReviewer = base.ExecuteSync<PullRequestReviewer>(
                 () =>
                 {
-                    return client.Git.AddPullRequestReviewer(
+                    return NewMockClient().Git.AddPullRequestReviewer(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50,
                         new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"));
@@ -2805,17 +2804,17 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_DeleteReviewer()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
-                    Method = RestSharp.Method.DELETE,
+                    Method = HttpMethod.Delete,
                 });
 
             base.ExecuteSync(
                 () =>
                 {
-                    return client.Git.DeletePullRequestReviewer(
+                    return NewMockClient().Git.DeletePullRequestReviewer(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50,
                         new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"));
@@ -2825,11 +2824,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_PullRequest_UpdateReviewer()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pullRequests/50/reviewers/19d9411e-9a34-45bb-b985-d24d9d87c0c9?api-version=1.0",
-                    Method = RestSharp.Method.PUT,
+                    Method = HttpMethod.Put,
                     RequestObject = new
                     {
                         vote = 10,
@@ -2840,7 +2839,7 @@ namespace Infinity.Tests.Models
             PullRequestReviewer pullRequestReviewer = base.ExecuteSync<PullRequestReviewer>(
                 () =>
                 {
-                    return client.Git.UpdatePullRequestReviewer(
+                    return NewMockClient().Git.UpdatePullRequestReviewer(
                         new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         50,
                         new Guid("19d9411e-9a34-45bb-b985-d24d9d87c0c9"),
@@ -2863,15 +2862,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPush()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23?api-version=1.0",
                     ResponseResource = "Git.GetPush",
                 });
 
             PushDetails push = base.ExecuteSync<PushDetails>(
-                () => { return client.Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23); });
+                () => { return NewMockClient().Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23); });
 
             Assert.Equal(new DateTime(2014, 06, 30, 18, 11, 18, 092, DateTimeKind.Utc), push.Date);
             Assert.Equal(23, push.Id);
@@ -2893,15 +2892,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushWithReferences()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23?api-version=1.0&includeRefUpdates=true",
                     ResponseResource = "Git.GetPushWithReferences",
                 });
 
             PushDetails push = base.ExecuteSync<PushDetails>(
-                () => { return client.Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23, true); });
+                () => { return NewMockClient().Git.GetPush(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 23, true); });
 
             Assert.Equal(new Uri("https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/23/commits"), push.Links.Commits.Url);
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d6245f20-2af8-44f4-9451-8107cb2767db"), push.Links.Pusher.Url);
@@ -2930,15 +2929,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushCommits()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/1/commits?api-version=1.0",
                     ResponseResource = "Git.GetPushCommits",
                 });
 
             IList<Commit> pushCommits = base.ExecuteSync<IEnumerable<Commit>>(
-                () => { return client.Git.GetPushCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 1); }).ToList();
+                () => { return NewMockClient().Git.GetPushCommits(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), 1); }).ToList();
 
             Assert.Equal(1, pushCommits.Count);
 
@@ -2961,15 +2960,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushes()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0",
                     ResponseResource = "Git.GetPushes",
                 });
 
             IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
-                () => { return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+                () => { return NewMockClient().Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
 
             Assert.Equal(22, pushes.Count);
 
@@ -3373,8 +3372,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushesByDate()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&fromDate=2014-01-15T00:00:00Z&toDate=2014-02-01T14:00:00Z",
                     ResponseResource = "Git.GetPushesByDate",
@@ -3383,7 +3382,7 @@ namespace Infinity.Tests.Models
             IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
                 () =>
                 {
-                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                    return NewMockClient().Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new PushFilters {
                             FromDate = new DateTime(2014, 01, 15),
                             ToDate = new DateTime(2014, 02, 01, 14, 00, 00)
@@ -3450,8 +3449,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushesByPusher()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&pusherId=d6245f20-2af8-44f4-9451-8107cb2767db",
                     ResponseResource = "Git.GetPushesByPusher",
@@ -3460,7 +3459,7 @@ namespace Infinity.Tests.Models
             IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
                 () =>
                 {
-                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                    return NewMockClient().Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new PushFilters {
                             Pusher = new Guid("d6245f20-2af8-44f4-9451-8107cb2767db")
                         });
@@ -3526,8 +3525,8 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Pushes_GetPushesByPage()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes?api-version=1.0&$skip=2&$top=2",
                     ResponseResource = "Git.GetPushesByPage",
@@ -3536,7 +3535,7 @@ namespace Infinity.Tests.Models
             IList<PushDetails> pushes = base.ExecuteSync<IEnumerable<PushDetails>>(
                 () =>
                 {
-                    return client.Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
+                    return NewMockClient().Git.GetPushes(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"),
                         new PushFilters
                         {
                             Skip = 2,
@@ -3590,15 +3589,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_GetRepositories()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories?api-version=1.0",
                     ResponseResource = "Git.GetRepositories",
                 });
 
             IList<Repository> repositories = base.ExecuteSync<IEnumerable<Repository>>(
-                () => { return client.Git.GetRepositories(); }).ToList();
+                () => { return NewMockClient().Git.GetRepositories(); }).ToList();
 
             Assert.Equal(3, repositories.Count);
 
@@ -3632,15 +3631,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_GetRepositoriesForTeamProject()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories?api-version=1.0",
                     ResponseResource = "Git.GetRepositoriesForTeamProject",
                 });
 
             IList<Repository> repositories = base.ExecuteSync<IEnumerable<Repository>>(
-                () => { return client.Git.GetRepositories(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c")); }).ToList();
+                () => { return NewMockClient().Git.GetRepositories(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c")); }).ToList();
 
             Assert.Equal(2, repositories.Count);
 
@@ -3665,15 +3664,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_GetRepositoryById()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
                     ResponseResource = "Git.GetRepository",
                 });
 
             Repository repository = base.ExecuteSync<Repository>(
-                () => { return client.Git.GetRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7")); });
+                () => { return NewMockClient().Git.GetRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7")); });
 
             Assert.Equal(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), repository.Id);
             Assert.Equal("AnotherRepository", repository.Name);
@@ -3687,15 +3686,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_GetRepositoryByName()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c/repositories/anotherrepository?api-version=1.0",
                     ResponseResource = "Git.GetRepository",
                 });
 
             Repository repository = base.ExecuteSync<Repository>(
-                () => { return client.Git.GetRepository(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), "anotherrepository"); });
+                () => { return NewMockClient().Git.GetRepository(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), "anotherrepository"); });
 
             Assert.Equal(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), repository.Id);
             Assert.Equal("AnotherRepository", repository.Name);
@@ -3709,11 +3708,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_CreateRepository()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories?api-version=1.0",
-                    Method = RestSharp.Method.POST,
+                    Method = HttpMethod.Post,
                     RequestObject = new
                     {
                         name = "AnotherRepository",
@@ -3725,7 +3724,7 @@ namespace Infinity.Tests.Models
                 });
 
             Repository repository = base.ExecuteSync<Repository>(
-                () => { return client.Git.CreateRepository(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), "AnotherRepository"); });
+                () => { return NewMockClient().Git.CreateRepository(new Guid("6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c"), "AnotherRepository"); });
             
             Assert.Equal(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), repository.Id);
             Assert.Equal("AnotherRepository", repository.Name);
@@ -3739,11 +3738,11 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_RenameRepository()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
-                    Method = RestSharp.Method.PATCH,
+                    Method = new HttpMethod("PATCH"),
                     RequestObject = new
                     {
                         name = "RenamedRepository"
@@ -3752,7 +3751,7 @@ namespace Infinity.Tests.Models
                 });
 
             Repository repository = base.ExecuteSync<Repository>(
-                () => { return client.Git.RenameRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), "RenamedRepository"); });
+                () => { return NewMockClient().Git.RenameRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), "RenamedRepository"); });
 
             Assert.Equal(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7"), repository.Id);
             Assert.Equal("RenamedRepository", repository.Name);
@@ -3766,15 +3765,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Repositories_DeleteRepository()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/17c3a073-1785-4f51-ba0a-a877bba5f5c7?api-version=1.0",
-                    Method = RestSharp.Method.DELETE,
+                    Method = HttpMethod.Delete,
                 });
 
             base.ExecuteSync(
-                () => { return client.Git.DeleteRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7")); });
+                () => { return NewMockClient().Git.DeleteRepository(new Guid("17c3a073-1785-4f51-ba0a-a877bba5f5c7")); });
         }
 
         #endregion
@@ -3784,15 +3783,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_References_GetReferences()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs?api-version=1.0",
                     ResponseResource = "Git.GetReferences",
                 });
 
             IList<Reference> references = base.ExecuteSync<IEnumerable<Reference>>(
-                () => { return client.Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
+                () => { return NewMockClient().Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249")); }).ToList();
 
             Assert.Equal(3, references.Count);
 
@@ -3812,15 +3811,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_References_GetReferencesWithFilter()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/refs/heads/develop?api-version=1.0",
                     ResponseResource = "Git.GetReferencesWithFilter",
                 });
 
             IList<Reference> references = base.ExecuteSync<IEnumerable<Reference>>(
-                () => { return client.Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "refs/heads/develop"); }).ToList();
+                () => { return NewMockClient().Git.GetReferences(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), "refs/heads/develop"); }).ToList();
 
             Assert.Equal(1, references.Count);
 
@@ -3836,15 +3835,15 @@ namespace Infinity.Tests.Models
         [Fact]
         public void Git_Trees_GetTree()
         {
-            TfsClient client = NewMockClient(
-                new MockRequestConfiguration
+            MessageHandler.AddConfiguration(
+                new MockHttpMessageConfiguration
                 {
                     Uri = "/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/trees/d1d5c2d49045d52bba6419652d6ecb2cd560dc29?api-version=1.0",
                     ResponseResource = "Git.GetTree",
                 });
 
             Tree tree = base.ExecuteSync<Tree>(
-                () => { return client.Git.GetTree(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29")); });
+                () => { return NewMockClient().Git.GetTree(new Guid("278d5cd2-584d-4b63-824a-2ba458937249"), new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29")); });
 
             Assert.Equal(new ObjectId("d1d5c2d49045d52bba6419652d6ecb2cd560dc29"), tree.Id);
             Assert.Equal(147, tree.Size);

@@ -1,7 +1,5 @@
 ﻿using System;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -13,42 +11,42 @@ namespace Infinity.Models
         /// <summary>
         /// The unique ID for this Team Project.
         /// </summary>
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The name of the Team Project.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The description of the Team Project.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// The URL of the Team Project's REST endpoint.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// The state of the Team Project.
         /// </summary>
-        public ProjectState State { get; private set; }
+        public ProjectState State { get; set; }
 
         /// <summary>
         /// The default team for this Team Project.
         /// </summary>
-        public Team DefaultTeam { get; private set; }
+        public Team DefaultTeam { get; set; }
 
         /// <summary>
         /// Links to other Project resources.
         /// </summary>
-        [DeserializeAs(Name = "_links")]
-        public ProjectLinks Links { get; private set; }
+        [JsonProperty("_links")]
+        public ProjectLinks Links { get; set; }
 
         /// <summary>
         /// The settings and capabilities for this Team Project.
         /// </summary>
-        public ProjectCapabilities Capabilities { get; private set; }
+        public ProjectCapabilities Capabilities { get; set; }
     }
 }

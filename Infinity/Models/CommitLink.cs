@@ -1,7 +1,5 @@
 ﻿using System;
-
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 
 namespace Infinity.Models
 {
@@ -13,12 +11,13 @@ namespace Infinity.Models
         /// <summary>
         /// The ID of the commit.
         /// </summary>
-        [DeserializeAs(Name = "CommitId")]
-        public ObjectId Id { get; private set; }
+        [JsonProperty("CommitId")]
+        [JsonConverter(typeof(ObjectId.JsonConverter))]
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// The URL of the rest endpoint for the commit.
         /// </summary>
-        public Uri Url { get; private set; }
+        public Uri Url { get; set; }
     }
 }
