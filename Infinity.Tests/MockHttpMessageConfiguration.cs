@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -29,15 +31,15 @@ namespace Infinity.Tests
             {
                 string resourceName = value.Replace('.', '_');
 
-                PropertyInfo resourceProperty = typeof(Properties.Resources).GetProperty(resourceName, BindingFlags.Static | BindingFlags.NonPublic);
+                IEnumerable<PropertyInfo> resourceProperties = typeof(Properties.Resources).GetTypeInfo().DeclaredProperties.Where(m => (m.Name.Equals(resourceName)));
 
-                if (resourceProperty == null)
+                if (resourceProperties.Count() != 1)
                 {
                     throw new Exception(String.Format("Could not load resource {0}", resourceName));
                 }
 
-                byte[] resourceData = (byte[])resourceProperty.GetValue(null);
-                ResponseBody = System.Text.Encoding.UTF8.GetString(resourceData);
+                PropertyInfo resourceProperty = resourceProperties.First();
+                this.ResponseBody = (string)resourceProperty.GetValue(null);
             }
         }
     }

@@ -2,6 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AF93F6FD-DBE3-4DD8-9A22-E5836FC8B518}</ProjectGuid>
@@ -9,8 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Infinity.Tests</RootNamespace>
     <AssemblyName>Infinity.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,21 +37,15 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -74,68 +72,68 @@
     <Compile Include="UrlHelpersFixture.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\TeamRoom.UpdateRoom.txt" />
+    <None Include="Resources\TeamRoom.UpdateMessage.txt" />
+    <None Include="Resources\TeamRoom.GetUsers.txt" />
+    <None Include="Resources\TeamRoom.GetUser.txt" />
+    <None Include="Resources\TeamRoom.GetRooms.txt" />
+    <None Include="Resources\TeamRoom.GetRoom.txt" />
+    <None Include="Resources\TeamRoom.GetMessages.txt" />
+    <None Include="Resources\TeamRoom.GetMessage.txt" />
+    <None Include="Resources\TeamRoom.CreateRoom.txt" />
+    <None Include="Resources\TeamRoom.CreateMessage.txt" />
+    <None Include="Resources\Team.GetTeams.txt" />
+    <None Include="Resources\Team.GetTeamMembers.txt" />
+    <None Include="Resources\Team.GetTeam.txt" />
+    <None Include="Resources\Project.UpdateProject.txt" />
+    <None Include="Resources\Project.GetProjectWithCapabilities.txt" />
+    <None Include="Resources\Project.GetProjects.txt" />
+    <None Include="Resources\Project.GetProject.txt" />
+    <None Include="Resources\Git.UpdatePullRequestReviewer.txt" />
+    <None Include="Resources\Git.UpdatePullRequest.txt" />
+    <None Include="Resources\Git.RenameRepository.txt" />
+    <None Include="Resources\Git.GetTree.txt" />
+    <None Include="Resources\Git.GetRepository.txt" />
+    <None Include="Resources\Git.GetRepositoriesForTeamProject.txt" />
+    <None Include="Resources\Git.GetRepositories.txt" />
+    <None Include="Resources\Git.GetReferencesWithFilter.txt" />
+    <None Include="Resources\Git.GetReferences.txt" />
+    <None Include="Resources\Git.GetPushWithReferences.txt" />
+    <None Include="Resources\Git.GetPushesByPusher.txt" />
+    <None Include="Resources\Git.GetPushesByPage.txt" />
+    <None Include="Resources\Git.GetPushesByDate.txt" />
+    <None Include="Resources\Git.GetPushes.txt" />
+    <None Include="Resources\Git.GetPushCommits.txt" />
+    <None Include="Resources\Git.GetPush.txt" />
+    <None Include="Resources\Git.GetPullRequestsByTargetBranch.txt" />
+    <None Include="Resources\Git.GetPullRequestsByStatus.txt" />
+    <None Include="Resources\Git.GetPullRequests.txt" />
+    <None Include="Resources\Git.GetPullRequestReviewers.txt" />
+    <None Include="Resources\Git.GetPullRequestReviewer.txt" />
+    <None Include="Resources\Git.GetPullRequest.txt" />
+    <None Include="Resources\Git.GetItemsBatch.txt" />
+    <None Include="Resources\Git.GetItemFolderRecursive.txt" />
+    <None Include="Resources\Git.GetItemFolder.txt" />
+    <None Include="Resources\Git.GetItemFile.txt" />
+    <None Include="Resources\Git.GetDiff.txt" />
+    <None Include="Resources\Git.GetCommitWithChangedItems.txt" />
+    <None Include="Resources\Git.GetCommitsToRevision.txt" />
+    <None Include="Resources\Git.GetCommitsPaged.txt" />
+    <None Include="Resources\Git.GetCommitsByItem.txt" />
+    <None Include="Resources\Git.GetCommitsByDate.txt" />
+    <None Include="Resources\Git.GetCommitsByCommitter.txt" />
+    <None Include="Resources\Git.GetCommitsBetweenTwoRevisions.txt" />
+    <None Include="Resources\Git.GetCommits.txt" />
+    <None Include="Resources\Git.GetCommit.txt" />
+    <None Include="Resources\Git.GetBranchStatisticsForAllBranches.txt" />
+    <None Include="Resources\Git.GetBranchStatisticsAgainstVersion.txt" />
+    <None Include="Resources\Git.GetBranchStatistics.txt" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Resources\Git.GetBlob.json" />
-    <None Include="Resources\Git.GetBranchStatistics.json" />
-    <None Include="Resources\Git.GetBranchStatisticsAgainstVersion.json" />
-    <None Include="Resources\Git.GetBranchStatisticsForAllBranches.json" />
-    <None Include="Resources\Git.GetCommit.json" />
-    <None Include="Resources\Git.GetCommitsBetweenTwoRevisions.json" />
-    <None Include="Resources\Git.GetCommitsByCommitter.json" />
-    <None Include="Resources\Git.GetCommitsByDate.json" />
-    <None Include="Resources\Git.GetCommitsByItem.json" />
-    <None Include="Resources\Git.GetCommits.json" />
-    <None Include="Resources\Git.GetItemFile.json" />
-    <None Include="Resources\Git.GetItemFolder.json" />
-    <None Include="Resources\Git.GetItemFolderRecursive.json" />
-    <None Include="Resources\Git.GetItemsBatch.json" />
-    <None Include="Resources\Git.GetPushCommits.json" />
-    <None Include="Resources\Git.GetCommitsPaged.json" />
-    <None Include="Resources\Git.GetCommitsToRevision.json" />
-    <None Include="Resources\Git.GetCommitWithChangedItems.json" />
-    <None Include="Resources\Git.GetDiff.json" />
-    <None Include="Resources\Git.GetPush.json" />
-    <None Include="Resources\Git.GetPushes.json" />
-    <None Include="Resources\Git.GetPushesByDate.json" />
-    <None Include="Resources\Git.GetPushesByPage.json" />
-    <None Include="Resources\Git.GetPushesByPusher.json" />
-    <None Include="Resources\Git.GetPushWithReferences.json" />
-    <None Include="Resources\Git.UpdatePullRequestReviewer.json" />
-    <None Include="Resources\Git.AddPullRequestReviewer.json" />
-    <None Include="Resources\Git.CreatePullRequest.json" />
-    <None Include="Resources\Git.CreateRepository.json" />
-    <None Include="Resources\Git.GetPullRequest.json" />
-    <None Include="Resources\Git.GetPullRequestReviewer.json" />
-    <None Include="Resources\Git.GetPullRequestReviewers.json" />
-    <None Include="Resources\Git.GetPullRequests.json" />
-    <None Include="Resources\Git.GetPullRequestsByStatus.json" />
-    <None Include="Resources\Git.GetPullRequestsByTargetBranch.json" />
-    <None Include="Resources\Git.GetReferences.json" />
-    <None Include="Resources\Git.GetReferencesWithFilter.json" />
-    <None Include="Resources\Git.GetRepositories.json" />
-    <None Include="Resources\Git.GetRepositoriesForTeamProject.json" />
-    <None Include="Resources\Git.GetRepository.json" />
-    <None Include="Resources\Git.GetTree.json" />
-    <None Include="Resources\Git.RenameRepository.json" />
-    <None Include="Resources\Git.UpdatePullRequest.json" />
-    <None Include="Resources\Project.GetProject.json" />
-    <None Include="Resources\Project.GetProjects.json" />
-    <None Include="Resources\Project.GetProjectWithCapabilities.json" />
-    <None Include="Resources\Project.UpdateProject.json" />
-    <None Include="Resources\Team.GetTeam.json" />
-    <None Include="Resources\Team.GetTeamMembers.json" />
-    <None Include="Resources\Team.GetTeams.json" />
-    <None Include="Resources\TeamRoom.CreateMessage.json" />
-    <None Include="Resources\TeamRoom.CreateRoom.json" />
-    <None Include="Resources\TeamRoom.GetMessage.json" />
-    <None Include="Resources\TeamRoom.GetMessages.json" />
-    <None Include="Resources\TeamRoom.GetRoom.json" />
-    <None Include="Resources\TeamRoom.GetRooms.json" />
-    <None Include="Resources\TeamRoom.GetUser.json" />
-    <None Include="Resources\TeamRoom.GetUsers.json" />
-    <None Include="Resources\TeamRoom.UpdateMessage.json" />
-    <None Include="Resources\TeamRoom.UpdateRoom.json" />
+    <None Include="Resources\Git.CreatePullRequest.txt" />
+    <None Include="Resources\Git.CreateRepository.txt" />
+    <Content Include="Resources\Git.GetBlob.txt" />
+    <Content Include="Resources\Git.AddPullRequestReviewer.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infinity\Infinity.csproj">
@@ -152,7 +150,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
