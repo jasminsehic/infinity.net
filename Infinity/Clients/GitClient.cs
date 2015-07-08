@@ -256,6 +256,9 @@ namespace Infinity.Clients
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/items");
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
 
+            // This header instructs VSO to return metadata rather than the item contents
+            request.AddHeader("Accept", "application/json");
+
             filters = filters ?? new ItemFilters();
 
             request.AddParameter("scopePath", path);
@@ -287,6 +290,9 @@ namespace Infinity.Clients
 
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/itemsBatch", HttpMethod.Post);
             request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+
+            // This header instructs VSO to return metadata rather than the item contents
+            request.AddHeader("Accept", "application/json");
 
             request.AddBody(new
             {
