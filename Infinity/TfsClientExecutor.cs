@@ -112,9 +112,9 @@ namespace Infinity
              * signin page.  Front-load basic credentials if they were
              * provided.
              */
-            if(IsVisualStudioOnline())
+            if (IsVisualStudioOnline())
             {
-                if(!string.IsNullOrWhiteSpace(Configuration.OAuthToken))
+                if (Configuration.OAuthToken != null)
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Configuration.OAuthToken);
                 }
