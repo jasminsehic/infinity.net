@@ -56,5 +56,15 @@ namespace Infinity
             get;
             set;
         }
+
+        /// <summary>
+        /// The OAuth Access token used to access VSO. If this is specified it will take
+        /// precendence over <see cref="Credentials" /> for VSO.
+        /// </summary>
+        public string OAuthToken
+        {
+            get;
+            set;
+        }
     }
 }

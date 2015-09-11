@@ -112,14 +112,22 @@ namespace Infinity
              * signin page.  Front-load basic credentials if they were
              * provided.
              */
-            if (Configuration.Credentials != null && IsVisualStudioOnline())
+            if (IsVisualStudioOnline())
             {
-                string concat = String.Format("{0}:{1}", Configuration.Credentials.UserName, Configuration.Credentials.Password);
-                string base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(concat));
+                if (Configuration.OAuthToken != null)
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Configuration.OAuthToken);
+                }
+                else if (Configuration.Credentials != null)
+                {
+                    string concat = String.Format("{0}:{1}", Configuration.Credentials.UserName, Configuration.Credentials.Password);
+                    string base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(concat));
 
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Basic", base64);
+                    client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Basic", base64);
+                }
             }
+            
 
             client.BaseAddress = Configuration.Url;
 
