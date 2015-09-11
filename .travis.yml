@@ -1,18 +1,21 @@
-language: c
+language: csharp
+solution: Infinity.sln
+sudo: false
 
-before_install:
- - export EnableNuGetPackageRestore=true
- - export PATH=/opt/mono/bin:$PATH
-
-install:
- - ./build/travis-ci-install.sh
+mono:
+ - 3.12.0
 
 script:
- - xbuild Infinity.msbuild /t:Test
+ - xbuild /p:Configuration=Release Infinity.sln
+ - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./Infinity.Tests/bin/Release/Infinity.Tests.dll
+
+branches:
+   only:
+   - master
 
 notifications:
    recipients:
-    - ethomson@edwardthomson.com
+   - ethomson@edwardthomson.com
    email:
       on_success: change
       on_failure: always
