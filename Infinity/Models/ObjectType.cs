@@ -19,5 +19,10 @@
         /// A blob.
         /// </summary>
         Blob,
+
+        /// <summary>
+        /// A commit (submodule).
+        /// </summary>
+        Commit,
     }
 }
