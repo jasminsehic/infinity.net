@@ -55,7 +55,7 @@ namespace Infinity
 
             using (HttpClient client = CreateClient())
             {
-                HttpResponseMessage responseMessage = await CreateClient().SendAsync(requestMessage);
+                HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
                 await HandleResponse(responseMessage);
                 return responseMessage;
             }
@@ -87,26 +87,26 @@ namespace Infinity
                 Configuration.Url.Host.EndsWith(".tfspreview.com", StringComparison.OrdinalIgnoreCase));
         }
 
+        private HttpClientHandler CreateClientHandler()
+        {
+            HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = false };
+
+            if (Configuration.Credentials != null && !IsVisualStudioOnline())
+            {
+                handler.PreAuthenticate = true;
+                handler.Credentials = Configuration.Credentials;
+            }
+
+            return handler;
+        }
+
         private HttpClient CreateClient()
         {
             HttpClient client;
+            HttpMessageHandler messageHandler = MessageHandler ?? CreateClientHandler();
+            bool disposeHandler = MessageHandler != null ? false : true;
 
-            if (MessageHandler != null)
-            {
-                client = new HttpClient(MessageHandler, false);
-            }
-            else if (Configuration.Credentials != null && !IsVisualStudioOnline())
-            {
-                client = new HttpClient(new HttpClientHandler
-                {
-                    PreAuthenticate = true,
-                    Credentials = Configuration.Credentials
-                }, true);
-            }
-            else
-            {
-                client = new HttpClient();
-            }
+            client = new HttpClient(messageHandler, disposeHandler);
 
             /* Hack: VSO doesn't give 401s proper, it redirects you to a
              * signin page.  Front-load basic credentials if they were
@@ -127,7 +127,6 @@ namespace Infinity
                         new AuthenticationHeaderValue("Basic", base64);
                 }
             }
-            
 
             client.BaseAddress = Configuration.Url;
 
@@ -245,7 +244,7 @@ namespace Infinity
                     break;
                 case HttpStatusCode.Unauthorized:
                     throw new TfsUnauthorizedException("Unauthorized", response);
-                case HttpStatusCode.Moved:
+                case HttpStatusCode.Redirect:
                     HandleMovedStatus(response);
                     goto default;
                 case HttpStatusCode.Conflict:
