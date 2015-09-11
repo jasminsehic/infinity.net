@@ -13,8 +13,7 @@ servers.
     var client = new TfsClient(new TfsClientConfiguration
     {
         Url = new Uri("https://my-account.visualstudio.com/DefaultCollection"),
-        Username = "my-username",
-        Password = "my-password",
+        Credentials = new NetworkCredential("username", "password"),
     });
     
     IEnumerable<Project> projects = new List<Project>();
