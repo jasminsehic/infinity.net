@@ -9,3 +9,8 @@
 
 *.user
 *.userosscache
+
+[Bb]in/
+[Oo]bj/
+
+.vs/
