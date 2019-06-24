@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
-
-using Infinity;
 using Infinity.Clients;
 using Infinity.Models;
 

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
-
-using Infinity;
 using Infinity.Models;
 
 namespace Infinity.Tests.Models
