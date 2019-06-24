@@ -8,9 +8,9 @@
     <MSBuild Projects="Infinity.sln" Targets="Build" Properties="Configuration=$(Configuration);TrackFileAccess=false" />
   </Target>
 
-  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\packages\xunit.runner.msbuild\2.4.1\build\net452\xunit.runner.msbuild.net452.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <Target Name="Test" DependsOnTargets="Build">
-    <xunit Assembly="Infinity.Tests\bin\$(Configuration)\Infinity.Tests.dll" />
+    <xunit Assembly="Infinity.Tests\bin\$(Configuration)\net472\Infinity.Tests.dll" />
   </Target>
 </Project>
