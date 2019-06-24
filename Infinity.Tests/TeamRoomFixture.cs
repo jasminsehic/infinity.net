@@ -30,8 +30,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/47d25e84-de54-49ce-8f3d-351c77422775"), rooms[0].CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 01, 24, 19, 19, 00, 210, DateTimeKind.Utc), rooms[0].CreatedDate);
             Assert.Equal("", rooms[0].Description);
-            Assert.Equal(true, rooms[0].HasAdminPermissions);
-            Assert.Equal(true, rooms[0].HasReadWritePermissions);
+            Assert.True(rooms[0].HasAdminPermissions);
+            Assert.True(rooms[0].HasReadWritePermissions);
             Assert.Equal(305, rooms[0].Id);
             Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 38, 543, DateTimeKind.Utc), rooms[0].LastActivity);
             Assert.Equal("Fabrikam-Fiber-Git Team Room", rooms[0].Name);
@@ -42,8 +42,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/47d25e84-de54-49ce-8f3d-351c77422775"), rooms[1].CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 01, 24, 19, 20, 37, 410, DateTimeKind.Utc), rooms[1].CreatedDate);
             Assert.Equal("", rooms[1].Description);
-            Assert.Equal(true, rooms[1].HasAdminPermissions);
-            Assert.Equal(true, rooms[1].HasReadWritePermissions);
+            Assert.True(rooms[1].HasAdminPermissions);
+            Assert.True(rooms[1].HasReadWritePermissions);
             Assert.Equal(306, rooms[1].Id);
             Assert.Equal(new DateTime(2014, 01, 24, 19, 20, 37, 410, DateTimeKind.Utc), rooms[1].LastActivity);
             Assert.Equal("Fabrikam-Fiber-TFVC Team Room", rooms[1].Name);
@@ -54,8 +54,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/47d25e84-de54-49ce-8f3d-351c77422775"), rooms[2].CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 01, 27, 23, 03, 55, 663, DateTimeKind.Utc), rooms[2].CreatedDate);
             Assert.Equal("", rooms[2].Description);
-            Assert.Equal(true, rooms[2].HasAdminPermissions);
-            Assert.Equal(true, rooms[2].HasReadWritePermissions);
+            Assert.True(rooms[2].HasAdminPermissions);
+            Assert.True(rooms[2].HasReadWritePermissions);
             Assert.Equal(307, rooms[2].Id);
             Assert.Equal(new DateTime(2014, 01, 27, 23, 03, 55, 663, DateTimeKind.Utc), rooms[2].LastActivity);
             Assert.Equal("Quality assurance Room", rooms[2].Name);
@@ -66,8 +66,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/47d25e84-de54-49ce-8f3d-351c77422775"), rooms[3].CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 05, 15, 14, 00, 36, 443, DateTimeKind.Utc), rooms[3].CreatedDate);
             Assert.Equal("", rooms[3].Description);
-            Assert.Equal(true, rooms[3].HasAdminPermissions);
-            Assert.Equal(false, rooms[3].HasReadWritePermissions);
+            Assert.True(rooms[3].HasAdminPermissions);
+            Assert.False(rooms[3].HasReadWritePermissions);
             Assert.Equal(2686, rooms[3].Id);
             Assert.Equal(new DateTime(2014, 05, 15, 14, 00, 36, 443, DateTimeKind.Utc), rooms[3].LastActivity);
             Assert.Equal("TestGit Team Room", rooms[3].Name);
@@ -78,8 +78,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), rooms[4].CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 05, 27, 20, 28, 11, 493, DateTimeKind.Utc), rooms[4].CreatedDate);
             Assert.Equal("updated room description", rooms[4].Description);
-            Assert.Equal(true, rooms[4].HasAdminPermissions);
-            Assert.Equal(true, rooms[4].HasReadWritePermissions);
+            Assert.True(rooms[4].HasAdminPermissions);
+            Assert.True(rooms[4].HasReadWritePermissions);
             Assert.Equal(4158, rooms[4].Id);
             Assert.Equal(new DateTime(2014, 05, 27, 20, 28, 11, 493, DateTimeKind.Utc), rooms[4].LastActivity);
             Assert.Equal("renamedRoom", rooms[4].Name);
@@ -104,8 +104,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), room.CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 40, 987, DateTimeKind.Utc), room.CreatedDate);
             Assert.Equal("used for API doc generation", room.Description);
-            Assert.Equal(true, room.HasAdminPermissions);
-            Assert.Equal(true, room.HasReadWritePermissions);
+            Assert.True(room.HasAdminPermissions);
+            Assert.True(room.HasReadWritePermissions);
             Assert.Equal(4207, room.Id);
             Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 40, 987, DateTimeKind.Utc), room.LastActivity);
             Assert.Equal("newCreatedRoom", room.Name);
@@ -135,8 +135,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/8c8c7d32-6b1b-47f4-b2e9-30b477b5ab3d"), room.CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 40, 987, DateTimeKind.Utc), room.CreatedDate);
             Assert.Equal("used for API doc generation", room.Description);
-            Assert.Equal(true, room.HasAdminPermissions);
-            Assert.Equal(true, room.HasReadWritePermissions);
+            Assert.True(room.HasAdminPermissions);
+            Assert.True(room.HasReadWritePermissions);
             Assert.Equal(4207, room.Id);
             Assert.Equal(new DateTime(2014, 05, 28, 16, 37, 40, 987, DateTimeKind.Utc), room.LastActivity);
             Assert.Equal("newCreatedRoom", room.Name);
@@ -167,8 +167,8 @@ namespace Infinity.Tests.Models
             Assert.Equal(new Uri("https://fabrikam-fiber-inc.vssps.visualstudio.com/_apis/Identities/d291b0c4-a05c-4ea6-8df1-4b41d5f39eff"), room.CreatedBy.Url);
             Assert.Equal(new DateTime(2014, 04, 29, 18, 45, 10, 590, DateTimeKind.Utc), room.CreatedDate);
             Assert.Equal("updated room description", room.Description);
-            Assert.Equal(true, room.HasAdminPermissions);
-            Assert.Equal(true, room.HasReadWritePermissions);
+            Assert.True(room.HasAdminPermissions);
+            Assert.True(room.HasReadWritePermissions);
             Assert.Equal(431, room.Id);
             Assert.Equal(new DateTime(2014, 04, 29, 18, 45, 10, 590, DateTimeKind.Utc), room.LastActivity);
             Assert.Equal("renamedRoom", room.Name);
@@ -397,7 +397,7 @@ namespace Infinity.Tests.Models
 
             Assert.Equal(1, users.Count);
 
-            Assert.Equal(true, users[0].IsOnline);
+            Assert.True(users[0].IsOnline);
             Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 26, 167, DateTimeKind.Utc), users[0].JoinedDate);
             Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc), users[0].LastActivity);
             Assert.Equal(6522, users[0].RoomId);
@@ -420,7 +420,7 @@ namespace Infinity.Tests.Models
             TeamRoomUserDetails user = base.ExecuteSync<TeamRoomUserDetails>(
                 () => { return NewMockClient().TeamRoom.GetUser(6522, new Guid("fd19aec1-3119-4671-80d7-5dcc4943211d")); });
 
-            Assert.Equal(true, user.IsOnline);
+            Assert.True(user.IsOnline);
             Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 26, 167, DateTimeKind.Utc), user.JoinedDate);
             Assert.Equal(new DateTime(2014, 10, 07, 21, 12, 55, 107, DateTimeKind.Utc), user.LastActivity);
             Assert.Equal(6522, user.RoomId);

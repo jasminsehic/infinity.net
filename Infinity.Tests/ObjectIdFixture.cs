@@ -12,7 +12,7 @@ namespace Infinity.Tests
         [InlineData("012345678901234567890123456789012345678z")]
         public void ObjectId_ThrowsOnInvalid(string invalid)
         {
-            Assert.Throws(typeof(ArgumentException), () => { new ObjectId(invalid); });
+            Assert.Throws<ArgumentException>(() => { new ObjectId(invalid); });
         }
 
         [Theory]
