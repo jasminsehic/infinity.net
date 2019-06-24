@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Xunit;
-
-using Infinity;
 using Infinity.Models;
 
 namespace Infinity.Tests.Models

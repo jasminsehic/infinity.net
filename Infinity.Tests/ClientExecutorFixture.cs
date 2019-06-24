@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Infinity.Tests
 {

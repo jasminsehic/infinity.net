@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Infinity.Models;
 
 namespace Infinity.Clients

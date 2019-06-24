@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-using Infinity.Util;
-
 namespace Infinity.Models
 {
     /// <summary>

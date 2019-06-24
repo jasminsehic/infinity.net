@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Infinity.Models
+﻿namespace Infinity.Models
 {
     /// <summary>
     /// Links to other Git push resources.
