@@ -6,6 +6,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Infinity.XML</DocumentationFile>
     <RestorePackagesPath>$(SolutionDir)\packages</RestorePackagesPath>
+    <Version>0.2.0</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>Infinity.NET</PackageId>
     <Authors>Edward Thomson</Authors>

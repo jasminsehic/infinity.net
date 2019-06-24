@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Infinity.NET</id>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
     <authors>Edward Thomson</authors>
     <owners>Edward Thomson</owners>
-    <licenseUrl>https://raw.githubusercontent.com/ethomson/infinity.net/v0.1.2/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/ethomson/infinity.net/v0.2.0/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ethomson/infinity.net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Visual Studio Online and Team Foundation Server REST API for .NET</description>
-    <releaseNotes>https://github.com/ethomson/infinity.net/blob/v0.1.2/CHANGES.md</releaseNotes>
+    <releaseNotes>https://github.com/ethomson/infinity.net/blob/v0.2.0/CHANGES.md</releaseNotes>
     <iconUrl>https://github.com/ethomson/infinity.net/raw/master/logo.png</iconUrl>
     <tags>VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</tags>
     <references>
