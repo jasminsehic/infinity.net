@@ -15,11 +15,13 @@
     <PackageProjectUrl>https://github.com/ethomson/infinity.net</PackageProjectUrl>
     <PackageIconUrl>https://github.com/ethomson/infinity.net/raw/master/logo.png</PackageIconUrl>
     <PackageTags>VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</PackageTags>
+	<PackageLicenseFile>$(SolutionDir)\LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+	<None Include="..\LICENSE.txt" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 </Project>
