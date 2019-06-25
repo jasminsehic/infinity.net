@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xunit;
-using Xunit.Extensions;
-
 using Infinity.Models;
 
 namespace Infinity.Tests
@@ -19,7 +12,7 @@ namespace Infinity.Tests
         [InlineData("012345678901234567890123456789012345678z")]
         public void ObjectId_ThrowsOnInvalid(string invalid)
         {
-            Assert.Throws(typeof(ArgumentException), () => { new ObjectId(invalid); });
+            Assert.Throws<ArgumentException>(() => { new ObjectId(invalid); });
         }
 
         [Theory]

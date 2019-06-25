@@ -1,6 +1,4 @@
 ﻿using Xunit;
-using Xunit.Extensions;
-
 using Infinity.Util;
 
 using Assert = Xunit.Assert;
