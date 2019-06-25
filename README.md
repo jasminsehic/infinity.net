@@ -16,11 +16,7 @@ servers.
         Credentials = new NetworkCredential("username", "password"),
     });
     
-    IEnumerable<Project> projects = new List<Project>();
-    Task.Run(async () =>
-    {
-        projects = await client.Project.GetProjects();
-    }).Wait();
+    var projects = client.Project.GetProjects().Result;
 
 ## Progress
 
