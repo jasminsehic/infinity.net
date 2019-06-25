@@ -6,6 +6,7 @@
     <WarningLevel>4</WarningLevel>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RestorePackagesPath>$(SolutionDir)\packages</RestorePackagesPath>
+    <Version>0.2.0</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>Infinity.NET</PackageId>
     <Authors>Edward Thomson</Authors>
@@ -21,5 +22,4 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-
 </Project>
