@@ -12,8 +12,8 @@
     <Authors>Edward Thomson</Authors>
     <Product>Infinity.NET</Product>
     <Description>Visual Studio Online and Team Foundation Server REST API for .NET</Description>
-    <PackageProjectUrl>https://github.com/ethomson/infinity.net</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/ethomson/infinity.net/raw/master/logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/jasminsehic/infinity.net</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/jasminsehic/infinity.net/raw/master/logo.png</PackageIconUrl>
     <PackageTags>VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</PackageTags>
 	<PackageLicenseFile>$(SolutionDir)\LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>

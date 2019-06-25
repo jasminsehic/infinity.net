@@ -81,5 +81,5 @@ Copyright (c) Edward Thomson.  All rights reserved.
 Available under the MIT license (refer to the [LICENSE][2] file).
 
 [1]: http://www.visualstudio.com/integrate/reference/reference-vso-overview-vsi
-[2]: https://github.com/ethomson/infinity.net/blob/master/LICENSE
+[2]: https://github.com/jasminsehic/infinity.net/blob/master/LICENSE.txt
 
