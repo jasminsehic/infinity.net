@@ -105,5 +105,10 @@ namespace Infinity.Models
         /// The list of reviewers on a pull request.
         /// </summary>
         public List<PullRequestReviewer> Reviewers { get; set; }
+
+        /// <summary>
+        /// The list of tags on a pull request.
+        /// </summary>
+        public List<WebApiTagDefinition> Labels { get; set; }
     }
 }
