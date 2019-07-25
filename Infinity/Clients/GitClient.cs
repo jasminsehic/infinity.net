@@ -473,7 +473,6 @@ namespace Infinity.Clients
         /// <param name="repositoryId">The repository</param>
         /// <param name="pullRequestId">The pull request</param>
         /// <param name="reviewerId">The reviewer</param>
-        /// <returns>The reviewer for the pull request</returns>
         public async Task DeletePullRequestReviewer(Guid repositoryId, int pullRequestId, Guid reviewerId)
         {
             var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/reviewers/{ReviewerId}", HttpMethod.Delete);
@@ -483,6 +482,7 @@ namespace Infinity.Clients
 
             await Executor.Execute(request);
         }
+
 
         /// <summary>
         /// Updates the reviewer's vote for a pull request.
@@ -504,6 +504,75 @@ namespace Infinity.Clients
             });
 
             return await Executor.Execute<PullRequestReviewer>(request);
+        }
+
+        /// <summary>
+        /// Get the labels listed for a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <returns>The list of labels listed for the pull request</returns>
+        public async Task<IEnumerable<WebApiTagDefinition>> GetPullRequestLabels(Guid repositoryId, int pullRequestId)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/labels", HttpMethod.Get, "5.1-preview");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+
+            Sequence<WebApiTagDefinition> list = await Executor.Execute<Sequence<WebApiTagDefinition>>(request);
+            return list.Value;
+        }
+
+        /// <summary>
+        /// Get the information about a label listed for a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="labelIdOrName">The reviewer</param>
+        /// <returns>The label for the pull request</returns>
+        public async Task<WebApiTagDefinition> GetPullRequestLabel(Guid repositoryId, int pullRequestId, string labelIdOrName)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/labels/{labelIdOrName}");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("labelIdOrName", labelIdOrName);
+
+            return await Executor.Execute<WebApiTagDefinition>(request);
+        }
+
+        /// <summary>
+        /// Adds a label to a pull request.
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="labelName">The name of label</param>
+        /// <returns>The created label</returns>
+        public async Task<WebApiTagDefinition> AddPullRequestLabel(Guid repositoryId, int pullRequestId, string labelName)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/labels", HttpMethod.Post, "5.1-preview");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddBody(new
+            {
+                name = labelName
+            });
+
+            return await Executor.Execute<WebApiTagDefinition>(request);
+        }
+
+        /// <summary>
+        /// Deletes a label from a pull request
+        /// </summary>
+        /// <param name="repositoryId">The repository</param>
+        /// <param name="pullRequestId">The pull request</param>
+        /// <param name="labelIdOrName">The label name or id</param>
+        public async Task DeletePullRequestLabel(Guid repositoryId, int pullRequestId, string labelIdOrName)
+        {
+            var request = new TfsRestRequest("/_apis/git/repositories/{RepositoryId}/pullRequests/{PullRequestId}/labels/{labelIdOrName}", HttpMethod.Delete, "5.1-preview");
+            request.AddUrlSegment("RepositoryId", repositoryId.ToString());
+            request.AddUrlSegment("PullRequestId", pullRequestId.ToString());
+            request.AddUrlSegment("labelIdOrName", labelIdOrName);
+
+            await Executor.Execute(request);
         }
 
         #endregion

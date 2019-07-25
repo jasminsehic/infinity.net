@@ -2,17 +2,16 @@
 
 [![Build Status](https://dev.azure.com/jasminsehic/Infinity.NET/_apis/build/status/jasminsehic.infinity.net?branchName=master)](https://dev.azure.com/jasminsehic/Infinity.NET/_build/latest?definitionId=1&branchName=master) [![NuGet package](https://img.shields.io/nuget/dt/infinity.net.svg)](https://www.nuget.org/packages/Infinity.NET)
 
-Infinity.NET is a .NET client library for the [Visual Studio REST API][0],
-providing access to Visual Studio Online and Team Foundation Server 14.0
-servers.
+Infinity.NET is a .NET client library for the [Azure DevOps REST API][0],
+providing access to Azure DevOps servers.
 
-[0]: http://www.visualstudio.com/en-us/integrate/reference/reference-vso-overview-vsi.aspx
+[0]: https://docs.microsoft.com/en-us/rest/api/azure/devops
 
 ## Example
 
     var client = new TfsClient(new TfsClientConfiguration
     {
-        Url = new Uri("https://my-account.visualstudio.com/DefaultCollection"),
+        Url = new Uri("https://dev.azure.com/YourOrganization"),
         Credentials = new NetworkCredential("username", "password"),
     });
     
@@ -34,8 +33,7 @@ Here are the currently implemented client functions:
 
 ## Unit Tests
 
-The REST APIs are tested by mocking them, using the [Visual Studio
-Online REST API Reference][1] examples.  To add a new test:
+The REST APIs are tested by mocking them, using the [Azure DevOps REST API Reference][1] examples.  To add a new test:
 
 1. Add the expected JSON output from the REST method in the
    `Infinity.Tests/Resources` directory.  Ensure that the file is
@@ -67,7 +65,7 @@ Online REST API Reference][1] examples.  To add a new test:
 A simple command-line interface is available in the `Infinity.Clients`
 project.  For example, to merge a pull request:
 
-    Infinity.Client https://account.visualstudio.com/DefaultCollection
+    Infinity.Client https://dev.azure.com/YourOrganization
     --username=username --password=password Git.UpdatePullRequest
     <RepositoryId> <PullRequestId> Completed <CommitId
 
@@ -80,6 +78,6 @@ Copyright (c) Edward Thomson.  All rights reserved.
 
 Available under the MIT license (refer to the [LICENSE][2] file).
 
-[1]: http://www.visualstudio.com/integrate/reference/reference-vso-overview-vsi
+[1]: https://docs.microsoft.com/en-us/rest/api/azure/devops
 [2]: https://github.com/jasminsehic/infinity.net/blob/master/LICENSE.txt
 
