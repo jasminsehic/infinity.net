@@ -77,10 +77,11 @@ namespace Infinity
             await responseMessage.Content.CopyToAsync(output);
         }
 
-        private bool IsVisualStudioOnline()
+        private bool IsAzureDevOps()
         {
             return Configuration.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase) &&
                 (Configuration.Url.Host.EndsWith(".visualstudio.com", StringComparison.OrdinalIgnoreCase) ||
+                Configuration.Url.Host.EndsWith(".azure.com", StringComparison.OrdinalIgnoreCase) ||
                 Configuration.Url.Host.EndsWith(".tfspreview.com", StringComparison.OrdinalIgnoreCase));
         }
 
@@ -88,7 +89,7 @@ namespace Infinity
         {
             HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = false };
 
-            if (Configuration.Credentials != null && !IsVisualStudioOnline())
+            if (Configuration.Credentials != null && !IsAzureDevOps())
             {
                 handler.PreAuthenticate = true;
                 handler.Credentials = Configuration.Credentials;
@@ -109,7 +110,7 @@ namespace Infinity
              * signin page.  Front-load basic credentials if they were
              * provided.
              */
-            if (IsVisualStudioOnline())
+            if (IsAzureDevOps())
             {
                 if (Configuration.OAuthToken != null)
                 {

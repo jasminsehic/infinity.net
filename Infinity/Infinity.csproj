@@ -6,16 +6,16 @@
     <WarningLevel>4</WarningLevel>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RestorePackagesPath>$(SolutionDir)\packages</RestorePackagesPath>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>Infinity.NET</PackageId>
     <Authors>Edward Thomson</Authors>
     <Product>Infinity.NET</Product>
-    <Description>Visual Studio Online and Team Foundation Server REST API for .NET</Description>
+    <Description>Azure DevOps Visual Studio Online and Team Foundation Server REST API for .NET</Description>
     <PackageProjectUrl>https://github.com/jasminsehic/infinity.net</PackageProjectUrl>
     <PackageIconUrl>https://github.com/jasminsehic/infinity.net/raw/master/logo.png</PackageIconUrl>
-    <PackageTags>VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</PackageTags>
 	<PackageLicenseFile>$(SolutionDir)\LICENSE.txt</PackageLicenseFile>
+    <PackageTags>Azure DevOps VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
