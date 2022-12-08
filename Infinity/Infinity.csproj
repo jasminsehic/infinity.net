@@ -18,7 +18,7 @@
     <PackageTags>Azure DevOps VisualStudio Visual Studio VisualStudioOnline Team Foundation Server TFS REST API</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
